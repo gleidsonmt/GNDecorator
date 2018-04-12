@@ -18,7 +18,7 @@
 
 # Etrutura - by Scenic View
 ## Primary
-![Structure](screenshot/primarySctructure.png)
+![Structure](src/main/resources/screenshot/primarySctructure.png)
 
 ### No metódo main utilize |  In method main
   
