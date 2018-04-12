@@ -1,0 +1,7 @@
+
+Interface da gn window
+
+metodos obrigatorios
+
+setMinWidth
+setMinHeigth
