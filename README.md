@@ -1,4 +1,8 @@
 
+# GNDecoration é um projeto de decoração simples para aplicações javaFx.
+
+![demo1](src/main/resources/screenshot/demo1.png)
+
 
 # Estrutura - Nodes
 
@@ -16,9 +20,8 @@
 
 
 
-# Etrutura - by Scenic View
-## Primary
-![Structure](screenshot/primarySctructure.png)
+## Primary Structure
+![Structure](src/main/resources/screenshot/primarySctructure.png)
 
 ### No metódo main utilize |  In method main
   

@@ -14,35 +14,49 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gn;
+package com.prototype;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.StrokeType;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * Protótipo de decoração | Prototype decoration.<br>
+ * Protótipo de decoração com barra de navegação | Prototype of decoration with
+ * navigation bar.<br>
  *
  * <p>
  * Cria um node com barras (AnchorPane) fixas nos cantos e nas extremidades
- * eixos (Paths) | Creates a node with fixed bars (AnchorPane) in the corners
- * and at the end axes (Paths).
+ * eixos (Paths), e um barra(Hbox) no tpo contendo tres paineis(HBox) um esquerdo, um central e
+ * um no direito, o da direita é dedicada a apresentação, o do meio ao titulo da janela e o da esquerada
+ * aos buttons de controle | Creates a node with fixed (AnchorPane) bars in corners and ends Paths, and a
+ * bar (Hbox) in the tpo containing three panels (HBox) one left, one central
+ * and one in the right, the one in the right is dedicated to the presentation,
+ * the middle to the window title and the left control buttons.
  * </p><br>
  * <p>
  * As barras são vermelhas e os eixos são pretos, as vermelhas representam o
@@ -58,22 +72,23 @@ import javafx.stage.StageStyle;
  *
  * <pre><code>
  * GNDecorationProto decoration = new GNDecorationProto();
+ * decoration.viewBar(true); // View resize bars
  * decoration.show();
  *
  * </code></pre>
  *
  * <p>
  *
- * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com <br>
- * Create 11/04/2018
- * @version 1.0
+ * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
+ * Created on 12/04/2018
  */
-public class GNWindowProto extends StackPane {
+public class GNWindowBar extends StackPane {
 
     private final Stage stage = new Stage();
     private final Scene scene = new Scene(this);
 
     private final AnchorPane body   = new AnchorPane();
+    private final StackPane content = new StackPane();
 
     private final Path top_left     = new Path();
     private final Path top_right    = new Path();
@@ -85,17 +100,39 @@ public class GNWindowProto extends StackPane {
     private final AnchorPane top    = new AnchorPane();
     private final AnchorPane bottom = new AnchorPane();
 
+    private final AnchorPane    bar              = new AnchorPane();
+    private final HBox          bar_content      = new HBox();
+    private final HBox          controls         = new HBox();
+    private final HBox          menu             = new HBox();
+    private final HBox          title_content    = new HBox();
+    
+    private final Button  btn_close     = new Button();
+    private final Button  btn_minimize  = new Button();
+    private final Button  btn_maximize  = new Button();
+    private final Label   title         = new Label("Application");
+    private final SVGPath icon          = new SVGPath();
+    
+    private final ImageView viewMinimize    = new ImageView(new Image("img/minimize.png"));
+    private final ImageView viewMaximize    = new ImageView(new Image("img/maximize.png"));
+    private final ImageView viewClose       = new ImageView(new Image("img/close.png"));
+    private final ImageView viewRestore     = new ImageView(new Image("img/restore.png"));
+
     private static double initX = -1;
     private static double initY = -1;
 
-    private static double newX;
-    private static double newY;
+    private static double       newX;
+    private static double       newY;
+    private final Rectangle2D   bounds;
+    
+    private BoundingBox savedBounds     = null;
+    private boolean     resizeInDrag    = true;
 
     /**
      * Cria uma decoração | Create a decoration.
      */
-    public GNWindowProto() {
+    public GNWindowBar() {
         super();
+        bounds = Screen.getPrimary().getVisualBounds();
         configStage();
         configLayout();
         addActions();
@@ -106,10 +143,10 @@ public class GNWindowProto extends StackPane {
      *
      * @return
      */
-    private Stage getStage() {
+    public Stage getStage() {
         return this.stage;
     }
-
+    
     /**
      * Configura o palco | Config the stage.
      */
@@ -118,6 +155,8 @@ public class GNWindowProto extends StackPane {
         this.scene.setFill(Color.TRANSPARENT);
 
         this.stage.setScene(this.scene);
+        this.stage.setMinWidth(254.0D);
+        this.stage.setMinHeight(57.0D);
     }
 
     /**
@@ -130,6 +169,16 @@ public class GNWindowProto extends StackPane {
 
         // add body in window
         this.getChildren().add(this.body);
+        
+        // add bar
+        this.body.getChildren().add(bar());
+        this.bar.getChildren().add(barContent());
+        
+        // add components in the bar
+        this.bar_content.getChildren().add(menu());
+        this.bar_content.getChildren().add(titleContent());
+        this.bar_content.getChildren().add(controls());
+        this.setStyle("-fx-border-color : #808080; -fx-border-width : 1");
 
         // Config Axis in body
         this.body.getChildren().add(axisTopLeft());
@@ -142,6 +191,8 @@ public class GNWindowProto extends StackPane {
         this.body.getChildren().add(right());
         this.body.getChildren().add(top());
         this.body.getChildren().add(bottom());
+        
+        viewBars(false);
     }
 
     /**
@@ -150,6 +201,7 @@ public class GNWindowProto extends StackPane {
      * @return the axis.
      */
     private Path axisTopLeft() {
+        top_left.setFill(Color.BLACK);
         top_left.setCursor(Cursor.NW_RESIZE);
         top_left.setId("top_left");
         pathLines(top_left);
@@ -210,7 +262,6 @@ public class GNWindowProto extends StackPane {
      */
     private void pathLines(Path path) {
         path.setFill(Color.BLACK);
-        path.setFill(Color.BLACK);
         path.setStroke(Color.BLACK);
         path.setStrokeType(StrokeType.INSIDE);
         MoveTo moveTo = new MoveTo(100D, -40D);
@@ -222,7 +273,7 @@ public class GNWindowProto extends StackPane {
         ClosePath closePath = new ClosePath();
         path.getElements().addAll(moveTo, line1, line2, line3, line4, line5, closePath);
     }
-
+    
     /**
      * Cria uma barra na esquerda | Create bar in left.
      *
@@ -257,7 +308,7 @@ public class GNWindowProto extends StackPane {
 
     /**
      * Cria uma barra no topo | Create bar in top.
-     * 
+     *
      * @return One bar of top.
      */
     private AnchorPane top() {
@@ -273,7 +324,6 @@ public class GNWindowProto extends StackPane {
 
     /**
      * Cria uma barra no fundo | Create bar in bottom.
-     * 
      * @return One bar of bottom.
      */
     private AnchorPane bottom() {
@@ -291,16 +341,156 @@ public class GNWindowProto extends StackPane {
      * Configura as barass | Config the bars.
      * @param bar The bar for configuration.
      */
-    private void bars(AnchorPane bar){
+    private void bars(AnchorPane bar) {
         bar.setStyle("-fx-background-color : red");
     }
+    
+    /**
+     * Configura a barra da decoração | Config the bar of decor.
+     * @return The bar content.
+     */
+    private AnchorPane bar(){
+        bar.setId("bar");
+        bar.setPrefHeight(36D);
+        AnchorPane.setTopAnchor(bar, 0D);
+        AnchorPane.setRightAnchor(bar, 0D);
+        AnchorPane.setLeftAnchor(bar, 0D);
+        return bar;
+    }
+    
 
     /**
-     * Adiciona ações aos eixos e barras que redimensiona o conteudo decoração | 
+     * Configura o content da barra | Config the content of bar.
+     * @return The bar content. 
+     */
+    private HBox barContent() {
+        bar_content.setId("barContent");
+        bar_content.setPrefHeight(36D);
+        AnchorPane.setTopAnchor(bar_content, 0D);
+        AnchorPane.setRightAnchor(bar_content, 0D);
+        AnchorPane.setLeftAnchor(bar_content, 0D);
+        return bar_content;
+    }
+    
+    /**
+     * Configura os controles básicos da decoração |  
+     * Config os controles básicos da decoração Configure basic decor controls.
+     * @return The controls.
+     */
+    private HBox controls(){
+        controls.setId("buttons");
+        btn_minimize.setGraphic(viewMinimize);
+        btn_maximize.setGraphic(viewMaximize);
+        btn_close.setGraphic(viewClose);
+        btn_minimize.setMinSize(40, 40);
+        btn_maximize.setMinSize(40, 40);
+        btn_close.setMinSize(40, 40);
+        controls.getChildren().addAll(btn_minimize, btn_maximize, btn_close);
+        
+        return controls;
+    }
+    
+    /**
+     * Configura o container de menu direito | Configure the right menu container.
+     * @return The container of menu.
+     */
+    private HBox menu(){
+        menu.setId("menu");
+        menu.setMinWidth(35);
+        menu.setMinHeight(30);
+        Button btn_ico = new Button();
+        icon.setContent("M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z");
+        btn_ico.setGraphic(icon);
+        icon.setFill(Color.web("#999"));
+        menu.getChildren().add(icon);
+        menu.setAlignment(Pos.CENTER);
+        return menu;
+    }
+    
+    /**
+     * Configura o container de titulo | Configure the title container.
+     * @return The container of menu.
+     */
+    private HBox titleContent() {
+        title_content.setId("menu");
+        title_content.getChildren().add(title);
+        title_content.setAlignment(Pos.CENTER);
+        HBox.setHgrow(title_content, Priority.ALWAYS);
+        title_content.setPadding(new Insets(0,0,0,controls.getWidth()));
+        return title_content;
+    }
+
+//    
+//    private static final class StyleableProperties {
+//
+//        private static final CssMetaData<JFXRippler, Boolean> RIPPLER_RECENTER
+//                = new CssMetaData<JFXRippler, Boolean>("-gn-color",
+//                        BooleanConverter.getInstance(), false) {
+//            @Override
+//            public boolean isSettable(JFXRippler control) {
+//                return control.ripplerRecenter == null || !control.ripplerRecenter.isBound();
+//            }
+//
+//            @Override
+//            public StyleableProperty<Boolean> getStyleableProperty(JFXRippler control) {
+//                return control.ripplerRecenterProperty();
+//            }
+//        };
+//        private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
+//
+//        static {
+//            final List<CssMetaData<? extends Styleable, ?>> styleables
+//                    = new ArrayList<>(Parent.getClassCssMetaData());
+//            Collections.addAll(styleables,
+//                    RIPPLER_RECENTER
+//            );
+//            STYLEABLES = Collections.unmodifiableList(styleables);
+//        }
+//    }
+//    
+//    private StyleableObjectProperty<Style> windowType = new SimpleStyleableObjectProperty<>(
+//            GNWindow.StyleableProperties.BUTTON_TYPE,
+//            JFXButton.this,
+//            "buttonType",
+//            JFXButton.ButtonType.FLAT);
+//
+//    public JFXButton.ButtonType getButtonType() {
+//        return buttonType == null ? JFXButton.ButtonType.FLAT : buttonType.get();
+//    }
+//
+//    public StyleableObjectProperty<JFXButton.ButtonType> buttonTypeProperty() {
+//        return this.buttonType;
+//    }
+//
+//    public void setButtonType(JFXButton.ButtonType type) {
+//        this.buttonType.set(type);
+//    }
+//
+//    public void initStyle(Style style) {
+//        switch (style) {
+//            case DEFAULT:
+//                scene.getStylesheets().addAll(
+//                        getClass().getResource("/genesis/controls/css/style/light.css").toExternalForm()
+//                );
+//                break;
+//            case DARK:
+//                scene.getStylesheets().addAll(
+//                        getClass().getResource("/genesis/controls/css/style/dark.css").toExternalForm()
+//                );
+//                break;
+//        }
+//    }
+    
+    /**
+     * Adiciona ações aos eixos e barras que redimensiona o conteudo decoração |
      * Add actions to the axes and bars that resize the decor content.
      */
     private void addActions() {
 
+        btn_close.setOnMouseClicked(event -> stage.close());
+        btn_maximize.setOnMouseClicked(event -> maximizeOrRestore());
+        btn_minimize.setOnMouseClicked(event -> stage.setIconified(true));
+        
         right.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown()) {
                 initX = event.getScreenX();
@@ -316,7 +506,6 @@ public class GNWindowProto extends StackPane {
             if (getStage().isFullScreen()) {
                 return;
             }
-            // Long press generates drag event!
             if (event.isStillSincePress()) {
                 return;
             }
@@ -383,7 +572,6 @@ public class GNWindowProto extends StackPane {
             if (getStage().isFullScreen()) {
                 return;
             }
-
             if (event.isStillSincePress()) {
                 return;
             }
@@ -413,11 +601,9 @@ public class GNWindowProto extends StackPane {
             if (!event.isPrimaryButtonDown() || (initX == -1 && initY == -1)) {
                 return;
             }
-
             if (getStage().isFullScreen()) {
                 return;
             }
-
             if (event.isStillSincePress()) {
                 return;
             }
@@ -452,7 +638,6 @@ public class GNWindowProto extends StackPane {
                 return;
             }
 
-            // Long press generates drag event!
             if (event.isStillSincePress()) {
                 return;
             }
@@ -485,11 +670,9 @@ public class GNWindowProto extends StackPane {
             if (!event.isPrimaryButtonDown() || (initX == -1 && initY == -1)) {
                 return;
             }
-            
             if (getStage().isFullScreen()) {
                 return;
             }
- 
             if (event.isStillSincePress()) {
                 return;
             }
@@ -528,8 +711,6 @@ public class GNWindowProto extends StackPane {
             if (getStage().isFullScreen()) {
                 return;
             }
-            
-           // Long press generates drag event!
             if (event.isStillSincePress()) {
                 return;
             }
@@ -563,9 +744,6 @@ public class GNWindowProto extends StackPane {
             if (getStage().isFullScreen()) {
                 return;
             }
-            /*
-         * Long press generates drag event!
-             */
             if (event.isStillSincePress()) {
                 return;
             }
@@ -585,8 +763,127 @@ public class GNWindowProto extends StackPane {
                 event.consume();
             }
         });
+        
+            
+        bar.setOnMousePressed(event -> {
+            initX = event.getSceneX();
+            initY = event.getSceneY();
+            if(isMaximized())
+                resizeInDrag = true;
+            else 
+                resizeInDrag = false;
+        });
+
+        bar.setOnMouseDragged(event -> {
+            if (event.isPrimaryButtonDown()) {
+                getStage().setX(event.getScreenX() - initX);
+                getStage().setY(event.getScreenY() - initY);
+                bar.setCursor(Cursor.MOVE);
+                btn_maximize.setGraphic(viewMaximize);
+            }  
+        });
+        
+        
+        bar.setOnDragDetected(e -> {
+            if (resizeInDrag) {
+                savedBounds = new BoundingBox(stage.getX() - 20, stage.getY() + 20,
+                        stage.getWidth() - 100, stage.getHeight() - 10);
+                restoreSavedBounds(stage);
+            }
+        });
+
+        bar.setOnMouseReleased(event -> {
+            if (stage.isResizable()) {
+                initX = -1;
+                initY = -1;
+                bar.setCursor(Cursor.DEFAULT);
+            } 
+
+        });
+
+        bar.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                maximizeOrRestore();
+            }
+        });
+
+    }
+    
+    /**
+     * Verifica se o palco está maximizado | Checks if the stage is maximized.
+     * @return true if it is, if not false.
+     */
+    public boolean isMaximized() {
+        return stage.getWidth() == Screen.getPrimary().getVisualBounds().getWidth()
+                && stage.getHeight() == Screen.getPrimary().getVisualBounds().getHeight()
+                && stage.getX() == Screen.getPrimary().getVisualBounds().getMinX()
+                && stage.getY() == Screen.getPrimary().getVisualBounds().getMinY();
     }
 
+    /**
+     * Restaura o tanho da janela | Restores size of the window..
+     * Se a decoração inicial maximizavel ao restaurar o tamanho é decrecido em 10, no outro caso
+     * o tamanho é restaurado para antes de maximizar | f the initial
+     * decoration maximizable when restoring size is decreased by 10, in the
+     * other case The size is restored to before maximizing..
+     */
+    public void restore() {
+//        if (!init) {
+
+//            init = true;
+//        }
+        restoreSavedBounds(stage);
+//        this.setPadding(new Insets(5));
+        btn_maximize.setGraphic(viewMaximize);
+        configCursor(true);
+    }
+
+    /**
+     * Maximiza a decoração | Maximize decoration.
+     */
+    public void maximize() {
+        savedBounds = new BoundingBox(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight());
+
+        this.stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
+
+//        if (init) {
+//            content.setPrefSize(bounds.getWidth(), bounds.getHeight());
+//        }
+
+        btn_maximize.setGraphic(viewRestore);
+        stage.centerOnScreen();
+        configCursor(false);
+    }
+
+    /**
+     * Maximiza ou restaura o tamanho da decoração | Maximizes or restores the
+     * size of the decor.
+     */
+    private void maximizeOrRestore() {
+        if (isResizable()) {
+            if (isMaximized()) {
+                restore();
+            } else {
+                maximize();
+            }
+        }
+    }
+
+    /**
+     * Restaura os bounds da janela | Restores the bounds of the decor.
+     * @param stage Stage for restore.
+     */
+    private void restoreSavedBounds(Stage stage) {
+        stage.setX(savedBounds.getMinX());
+        stage.setY(savedBounds.getMinY());
+        stage.setWidth(savedBounds.getWidth());
+        stage.setHeight(savedBounds.getHeight());
+        savedBounds = null;
+    }
+    
     /**
      * Configura nova posição do eixo y durante o evento | Sets new y-axis
      * position during the event.
@@ -649,8 +946,63 @@ public class GNWindowProto extends StackPane {
         return false;
     }
 
+    private void configCursor(boolean resizable) {
+        if (!resizable) {
+            top.cursorProperty().set(Cursor.DEFAULT);
+            right.cursorProperty().set(Cursor.DEFAULT);
+            left.cursorProperty().set(Cursor.DEFAULT);
+            bottom.cursorProperty().set(Cursor.DEFAULT);
+
+            top_right.cursorProperty().set(Cursor.DEFAULT);
+            top_left.cursorProperty().set(Cursor.DEFAULT);
+            bottom_right.cursorProperty().set(Cursor.DEFAULT);
+            bottom_left.cursorProperty().set(Cursor.DEFAULT);
+
+        } else {
+            top.cursorProperty().set(Cursor.N_RESIZE);
+            left.cursorProperty().set(Cursor.W_RESIZE);
+            right.cursorProperty().set(Cursor.E_RESIZE);
+            bottom.cursorProperty().set(Cursor.S_RESIZE);
+
+            top_right.cursorProperty().set(Cursor.NE_RESIZE);
+            top_left.cursorProperty().set(Cursor.NW_RESIZE);
+            bottom_right.cursorProperty().set(Cursor.SE_RESIZE);
+            bottom_left.cursorProperty().set(Cursor.SW_RESIZE);
+        }
+    }
+
     /**
-     * Inicializa o palco com a decoração | Initialize the stage with decoration.
+     * Visualizar as barras de redimensionamento | View the resize bars
+     * @param view The bars of decor.
+     */
+    public void viewBars(boolean view){
+        if(view){
+            top_left.setOpacity(1);
+            top_right.setOpacity(1);
+            bottom_left.setOpacity(1);
+            bottom_right.setOpacity(1);
+            
+            left.setOpacity(1);
+            right.setOpacity(1);
+            top.setOpacity(1);
+            bottom.setOpacity(1);
+            
+        } else {
+            top_left.setOpacity(0);
+            top_right.setOpacity(0);
+            bottom_left.setOpacity(0);
+            bottom_right.setOpacity(0);
+
+            left.setOpacity(0);
+            right.setOpacity(0);
+            top.setOpacity(0);
+            bottom.setOpacity(0);
+        }
+    }
+
+    /**
+     * Inicializa o palco com a decoração | Initialize the stage with
+     * decoration.
      */
     public void show() {
         stage.centerOnScreen();

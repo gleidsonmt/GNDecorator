@@ -16,25 +16,34 @@
  */
 package com.gn;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
@@ -83,13 +92,13 @@ import javafx.stage.StageStyle;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Created on 12/04/2018
  */
-public class GNWindowBar extends StackPane {
+public class GNWindow extends StackPane {
 
     private final Stage stage = new Stage();
     private final Scene scene = new Scene(this);
 
-    private final AnchorPane body   = new AnchorPane();
-    private final StackPane content = new StackPane();
+    private final AnchorPane body       = new AnchorPane();
+    public  final ScrollPane container  = new ScrollPane();
 
     private final Path top_left     = new Path();
     private final Path top_right    = new Path();
@@ -110,33 +119,40 @@ public class GNWindowBar extends StackPane {
     private final Button  btn_close     = new Button();
     private final Button  btn_minimize  = new Button();
     private final Button  btn_maximize  = new Button();
-    private final Label   title         = new Label("Application");
+    private final Label   title         = new Label("GNDecoration");
     private final SVGPath icon          = new SVGPath();
     
     private final ImageView viewMinimize    = new ImageView(new Image("img/minimize.png"));
     private final ImageView viewMaximize    = new ImageView(new Image("img/maximize.png"));
     private final ImageView viewClose       = new ImageView(new Image("img/close.png"));
-    private final ImageView viewRestore     = new ImageView(new Image("img/restore.png"));
 
     private static double initX = -1;
     private static double initY = -1;
 
-    private static double newX;
-    private static double newY;
-    private Rectangle2D   bounds;
+    private static double       newX;
+    private static double       newY;
+    private final  Rectangle2D  bounds;
     
     private BoundingBox savedBounds = null;
     private boolean     init        = true;
+    private boolean resizeInDrag    = true;
+            
+    private final BooleanProperty maximizedProperty     = new SimpleBooleanProperty(false);
+    private static final String USER_AGENT_STYLESHEET   = GNWindow.class.getResource("/css/regular.css").toExternalForm();
+    
+    
+    private final AnchorPane areaContent = new AnchorPane();
+    private final StackPane content = new StackPane();
 
     /**
      * Cria uma decoração | Create a decoration.
      */
-    public GNWindowBar() {
+    public GNWindow() {
         super();
-        bounds = Screen.getPrimary().getVisualBounds();
         configStage();
         configLayout();
         addActions();
+        bounds = Screen.getPrimary().getVisualBounds();
     }
 
     /**
@@ -146,6 +162,13 @@ public class GNWindowBar extends StackPane {
      */
     public Stage getStage() {
         return this.stage;
+    }
+    
+    /**
+     * @param body o corpo para configurar.
+     */
+    public void setContent(Node body) {
+        this.container.setContent(body);
     }
     
     /**
@@ -164,10 +187,24 @@ public class GNWindowBar extends StackPane {
      * Configura o layout | Config the layout.
      */
     private void configLayout() {
-        // Color initial
-        this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-        this.body.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
+        Parent root = null;
+        try {
+            // Color initial
+//        this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+//        this.body.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 
+root = FXMLLoader.load(getClass().getResource("/fxml/FXML.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(GNWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        this.setId("GNWindow");
+        this.body.setId("body");
+        this.title.setId("title");
+        this.container.setId("container");
+        
+
+        
         // add body in window
         this.getChildren().add(this.body);
         
@@ -177,10 +214,35 @@ public class GNWindowBar extends StackPane {
         
         // add components in the bar
         this.bar_content.getChildren().add(menu());
-        this.bar_content.getChildren().add(titleContent());
         this.bar_content.getChildren().add(controls());
+        this.bar_content.getChildren().add(titleContent());
+        controls.toFront();
         this.setStyle("-fx-border-color : #808080; -fx-border-width : 1");
 
+        StackPane content = new StackPane(root);
+        
+        StackPane areaContent = new StackPane(this.container);
+       
+        AnchorPane.setTopAnchor(areaContent, 35D);
+        AnchorPane.setRightAnchor(areaContent, 0D);
+        AnchorPane.setBottomAnchor(areaContent, 0D);
+        AnchorPane.setLeftAnchor(areaContent, 0D);
+        
+        AnchorPane.setTopAnchor(container, 35D);
+        AnchorPane.setRightAnchor(container, 0D);
+        AnchorPane.setBottomAnchor(container, 0D);
+        AnchorPane.setLeftAnchor(container, 0D);
+        
+        container.setFitToHeight(true);
+        container.setFitToWidth(true);
+        
+        
+        this.container.setContent(content);
+//        this.container.setPadding(new Insets(10, 10, 10, 10));
+        this.body.getChildren().add(areaContent);
+//        this.content.getChildren().add(body);
+        
+        
         // Config Axis in body
         this.body.getChildren().add(axisTopLeft());
         this.body.getChildren().add(axisTopRight());
@@ -193,7 +255,70 @@ public class GNWindowBar extends StackPane {
         this.body.getChildren().add(top());
         this.body.getChildren().add(bottom());
         
+        
+        
+        initTheme(Theme.DEFAULT);
         viewBars(false);
+    }
+    
+        /**
+     * Cria a area da janela destinada para aplicação.
+     *
+     * @return Contéudo da aplicação.
+     */
+    private Parent createContent() {
+        return areaContent;    // create drawing Pane without Border or size
+    }
+    
+    /**
+     * Criar a região com os limites de bordas.
+     *
+     * @return Região configurada.
+     */
+    private Region createRegion() {
+
+        // create sized enclosing Region with Border
+        // create drawing Pane without Border or size
+        final StackPane pane = new StackPane(createContent());
+//        clipChildren(pane, BORDER_RADIUS);
+//        pane.setStyle("-fx-background-color : red");
+
+        // create sized enclosing Region with Border
+        final ScrollPane container = new ScrollPane(pane);
+        container.setId("container");
+        AnchorPane.setTopAnchor(container, 35.0);
+        AnchorPane.setBottomAnchor(container, 0.0);
+        AnchorPane.setRightAnchor(container, 0.0);
+        AnchorPane.setLeftAnchor(container, 0.0);
+
+
+//        clipChildren(container, BORDER_RADIUS);
+        container.setFitToHeight(true);
+        container.setFitToWidth(true);
+        
+
+//        this.container.setContent(body);
+        return container;
+    }
+
+        /**
+     * Configura o filho dentro da decoração. Utiliza o AnchorPane como root
+     * pai.
+     */
+    private void configBody(Node body) {
+//        if (body != null) {
+//            System.out.println("aki poha");
+//            AnchorPane.setTopAnchor(body, 2.0);
+//            AnchorPane.setBottomAnchor(body, 0.0);
+//            AnchorPane.setRightAnchor(body, 0.0);
+//            AnchorPane.setLeftAnchor(body, 0.0);
+//
+//            if (!areaContent.getChildren().isEmpty()) {
+//                areaContent.getChildren().clear();
+//            }
+//
+//        }
+//            areaContent.getChildren().add(body);
     }
 
     /**
@@ -380,14 +505,33 @@ public class GNWindowBar extends StackPane {
      */
     private HBox controls(){
         controls.setId("buttons");
+        btn_minimize.setId("minimize");
+        btn_maximize.setId("maximize");
+        btn_close.setId("close");
+        
+        double prefWidth = 30, prefHeiht = 30;
+        
         btn_minimize.setGraphic(viewMinimize);
         btn_maximize.setGraphic(viewMaximize);
         btn_close.setGraphic(viewClose);
-        btn_minimize.setMinSize(40, 40);
-        btn_maximize.setMinSize(40, 40);
-        btn_close.setMinSize(40, 40);
-        controls.getChildren().addAll(btn_minimize, btn_maximize, btn_close);
         
+        btn_close.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        btn_maximize.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        btn_minimize.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        
+        btn_minimize.setMinSize(prefWidth, prefHeiht);
+        btn_maximize.setMinSize(prefWidth, prefHeiht);
+        btn_close.setMinSize(prefWidth, prefHeiht);
+        
+        btn_minimize.setPrefSize(prefWidth, prefHeiht);
+        btn_maximize.setPrefSize(prefWidth, prefHeiht);
+        btn_close.setPrefSize(prefWidth, prefHeiht);
+        
+        InnerShadow inner = new InnerShadow();
+        inner.setColor(Color.BLUE);
+//        btn_close.setEffect(inner);
+
+        controls.getChildren().addAll(btn_minimize, btn_maximize, btn_close);
         return controls;
     }
     
@@ -400,6 +544,7 @@ public class GNWindowBar extends StackPane {
         menu.setMinWidth(35);
         menu.setMinHeight(30);
         Button btn_ico = new Button();
+        icon.setId("icon");
         icon.setContent("M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z");
         btn_ico.setGraphic(icon);
         icon.setFill(Color.web("#999"));
@@ -416,72 +561,15 @@ public class GNWindowBar extends StackPane {
         title_content.setId("menu");
         title_content.getChildren().add(title);
         title_content.setAlignment(Pos.CENTER);
+        title.setAlignment(Pos.CENTER);
         HBox.setHgrow(title_content, Priority.ALWAYS);
-        title_content.setPadding(new Insets(0,0,0,controls.getWidth()));
+//        centralize the title
+        title_content.setPadding(new Insets(0,menu.getMaxWidth(),0,btn_close.getMinWidth() * 2));
         return title_content;
     }
-
-//    
-//    private static final class StyleableProperties {
-//
-//        private static final CssMetaData<JFXRippler, Boolean> RIPPLER_RECENTER
-//                = new CssMetaData<JFXRippler, Boolean>("-gn-color",
-//                        BooleanConverter.getInstance(), false) {
-//            @Override
-//            public boolean isSettable(JFXRippler control) {
-//                return control.ripplerRecenter == null || !control.ripplerRecenter.isBound();
-//            }
-//
-//            @Override
-//            public StyleableProperty<Boolean> getStyleableProperty(JFXRippler control) {
-//                return control.ripplerRecenterProperty();
-//            }
-//        };
-//        private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
-//
-//        static {
-//            final List<CssMetaData<? extends Styleable, ?>> styleables
-//                    = new ArrayList<>(Parent.getClassCssMetaData());
-//            Collections.addAll(styleables,
-//                    RIPPLER_RECENTER
-//            );
-//            STYLEABLES = Collections.unmodifiableList(styleables);
-//        }
-//    }
-//    
-//    private StyleableObjectProperty<Style> windowType = new SimpleStyleableObjectProperty<>(
-//            GNWindow.StyleableProperties.BUTTON_TYPE,
-//            JFXButton.this,
-//            "buttonType",
-//            JFXButton.ButtonType.FLAT);
-//
-//    public JFXButton.ButtonType getButtonType() {
-//        return buttonType == null ? JFXButton.ButtonType.FLAT : buttonType.get();
-//    }
-//
-//    public StyleableObjectProperty<JFXButton.ButtonType> buttonTypeProperty() {
-//        return this.buttonType;
-//    }
-//
-//    public void setButtonType(JFXButton.ButtonType type) {
-//        this.buttonType.set(type);
-//    }
-//
-//    public void initStyle(Style style) {
-//        switch (style) {
-//            case DEFAULT:
-//                scene.getStylesheets().addAll(
-//                        getClass().getResource("/genesis/controls/css/style/light.css").toExternalForm()
-//                );
-//                break;
-//            case DARK:
-//                scene.getStylesheets().addAll(
-//                        getClass().getResource("/genesis/controls/css/style/dark.css").toExternalForm()
-//                );
-//                break;
-//        }
-//    }
     
+
+
     /**
      * Adiciona ações aos eixos e barras que redimensiona o conteudo decoração |
      * Add actions to the axes and bars that resize the decor content.
@@ -768,6 +856,7 @@ public class GNWindowBar extends StackPane {
         bar.setOnMousePressed(event -> {
             initX = event.getSceneX();
             initY = event.getSceneY();
+            resizeInDrag = isMaximized();
         });
 
         bar.setOnMouseDragged(event -> {
@@ -776,7 +865,15 @@ public class GNWindowBar extends StackPane {
                 getStage().setY(event.getScreenY() - initY);
                 bar.setCursor(Cursor.MOVE);
 //                this.setPadding(new Insets(5));
-                btn_maximize.setId("btn-maximize");
+                btn_maximize.setId("maximize");
+            }
+        });
+        
+        bar.setOnDragDetected(e -> {
+            if (resizeInDrag) {
+                savedBounds = new BoundingBox(stage.getX() - 20, stage.getY() + 20,
+                        stage.getWidth() - 100, stage.getHeight() - 10);
+                restoreSavedBounds(stage);
             }
         });
 
@@ -795,6 +892,17 @@ public class GNWindowBar extends StackPane {
             }
         });
 
+    }
+    
+    public void setMaximized(boolean maximized) {
+        maximizedProperty.set(maximized);
+        if(maximized){
+            maximize();
+        }
+    }
+
+    public BooleanProperty maximizedProperty() {
+        return maximizedProperty;
     }
     
     /**
@@ -824,7 +932,7 @@ public class GNWindowBar extends StackPane {
         restoreSavedBounds(stage);
 //        if the stage transparent support
 //        this.setPadding(new Insets(5));
-        btn_maximize.setGraphic(viewMaximize);
+        btn_maximize.setId("maximize");
         configCursor(true);
     }
 
@@ -842,11 +950,11 @@ public class GNWindowBar extends StackPane {
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
 
-        if (init) {
-            content.setPrefSize(bounds.getWidth(), bounds.getHeight());
-        }
+//        if (init) {
+//            content.setPrefSize(bounds.getWidth(), bounds.getHeight());
+//        }
 
-        btn_maximize.setGraphic(viewRestore);
+        btn_maximize.setId("restore");
         stage.centerOnScreen();
         configCursor(false);
     }
@@ -964,21 +1072,7 @@ public class GNWindowBar extends StackPane {
         }
     }
 
-    private void configBody(Node body) {
-//        if (body != null) {
-//
-//            AnchorPane.setTopAnchor(body, 2.0);
-//            AnchorPane.setBottomAnchor(body, 0.0);
-//            AnchorPane.setRightAnchor(body, 0.0);
-//            AnchorPane.setLeftAnchor(body, 0.0);
-//
-//            if (!areaContent.getChildren().isEmpty()) {
-//                areaContent.getChildren().clear();
-//            }
-//
-//            areaContent.getChildren().add(body);
-//        }
-    }
+
     
     /**
      * Visualizar as barras de redimensionamento | View the resize bars
@@ -1008,7 +1102,38 @@ public class GNWindowBar extends StackPane {
             bottom.setOpacity(0);
         }
     }
+    
+    public void initTheme(Theme theme){
+//        switch(theme){
+//            case DEFAULT : 
+//                this.scene.getStylesheets().add(GNWindow.class.getResource("/css/regular.css").toExternalForm());
+//                break;
+//        }
+    }
 
+
+
+    /**
+     * Inicializa o palco com a decoração | Initialize the stage with
+     * decoration.
+     */
+    public void show() {
+        configBody(body);
+        if (maximizedProperty().get()) {
+            maximize();
+//            init = false;
+        }
+//
+//        if (!resizableProperty().get()) {
+//            btn_maximizar.setDisable(true);
+//            configCursor(false);
+//        }
+        
+
+        stage.centerOnScreen();
+        stage.show();
+    }
+    
     public enum Style {
         DEFAULT, DARK
     };
@@ -1016,24 +1141,10 @@ public class GNWindowBar extends StackPane {
     public enum Theme {
         DEFAULT
     };
-
-    /**
-     * Inicializa o palco com a decoração | Initialize the stage with
-     * decoration.
-     */
-    public void show() {
-//        configBody(body);
-//        if (maximizedProperty().get() && init) {
-//            maximize();
-//            init = false;
-//        }
-//
-//        if (!resizableProperty().get()) {
-//            btn_maximizar.setDisable(true);
-//            configCursor(false);
-//        }
-
-        stage.centerOnScreen();
-        stage.show();
+    
+    @Override
+    public String getUserAgentStylesheet() {
+        return USER_AGENT_STYLESHEET;
     }
 }
+

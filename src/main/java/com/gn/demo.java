@@ -17,14 +17,14 @@
 
 package com.gn;
 
-import com.jfoenix.controls.JFXDecorator;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.scenicview.ScenicView;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -35,10 +35,15 @@ public class demo extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        GNWindowBar window = new GNWindowBar();
-        window.viewBars(true);
+        
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXML.fxml"));
+        
+        GNWindow window = new GNWindow();
+//        window.setContent(root);
         window.show();
+        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toExternalForm());
 //        ScenicView.show(window.getScene());
+
     }
     
     public static void main(String[] args) {
