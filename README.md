@@ -20,7 +20,12 @@
 
 
 
+<<<<<<< HEAD
 ## Primary Structure
+=======
+# Etrutura - by Scenic View
+## Primary
+>>>>>>> 8e13e4dc3228a307b25d397e4eadb80ca88fba21
 ![Structure](src/main/resources/screenshot/primarySctructure.png)
 
 ### No metódo main utilize |  In method main
