@@ -1,5 +1,9 @@
 
-# GNDecoration é um projeto de decoração simples para aplicações javaFx.
+## GNDecoration é um projeto de decoração simples para aplicações javaFx.
+
+### Basic decoration
+
+![demo1](src/main/resources/screenshot/basic.png)
 
 ![demo1](src/main/resources/screenshot/demo1.png)
 

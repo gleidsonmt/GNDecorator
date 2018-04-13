@@ -41,7 +41,7 @@ public class demo extends Application {
         GNWindow window = new GNWindow();
 //        window.setContent(root);
         window.show();
-        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toExternalForm());
+//        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toExternalForm());
 //        ScenicView.show(window.getScene());
 
     }
