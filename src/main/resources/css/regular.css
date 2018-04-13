@@ -77,4 +77,7 @@ and open the template in the editor.
     -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
 }
 
-
+#teste {
+    -fx-background-image : url('../img/login.jpg') ;
+    -fx-background-size : cover;
+}
