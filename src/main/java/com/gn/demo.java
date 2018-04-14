@@ -39,9 +39,9 @@ public class demo extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXML.fxml"));
         
         GNWindow window = new GNWindow();
-//        window.setContent(root);
+        window.setContent(root);
         window.show();
-//        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toExternalForm());
+        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toExternalForm());
 //        ScenicView.show(window.getScene());
 
     }

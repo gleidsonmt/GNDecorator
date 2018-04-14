@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30/03/2018, 00:23:59
+    Author     : Gleidson Neves da Silveira
+*/
+
+
+/* 
+    Created on : 02/04/2017, 14:26:00
+    Author     : Gleidson Neves da Silveira
+*/
+
+
+#GNWindow {
+    -gray : #00000030;
+    -red : #FF3547;
+    
+    -fx-background-size : cover;
+}
+
+#body {
+    -fx-background-color : linear-gradient(to top left, -red, black);
+    -fx-opacity : 0.5;
+}
+
+#body #container {
+    -fx-background-color : transparent;
+}
+
+#body #container .viewport{
+    -fx-background-color : transparent;
+}
+
+#bar {
+    -fx-background-color : transparent;
+}
+
+#bar #buttons {
+    -fx-background-color : transparent;
+}
+
+#bar #title {
+    -fx-text-fill : white;
+}
+
+#bar #buttons .button {
+    -fx-background-radius : 0px;
+    -fx-background-color : transparent;
+}
+
+#bar #buttons #minimize:hover, 
+#bar #buttons #maximize:hover, 
+#bar #buttons #restore:hover,
+#bar #buttons #close:hover
+{
+    -fx-background-color : -gray;
+}
+
+#bar #buttons #minimize .image-view {
+    -fx-image : url('../img/minimize.png');
+    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
+}
+
+#bar #buttons #maximize .image-view {
+    -fx-image : url('../img/maximize.png');
+    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
+}
+
+#bar #buttons #close .image-view {
+    -fx-image : url('../img/close.png');
+    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
+}
+
+#bar #buttons #restore .image-view {
+    -fx-image : url('../img/restore.png');
+    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
+}
+
+#bar #buttons #close:hover .image-view {
+    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
+}
+
+#bar #menu #icon{
+    -fx-fill : white;
+}
+

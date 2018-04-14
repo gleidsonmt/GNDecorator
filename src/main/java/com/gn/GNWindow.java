@@ -168,7 +168,7 @@ public class GNWindow extends StackPane {
      * @param body o corpo para configurar.
      */
     public void setContent(Node body) {
-        this.container.setContent(body);
+        this.content.getChildren().add(body);
     }
     
     /**
@@ -188,22 +188,11 @@ public class GNWindow extends StackPane {
      */
     private void configLayout() {
         Parent root = null;
-        try {
-            // Color initial
-//        this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-//        this.body.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-
-root = FXMLLoader.load(getClass().getResource("/fxml/FXML.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(GNWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         this.setId("GNWindow");
         this.body.setId("body");
         this.title.setId("title");
         this.container.setId("container");
-        
-
         
         // add body in window
         this.getChildren().add(this.body);
@@ -218,30 +207,13 @@ root = FXMLLoader.load(getClass().getResource("/fxml/FXML.fxml"));
         this.bar_content.getChildren().add(titleContent());
         controls.toFront();
         this.setStyle("-fx-border-color : #808080; -fx-border-width : 1");
-
-        StackPane content = new StackPane(root);
-        
-        StackPane areaContent = new StackPane(this.container);
-       
-        AnchorPane.setTopAnchor(areaContent, 35D);
-        AnchorPane.setRightAnchor(areaContent, 0D);
-        AnchorPane.setBottomAnchor(areaContent, 0D);
-        AnchorPane.setLeftAnchor(areaContent, 0D);
-        
-        AnchorPane.setTopAnchor(container, 35D);
-        AnchorPane.setRightAnchor(container, 0D);
-        AnchorPane.setBottomAnchor(container, 0D);
-        AnchorPane.setLeftAnchor(container, 0D);
         
         container.setFitToHeight(true);
         container.setFitToWidth(true);
         
         
         this.container.setContent(content);
-//        this.container.setPadding(new Insets(10, 10, 10, 10));
-        this.body.getChildren().add(areaContent);
-//        this.content.getChildren().add(body);
-        
+        this.body.getChildren().add(createRegion());
         
         // Config Axis in body
         this.body.getChildren().add(axisTopLeft());
@@ -276,29 +248,15 @@ root = FXMLLoader.load(getClass().getResource("/fxml/FXML.fxml"));
      * @return Região configurada.
      */
     private Region createRegion() {
+        StackPane areaContent = new StackPane(this.container);
 
-        // create sized enclosing Region with Border
-        // create drawing Pane without Border or size
-        final StackPane pane = new StackPane(createContent());
-//        clipChildren(pane, BORDER_RADIUS);
-//        pane.setStyle("-fx-background-color : red");
-
-        // create sized enclosing Region with Border
-        final ScrollPane container = new ScrollPane(pane);
-        container.setId("container");
-        AnchorPane.setTopAnchor(container, 35.0);
-        AnchorPane.setBottomAnchor(container, 0.0);
-        AnchorPane.setRightAnchor(container, 0.0);
-        AnchorPane.setLeftAnchor(container, 0.0);
-
-
-//        clipChildren(container, BORDER_RADIUS);
-        container.setFitToHeight(true);
-        container.setFitToWidth(true);
-        
+        AnchorPane.setTopAnchor(areaContent, 35D);
+        AnchorPane.setRightAnchor(areaContent, 0D);
+        AnchorPane.setBottomAnchor(areaContent, 0D);
+        AnchorPane.setLeftAnchor(areaContent, 0D);
 
 //        this.container.setContent(body);
-        return container;
+        return areaContent;
     }
 
         /**
