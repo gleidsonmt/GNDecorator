@@ -27,11 +27,12 @@
 
 ## Primary Structure
 
-# Etrutura - by Scenic View
+# Structure - by Scenic View
 ## Primary
 
 ![Structure](src/main/resources/screenshot/primarySctructure.png)
 
+## Adaptable when the bar is moved
 ![gif1](src/main/resources/screenshot/gif1.gif)
 
 ### No metódo main utilize |  In method main
