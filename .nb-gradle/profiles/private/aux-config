@@ -6,11 +6,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/GNWindow.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/GNWindowProto.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/build.gradle</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/demo.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/lembrar.txt</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/screenshot/demo1.png</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/demo1.css</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/GNWindowBar.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/README.md</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/darkula.css</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/prototype/GNWindowProto.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/prototype/GNWindowBar.java</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/regular.css</file>
       </group>
     </open-files>

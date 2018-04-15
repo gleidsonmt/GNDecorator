@@ -19,8 +19,11 @@ package com.gn;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.NamedArg;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.BoundingBox;
@@ -94,8 +97,8 @@ import javafx.stage.StageStyle;
  */
 public class GNWindow extends StackPane {
 
-    private final Stage stage = new Stage();
-    private final Scene scene = new Scene(this);
+    private final Stage stage = new Stage(StageStyle.TRANSPARENT);
+    private final Scene scene = new Scene(this, Color.TRANSPARENT);
 
     private final AnchorPane body       = new AnchorPane();
     public  final ScrollPane container  = new ScrollPane();
@@ -137,13 +140,17 @@ public class GNWindow extends StackPane {
     private boolean     init        = true;
     private boolean resizeInDrag    = true;
             
-    private final BooleanProperty maximizedProperty     = new SimpleBooleanProperty(false);
     private static final String USER_AGENT_STYLESHEET   = GNWindow.class.getResource("/css/regular.css").toExternalForm();
     
     
-    private final AnchorPane areaContent = new AnchorPane();
     private final StackPane content = new StackPane();
+    
+    private final BooleanProperty resizableProperty = new SimpleBooleanProperty(true);
+    private final StringProperty titleProperty = new SimpleStringProperty(this, "title");
+    private final BooleanProperty maximizedProperty = new SimpleBooleanProperty(this, "maximized", false );
 
+    private BoundingBox initialBound = null;
+    
     /**
      * Cria uma decoração | Create a decoration.
      */
@@ -153,6 +160,8 @@ public class GNWindow extends StackPane {
         configLayout();
         addActions();
         bounds = Screen.getPrimary().getVisualBounds();
+        stage.setX(-100);
+        title.textProperty().bind(titleProperty);
     }
 
     /**
@@ -160,14 +169,51 @@ public class GNWindow extends StackPane {
      *
      * @return
      */
-    public Stage getStage() {
+    private Stage getStage() {
         return this.stage;
     }
+
+    public final StringProperty titleProperty() {
+        return titleProperty;
+    }
+
+    public final String getTitle() {
+        return titleProperty.get();
+    }
+
+    public final void setTitle(String text) {
+        titleProperty.set(text);
+    }
+    
+    public void setMaximized(boolean maximized) {
+        maximizedProperty.set(maximized);
+        maximize(); // configura os icones dos buttons
+    }
+
+    public BooleanProperty maximizedProperty() {
+        return maximizedProperty;
+    }
+
+    /**
+     * Verifica se o palco está maximizado | Checks if the stage is maximized.
+     *
+     * @return true if it is, if not false.
+     */
+    public boolean isMaximized() {
+        return stage.getWidth() == Screen.getPrimary().getVisualBounds().getWidth()
+                && stage.getHeight() == Screen.getPrimary().getVisualBounds().getHeight()
+                && stage.getX() == Screen.getPrimary().getVisualBounds().getMinX()
+                && stage.getY() == Screen.getPrimary().getVisualBounds().getMinY();
+    }
+
     
     /**
      * @param body o corpo para configurar.
      */
     public void setContent(Node body) {
+        if(!this.content.getChildren().isEmpty())
+            this.content.getChildren().clear();
+        
         this.content.getChildren().add(body);
     }
     
@@ -175,8 +221,6 @@ public class GNWindow extends StackPane {
      * Configura o palco | Config the stage.
      */
     private void configStage() {
-        this.stage.initStyle(StageStyle.UNDECORATED);
-        this.scene.setFill(Color.TRANSPARENT);
 
         this.stage.setScene(this.scene);
         this.stage.setMinWidth(254.0D);
@@ -187,8 +231,6 @@ public class GNWindow extends StackPane {
      * Configura o layout | Config the layout.
      */
     private void configLayout() {
-        Parent root = null;
-
         this.setId("GNWindow");
         this.body.setId("body");
         this.title.setId("title");
@@ -206,7 +248,7 @@ public class GNWindow extends StackPane {
         this.bar_content.getChildren().add(controls());
         this.bar_content.getChildren().add(titleContent());
         controls.toFront();
-        this.setStyle("-fx-border-color : #808080; -fx-border-width : 1");
+//        this.setStyle("-fx-border-color : #808080; -fx-border-width : 1");
         
         container.setFitToHeight(true);
         container.setFitToWidth(true);
@@ -226,21 +268,12 @@ public class GNWindow extends StackPane {
         this.body.getChildren().add(right());
         this.body.getChildren().add(top());
         this.body.getChildren().add(bottom());
-        
-        
-        
+
         initTheme(Theme.DEFAULT);
         viewBars(false);
     }
     
-        /**
-     * Cria a area da janela destinada para aplicação.
-     *
-     * @return Contéudo da aplicação.
-     */
-    private Parent createContent() {
-        return areaContent;    // create drawing Pane without Border or size
-    }
+
     
     /**
      * Criar a região com os limites de bordas.
@@ -255,7 +288,6 @@ public class GNWindow extends StackPane {
         AnchorPane.setBottomAnchor(areaContent, 0D);
         AnchorPane.setLeftAnchor(areaContent, 0D);
 
-//        this.container.setContent(body);
         return areaContent;
     }
 
@@ -812,27 +844,75 @@ public class GNWindow extends StackPane {
         });
 
         bar.setOnMousePressed(event -> {
-            initX = event.getSceneX();
-            initY = event.getSceneY();
+            initX = event.getScreenX();
+            initY = event.getScreenY();
             resizeInDrag = isMaximized();
         });
 
-        bar.setOnMouseDragged(event -> {
-            if (event.isPrimaryButtonDown()) {
-                getStage().setX(event.getScreenX() - initX);
-                getStage().setY(event.getScreenY() - initY);
-                bar.setCursor(Cursor.MOVE);
-//                this.setPadding(new Insets(5));
-                btn_maximize.setId("maximize");
+        bar.setOnMouseDragged(e -> {
+            
+            if (!e.isPrimaryButtonDown() || initX == -1) {
+                return;
             }
+            
+            if (e.isStillSincePress()) {
+                return;
+            }
+            
+//            if (event.isPrimaryButtonDown()) {
+////                getStage().setX(event.getScreenX() - initX);
+////                getStage().setY(event.getScreenY() - initY);
+//                bar.setCursor(Cursor.MOVE);
+////                this.setPadding(new Insets(5));
+//                btn_maximize.setId("maximize");
+//            }
+//            if(e.isPrimaryButtonDown()){
+                if (savedBounds == null) {
+                    savedBounds = initialBound;
+                }
+//            }
+//
+            
+        
+
+            if(isMaximized()){
+                
+                stage.setX(e.getScreenX() - savedBounds.getWidth() / 2);
+                stage.setY(0);  
+                stage.setWidth(savedBounds.getWidth());
+                stage.setHeight(savedBounds.getHeight());
+                
+                System.out.println("stage.getX() = " + stage.getX());
+                System.out.println("savedBounds.getWidth() = " + savedBounds.getWidth());
+                System.out.println("result " + (stage.getX() + savedBounds.getWidth()));
+                
+                if(stage.getX() < bounds.getMinX()){
+                    stage.setX(bounds.getMinX());
+                } else if((stage.getX() + savedBounds.getWidth() )  > bounds.getMaxX()){
+                    System.out.println("aki poha");
+//                    stage.setX(bounds.getMaxX());
+                    stage.setX(bounds.getMaxX() - savedBounds.getWidth());
+                }
+
+            }
+
+//            getStage().setX(e.getScreenX() - initX);
+//            getStage().setY(e.getScreenY() - initY);
+            newX = e.getScreenX();
+            newY = e.getScreenY();
+            double deltax = newX - initX;
+            double deltay = newY - initY;
+            initX = newX;
+            initY = newY;            
+            stage.setX(stage.getX() + deltax);
+            setStageY(stage, stage.getY() + deltay);
+
+            configCursor(true);
+            btn_maximize.setId("restore");
         });
         
         bar.setOnDragDetected(e -> {
-            if (resizeInDrag) {
-                savedBounds = new BoundingBox(stage.getX() - 20, stage.getY() + 20,
-                        stage.getWidth() - 100, stage.getHeight() - 10);
-                restoreSavedBounds(stage);
-            }
+
         });
 
         bar.setOnMouseReleased(event -> {
@@ -851,28 +931,7 @@ public class GNWindow extends StackPane {
         });
 
     }
-    
-    public void setMaximized(boolean maximized) {
-        maximizedProperty.set(maximized);
-        if(maximized){
-            maximize();
-        }
-    }
 
-    public BooleanProperty maximizedProperty() {
-        return maximizedProperty;
-    }
-    
-    /**
-     * Verifica se o palco está maximizado | Checks if the stage is maximized.
-     * @return true if it is, if not false.
-     */
-    public boolean isMaximized() {
-        return stage.getWidth() == Screen.getPrimary().getVisualBounds().getWidth()
-                && stage.getHeight() == Screen.getPrimary().getVisualBounds().getHeight()
-                && stage.getX() == Screen.getPrimary().getVisualBounds().getMinX()
-                && stage.getY() == Screen.getPrimary().getVisualBounds().getMinY();
-    }
 
     /**
      * Restaura o tanho da janela | Restores size of the window..
@@ -882,11 +941,16 @@ public class GNWindow extends StackPane {
      * other case The size is restored to before maximizing..
      */
     public void restore() {
-        if (!init) {
-            this.savedBounds = new BoundingBox(stage.getX() + 5, stage.getY() + 5,
-                    stage.getWidth() - 10, stage.getHeight() - 10);
-            init = true;
+//        if (!init) {
+//            this.savedBounds = new BoundingBox(stage.getX() + 5, stage.getY() + 5,
+//                    stage.getWidth() - 10, stage.getHeight() - 10);
+//            init = true;
+//        }
+
+        if (savedBounds == null) {
+            savedBounds = initialBound;
         }
+        
         restoreSavedBounds(stage);
 //        if the stage transparent support
 //        this.setPadding(new Insets(5));
@@ -898,20 +962,13 @@ public class GNWindow extends StackPane {
      * Maximiza a decoração | Maximize decoration.
      */
     public void maximize() {
-//        this.setPadding(new Insets(0));
-
-        savedBounds = new BoundingBox(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight());
-//
        //set Stage boundaries to visible bounds of the main screen
         this.stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
+        this.stage.setY(bounds.getMinY());
+        this.stage.setWidth(bounds.getWidth());
+        this.stage.setHeight(bounds.getHeight());
 
-//        if (init) {
-//            content.setPrefSize(bounds.getWidth(), bounds.getHeight());
-//        }
-
+        this.stage.setMaximized(true); // important
         btn_maximize.setId("restore");
         stage.centerOnScreen();
         configCursor(false);
@@ -1076,11 +1133,11 @@ public class GNWindow extends StackPane {
      * decoration.
      */
     public void show() {
-        configBody(body);
-        if (maximizedProperty().get()) {
-            maximize();
-//            init = false;
-        }
+//        configBody(body);
+//        if (maximizedProperty().get()) {
+//            maximize();
+////            init = false;
+//        }
 //
 //        if (!resizableProperty().get()) {
 //            btn_maximizar.setDisable(true);
@@ -1090,7 +1147,16 @@ public class GNWindow extends StackPane {
 
         stage.centerOnScreen();
         stage.show();
+        initRestaure();
+        
+        // maximiza depois de visivel
+        if(maximizedProperty.get()){
+            maximize();
+        }
+        
     }
+    
+    
     
     public enum Style {
         DEFAULT, DARK
@@ -1103,6 +1169,19 @@ public class GNWindow extends StackPane {
     @Override
     public String getUserAgentStylesheet() {
         return USER_AGENT_STYLESHEET;
+    }
+    
+    /**
+     * Pega os parametros do stage para definir a posição e o tamanho.
+     * @return Um box com as dimensões.
+     */
+    private BoundingBox initRestaure(){
+        double x = stage.getX();
+        double y = stage.getY();
+        double width = stage.getWidth();
+        double height = stage.getHeight();
+        this.initialBound  = new BoundingBox(x, y, width, height);
+        return this.initialBound;
     }
 }
 

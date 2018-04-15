@@ -18,37 +18,44 @@
 package com.gn;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.layout.Region;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 /**
+ *
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  */
-public class demo extends Application {
-
-
+public class NewFXMain extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) {
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXML.fxml"));
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
 
-        Region region = new Region();
-        
-        GNWindow window = new GNWindow();
-//        window.setPadding(new Insets(5));
-        window.setTitle("Hello JavaFx");
-        window.setContent(root);
-        window.show();
-//        window.setMaximized(true);
-//        window.setMaximized(true);
-//        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toExternalForm());
-//        ScenicView.show(window.getScene());
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+
+        Scene scene = new Scene(root, 300, 250);
+
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        primaryStage.setMaximized(true);
     }
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

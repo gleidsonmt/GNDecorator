@@ -19,6 +19,7 @@ and open the template in the editor.
     -gray : #00000020;
     -red : #FF3547;
     -fx-background-color : white;
+    -fx-border-color : #808080;
 }
 
 #body {
