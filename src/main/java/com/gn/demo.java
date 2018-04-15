@@ -38,12 +38,13 @@ public class demo extends Application {
 
         Region region = new Region();
         
-        GNWindow window = new GNWindow();
+        GNDecorator window = new GNDecorator();
 //        window.setPadding(new Insets(5));
         window.setTitle("Hello JavaFx");
         window.setContent(root);
         window.show();
-//        window.setMaximized(true);
+        window.setMaximized(true);
+        
 //        window.setMaximized(true);
 //        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toExternalForm());
 //        ScenicView.show(window.getScene());
