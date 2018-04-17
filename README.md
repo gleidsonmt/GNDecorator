@@ -1,14 +1,14 @@
 
 ## GNDecorator is a simple decoration project for javaFx applications.
 
-## Adaptable when the bar is moved
+### Adaptable when the bar is moved
 ![gif1](src/main/resources/screenshot/gif1.gif)
-## Full Screen animation
+### Full Screen animation
 ![gif2](src/main/resources/screenshot/gif2.gif)
-## In production
+### In production
 ![gif3](src/main/resources/screenshot/gif3.gif)
 
-### Basic decoration
+#### Basic decoration
 
 ![demo1](src/main/resources/screenshot/basic.png)
 ### With gradient and image
