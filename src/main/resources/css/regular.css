@@ -50,7 +50,8 @@ and open the template in the editor.
 #body #bar #buttons #minimize:hover, 
 #body #bar #buttons #maximize:hover, 
 #body #bar #buttons #restore:hover,
-#body #bar #buttons #full-screen:hover
+#body #bar #buttons #full-screen:hover,
+#body #bar #buttons #unfull-screen:hover
 
 {
     -fx-background-color : -grey;
@@ -72,14 +73,13 @@ and open the template in the editor.
     -fx-image : url('../img/restore.png');
 }
 
-
-
-#teste {
-    -fx-background-image : url('../img/login.jpg') ;
-    -fx-background-size : cover;
+#bar #buttons #full-screen .image-view {
+    -fx-image : url('../img/fullscreen.png');
 }
 
-
+#bar #buttons #unfull-screen .image-view {
+    -fx-image : url('../img/unfullscreen.png');
+}
 
 .scroll-bar > .thumb{
     -fx-background-color: #cdcdcd;

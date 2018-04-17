@@ -1,37 +1,18 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 30/03/2018, 00:23:59
-    Author     : Gleidson Neves da Silveira
-*/
-
 
 /* 
     Created on : 02/04/2017, 14:26:00
     Author     : Gleidson Neves da Silveira
 */
 
-
-.cu .image-view{
-    -gn-fill : blue;
-}
-
-
-
-
 #GNWindow {
     -gray : #00000030;
     -red : #FF3547;
-    
-    -fx-background-size : cover;
+    -elegant : #2E2E2E;
+    -primary : #4285f4;
 }
 
 #body {
-    -fx-background-color : linear-gradient(to top left, -red, black);
-    -fx-opacity : 0.5;
+    -fx-background-color : -elegant;
 }
 
 #body #container {
@@ -46,49 +27,38 @@ and open the template in the editor.
     -fx-background-color : transparent;
 }
 
+#bar #title {
+    -fx-text-fill : -primary;
+    -fx-font-weight : bold;
+}
+
 #bar #buttons {
     -fx-background-color : transparent;
 }
 
-#bar #title {
-    -fx-text-fill : white;
-}
 
 #bar #buttons .button {
     -fx-background-radius : 0px;
     -fx-background-color : transparent;
 }
 
-#bar #buttons #minimize:hover, 
-#bar #buttons #maximize:hover, 
-#bar #buttons #restore:hover,
-#bar #buttons #close:hover
+#body #bar #buttons #minimize:hover, 
+#body #bar #buttons #maximize:hover, 
+#body #bar #buttons #restore:hover,
+#body #bar #buttons #full-screen:hover,
+#body #bar #buttons #unfull-screen:hover
 {
-    -fx-background-color : -gray;
+    -fx-background-color : #ffffff50;
 }
 
-#bar #buttons #minimize .image-view {
-    -fx-image : url('../img/minimize.png');
-    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
-}
-
-#bar #buttons #maximize .image-view {
-    -fx-image : url('../img/maximize.png');
-    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
-}
-
-#bar #buttons #close .image-view {
-    -fx-image : url('../img/close.png');
-    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
-}
-
-#bar #buttons #restore .image-view {
-    -fx-image : url('../img/restore.png');
-    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
-}
-
-#bar #buttons #close:hover .image-view {
-    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
+#bar #buttons #close .image-view,
+#bar #buttons #maximize .image-view,
+#bar #buttons #minimize .image-view,
+#bar #buttons #restore .image-view,
+#bar #buttons #full-screen .image-view,
+#bar #buttons #unfull-screen .image-view
+{
+    -gn-fill : white;
 }
 
 #bar #menu #icon{

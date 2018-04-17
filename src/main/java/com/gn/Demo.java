@@ -17,10 +17,9 @@
 
 package com.gn;
 
-import com.gn.GNDecorator;
+import com.gn.options.ButtonType;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -40,18 +39,20 @@ public class Demo extends Application {
         Region region = new Region();
         
         GNDecorator window = new GNDecorator();
-//        window.setPadding(new Insets(5));
-        window.setTitle("Hello JavaFx");
+        window.setTitle("GNDecoration");
         window.setContent(root);
-        window.addButton(GNDecorator.ButtonType.FULL_SCREEN);
+        window.addButton(ButtonType.FULL_EFFECT);
+        window.initTheme(GNDecorator.Theme.DARKULA);
         window.show();
-//        window.setMaximized(true);
-//        window.getScene().getStylesheets().add(getClass().getResource("/css/regular.css").toExternalForm());
-//        ScenicView.show(window.getScene());
+
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private Object ButtonType(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

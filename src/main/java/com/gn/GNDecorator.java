@@ -20,19 +20,18 @@ import com.gn.buttons.Close;
 import com.gn.buttons.FullScreen;
 import com.gn.buttons.Maximize;
 import com.gn.buttons.Minimize;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import com.gn.options.ButtonType;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Insets;
@@ -47,7 +46,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -111,9 +109,10 @@ public class GNDecorator extends StackPane {
     private final Stage stage = new Stage(StageStyle.UNDECORATED);
     private final Scene scene = new Scene(this, Color.TRANSPARENT);
 
-    private final AnchorPane body       = new AnchorPane();
-    public  final ScrollPane container  = new ScrollPane();
-    private final StackPane  content    = new StackPane();
+    private final AnchorPane body        = new AnchorPane();
+    public  final ScrollPane container   = new ScrollPane();
+    private final StackPane  content     = new StackPane();
+    private final StackPane  areaContent = new StackPane(this.container);
 
     private final Path top_left     = new Path();
     private final Path top_right    = new Path();
@@ -131,11 +130,12 @@ public class GNDecorator extends StackPane {
     private final HBox          menu             = new HBox();
     private final HBox          title_content    = new HBox();
     
-    private final Close     btn_close     = new Close();
-    private final Maximize  btn_minimize  = new Maximize();
-    private final Minimize  btn_maximize  = new Minimize();
-    private final Label     title         = new Label("Application");
-    private final SVGPath   icon          = new SVGPath();
+    private final Close      btn_close      = new Close();
+    private final Maximize   btn_minimize   = new Maximize();
+    private final Minimize   btn_maximize   = new Minimize();
+    private final FullScreen btn_fullScreen = new FullScreen();
+    private final Label      title          = new Label("Application");
+    private final SVGPath    icon           = new SVGPath();
     
     private final ImageView viewMinimize    = new ImageView(new Image("img/minimize.png"));
     private final ImageView viewMaximize    = new ImageView(new Image("img/maximize.png"));
@@ -154,12 +154,35 @@ public class GNDecorator extends StackPane {
     // in the future
 //    private static final String USER_AGENT_STYLESHEET  = GNDecorator.class.getResource("/css/regular.css").toExternalForm();
     
-    private final BooleanProperty resizableProperty = new SimpleBooleanProperty(true);
-    private final StringProperty  titleProperty     = new SimpleStringProperty(this, "title");
-    private final BooleanProperty maximizedProperty = new SimpleBooleanProperty(this, "maximized", false);
+    private final BooleanProperty resizableProperty = new SimpleBooleanProperty(GNDecorator.this, "resizableProperty", true);
+    private final StringProperty  titleProperty     = new SimpleStringProperty(GNDecorator.this, "textProperty", "title");
+    private final BooleanProperty maximizedProperty = new SimpleBooleanProperty(GNDecorator.this, "maximizedProperty", false);
    
-    private TranslateTransition open = new TranslateTransition(Duration.millis(100D), this.bar);
-    private TranslateTransition close = new TranslateTransition(Duration.millis(100D), this.bar);
+    private DoubleProperty barHeight = new SimpleDoubleProperty(GNDecorator.this, "barSize", 30);
+    private DoubleProperty buttonHeight = new SimpleDoubleProperty(GNDecorator.this, "buttonHeiht", 30);
+    private DoubleProperty buttonWidth = new SimpleDoubleProperty(GNDecorator.this, "buttonWidth", 30);
+    
+    
+    private final TranslateTransition open = new TranslateTransition(Duration.millis(100D), this.bar);
+    private final TranslateTransition close = new TranslateTransition(Duration.millis(100D), this.bar);
+    
+    private ChangeListener<Object> restaureFullScreen = new ChangeListener<Object>() {
+        @Override
+        public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
+            if (newValue != null) {
+                configCursor(true);
+                AnchorPane.setTopAnchor(GNDecorator.this.areaContent, barHeight.get());
+            }
+        }
+    };
+    
+    /********************************************************************************************
+     * 
+     * 
+     *                      Construtors
+     *      
+     * 
+     ********************************************************************************************/
     
     /**
      * Cria uma decoração | Create a decoration.
@@ -171,14 +194,38 @@ public class GNDecorator extends StackPane {
         addActions();
         bounds = Screen.getPrimary().getVisualBounds();
         title.textProperty().bind(titleProperty);
+        controls.minHeightProperty().bind(barHeight);
+        menu.minHeightProperty().bind(barHeight);
+        title_content.minHeightProperty().bind(barHeight);
+        this.bar.minHeightProperty().bind(barHeight);
+        
+        for(Node node : controls.getChildren()){
+            ((Button) node).minHeightProperty().bind(buttonHeight);
+            ((Button) node).prefHeightProperty().bind(buttonHeight);
+            ((Button) node).minWidthProperty().bind(buttonWidth);
+            ((Button) node).prefWidthProperty().bind(buttonWidth);
+        }
+        
+        btn_fullScreen.minHeightProperty().bind(buttonHeight);
+        btn_fullScreen.prefHeightProperty().bind(buttonHeight);
+        btn_fullScreen.minWidthProperty().bind(buttonWidth);
+        btn_fullScreen.prefWidthProperty().bind(buttonWidth);
     }
-
+    
+    /********************************************************************************************
+     *
+     *
+     *                              Public methods
+     *
+     *
+     ********************************************************************************************/
+    
     /**
      * Palco desta decoração | Stage this decoration.
      *
      * @return
      */
-    private Stage getStage() {
+    public Stage getStage() {
         return this.stage;
     }
 
@@ -262,6 +309,62 @@ public class GNDecorator extends StackPane {
         this.body.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
     
+    public boolean isFullScreen(){
+        return stage.isFullScreen();
+    }
+    
+    public void setFullScreen(boolean full){
+        if(full){
+            stage.setFullScreen(true);
+            AnchorPane.setTopAnchor(this.areaContent, 0D);
+            stage.fullScreenProperty().addListener(restaureFullScreen);
+        }
+    }
+    
+    public DoubleProperty barHeightProperty(){
+        return this.barHeight;
+    }
+    
+    public void setBarHeight(double height){
+        this.barHeight.set(height);
+        AnchorPane.setTopAnchor(this.areaContent, height);
+    }
+    
+    public double getBarHeight(){
+        return this.barHeight.get();
+    }
+    
+    public DoubleProperty buttonHeightProperty() {
+        return this.buttonHeight;
+    }
+
+    public void setButtonHeight(double height) {
+        this.buttonHeight.set(height);
+    }
+
+    public double getButtonHeight() {
+        return this.buttonHeight.get();
+    }
+    
+    public DoubleProperty buttonWidthProperty() {
+        return this.buttonWidth;
+    }
+
+    public void setButtonWidth(double width) {
+        this.buttonWidth.set(width);
+    }
+
+    public double getButtonWidth() {
+        return this.buttonWidth.get();
+    }
+    
+    public void setButtonSize(double width, double height){
+        this.buttonWidth.set(width);
+        this.buttonHeight.set(height);
+    }
+    
+
+    
     /**
      * Configura o palco | Config the stage.
      */
@@ -326,9 +429,8 @@ public class GNDecorator extends StackPane {
      * @return Região configurada.
      */
     private Region createRegion() {
-        StackPane areaContent = new StackPane(this.container);
 
-        AnchorPane.setTopAnchor(areaContent, 35D);
+        AnchorPane.setTopAnchor(areaContent, barHeight.get());
         AnchorPane.setRightAnchor(areaContent, 0D);
         AnchorPane.setBottomAnchor(areaContent, 0D);
         AnchorPane.setLeftAnchor(areaContent, 0D);
@@ -492,7 +594,7 @@ public class GNDecorator extends StackPane {
      */
     private AnchorPane bar(){
         bar.setId("bar");
-        bar.setMinHeight(35D);
+        bar.setMinHeight(barHeight.get());
         AnchorPane.setTopAnchor(bar, 0D);
         AnchorPane.setRightAnchor(bar, 0D);
         AnchorPane.setLeftAnchor(bar, 0D);
@@ -506,7 +608,8 @@ public class GNDecorator extends StackPane {
      */
     private HBox barContent() {
         bar_content.setId("barContent");
-        bar_content.setPrefHeight(36D);
+        bar_content.setPrefHeight(barHeight.get());
+        bar_content.setMinHeight(barHeight.get());
         AnchorPane.setTopAnchor(bar_content, 0D);
         AnchorPane.setRightAnchor(bar_content, 0D);
         AnchorPane.setLeftAnchor(bar_content, 0D);
@@ -520,11 +623,12 @@ public class GNDecorator extends StackPane {
      */
     private HBox controls(){
         controls.setId("buttons");
+        controls.setAlignment(Pos.CENTER);
         btn_minimize.setId("minimize");
         btn_maximize.setId("maximize");
         btn_close.setId("close");
         
-        double prefWidth = 30, prefHeiht = 30;
+        double prefWidth = buttonWidth.get(), prefHeiht = buttonHeight.get();
         
         btn_minimize.setGraphic(viewMinimize);
         btn_maximize.setGraphic(viewMaximize);
@@ -548,8 +652,8 @@ public class GNDecorator extends StackPane {
      */
     private HBox menu(){
         menu.setId("menu");
-        menu.setMinWidth(35);
-        menu.setMinHeight(30);
+        menu.setMinWidth(barHeight.get());
+        menu.setMinHeight(barHeight.get());
         Button btn_ico = new Button();
         icon.setId("icon");
         icon.setContent("M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z");
@@ -959,6 +1063,7 @@ public class GNDecorator extends StackPane {
         this.setHeight(bounds.getHeight());
 //
         this.stage.setFullScreen(false); // important
+        btn_fullScreen.setId("full-screen");
         btn_maximize.setId("restore");
         stage.centerOnScreen();
         configCursor(false);
@@ -1111,107 +1216,135 @@ public class GNDecorator extends StackPane {
     
     
     public void addButton(ButtonType button){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setContentText("Deu erro bobão");
-        
         switch(button){
+            case FULL_EFFECT :
+                fullScreen();
+                configFullEffect();
+                break;
             case FULL_SCREEN :
-                FullScreen full = new FullScreen();
-                full.setId("full-screen");
-                controls.getChildren().add(full);
-                full.setMinSize(30, 30);
-                full.setPrefSize(30, 30);
-                full.toBack();
-                full.setOnMouseClicked(e-> {
-                    if(!stage.isFullScreen()){
-                        
-                        stage.setFullScreen(true);
-                        configCursor(false);
-                        viewBar(false);
-                        this.btn_maximize.setId("restore");
-                    } else  {
-                        stage.setFullScreen(false);
-                        configCursor(true);
-////                        viewBar(true);
-                        this.btn_maximize.setId("maximize");
-                    }
-                });
-
-                stage.fullScreenProperty().addListener(new ChangeListener<Object>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
-                        if(newValue != null){
-                            configCursor(true);
-                            viewBar(true);
-                        }
-                            
-                    }
-                });
                 
-             
-                EventHandler handler = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        if (event.getY() == 0 && stage.isFullScreen()) {
-                            viewBar(true);
-                        }
-                    }
-                };
-
+                fullScreen();
                 
-                this.setOnMouseMoved(handler);
-
-                this.bar.setOnMouseExited(e ->{
-                    if(stage.isFullScreen() && e.getY() > 0){
-                        viewBar(false);
-                        this.setOnMouseMoved(handler);
-                    }
-                });
-                
-                this.bar.setOnMouseMoved(e ->{
-                    if(stage.isFullScreen())
-                    this.setOnMouseMoved(null);
-                });
-           
-                this.bar.setOnMouseEntered(e ->{
-                    if(stage.isFullScreen()){
-                        this.setOnMouseMoved(null);
-                    }
-                    
-                });
+                configFullScreen();
                 
                 break;
         }
     }
-    
 
+    private FullScreen fullScreen(){
+        btn_fullScreen.setId("full-screen");
+        controls.getChildren().add(btn_fullScreen);
+
+        btn_fullScreen.toBack();
+        return this.btn_fullScreen;
+    }
+    
+    private void configFullEffect(){
+        btn_fullScreen.setOnMouseClicked(e -> {
+            if (!stage.isFullScreen()) {
+                stage.setFullScreen(true);
+                configCursor(false);
+                viewBar(false);
+                btn_fullScreen.setId("unfull-screen");
+                this.controls.getChildren().removeAll(btn_minimize, btn_maximize);
+            } else {
+                this.controls.getChildren().addAll(btn_minimize, btn_maximize);
+                btn_maximize.toFront();
+                btn_close.toFront();
+                stage.setFullScreen(false);
+                configCursor(true);
+                btn_fullScreen.setId("full-screen");
+            }
+        });
+
+        stage.fullScreenProperty().addListener(new ChangeListener<Object>() {
+            @Override
+            public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
+                if (newValue != null) {
+                    configCursor(true);
+                    viewBar(true);
+                    if(GNDecorator.this.controls.getChildren().size() < 4){
+                        GNDecorator.this.controls.getChildren().addAll(btn_minimize, btn_maximize);
+                        btn_maximize.toFront();
+                        btn_close.toFront();
+                    }
+                    
+                }
+
+            }
+        });
+
+        EventHandler handler = (EventHandler<MouseEvent>) (MouseEvent event) -> {
+            if (event.getY() == 0 && stage.isFullScreen()) {
+                viewBar(true);
+            }
+        };
+
+        this.setOnMouseMoved(handler);
+
+        this.bar.setOnMouseExited(e -> {
+            if (stage.isFullScreen() && e.getY() > 0) {
+                viewBar(false);
+                this.setOnMouseMoved(handler);
+            }
+        });
+
+        this.bar.setOnMouseMoved(e -> {
+            if (stage.isFullScreen()) {
+                this.setOnMouseMoved(null);
+            }
+        });
+
+        this.bar.setOnMouseEntered(e -> {
+            if (stage.isFullScreen()) {
+                this.setOnMouseMoved(null);
+            }
+
+        });
+    }
+    
+    private void configFullScreen(){
+        btn_fullScreen.setOnMouseClicked(e -> {
+            if (!stage.isFullScreen()) {
+                stage.setFullScreen(true);
+                AnchorPane.setTopAnchor(this.areaContent, 0D);
+            } else {
+                stage.setFullScreen(false);
+                AnchorPane.setTopAnchor(this.areaContent, barHeight.get());
+            }
+        });
+
+        stage.fullScreenProperty().addListener(restaureFullScreen);
+    }
     
     private void viewBar(boolean view){
         
-        open.setFromY(-(bar.getMinHeight()));
+        open.setFromY(-(barHeight.get()));
         open.setByY(bar.getMinHeight());
         
-        close.setFromY(bar.getMinHeight() * -1);
-        close.setByY( - (bar.getMinHeight() ));
+        close.setFromY(barHeight.get() * -1);
+        close.setByY( - (barHeight.get() ));
         
-        if(view) open.play(); else close.play();
-     
+        if(view) {
+            open.play();
+            AnchorPane.setTopAnchor(this.areaContent, barHeight.get());
+        } else {
+            AnchorPane.setTopAnchor(this.areaContent, 0D);
+            close.play();
+        }
         
     }
-    
- 
     
     public void initTheme(Theme theme){
         switch(theme){
             case DEFAULT : 
                 this.getStylesheets().add(getClass().getResource("/css/regular.css").toExternalForm());
                 break;
-        
+            case DARKULA :
+                this.getStylesheets().add(getClass().getResource("/css/theme/darkula.css").toExternalForm());
+                break;
         }
     }
-
-
 
     /**
      * Inicializa o palco com a decoração | Initialize the stage with
@@ -1229,10 +1362,7 @@ public class GNDecorator extends StackPane {
     public enum Theme {
         DEFAULT, DARKULA
     };
-    
-    public enum ButtonType {
-        FULL_SCREEN
-    }
+
     
     /**
      * Pega os parametros do stage para definir a posição e o tamanho.
@@ -1246,10 +1376,4 @@ public class GNDecorator extends StackPane {
         this.initialBound  = new BoundingBox(x, y, width, height);
         return this.initialBound;
     }
-    
-    
-
-
-    
 }
-
