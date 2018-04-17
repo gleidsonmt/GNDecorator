@@ -1,0 +1,10 @@
+
+Interface da gn window
+
+metodos obrigatorios
+
+setMinWidth
+setMinHeigth
+
+
+lembar de atualizar metodos bar.setOnMouseDragged da classe GNWindowBar
