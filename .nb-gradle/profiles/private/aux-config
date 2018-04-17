@@ -5,32 +5,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/GNWindow.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/archive.css</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/Close.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/MyControlSkin.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/GNDecorator.java</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/demo.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/lembrar.txt</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/screenshot/demo1.png</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/demo1.css</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/README.md</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/MyImageView.java</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/darkula.css</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/prototype/GNWindowProto.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/prototype/GNWindowBar.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/NewFXMain.java</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/regular.css</file>
       </group>
     </open-files>
     <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-      <group>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/GNWindow.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/demo.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/lembrar.txt</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/screenshot/demo1.png</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/demo1.css</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/README.md</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/darkula.css</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/prototype/GNWindowProto.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/prototype/GNWindowBar.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/regular.css</file>
-      </group>
-    </open-files>
   </auxiliary>
 </gradle-project-properties>

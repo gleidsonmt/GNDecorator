@@ -15,6 +15,13 @@ and open the template in the editor.
 */
 
 
+.cu .image-view{
+    -gn-fill : blue;
+}
+
+
+
+
 #GNWindow {
     -gray : #00000030;
     -red : #FF3547;

@@ -42,11 +42,11 @@ public class demo extends Application {
 //        window.setPadding(new Insets(5));
         window.setTitle("Hello JavaFx");
         window.setContent(root);
+        window.addButton(GNDecorator.ButtonType.FULL_SCREEN);
         window.show();
-        window.setMaximized(true);
         
 //        window.setMaximized(true);
-//        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toExternalForm());
+        window.getScene().getStylesheets().add(getClass().getResource("/css/regular.css").toExternalForm());
 //        ScenicView.show(window.getScene());
     }
 

@@ -17,7 +17,7 @@ and open the template in the editor.
 
 #GNWindow {
     -gray : #00000020;
-    -red : #FF3547;
+    -red : #e04343;
     -fx-background-color : white;
     -fx-border-color : #808080;
 }
@@ -49,7 +49,9 @@ and open the template in the editor.
 
 #bar #buttons #minimize:hover, 
 #bar #buttons #maximize:hover, 
-#bar #buttons #restore:hover 
+#bar #buttons #restore:hover,
+#bar #buttons #full-screen:hover
+
 {
     -fx-background-color : -gray;
 }
@@ -58,24 +60,16 @@ and open the template in the editor.
     -fx-background-color : -red;
 }
 
-#bar #buttons #minimize .image-view {
-    -fx-image : url('../img/minimize.png');
+#bar #buttons #close:hover .image-view{
+    -gn-fill : white;
 }
 
 #bar #buttons #maximize .image-view {
     -fx-image : url('../img/maximize.png');
 }
 
-#bar #buttons #close .image-view {
-    -fx-image : url('../img/close.png');
-}
-
 #bar #buttons #restore .image-view {
     -fx-image : url('../img/restore.png');
-}
-
-#bar #buttons #close:hover .image-view {
-    -fx-effect : innershadow( gaussian , white , 10,1,21,21 );
 }
 
 #teste {
