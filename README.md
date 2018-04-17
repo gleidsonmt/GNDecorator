@@ -37,20 +37,6 @@
 ## Full Screen animation
 ![gif2](src/main/resources/screenshot/gif2.gif)
 
-### No metódo main utilize |  In method main
-  
-    // init proto
-    GNWindowProto decoration = new GNDecorationProto();
-    decoration.show();
-    
-    // init proto bar
-    GNWindowBar decoration = new GNWindowBar();
-    decoration.setContent(node);
-    // para vers as barras de redimensionamento
-    decoration.viewBars(true);
-    decoration.show();
-
-
 # Features
 * Shadow <br>
         Decoração com sombra (É possivel fazer, porém no caso do windows causa lentidaão na gui), mais no caso do linux parace não haver essa lentidão.
