@@ -4,7 +4,7 @@
 ### Basic decoration
 
 ![demo1](src/main/resources/screenshot/basic.png)
-
+### With gradient and image
 ![demo1](src/main/resources/screenshot/demo1.png)
 
 
