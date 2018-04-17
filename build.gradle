@@ -10,8 +10,17 @@ sourceCompatibility = '1.8'
 // Note however, that you may define your own "run" and "debug" task if you
 // prefer. In this case NetBeans will not add these tasks but you may rely on
 // your own implementation.
+
+defaultTasks 'jar'
+
 if (!hasProperty('mainClass')) {
-    ext.mainClass = 'com.gn.demo'
+    ext.mainClass = 'com.gn.Demo'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.gn.Demo'
+    }
 }
 
 repositories {
@@ -23,9 +32,9 @@ repositories {
 
 dependencies {
     
-    compile 'com.jfoenix:jfoenix:8.0.3' // Java 8
-    compile files('lib/scenicView.jar')
-    compile files('lib/Genesis.jar')
+//    compile 'com.jfoenix:jfoenix:8.0.3' // Java 8
+//    compile files('lib/scenicView.jar')
+//    compile files('lib/Genesis.jar')
     
     // TODO: Add dependencies here ...
     // You can read more about how to add dependency here:

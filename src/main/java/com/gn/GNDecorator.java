@@ -41,6 +41,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -49,6 +50,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -147,13 +151,15 @@ public class GNDecorator extends StackPane {
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
     
-    private static final String USER_AGENT_STYLESHEET  = GNDecorator.class.getResource("/css/regular.css").toExternalForm();
+    // in the future
+//    private static final String USER_AGENT_STYLESHEET  = GNDecorator.class.getResource("/css/regular.css").toExternalForm();
     
     private final BooleanProperty resizableProperty = new SimpleBooleanProperty(true);
     private final StringProperty  titleProperty     = new SimpleStringProperty(this, "title");
     private final BooleanProperty maximizedProperty = new SimpleBooleanProperty(this, "maximized", false);
    
-    
+    private TranslateTransition open = new TranslateTransition(Duration.millis(100D), this.bar);
+    private TranslateTransition close = new TranslateTransition(Duration.millis(100D), this.bar);
     
     /**
      * Cria uma decoração | Create a decoration.
@@ -165,7 +171,6 @@ public class GNDecorator extends StackPane {
         addActions();
         bounds = Screen.getPrimary().getVisualBounds();
         title.textProperty().bind(titleProperty);
-               
     }
 
     /**
@@ -251,6 +256,10 @@ public class GNDecorator extends StackPane {
             this.content.getChildren().clear();
         
         this.content.getChildren().add(body);
+    }
+    
+    public void setColor(Color color){
+        this.body.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
     
     /**
@@ -949,7 +958,7 @@ public class GNDecorator extends StackPane {
         this.setWidth(bounds.getWidth());
         this.setHeight(bounds.getHeight());
 //
-//        this.stage.setMaximized(true); // important
+        this.stage.setFullScreen(false); // important
         btn_maximize.setId("restore");
         stage.centerOnScreen();
         configCursor(false);
@@ -1102,6 +1111,10 @@ public class GNDecorator extends StackPane {
     
     
     public void addButton(ButtonType button){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setContentText("Deu erro bobão");
+        
         switch(button){
             case FULL_SCREEN :
                 FullScreen full = new FullScreen();
@@ -1112,12 +1125,16 @@ public class GNDecorator extends StackPane {
                 full.toBack();
                 full.setOnMouseClicked(e-> {
                     if(!stage.isFullScreen()){
+                        
                         stage.setFullScreen(true);
                         configCursor(false);
                         viewBar(false);
-                    } else {
+                        this.btn_maximize.setId("restore");
+                    } else  {
                         stage.setFullScreen(false);
                         configCursor(true);
+////                        viewBar(true);
+                        this.btn_maximize.setId("maximize");
                     }
                 });
 
@@ -1142,7 +1159,6 @@ public class GNDecorator extends StackPane {
                     }
                 };
 
-                this.bar.setStyle("-fx-background-color : #82B1FF");
                 
                 this.setOnMouseMoved(handler);
 
@@ -1154,6 +1170,7 @@ public class GNDecorator extends StackPane {
                 });
                 
                 this.bar.setOnMouseMoved(e ->{
+                    if(stage.isFullScreen())
                     this.setOnMouseMoved(null);
                 });
            
@@ -1168,8 +1185,7 @@ public class GNDecorator extends StackPane {
         }
     }
     
-    TranslateTransition open = new TranslateTransition(Duration.millis(100D), this.bar);
-    TranslateTransition close = new TranslateTransition(Duration.millis(500D), this.bar);
+
     
     private void viewBar(boolean view){
         
@@ -1187,11 +1203,12 @@ public class GNDecorator extends StackPane {
  
     
     public void initTheme(Theme theme){
-//        switch(theme){
-//            case DEFAULT : 
-//                this.scene.getStylesheets().add(GNWindow.class.getResource("/css/regular.css").toExternalForm());
-//                break;
-//        }
+        switch(theme){
+            case DEFAULT : 
+                this.getStylesheets().add(getClass().getResource("/css/regular.css").toExternalForm());
+                break;
+        
+        }
     }
 
 
@@ -1201,35 +1218,21 @@ public class GNDecorator extends StackPane {
      * decoration.
      */
     public void show() {
-
         stage.show();
         initRestaure();
-
-        
     }
-    
-    
     
     public enum Style {
         DEFAULT, DARK
     };
 
     public enum Theme {
-        DEFAULT
+        DEFAULT, DARKULA
     };
     
     public enum ButtonType {
         FULL_SCREEN
     }
-    
-    @Override
-    public String getUserAgentStylesheet() {
-        return USER_AGENT_STYLESHEET;
-    }
-
-
-    
-    
     
     /**
      * Pega os parametros do stage para definir a posição e o tamanho.

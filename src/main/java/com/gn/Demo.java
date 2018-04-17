@@ -17,6 +17,7 @@
 
 package com.gn;
 
+import com.gn.GNDecorator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -27,7 +28,7 @@ import javafx.stage.Stage;
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  */
-public class demo extends Application {
+public class Demo extends Application {
 
 
 
@@ -44,9 +45,8 @@ public class demo extends Application {
         window.setContent(root);
         window.addButton(GNDecorator.ButtonType.FULL_SCREEN);
         window.show();
-        
 //        window.setMaximized(true);
-        window.getScene().getStylesheets().add(getClass().getResource("/css/regular.css").toExternalForm());
+//        window.getScene().getStylesheets().add(getClass().getResource("/css/regular.css").toExternalForm());
 //        ScenicView.show(window.getScene());
     }
 

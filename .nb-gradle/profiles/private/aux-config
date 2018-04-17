@@ -5,18 +5,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/archive.css</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/Close.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/MyControlSkin.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/buttons/Watermark.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/Demo.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/controls/teste.css</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/build.gradle</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/GNDecorator.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/demo.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/demo1.css</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/MyImageView.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/darkula.css</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/buttons/Close.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/fxml/FXML.fxml</file>
         <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/NewFXMain.java</file>
-        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/regular.css</file>
       </group>
     </open-files>
     <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+      <group>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/buttons/Watermark.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/Demo.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/css/controls/teste.css</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/build.gradle</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/GNDecorator.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/buttons/Close.java</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/resources/fxml/FXML.fxml</file>
+        <file>file:/E:/Projetos/Desktop/GNWindow/src/main/java/com/gn/NewFXMain.java</file>
+      </group>
+    </open-files>
   </auxiliary>
 </gradle-project-properties>
