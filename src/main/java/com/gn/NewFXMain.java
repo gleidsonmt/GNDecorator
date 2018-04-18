@@ -18,13 +18,12 @@
 package com.gn;
 
 import com.gn.buttons.Close;
-import com.gn.buttons.Watermark;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 /**
  *
@@ -48,7 +47,7 @@ public class NewFXMain extends Application {
             }
         });
 
-        Watermark root = new Watermark();
+        VBox root = new VBox();
         root.getStyleClass().add("tedo");
 //        root.setAlignment(Pos.BASELINE_LEFT);
         root.getChildren().addAll(control, btn);
@@ -59,7 +58,6 @@ public class NewFXMain extends Application {
 
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 

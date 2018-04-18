@@ -23,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import org.scenicview.ScenicView;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -39,20 +40,20 @@ public class Demo extends Application {
         Region region = new Region();
         
         GNDecorator window = new GNDecorator();
+//        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toString());
         window.setTitle("GNDecoration");
         window.setContent(root);
-        window.addButton(ButtonType.FULL_EFFECT);
-        window.initTheme(GNDecorator.Theme.DARKULA);
+        window.addButton(ButtonType.FULL_SCREEN);
+        window.initTheme(GNDecorator.Theme.DANGER);
+        window.centralizeTitle();
         window.show();
-
+        
+//        ScenicView.show(window.getScene());
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    private Object ButtonType(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
