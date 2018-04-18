@@ -33,7 +33,7 @@ repositories {
 dependencies {
     
 //    compile 'com.jfoenix:jfoenix:8.0.3' // Java 8
-//    compile files('lib/scenicView.jar')
+    compile files('lib/scenicView.jar')
 //    compile files('lib/Genesis.jar')
     
     // TODO: Add dependencies here ...
