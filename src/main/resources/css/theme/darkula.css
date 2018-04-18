@@ -4,64 +4,33 @@
     Author     : Gleidson Neves da Silveira
 */
 
-#GNWindow {
+.gn-decorator {
     -gray : #00000030;
     -red : #FF3547;
     -elegant : #2E2E2E;
     -primary : #4285f4;
-}
-
-#body {
     -fx-background-color : -elegant;
+    -fx-border-color: white;
 }
 
-#body #container {
-    -fx-background-color : transparent;
+.gn-buttons * {
+    -fx-background-radius : 0;
 }
 
-#body #container .viewport{
-    -fx-background-color : transparent;
-}
-
-#bar {
-    -fx-background-color : transparent;
-}
-
-#bar #title {
-    -fx-text-fill : -primary;
-    -fx-font-weight : bold;
-}
-
-#bar #buttons {
-    -fx-background-color : transparent;
-}
-
-
-#bar #buttons .button {
-    -fx-background-radius : 0px;
-    -fx-background-color : transparent;
-}
-
-#body #bar #buttons #minimize:hover, 
-#body #bar #buttons #maximize:hover, 
-#body #bar #buttons #restore:hover,
-#body #bar #buttons #full-screen:hover,
-#body #bar #buttons #unfull-screen:hover
-{
-    -fx-background-color : #ffffff50;
-}
-
-#bar #buttons #close .image-view,
-#bar #buttons #maximize .image-view,
-#bar #buttons #minimize .image-view,
-#bar #buttons #restore .image-view,
-#bar #buttons #full-screen .image-view,
-#bar #buttons #unfull-screen .image-view
-{
+.gn-buttons * *, .gn-title, .gn-menu * {
     -gn-fill : white;
+    -fx-text-fill : -primary;
+    -fx-fill : white;
+    -fx-font-family: 'Roboto Medium';
 }
 
-#bar #menu #icon{
-    -fx-fill : white;
+.gn-buttons *:hover
+{
+    -fx-background-color : -grey;
+}
+
+.gn-buttons .gn-close:hover
+{
+    -fx-background-color : -red;
 }
 
