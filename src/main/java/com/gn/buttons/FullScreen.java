@@ -45,12 +45,21 @@ import javafx.scene.paint.Paint;
 public class FullScreen extends Button {
     
     
-    private final ImageView viewMinimize = new ImageView(new Image("img/fullscreen.png"));
+    private final ImageView viewFullScreen = new ImageView(new Image("img/fullscreen.png"));
+    private final ImageView viewUnFullScreen = new ImageView(new Image("img/unfullscreen.png"));
     
     public FullScreen(){
-        getStyleClass().add("full-screen");
-        super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        super.setGraphic(viewMinimize);
+        getStyleClass().add("-gn-full-screen");
+        this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        this.setGraphic(viewFullScreen);
+    }
+    
+    public void updateState(boolean fullscreen) {
+        if (fullscreen) {
+            this.setGraphic(viewFullScreen);
+        } else {
+            this.setGraphic(viewUnFullScreen);
+        }
     }
     
     @Override

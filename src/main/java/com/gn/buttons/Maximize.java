@@ -45,12 +45,18 @@ import javafx.scene.paint.Paint;
 public class Maximize extends Button {
     
     
-    private final ImageView viewMinimize = new ImageView(new Image("img/maximize.png"));
+    private final ImageView viewMaximize = new ImageView(new Image("img/maximize.png"));
+    private final ImageView viewRestore = new ImageView(new Image("img/restore.png"));
     
     public Maximize(){
-        getStyleClass().add("maximize");
-        super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        super.setGraphic(viewMinimize);
+        getStyleClass().add("gn-maximize");
+        this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        this.setGraphic(viewMaximize);
+    }
+    
+    public void updateState(boolean maximize){
+        if(maximize)this.setGraphic(viewMaximize);
+        else this.setGraphic(viewRestore);
     }
     
     @Override

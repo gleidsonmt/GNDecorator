@@ -48,7 +48,7 @@ public class Close extends Button {
     private final ImageView viewMinimize = new ImageView(new Image("img/close.png"));
     
     public Close(){
-        getStyleClass().add("close");
+        getStyleClass().add("gn-close");
         super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         super.setGraphic(viewMinimize);
     }

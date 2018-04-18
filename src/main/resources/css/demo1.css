@@ -18,7 +18,7 @@ and open the template in the editor.
 #GNWindow {
     -gray : #00000030;
     -red : #FF3547;
-    -fx-background-image : url('../img/login.jpg') ;
+    -fx-background-image : url('../screenshot/login.jpg') ;
     -fx-background-size : cover;
 }
 

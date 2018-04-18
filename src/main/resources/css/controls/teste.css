@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Author     : Gleidson Neves da Silveira
 */
 
-.tedo {
-    -gn-fill : blue;
+.tedo .image-view{
+    -gn-fill : red;
+
+        
 }

@@ -3,11 +3,15 @@
     Author     : Gleidson Neves da Silveira
 */
 
+.gn-close {
+    -fx-background-color : blue;
+}
+
 .button, .button:focused{
     -fx-background-color : transparent;
 }
 
-.button .image-view {
+.button *{
     -gn-fill : #808080;
     -fx-effect : innershadow( gaussian , -gn-fill , 10,1,21,21 );
 }

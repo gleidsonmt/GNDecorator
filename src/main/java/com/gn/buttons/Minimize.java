@@ -48,7 +48,7 @@ public class Minimize extends Button {
     private final ImageView viewMinimize = new ImageView(new Image("img/minimize.png"));
     
     public Minimize(){
-        getStyleClass().add("minimize");
+        getStyleClass().add("gn-minimize");
         super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         super.setGraphic(viewMinimize);
     }
