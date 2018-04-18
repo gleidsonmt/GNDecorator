@@ -1,0 +1,18 @@
+
+/*
+    Created on : 03/04/2017, 16:30:52
+    Author     : Gleidson Neves da Silveira
+*/
+
+.root {
+    -fx-background-color: white;
+    -primary : #4285f4;
+}
+
+.bar, .content {
+    -fx-background-color: -primary;
+}
+
+.bar .label {
+    -fx-text-fill: white;
+}

@@ -1,0 +1,29 @@
+
+/*
+    Created on : 03/04/2017, 16:30:52
+    Author     : Gleidson Neves da Silveira
+*/
+
+
+.gn-decorator {
+    -grey : #00000020;
+    -red : #FF3547;
+    -fx-background-color : -red;
+    -fx-border-color: white;
+}
+
+.gn-buttons * {
+    -fx-background-radius :0;
+}
+
+.gn-buttons * *, .gn-title, .gn-menu * {
+    -gn-fill : white;
+    -fx-text-fill : white;
+    -fx-fill : white;
+    -fx-font-family: 'Roboto Medium';
+}
+
+.gn-buttons *:hover
+{
+    -fx-background-color : -grey;
+}
