@@ -40,7 +40,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -50,6 +49,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -131,8 +134,8 @@ public class GNDecorator extends StackPane {
     private final HBox          title_content    = new HBox();
     
     private final Close      btn_close      = new Close();
-    private final Maximize   btn_minimize   = new Maximize();
-    private final Minimize   btn_maximize   = new Minimize();
+    private final Maximize   btn_maximize   = new Maximize();
+    private final Minimize   btn_minimize   = new Minimize();
     private final FullScreen btn_fullScreen = new FullScreen();
     private final Label      title          = new Label("Application");
     private final SVGPath    icon           = new SVGPath();
@@ -152,7 +155,7 @@ public class GNDecorator extends StackPane {
     private BoundingBox initialBound = null;
     
     // in the future
-//    private static final String USER_AGENT_STYLESHEET  = GNDecorator.class.getResource("/css/regular.css").toExternalForm();
+    private static final String USER_AGENT_STYLESHEET  = GNDecorator.class.getResource("/css/decorator/decorator.css").toExternalForm();
     
     private final BooleanProperty resizableProperty = new SimpleBooleanProperty(GNDecorator.this, "resizableProperty", true);
     private final StringProperty  titleProperty     = new SimpleStringProperty(GNDecorator.this, "textProperty", "title");
@@ -166,12 +169,18 @@ public class GNDecorator extends StackPane {
     private final TranslateTransition open = new TranslateTransition(Duration.millis(100D), this.bar);
     private final TranslateTransition close = new TranslateTransition(Duration.millis(100D), this.bar);
     
-    private ChangeListener<Object> restaureFullScreen = new ChangeListener<Object>() {
+    private final ChangeListener<Object> restaureFullScreen = new ChangeListener<Object>() {
         @Override
         public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
             if (newValue != null) {
                 configCursor(true);
                 AnchorPane.setTopAnchor(GNDecorator.this.areaContent, barHeight.get());
+                btn_fullScreen.updateState(true);
+                if(!GNDecorator.this.bar.isVisible()){
+                    GNDecorator.this.bar.setVisible(true);
+                    viewBorders(true);
+                }
+                if(isResizable() && !isMaximized()) configCursor(true); else configCursor(false);
             }
         }
     };
@@ -199,12 +208,18 @@ public class GNDecorator extends StackPane {
         title_content.minHeightProperty().bind(barHeight);
         this.bar.minHeightProperty().bind(barHeight);
         
-        for(Node node : controls.getChildren()){
+        controls.getChildren().stream().map((node) -> {
             ((Button) node).minHeightProperty().bind(buttonHeight);
+            return node;
+        }).map((node) -> {
             ((Button) node).prefHeightProperty().bind(buttonHeight);
+            return node;
+        }).map((node) -> {
             ((Button) node).minWidthProperty().bind(buttonWidth);
+            return node;
+        }).forEachOrdered((node) -> {
             ((Button) node).prefWidthProperty().bind(buttonWidth);
-        }
+        });
         
         btn_fullScreen.minHeightProperty().bind(buttonHeight);
         btn_fullScreen.prefHeightProperty().bind(buttonHeight);
@@ -278,11 +293,11 @@ public class GNDecorator extends StackPane {
                 btn_maximize.setDisable(true);
                 bar.setOnMouseClicked(null);
             }
-            if (isMaximized()) {
-                btn_maximize.setId("restore");
-            } else {
-                btn_maximize.setId("maximize");
-            }
+//            if (isMaximized()) {
+//                btn_maximize.setId("restore");
+//            } else {
+//                btn_maximize.setId("maximize");
+//            }
         });
     }
 
@@ -318,6 +333,9 @@ public class GNDecorator extends StackPane {
             stage.setFullScreen(true);
             AnchorPane.setTopAnchor(this.areaContent, 0D);
             stage.fullScreenProperty().addListener(restaureFullScreen);
+            viewBorders(true);
+            configCursor(false);
+            if(bar.isVisible()) bar.setVisible(false);
         }
     }
     
@@ -379,10 +397,12 @@ public class GNDecorator extends StackPane {
      * Configura o layout | Config the layout.
      */
     private void configLayout() {
-        this.setId("GNWindow");
-        this.body.setId("body");
-        this.title.setId("title");
-        this.container.setId("container");
+        this.getStyleClass().add("gn-decorator");
+        this.body.getStyleClass().add("gn-body");
+        this.title.getStyleClass().add("gn-title");
+        this.container.getStyleClass().add("gn-container");
+        
+//        this.container.getViewportBounds().false);
         
         // add body in window
         this.getChildren().add(this.body);
@@ -401,7 +421,7 @@ public class GNDecorator extends StackPane {
         container.setFitToHeight(true);
         container.setFitToWidth(true);
         
-        
+//        containersetStyle("-fx-background-color : blue");
         this.container.setContent(content);
         this.body.getChildren().add(createRegion());
         
@@ -429,7 +449,7 @@ public class GNDecorator extends StackPane {
      * @return Região configurada.
      */
     private Region createRegion() {
-
+        
         AnchorPane.setTopAnchor(areaContent, barHeight.get());
         AnchorPane.setRightAnchor(areaContent, 0D);
         AnchorPane.setBottomAnchor(areaContent, 0D);
@@ -593,7 +613,7 @@ public class GNDecorator extends StackPane {
      * @return The bar content.
      */
     private AnchorPane bar(){
-        bar.setId("bar");
+        bar.getStyleClass().add("gn-bar");
         bar.setMinHeight(barHeight.get());
         AnchorPane.setTopAnchor(bar, 0D);
         AnchorPane.setRightAnchor(bar, 0D);
@@ -610,6 +630,7 @@ public class GNDecorator extends StackPane {
         bar_content.setId("barContent");
         bar_content.setPrefHeight(barHeight.get());
         bar_content.setMinHeight(barHeight.get());
+        bar_content.setAlignment(Pos.CENTER);
         AnchorPane.setTopAnchor(bar_content, 0D);
         AnchorPane.setRightAnchor(bar_content, 0D);
         AnchorPane.setLeftAnchor(bar_content, 0D);
@@ -622,11 +643,8 @@ public class GNDecorator extends StackPane {
      * @return The controls.
      */
     private HBox controls(){
-        controls.setId("buttons");
+        controls.getStyleClass().add("gn-buttons");
         controls.setAlignment(Pos.CENTER);
-        btn_minimize.setId("minimize");
-        btn_maximize.setId("maximize");
-        btn_close.setId("close");
         
         double prefWidth = buttonWidth.get(), prefHeiht = buttonHeight.get();
         
@@ -643,6 +661,7 @@ public class GNDecorator extends StackPane {
         btn_close.setPrefSize(prefWidth, prefHeiht);
         
         controls.getChildren().addAll(btn_minimize, btn_maximize, btn_close);
+        controls.setMinWidth(buttonWidth.get() * controls.getChildren().size());
         return controls;
     }
     
@@ -651,7 +670,7 @@ public class GNDecorator extends StackPane {
      * @return The container of menu.
      */
     private HBox menu(){
-        menu.setId("menu");
+        menu.getStyleClass().add("gn-menu");
         menu.setMinWidth(barHeight.get());
         menu.setMinHeight(barHeight.get());
         Button btn_ico = new Button();
@@ -671,14 +690,20 @@ public class GNDecorator extends StackPane {
     private HBox titleContent() {
         title_content.setId("menu");
         title_content.getChildren().add(title);
-        title_content.setAlignment(Pos.CENTER);
-        title.setAlignment(Pos.CENTER);
+        title_content.setAlignment(Pos.CENTER_LEFT);
+        title.setAlignment(Pos.CENTER_LEFT);
         HBox.setHgrow(title_content, Priority.ALWAYS);
-//        centralize the title
-        title_content.setPadding(new Insets(0,menu.getMaxWidth(),0,btn_close.getMinWidth() * 2));
         return title_content;
     }
     
+    public void centralizeTitle(){
+        title_content.setAlignment(Pos.CENTER);
+        title.setAlignment(Pos.CENTER);
+        double esquerda = menu.getMinWidth();
+        double direita = getButtonWidth() * controls.getChildren().size();
+        double x = direita - esquerda;
+        title.setTranslateX(x / 2);
+    }
 
 
     /**
@@ -1046,7 +1071,8 @@ public class GNDecorator extends StackPane {
         }
         
         restoreSavedBounds(stage);
-        btn_maximize.setId("maximize");
+        btn_maximize.updateState(true);
+        viewBorders(true);
         configCursor(true);
     }
 
@@ -1063,8 +1089,9 @@ public class GNDecorator extends StackPane {
         this.setHeight(bounds.getHeight());
 //
         this.stage.setFullScreen(false); // important
-        btn_fullScreen.setId("full-screen");
-        btn_maximize.setId("restore");
+        btn_fullScreen.updateState(true);
+        btn_maximize.updateState(false);
+        viewBorders(false);
         stage.centerOnScreen();
         configCursor(false);
     }
@@ -1213,7 +1240,10 @@ public class GNDecorator extends StackPane {
         }
     }
     
-    
+    private void viewBorders(boolean view){
+        if(view && !isMaximized() && !stage.isFullScreen()) this.setStyle("-fx-border-width : 1");
+        else this.setStyle("-fx-border-width : 0");
+    }
     
     public void addButton(ButtonType button){
         switch(button){
@@ -1222,17 +1252,14 @@ public class GNDecorator extends StackPane {
                 configFullEffect();
                 break;
             case FULL_SCREEN :
-                
                 fullScreen();
-                
                 configFullScreen();
-                
                 break;
         }
     }
 
     private FullScreen fullScreen(){
-        btn_fullScreen.setId("full-screen");
+//        btn_fullScreen.updateState(true );
         controls.getChildren().add(btn_fullScreen);
 
         btn_fullScreen.toBack();
@@ -1245,38 +1272,40 @@ public class GNDecorator extends StackPane {
                 stage.setFullScreen(true);
                 configCursor(false);
                 viewBar(false);
-                btn_fullScreen.setId("unfull-screen");
+                viewBorders(false);
+                btn_fullScreen.updateState(false);
                 this.controls.getChildren().removeAll(btn_minimize, btn_maximize);
             } else {
                 this.controls.getChildren().addAll(btn_minimize, btn_maximize);
                 btn_maximize.toFront();
                 btn_close.toFront();
+                viewBorders(true);
                 stage.setFullScreen(false);
                 configCursor(true);
-                btn_fullScreen.setId("full-screen");
+                btn_fullScreen.updateState(true);
             }
         });
 
-        stage.fullScreenProperty().addListener(new ChangeListener<Object>() {
-            @Override
-            public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
-                if (newValue != null) {
-                    configCursor(true);
-                    viewBar(true);
-                    if(GNDecorator.this.controls.getChildren().size() < 4){
-                        GNDecorator.this.controls.getChildren().addAll(btn_minimize, btn_maximize);
-                        btn_maximize.toFront();
-                        btn_close.toFront();
-                    }
+        stage.fullScreenProperty().addListener((ObservableValue<? extends Object> observable, Object oldValue, Object newValue) -> {
+            if (newValue != null) {
+                configCursor(true);
+                viewBar(true);
+                if(GNDecorator.this.controls.getChildren().size() < 4){
+                    GNDecorator.this.controls.getChildren().addAll(btn_minimize, btn_maximize);
+                    btn_maximize.toFront();
+                    btn_close.toFront();
                     
                 }
-
+                btn_fullScreen.updateState(true);
+                
             }
         });
 
+       
         EventHandler handler = (EventHandler<MouseEvent>) (MouseEvent event) -> {
             if (event.getY() == 0 && stage.isFullScreen()) {
                 viewBar(true);
+                this.setOnMouseMoved(null);
             }
         };
 
@@ -1307,10 +1336,16 @@ public class GNDecorator extends StackPane {
         btn_fullScreen.setOnMouseClicked(e -> {
             if (!stage.isFullScreen()) {
                 stage.setFullScreen(true);
+                viewBorders(false);
+                this.bar.setVisible(false);
+                configCursor(false);
                 AnchorPane.setTopAnchor(this.areaContent, 0D);
-            } else {
+            } 
+            // provavelmente nunca chamado
+            else {
                 stage.setFullScreen(false);
-                AnchorPane.setTopAnchor(this.areaContent, barHeight.get());
+                this.bar.setVisible(true);
+                AnchorPane.setTopAnchor(this.areaContent, bar.getHeight());
             }
         });
 
@@ -1338,10 +1373,19 @@ public class GNDecorator extends StackPane {
     public void initTheme(Theme theme){
         switch(theme){
             case DEFAULT : 
-                this.getStylesheets().add(getClass().getResource("/css/regular.css").toExternalForm());
+                this.getStylesheets().clear();
+                this.getStylesheets().add(getClass().getResource("/css/theme/regular.css").toExternalForm());
                 break;
             case DARKULA :
+                this.getStylesheets().clear();
                 this.getStylesheets().add(getClass().getResource("/css/theme/darkula.css").toExternalForm());
+                break;
+            case DANGER:
+                this.getStylesheets().clear();
+                // add css
+                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                // add theme
+                this.getStylesheets().add(getClass().getResource("/css/theme/danger.css").toExternalForm());
                 break;
         }
     }
@@ -1360,7 +1404,7 @@ public class GNDecorator extends StackPane {
     };
 
     public enum Theme {
-        DEFAULT, DARKULA
+        DEFAULT, DARKULA, DANGER
     };
 
     
@@ -1375,5 +1419,10 @@ public class GNDecorator extends StackPane {
         double height = stage.getHeight();
         this.initialBound  = new BoundingBox(x, y, width, height);
         return this.initialBound;
+    }
+
+    @Override
+    public String getUserAgentStylesheet() {
+        return getClass().getResource("/css/decorator/decorator.css").toExternalForm();
     }
 }
