@@ -18,12 +18,12 @@
                <children>
                   <TextFlow prefHeight="59.0" prefWidth="732.0" textAlignment="CENTER">
                      <children>
-                        <Text opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java" textAlignment="CENTER" wrappingWidth="731.1669921875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Java" textAlignment="CENTER" wrappingWidth="731.1669921875">
                            <font>
                               <Font name="Roboto" size="41.0" />
                            </font>
                         </Text>
-                        <Text opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FX 8" textAlignment="CENTER" wrappingWidth="731.1669921875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FX 8" textAlignment="CENTER" wrappingWidth="731.1669921875">
                            <font>
                               <Font name="Roboto" size="41.0" />
                            </font>
@@ -40,7 +40,7 @@
                               <Image url="@../img/fullscreen.png" />
                            </image>
                         </ImageView>
-                        <Text opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A beautiful decoration JavaFx. Yours free." textAlignment="CENTER" wrappingWidth="731.1669921875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A beautiful decoration JavaFx. Yours free." textAlignment="CENTER" wrappingWidth="731.1669921875">
                            <font>
                               <Font name="Roboto" size="24.0" />
                            </font>
@@ -51,7 +51,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="48.0" prefWidth="732.0">
                <children>
-                  <Label alignment="CENTER" opacity="0.0" prefHeight="17.0" prefWidth="778.0" text="Designed by - Gleidson Neves" textAlignment="CENTER" />
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="778.0" text="Designed by - Gleidson Neves" textAlignment="CENTER" />
                </children>
             </VBox>
          </children>
