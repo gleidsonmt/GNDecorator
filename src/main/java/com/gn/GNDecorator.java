@@ -1417,12 +1417,9 @@ public class GNDecorator extends StackPane {
         double width = stage.getWidth();
         double height = stage.getHeight();
         
-        System.out.println("this.initialBound = " + this.initialBound);
-        
-        
         if(stage.isFullScreen()){
-            width = Screen.getPrimary().getVisualBounds().getWidth();
-            height = Screen.getPrimary().getVisualBounds().getHeight();
+            width = Screen.getPrimary().getVisualBounds().getWidth() - 5;
+            height = Screen.getPrimary().getVisualBounds().getHeight() - 5;
         }
         this.initialBound = new BoundingBox(x, y, width, height);
         return this.initialBound;
