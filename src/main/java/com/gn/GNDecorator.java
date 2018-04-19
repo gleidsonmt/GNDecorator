@@ -1373,7 +1373,7 @@ public class GNDecorator extends StackPane {
         switch(theme){
             case DEFAULT : 
                 this.getStylesheets().clear();
-                this.getStylesheets().add(getClass().getResource("/css/theme/regular.css").toExternalForm());
+                this.getStylesheets().add(getClass().getResource("/css/theme/default.css").toExternalForm());
                 break;
             case DARKULA :
                 this.getStylesheets().clear();
@@ -1385,6 +1385,41 @@ public class GNDecorator extends StackPane {
                 this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
                 // add theme
                 this.getStylesheets().add(getClass().getResource("/css/theme/danger.css").toExternalForm());
+                break;
+            case INFO :
+                this.getStylesheets().clear();
+                // add css
+                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                // add theme
+                this.getStylesheets().add(getClass().getResource("/css/theme/info.css").toExternalForm());
+            break;
+            case PRIMARY:
+                this.getStylesheets().clear();
+                // add css
+                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                // add theme
+                this.getStylesheets().add(getClass().getResource("/css/theme/primary.css").toExternalForm());
+            break;
+            case SECONDARY:
+                this.getStylesheets().clear();
+                // add css
+                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                // add theme
+                this.getStylesheets().add(getClass().getResource("/css/theme/secondary.css").toExternalForm());
+            break;
+            case SUCCESS:
+                this.getStylesheets().clear();
+                // add css
+                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                // add theme
+                this.getStylesheets().add(getClass().getResource("/css/theme/success.css").toExternalForm());
+                break;
+            case WARNING:
+                this.getStylesheets().clear();
+                // add css
+                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                // add theme
+                this.getStylesheets().add(getClass().getResource("/css/theme/warning.css").toExternalForm());
                 break;
         }
     }
@@ -1403,7 +1438,7 @@ public class GNDecorator extends StackPane {
     };
 
     public enum Theme {
-        DEFAULT, DARKULA, DANGER
+        DEFAULT, DARKULA, DANGER, INFO, PRIMARY, SECONDARY, WARNING, SUCCESS
     };
 
     

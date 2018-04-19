@@ -1,18 +1,27 @@
-
 /*
     Created on : 03/04/2017, 16:30:52
     Author     : Gleidson Neves da Silveira
 */
 
-.root {
-    -fx-background-color: white;
+.gn-decorator {
+    -grey : #00000020;
     -warning : #FF8800;
+    -fx-background-color : -warning;
+    -fx-border-color: white;
 }
 
-.bar, .content {
-    -fx-background-color: -warning;
+.gn-buttons * {
+    -fx-background-radius :0;
 }
 
-.bar .label {
-    -fx-text-fill: white;
+.gn-buttons * *, .gn-title, .gn-menu * {
+    -gn-fill : white;
+    -fx-text-fill : white;
+    -fx-fill : white;
+    -fx-font-family: 'Roboto Medium';
+}
+
+.gn-buttons *:hover
+{
+    -fx-background-color : -grey;
 }
