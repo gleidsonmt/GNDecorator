@@ -44,12 +44,12 @@ public class Demo extends Application {
         window.setTitle("GNDecoration");
         window.setContent(root);
         window.addButton(ButtonType.FULL_SCREEN);
-        window.initTheme(GNDecorator.Theme.WARNING);
+        window.initTheme(GNDecorator.Theme.DANGER);
         window.centralizeTitle();
 //        window.setFullScreen(true);
         window.show();
         
-//        ScenicView.show(window.getScene());
+        ScenicView.show(window.getScene());
     }
 
     public static void main(String[] args) {
