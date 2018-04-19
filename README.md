@@ -16,7 +16,11 @@
 ### With gradient and image
 ![demo1](src/main/resources/screenshot/demo1.png)
 ### Colored - bootstrap
-
+![primary](src/main/resources/screenshot/primary.png)
+![info](src/main/resources/screenshot/info.png)
+![success](src/main/resources/screenshot/success.png)
+![warning](src/main/resources/screenshot/warning.png)
+![danger](src/main/resources/screenshot/danger.png)
 
 # Estrutura - Nodes
 
