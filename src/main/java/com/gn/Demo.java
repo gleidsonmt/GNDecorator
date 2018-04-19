@@ -46,6 +46,7 @@ public class Demo extends Application {
         window.addButton(ButtonType.FULL_SCREEN);
         window.initTheme(GNDecorator.Theme.DANGER);
         window.centralizeTitle();
+        window.setFullScreen(true);
         window.show();
         
 //        ScenicView.show(window.getScene());

@@ -154,7 +154,6 @@ public class GNDecorator extends StackPane {
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
     
-    // in the future
     private static final String USER_AGENT_STYLESHEET  = GNDecorator.class.getResource("/css/decorator/decorator.css").toExternalForm();
     
     private final BooleanProperty resizableProperty = new SimpleBooleanProperty(GNDecorator.this, "resizableProperty", true);
@@ -1259,7 +1258,7 @@ public class GNDecorator extends StackPane {
     }
 
     private FullScreen fullScreen(){
-//        btn_fullScreen.updateState(true );
+        btn_fullScreen.updateState(true );
         controls.getChildren().add(btn_fullScreen);
 
         btn_fullScreen.toBack();
@@ -1417,12 +1416,20 @@ public class GNDecorator extends StackPane {
         double y = stage.getY();
         double width = stage.getWidth();
         double height = stage.getHeight();
-        this.initialBound  = new BoundingBox(x, y, width, height);
+        
+        System.out.println("this.initialBound = " + this.initialBound);
+        
+        
+        if(stage.isFullScreen()){
+            width = Screen.getPrimary().getVisualBounds().getWidth();
+            height = Screen.getPrimary().getVisualBounds().getHeight();
+        }
+        this.initialBound = new BoundingBox(x, y, width, height);
         return this.initialBound;
     }
 
     @Override
     public String getUserAgentStylesheet() {
-        return getClass().getResource("/css/decorator/decorator.css").toExternalForm();
+        return USER_AGENT_STYLESHEET;
     }
 }
