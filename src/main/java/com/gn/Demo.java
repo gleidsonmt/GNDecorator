@@ -46,10 +46,10 @@ public class Demo extends Application {
         window.setTitle("GNDecoration");
         window.setContent(root);
 //        window.addButton(ButtonType.FULL_SCREEN);
-//        window.initTheme(GNDecorator.Theme.DARKULA);
+//        window.initTheme(GNDecorator.Theme.SUCCESS);
         window.centralizeTitle();
 //        window.fullBody(400);
-//        window.setFullScreen(true);
+        window.setFullScreen(true);
         window.show();
         
 //        ScenicView.show(window.getScene());

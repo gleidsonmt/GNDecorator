@@ -329,7 +329,7 @@ public class GNDecorator extends StackPane {
             stage.setFullScreen(true);
             AnchorPane.setTopAnchor(this.areaContent, 0D);
             stage.fullScreenProperty().addListener(restaureFullScreen);
-            viewBorders(true);
+            viewBorders(false);
             configCursor(false);
             if(bar.isVisible()) bar.setVisible(false);
         }

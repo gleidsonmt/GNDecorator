@@ -9,6 +9,7 @@
     -primary : #4285f4;
     -fx-background-color : -primary;
     -fx-border-color: white;
+    -fx-padding : 22;
 }
 
 .gn-buttons * {
