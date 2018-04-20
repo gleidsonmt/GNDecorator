@@ -45,10 +45,10 @@ public class Demo extends Application {
 //        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toString());
         window.setTitle("GNDecoration");
         window.setContent(root);
-        window.addButton(ButtonType.FULL_SCREEN);
+//        window.addButton(ButtonType.FULL_SCREEN);
 //        window.initTheme(GNDecorator.Theme.DARKULA);
         window.centralizeTitle();
-        window.fullBody(400);
+//        window.fullBody(400);
 //        window.setFullScreen(true);
         window.show();
         
