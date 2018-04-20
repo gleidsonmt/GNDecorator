@@ -45,11 +45,25 @@ public class Demo extends Application {
 //        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toString());
         window.setTitle("GNDecoration");
         window.setContent(root);
+<<<<<<< HEAD
         window.addButton(ButtonType.FULL_SCREEN);
 //        window.initTheme(GNDecorator.Theme.DARKULA);
 //        window.centralizeTitle();
 //        window.fullBody(400);
 //        window.setFullScreen(true);
+||||||| merged common ancestors
+        window.addButton(ButtonType.FULL_SCREEN);
+//        window.initTheme(GNDecorator.Theme.DARKULA);
+        window.centralizeTitle();
+        window.fullBody(400);
+//        window.setFullScreen(true);
+=======
+//        window.addButton(ButtonType.FULL_SCREEN);
+//        window.initTheme(GNDecorator.Theme.SUCCESS);
+        window.centralizeTitle();
+//        window.fullBody(400);
+        window.setFullScreen(true);
+>>>>>>> master
         window.show();
         
 //        ScenicView.show(window.getScene());

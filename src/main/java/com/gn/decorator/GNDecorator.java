@@ -332,7 +332,7 @@ public class GNDecorator {
             stage.setFullScreen(true);
             AnchorPane.setTopAnchor(this.areaContent, 0D);
             stage.fullScreenProperty().addListener(restaureFullScreen);
-            viewBorders(true);
+            viewBorders(false);
             configCursor(false);
             if(bar.isVisible()) bar.setVisible(false);
         }
@@ -1110,6 +1110,7 @@ public class GNDecorator {
      * other case The size is restored to before maximizing..
      */
     public void restore() {
+        System.out.println(savedBounds);
         if (savedBounds == null) {
             savedBounds = initialBound;
         }
@@ -1125,6 +1126,9 @@ public class GNDecorator {
      */
     public void maximize() {
        //set Stage boundaries to visible bounds of the main screen
+       
+       this.savedBounds = new BoundingBox(this.stage.getX(), this.stage.getY(), this.stage.getWidth(), this.stage.getHeight());
+       
         this.stage.setX(bounds.getMinX());
         this.stage.setY(bounds.getMinY());
         this.stage.setWidth(bounds.getWidth());
