@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.gn.buttons;
+package com.gn.decorator.buttons;
 
 import com.sun.javafx.css.converters.EffectConverter;
 import com.sun.javafx.css.converters.PaintConverter;
@@ -42,26 +42,29 @@ import javafx.scene.paint.Paint;
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Creation  15/04/2018
  */
-public class Maximize extends Button {
+public class FullScreen extends Button {
     
     
-    private final ImageView viewMaximize = new ImageView(new Image("img/maximize.png"));
-    private final ImageView viewRestore = new ImageView(new Image("img/restore.png"));
+    private final ImageView viewFullScreen = new ImageView(new Image("img/fullscreen.png"));
+    private final ImageView viewUnFullScreen = new ImageView(new Image("img/unfullscreen.png"));
     
-    public Maximize(){
-        getStyleClass().add("gn-maximize");
+    public FullScreen(){
+        getStyleClass().add("-gn-full-screen");
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        this.setGraphic(viewMaximize);
+        this.setGraphic(viewFullScreen);
     }
     
-    public void updateState(boolean maximize){
-        if(maximize)this.setGraphic(viewMaximize);
-        else this.setGraphic(viewRestore);
+    public void updateState(boolean fullscreen) {
+        if (fullscreen) {
+            this.setGraphic(viewFullScreen);
+        } else {
+            this.setGraphic(viewUnFullScreen);
+        }
     }
     
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new ButtonSkin(Maximize.this);
+        return new ButtonSkin(FullScreen.this);
     }
 
     @Override
@@ -70,7 +73,7 @@ public class Maximize extends Button {
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,
-            Maximize.this,
+            FullScreen.this,
             "defaultFill",
             Color.WHITE);
 
@@ -88,16 +91,16 @@ public class Maximize extends Button {
 
     private static class StyleableProperties {
 
-        private static final CssMetaData<Maximize, Paint> DEFAULT_FILL
-                = new CssMetaData<Maximize, Paint>("-gn-fill",
+        private static final CssMetaData<FullScreen, Paint> DEFAULT_FILL
+                = new CssMetaData<FullScreen, Paint>("-gn-fill",
                         PaintConverter.getInstance(), Color.RED) {
             @Override
-            public boolean isSettable(Maximize control) {
+            public boolean isSettable(FullScreen control) {
                 return control.defaultFill == null || !control.defaultFill.isBound();
             }
 
             @Override
-            public StyleableProperty<Paint> getStyleableProperty(Maximize control) {
+            public StyleableProperty<Paint> getStyleableProperty(FullScreen control) {
                 return control.defaultFillProperty();
             }
         };
@@ -122,7 +125,7 @@ public class Maximize extends Button {
             final List<CssMetaData<? extends Styleable, ?>> styleables
                     = new ArrayList<>(Button.getClassCssMetaData());
             styleables.addAll(getClassCssMetaData());
-            styleables.addAll(Maximize.getClassCssMetaData());
+            styleables.addAll(FullScreen.getClassCssMetaData());
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
         return STYLEABLES;

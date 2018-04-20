@@ -15,9 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.gn.buttons;
+package com.gn.decorator.buttons;
 
-import com.sun.javafx.css.converters.EffectConverter;
 import com.sun.javafx.css.converters.PaintConverter;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ import javafx.css.StyleableProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Skin;
-import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -42,20 +40,20 @@ import javafx.scene.paint.Paint;
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Creation  15/04/2018
  */
-public class Minimize extends Button {
+public class Close extends Button {
     
     
-    private final ImageView viewMinimize = new ImageView(new Image("img/minimize.png"));
+    private final ImageView viewMinimize = new ImageView(new Image("img/close.png"));
     
-    public Minimize(){
-        getStyleClass().add("gn-minimize");
+    public Close(){
+        getStyleClass().add("gn-close");
         super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         super.setGraphic(viewMinimize);
     }
     
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new ButtonSkin(Minimize.this);
+        return new ButtonSkin(Close.this);
     }
 
     @Override
@@ -64,7 +62,7 @@ public class Minimize extends Button {
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,
-            Minimize.this,
+            Close.this,
             "defaultFill",
             Color.WHITE);
 
@@ -82,16 +80,16 @@ public class Minimize extends Button {
 
     private static class StyleableProperties {
 
-        private static final CssMetaData<Minimize, Paint> DEFAULT_FILL
-                = new CssMetaData<Minimize, Paint>("-gn-fill",
+        private static final CssMetaData<Close, Paint> DEFAULT_FILL
+                = new CssMetaData<Close, Paint>("-gn-fill",
                         PaintConverter.getInstance(), Color.RED) {
             @Override
-            public boolean isSettable(Minimize control) {
+            public boolean isSettable(Close control) {
                 return control.defaultFill == null || !control.defaultFill.isBound();
             }
 
             @Override
-            public StyleableProperty<Paint> getStyleableProperty(Minimize control) {
+            public StyleableProperty<Paint> getStyleableProperty(Close control) {
                 return control.defaultFillProperty();
             }
         };
@@ -116,7 +114,7 @@ public class Minimize extends Button {
             final List<CssMetaData<? extends Styleable, ?>> styleables
                     = new ArrayList<>(Button.getClassCssMetaData());
             styleables.addAll(getClassCssMetaData());
-            styleables.addAll(Minimize.getClassCssMetaData());
+            styleables.addAll(Close.getClassCssMetaData());
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
         return STYLEABLES;

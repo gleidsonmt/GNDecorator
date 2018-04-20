@@ -17,11 +17,13 @@
 
 package com.gn;
 
-import com.gn.options.ButtonType;
+import com.gn.decorator.GNDecorator;
+import com.gn.decorator.options.ButtonType;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.scenicview.ScenicView;
 
@@ -44,12 +46,13 @@ public class Demo extends Application {
         window.setTitle("GNDecoration");
         window.setContent(root);
         window.addButton(ButtonType.FULL_SCREEN);
-        window.initTheme(GNDecorator.Theme.DANGER);
+//        window.initTheme(GNDecorator.Theme.DARKULA);
         window.centralizeTitle();
+        window.fullBody(400);
 //        window.setFullScreen(true);
         window.show();
         
-        ScenicView.show(window.getScene());
+//        ScenicView.show(window.getScene());
     }
 
     public static void main(String[] args) {

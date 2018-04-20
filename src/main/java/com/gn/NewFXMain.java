@@ -17,12 +17,12 @@
 
 package com.gn;
 
-import com.gn.buttons.Close;
+import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 /**
@@ -32,33 +32,7 @@ import javafx.stage.Stage;
 public class NewFXMain extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        
-        Close control = new Close();
-        
-        
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-
-        VBox root = new VBox();
-        root.getStyleClass().add("tedo");
-//        root.setAlignment(Pos.BASELINE_LEFT);
-        root.getChildren().addAll(control, btn);
-
-        Scene scene = new Scene(root, 300, 250);
-        
-        scene.getStylesheets().add(getClass().getResource("/css/controls/teste.css").toExternalForm());
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage stage) throws IOException {
     }
 
     /**

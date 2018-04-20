@@ -8,3 +8,15 @@ setMinHeigth
 
 
 lembar de atualizar metodos bar.setOnMouseDragged da classe GNWindowBar
+
+lembrar cria modelo squeleton para aplicação
+
+background
+
+squeleton
+
+bar
+
+areaContent
+
+criar branch components

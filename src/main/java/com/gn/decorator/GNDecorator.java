@@ -14,15 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gn;
+package com.gn.decorator;
 
-import com.gn.buttons.Close;
-import com.gn.buttons.FullScreen;
-import com.gn.buttons.Maximize;
-import com.gn.buttons.Minimize;
-import com.gn.options.ButtonType;
+import com.gn.decorator.buttons.Close;
+import com.gn.decorator.buttons.FullScreen;
+import com.gn.decorator.buttons.Maximize;
+import com.gn.decorator.buttons.Minimize;
+import com.gn.decorator.options.ButtonType;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.beans.NamedArg;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -49,10 +50,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -703,8 +700,50 @@ public class GNDecorator extends StackPane {
         double x = direita - esquerda;
         title.setTranslateX(x / 2);
     }
+    
+    /**
+     * Sets the body of the application as background.
+     * This method makes the content occupy every area of the decoration,
+     * however when a component not resized by width or height is scaled a
+     * scroolpane launches a bar to define the border limits, when this happens
+     * a vertical bar appears next to the close button if the limit resize is
+     * reached, then a minimum height limit must be set.
+     * perfect for sliding applications.
+     * @param minHeight Minimum height limit.
+     */
+    public void fullBody(@NamedArg("minHeight") double minHeight){
+        AnchorPane.setTopAnchor(this.areaContent, 0D);
+        this.bar.toFront();
+        top.toFront();
+        top_left.toFront();
+        top_right.toFront();
+        
+        this.stage.setHeight(minHeight);
+        this.stage.setMinHeight(minHeight);
+    }
+    
+    /**
+     * Sets the body of the application as background. This method makes the
+     * content occupy every area of the decoration, however when a component not
+     * resized by width or height is scaled a scroolpane launches a bar to
+     * define the border limits, when this happens a vertical bar appears next
+     * to the close button if the limit resize is reached, then a minimum height
+     * limit must be set. perfect for responsive applications.
+     *
+     * @param minWidth  Minimum width limit.
+     * @param minHeight Minimum height limit.
+     */
+    public void fullBody(@NamedArg("minWidth") double minWidth, @NamedArg("minHeight") double minHeight) {
+        AnchorPane.setTopAnchor(this.areaContent, 0D);
+        this.bar.toFront();
+        top.toFront();
+        top_left.toFront();
+        top_right.toFront();
 
-
+        this.stage.setHeight(minHeight);
+        this.stage.setMinHeight(minHeight);
+    }
+    
     /**
      * Adiciona ações aos eixos e barras que redimensiona o conteudo decoração |
      * Add actions to the axes and bars that resize the decor content.
@@ -724,6 +763,7 @@ public class GNDecorator extends StackPane {
         });
 
         right.setOnMouseDragged(event -> {
+            
             if (!event.isPrimaryButtonDown() || (initX == -1 && initY == -1)) {
                 return;
             }
