@@ -16,6 +16,7 @@
  */
 package com.gn.decorator;
 
+import com.gn.decorator.background.GNBackground;
 import com.gn.decorator.buttons.Close;
 import com.gn.decorator.buttons.FullScreen;
 import com.gn.decorator.buttons.Maximize;
@@ -104,10 +105,12 @@ import javafx.util.Duration;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Created on 12/04/2018
  */
-public class GNDecorator extends StackPane {
+public class GNDecorator {
 
-    private final Stage stage = new Stage(StageStyle.UNDECORATED);
-    private final Scene scene = new Scene(this, Color.TRANSPARENT);
+    private GNBackground background = null;
+    
+    private Stage stage = null;
+    private Scene scene = null;
 
     private final AnchorPane body        = new AnchorPane();
     public  final ScrollPane container   = new ScrollPane();
@@ -194,9 +197,10 @@ public class GNDecorator extends StackPane {
      */
     public GNDecorator() {
         super();
-        configStage();
+        background =  new GNBackground();
         configLayout();
         addActions();
+        configStage();
         bounds = Screen.getPrimary().getVisualBounds();
         title.textProperty().bind(titleProperty);
         controls.minHeightProperty().bind(barHeight);
@@ -297,7 +301,6 @@ public class GNDecorator extends StackPane {
         });
     }
 
-    @Override
     public boolean isResizable(){
         return this.resizableProperty.get();
     }
@@ -383,7 +386,9 @@ public class GNDecorator extends StackPane {
      * Configura o palco | Config the stage.
      */
     private void configStage() {
-
+        this.stage = new Stage(StageStyle.UNDECORATED);
+        this.scene = new Scene(background);
+        this.stage.setScene(this.scene);
         this.stage.setScene(this.scene);
         this.stage.setMinWidth(254.0D);
         this.stage.setMinHeight(57.0D);
@@ -393,7 +398,7 @@ public class GNDecorator extends StackPane {
      * Configura o layout | Config the layout.
      */
     private void configLayout() {
-        this.getStyleClass().add("gn-decorator");
+        this.background.getStyleClass().add("gn-decorator");
         this.body.getStyleClass().add("gn-body");
         this.title.getStyleClass().add("gn-title");
         this.container.getStyleClass().add("gn-container");
@@ -401,7 +406,7 @@ public class GNDecorator extends StackPane {
 //        this.container.getViewportBounds().false);
         
         // add body in window
-        this.getChildren().add(this.body);
+        this.background.getChildren().add(this.body);
         
         // add bar
         this.body.getChildren().add(bar());
@@ -1124,8 +1129,8 @@ public class GNDecorator extends StackPane {
         this.stage.setY(bounds.getMinY());
         this.stage.setWidth(bounds.getWidth());
         this.stage.setHeight(bounds.getHeight());
-        this.setWidth(bounds.getWidth());
-        this.setHeight(bounds.getHeight());
+        this.background.setMinWidth(bounds.getWidth());
+        this.background.setMinHeight(bounds.getHeight());
 //
         this.stage.setFullScreen(false); // important
         btn_fullScreen.updateState(true);
@@ -1280,8 +1285,8 @@ public class GNDecorator extends StackPane {
     }
     
     private void viewBorders(boolean view){
-        if(view && !isMaximized() && !stage.isFullScreen()) this.setStyle("-fx-border-width : 1");
-        else this.setStyle("-fx-border-width : 0");
+        if(view && !isMaximized() && !stage.isFullScreen()) this.background.setStyle("-fx-border-width : 1");
+        else this.background.setStyle("-fx-border-width : 0");
     }
     
     public void addButton(ButtonType button){
@@ -1344,28 +1349,28 @@ public class GNDecorator extends StackPane {
         EventHandler handler = (EventHandler<MouseEvent>) (MouseEvent event) -> {
             if (event.getY() == 0 && stage.isFullScreen()) {
                 viewBar(true);
-                this.setOnMouseMoved(null);
+                this.background.setOnMouseMoved(null);
             }
         };
 
-        this.setOnMouseMoved(handler);
+        this.background.setOnMouseMoved(handler);
 
         this.bar.setOnMouseExited(e -> {
             if (stage.isFullScreen() && e.getY() > 0) {
                 viewBar(false);
-                this.setOnMouseMoved(handler);
+                this.background.setOnMouseMoved(handler);
             }
         });
 
         this.bar.setOnMouseMoved(e -> {
             if (stage.isFullScreen()) {
-                this.setOnMouseMoved(null);
+                this.background.setOnMouseMoved(null);
             }
         });
 
         this.bar.setOnMouseEntered(e -> {
             if (stage.isFullScreen()) {
-                this.setOnMouseMoved(null);
+                this.background.setOnMouseMoved(null);
             }
 
         });
@@ -1412,54 +1417,54 @@ public class GNDecorator extends StackPane {
     public void initTheme(Theme theme){
         switch(theme){
             case DEFAULT : 
-                this.getStylesheets().clear();
-                this.getStylesheets().add(getClass().getResource("/css/theme/default.css").toExternalForm());
+                this.background.getStylesheets().clear();
+                this.background.getStylesheets().add(getClass().getResource("/css/theme/default.css").toExternalForm());
                 break;
             case DARKULA :
-                this.getStylesheets().clear();
-                this.getStylesheets().add(getClass().getResource("/css/theme/darkula.css").toExternalForm());
+                this.background.getStylesheets().clear();
+                this.background.getStylesheets().add(getClass().getResource("/css/theme/darkula.css").toExternalForm());
                 break;
             case DANGER:
-                this.getStylesheets().clear();
+                this.background.getStylesheets().clear();
                 // add css
-                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.getStylesheets().add(getClass().getResource("/css/theme/danger.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/css/theme/danger.css").toExternalForm());
                 break;
             case INFO :
-                this.getStylesheets().clear();
+                this.background.getStylesheets().clear();
                 // add css
-                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.getStylesheets().add(getClass().getResource("/css/theme/info.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/css/theme/info.css").toExternalForm());
             break;
             case PRIMARY:
-                this.getStylesheets().clear();
+                this.background.getStylesheets().clear();
                 // add css
-                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.getStylesheets().add(getClass().getResource("/css/theme/primary.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/css/theme/primary.css").toExternalForm());
             break;
             case SECONDARY:
-                this.getStylesheets().clear();
+                this.background.getStylesheets().clear();
                 // add css
-                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.getStylesheets().add(getClass().getResource("/css/theme/secondary.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/css/theme/secondary.css").toExternalForm());
             break;
             case SUCCESS:
-                this.getStylesheets().clear();
+                this.background.getStylesheets().clear();
                 // add css
-                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.scene.getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.getStylesheets().add(getClass().getResource("/css/theme/success.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/css/theme/success.css").toExternalForm());
                 break;
             case WARNING:
-                this.getStylesheets().clear();
+                this.background.getStylesheets().clear();
                 // add css
-                this.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.getStylesheets().add(getClass().getResource("/css/theme/warning.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/css/theme/warning.css").toExternalForm());
                 break;
         }
     }
@@ -1500,8 +1505,5 @@ public class GNDecorator extends StackPane {
         return this.initialBound;
     }
 
-    @Override
-    public String getUserAgentStylesheet() {
-        return USER_AGENT_STYLESHEET;
-    }
+
 }

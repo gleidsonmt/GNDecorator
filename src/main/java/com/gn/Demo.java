@@ -47,8 +47,8 @@ public class Demo extends Application {
         window.setContent(root);
         window.addButton(ButtonType.FULL_SCREEN);
 //        window.initTheme(GNDecorator.Theme.DARKULA);
-        window.centralizeTitle();
-        window.fullBody(400);
+//        window.centralizeTitle();
+//        window.fullBody(400);
 //        window.setFullScreen(true);
         window.show();
         
