@@ -6,38 +6,38 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/primary.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/Demo.java</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/warning.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/danger.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/GNDecorator.java</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/info.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/fxml/FXML.fxml</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/secondary.css</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/Controller.java</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/Controller1.java</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/success.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/darkula.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/decorator/decorator.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/default.css</file>
-      </group>
-    </open-files>
-    <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-      <group>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/primary.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/success.css</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/decorator/GNDecorator.java</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/Teste.java</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/darkula.css</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/default.css</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/lembrar.txt</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/decorator/background/GNBackground.java</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/Demo.java</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/warning.css</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/fxml/FU.fxml</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/danger.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/GNDecorator.java</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/info.css</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/fxml/FXML.fxml</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/theme/secondary.css</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/NewFXMain.java</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/decorator/decorator.css</file>
-        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/decorator/Squeleton.java</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/fxml/Teste.fxml</file>
         <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/css/decorator/squeleton.css</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/prototype/GNWindowProto.java</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/prototype/GNWindowBar.java</file>
+      </group>
+    </open-files>
+    <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+      <group>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/Controller.java</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/decorator/GNDecorator.java</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/Teste.java</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/java/com/gn/NewFXMain.java</file>
+        <file>file:/E:/Projetos/Desktop/GNDecorator/src/main/resources/fxml/Teste.fxml</file>
       </group>
     </open-files>
   </auxiliary>

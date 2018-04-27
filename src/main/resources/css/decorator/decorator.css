@@ -19,10 +19,12 @@
     -fx-background-color: transparent, transparent;
     -fx-focus-color : transparent;
     -fx-focus-faint-color : transparent;
+    -fx-padding : 0;
 }
 
 .gn-decorator .gn-container .viewport {
     -fx-background-color : transparent;
+   
 }
 
 

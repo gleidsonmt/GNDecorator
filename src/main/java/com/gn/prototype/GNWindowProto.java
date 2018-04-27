@@ -16,11 +16,16 @@
  */
 package com.gn.prototype;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -132,6 +137,12 @@ public class GNWindowProto extends StackPane {
      * Configura o layout | Config the layout.
      */
     private void configLayout() {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/fxml/Teste.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(GNWindowProto.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // Color initial
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         this.body.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -143,7 +154,7 @@ public class GNWindowProto extends StackPane {
         AnchorPane.setRightAnchor(node, 1D);
         AnchorPane.setBottomAnchor(node, 1D);
         AnchorPane.setLeftAnchor(node, 1D);
-        this.body.getChildren().add(node);
+        this.body.getChildren().add(root);
         
 
         // Config Axis in body
@@ -157,6 +168,7 @@ public class GNWindowProto extends StackPane {
         this.body.getChildren().add(right());
         this.body.getChildren().add(top());
         this.body.getChildren().add(bottom());
+        
         
    
     }

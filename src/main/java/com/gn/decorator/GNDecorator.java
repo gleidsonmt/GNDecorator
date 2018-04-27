@@ -154,7 +154,7 @@ public class GNDecorator {
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
     
-    private static final String USER_AGENT_STYLESHEET  = GNDecorator.class.getResource("/css/decorator/decorator.css").toExternalForm();
+    
     
     private final BooleanProperty resizableProperty = new SimpleBooleanProperty(GNDecorator.this, "resizableProperty", true);
     private final StringProperty  titleProperty     = new SimpleStringProperty(GNDecorator.this, "textProperty", "title");
@@ -242,6 +242,10 @@ public class GNDecorator {
      */
     public Stage getStage() {
         return this.stage;
+    }
+    
+    public Scene getScene(){
+        return this.scene;
     }
 
     public final StringProperty titleProperty() {
@@ -388,10 +392,14 @@ public class GNDecorator {
     private void configStage() {
         this.stage = new Stage(StageStyle.UNDECORATED);
         this.scene = new Scene(background);
-        this.stage.setScene(this.scene);
+        this.scene.setFill(Color.RED);
+        
+        
         this.stage.setScene(this.scene);
         this.stage.setMinWidth(254.0D);
         this.stage.setMinHeight(57.0D);
+        stage.widthProperty().divide(scene.heightProperty());
+        stage.heightProperty().divide(scene.widthProperty());
     }
 
     /**
@@ -422,7 +430,7 @@ public class GNDecorator {
         container.setFitToHeight(true);
         container.setFitToWidth(true);
         
-//        containersetStyle("-fx-background-color : blue");
+        container.setStyle("-fx-background-color : transparent");
         this.container.setContent(content);
         this.body.getChildren().add(createRegion());
         
@@ -1110,7 +1118,6 @@ public class GNDecorator {
      * other case The size is restored to before maximizing..
      */
     public void restore() {
-        System.out.println(savedBounds);
         if (savedBounds == null) {
             savedBounds = initialBound;
         }
@@ -1479,6 +1486,14 @@ public class GNDecorator {
      */
     public void show() {
         stage.show();
+        stage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                background.setPrefWidth(newValue.doubleValue());
+                body.setPrefWidth(newValue.doubleValue());
+                AnchorPane.setRightAnchor(content, newValue.doubleValue());
+            }
+        });
         initRestaure();
     }
     
@@ -1508,6 +1523,19 @@ public class GNDecorator {
         this.initialBound = new BoundingBox(x, y, width, height);
         return this.initialBound;
     }
-
-
 }
+
+/* 
+
+Notas : 
+
+1) a posição x no evento de getStage().setX()... não sofre lag ao ser alterado se o palco 
+for do estilo tranparent.
+
+2) se o palco for do estilo transparent causa uma lentidão na ui
+
+3) com o palco transparent mesmo a posição x não sofrendo o delay.. o layou interno sofre.
+
+
+
+*/
