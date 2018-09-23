@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="087ddaf0-c2aa-4bf9-85ea-459fe47f7c54" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jfoenix_jfoenix_8_0_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jfoenix_8_0_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gn/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/wall2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.5.1/fileContent/annotation-processors.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.5.1/fileContent/annotation-processors.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.5.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.5.1/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.5.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.5.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.5.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.5.1/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.5.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.5.1/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.nb-gradle/private/cache/GNDecorator-d41d8cd98f00b204e9800998ecf8427e" beforeDir="false" afterPath="$PROJECT_DIR$/.nb-gradle/private/cache/GNDecorator-d41d8cd98f00b204e9800998ecf8427e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.nb-gradle/profiles/private/aux-config" beforeDir="false" afterPath="$PROJECT_DIR$/.nb-gradle/profiles/private/aux-config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenicView.properties" beforeDir="false" afterPath="$PROJECT_DIR$/scenicView.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gn/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gn/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gn/decorator/GNDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gn/decorator/GNDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gn/decorator/background/GNBackground.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gn/decorator/background/GNBackground.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gn/decorator/buttons/Close.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gn/decorator/buttons/Close.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gn/decorator/buttons/FullScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gn/decorator/buttons/FullScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gn/decorator/options/ButtonType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gn/decorator/options/ButtonType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/controls/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/controls/buttons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/decorator/decorator.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/decorator/decorator.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/demo1.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/demo1.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/theme/danger.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/theme/danger.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/theme/default.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/theme/default.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/theme/info.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/theme/info.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/theme/primary.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/theme/primary.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/FXML.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/FXML.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="087ddaf0-c2aa-4bf9-85ea-459fe47f7c54" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -64,6 +31,7 @@
         <counts>
           <entry key="CSS" value="16" />
           <entry key="Groovy" value="1" />
+          <entry key="HTML" value="1" />
           <entry key="Image" value="6" />
           <entry key="JAVA" value="17" />
           <entry key="XML" value="2" />
@@ -74,7 +42,7 @@
           <entry key="css" value="422" />
           <entry key="fxml" value="7" />
           <entry key="gradle" value="1" />
-          <entry key="java" value="1010" />
+          <entry key="java" value="1011" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -82,7 +50,7 @@
         <counts>
           <entry key="CSS" value="422" />
           <entry key="Groovy" value="1" />
-          <entry key="JAVA" value="1010" />
+          <entry key="JAVA" value="1011" />
           <entry key="XML" value="7" />
         </counts>
       </usages-collector>
@@ -91,6 +59,7 @@
           <entry key="css" value="16" />
           <entry key="fxml" value="2" />
           <entry key="gradle" value="1" />
+          <entry key="html" value="1" />
           <entry key="java" value="17" />
           <entry key="jpg" value="1" />
           <entry key="png" value="5" />
@@ -100,11 +69,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/decorator/GNDecorator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="741" column="19" selection-start-line="741" selection-start-column="19" selection-end-line="741" selection-end-column="19" />
+            <state relative-caret-position="190">
+              <caret line="747" column="27" lean-forward="true" selection-start-line="747" selection-start-column="27" selection-end-line="747" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#9663#9664#0" expanded="true" />
@@ -127,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/Demo.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
-              <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -618,8 +587,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/css/controls/buttons.css" />
         <option value="$PROJECT_DIR$/src/main/java/com/gn/Main.java" />
         <option value="$PROJECT_DIR$/src/main/resources/css/theme/custom.css" />
-        <option value="$PROJECT_DIR$/src/main/java/com/gn/Demo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/gn/decorator/GNDecorator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gn/Demo.java" />
       </list>
     </option>
   </component>
@@ -644,76 +613,6 @@
             </path>
             <path>
               <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="gn" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="gn" type="462c0819:PsiDirectoryNode" />
-              <item name="decorator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="gn" type="462c0819:PsiDirectoryNode" />
-              <item name="decorator" type="462c0819:PsiDirectoryNode" />
-              <item name="background" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="gn" type="462c0819:PsiDirectoryNode" />
-              <item name="decorator" type="462c0819:PsiDirectoryNode" />
-              <item name="buttons" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GNDecorator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GNDecorator" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -726,7 +625,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/android-sdk" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537724799018" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537726099172" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Bibliotecas/Desktop/Jfoenix/jfoenix-8.0.7.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -822,9 +721,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49914822" visible="true" weight="0.25718608" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49914822" visible="true" weight="0.25718608" />
       <window_info id="Structure" order="1" sideWeight="0.5008518" side_tool="true" visible="true" weight="0.25718608" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -833,7 +731,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32879046" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32879046" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1037,20 +935,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/Demo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/decorator/GNDecorator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="741" column="19" selection-start-line="741" selection-start-column="19" selection-end-line="741" selection-end-column="19" />
+        <state relative-caret-position="190">
+          <caret line="747" column="27" lean-forward="true" selection-start-line="747" selection-start-column="27" selection-end-line="747" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#9663#9664#0" expanded="true" />
@@ -1059,6 +947,19 @@
             <element signature="e#9784#9785#0" expanded="true" />
             <element signature="e#10869#10870#0" expanded="true" />
             <element signature="e#10920#10921#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/cache/retriever/www.oracle.com/technetwork/java/javase/overview/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/Demo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
