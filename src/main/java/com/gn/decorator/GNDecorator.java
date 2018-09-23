@@ -17,20 +17,12 @@
 package com.gn.decorator;
 
 import com.gn.decorator.background.GNBackground;
-import com.gn.decorator.buttons.Close;
-import com.gn.decorator.buttons.FullScreen;
-import com.gn.decorator.buttons.Maximize;
-import com.gn.decorator.buttons.Minimize;
+import com.gn.decorator.buttons.*;
 import com.gn.decorator.options.ButtonType;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.NamedArg;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -48,21 +40,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ClosePath;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.SVGPath;
-import javafx.scene.shape.StrokeType;
+import javafx.scene.shape.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -153,7 +133,7 @@ public class GNDecorator {
     private Rectangle2D bounds       = null;
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
-    
+    private User user = null;
     
     
     private final BooleanProperty resizableProperty = new SimpleBooleanProperty(GNDecorator.this, "resizableProperty", true);
@@ -273,6 +253,11 @@ public class GNDecorator {
         return maximizedProperty;
     }
 
+    public GNBackground getBackground() {
+        return this.background;
+    }
+
+
     /**
      * Verifica se o palco está maximizado | Checks if the stage is maximized.
      *
@@ -290,8 +275,8 @@ public class GNDecorator {
         
         Platform.runLater(() -> {
             configCursor(resizable);
-//            bar.setOnMouseDragged(null);
-//            bar.setOnMousePressed(null);
+            bar.setOnMouseDragged(null);
+            bar.setOnMousePressed(null);
             
             if(!resizable) {
                 btn_maximize.setDisable(true);
@@ -308,7 +293,7 @@ public class GNDecorator {
     public boolean isResizable(){
         return this.resizableProperty.get();
     }
-    
+
     public BooleanProperty resizableProperty(){
         return this.resizableProperty;
     }
@@ -321,6 +306,10 @@ public class GNDecorator {
             this.content.getChildren().clear();
         
         this.content.getChildren().add(body);
+    }
+    
+    public StackPane getContent(){
+        return this.content;
     }
     
     public void setColor(Color color){
@@ -384,7 +373,11 @@ public class GNDecorator {
         this.buttonHeight.set(height);
     }
     
-
+    public User getUser(){
+        return this.user;
+    }
+    
+    
     
     /**
      * Configura o palco | Config the stage.
@@ -410,9 +403,7 @@ public class GNDecorator {
         this.body.getStyleClass().add("gn-body");
         this.title.getStyleClass().add("gn-title");
         this.container.getStyleClass().add("gn-container");
-        
-//        this.container.getViewportBounds().false);
-        
+
         // add body in window
         this.background.getChildren().add(this.body);
         
@@ -449,9 +440,7 @@ public class GNDecorator {
         initTheme(Theme.DEFAULT);
         viewBars(false);
     }
-    
 
-    
     /**
      * Criar a região com os limites de bordas.
      *
@@ -673,6 +662,10 @@ public class GNDecorator {
         controls.setMinWidth(buttonWidth.get() * controls.getChildren().size());
         return controls;
     }
+
+    public void atualizeMinWidth(){
+        controls.setMinWidth(buttonWidth.get() * controls.getChildren().size());
+    }
     
     /**
      * Configura o container de menu direito | Configure the right menu container.
@@ -723,6 +716,7 @@ public class GNDecorator {
      * reached, then a minimum height limit must be set.
      * perfect for sliding applications.
      * @param minHeight Minimum height limit.
+     * @deprecated
      */
     public void fullBody(@NamedArg("minHeight") double minHeight){
         AnchorPane.setTopAnchor(this.areaContent, 0D);
@@ -745,6 +739,7 @@ public class GNDecorator {
      *
      * @param minWidth  Minimum width limit.
      * @param minHeight Minimum height limit.
+     * @deprecated
      */
     public void fullBody(@NamedArg("minWidth") double minWidth, @NamedArg("minHeight") double minHeight) {
         AnchorPane.setTopAnchor(this.areaContent, 0D);
@@ -763,7 +758,7 @@ public class GNDecorator {
      */
     private void addActions() {
 
-        btn_close.setOnMouseClicked(event -> stage.close());
+        btn_close.setOnMouseClicked(event -> getStage().close());
         btn_maximize.setOnMouseClicked(event -> maximizeOrRestore());
         btn_minimize.setOnMouseClicked(event -> stage.setIconified(true));
         
@@ -1070,11 +1065,12 @@ public class GNDecorator {
                 
                 // verifica se a posicao não atinji o limite da borda
                 if(stage.getX() < bounds.getMinX()){
-                    stage.setX(bounds.getMinX());
                 } else if((stage.getX() + savedBounds.getWidth() )  > bounds.getMaxX()){
                     stage.setX(bounds.getMaxX() - savedBounds.getWidth());
                 }
-
+                
+                setMaximized(false);
+                btn_maximize.updateState(true);
             }
 
             newX = e.getScreenX();
@@ -1131,7 +1127,7 @@ public class GNDecorator {
     /**
      * Maximiza a decoração | Maximize decoration.
      */
-    public void maximize() {
+    private void maximize() {
        //set Stage boundaries to visible bounds of the main screen
        
        this.savedBounds = new BoundingBox(this.stage.getX(), this.stage.getY(), this.stage.getWidth(), this.stage.getHeight());
@@ -1159,8 +1155,10 @@ public class GNDecorator {
         if (isResizable()) {
             if (isMaximized()) {
                 restore();
+                maximizedProperty.set(false);
             } else {
                 maximize();
+                maximizedProperty.set(true);
             }
         }
     }
@@ -1310,6 +1308,11 @@ public class GNDecorator {
                 fullScreen();
                 configFullScreen();
                 break;
+            case USER : {
+                user = new User("Gleidson Neves da Silveira");
+                controls.getChildren().add(user);
+                user.toBack();
+            }
         }
     }
 
@@ -1329,7 +1332,8 @@ public class GNDecorator {
                 viewBar(false);
                 viewBorders(false);
                 btn_fullScreen.updateState(false);
-                this.controls.getChildren().removeAll(btn_minimize, btn_maximize);
+                this.controls.getChildren().removeAll(btn_maximize, btn_minimize);
+                atualizeMinWidth();
             } else {
                 this.controls.getChildren().addAll(btn_minimize, btn_maximize);
                 btn_maximize.toFront();
@@ -1427,7 +1431,7 @@ public class GNDecorator {
     
     public void initTheme(Theme theme){
         switch(theme){
-            case DEFAULT : 
+            case DEFAULT :
                 this.background.getStylesheets().clear();
                 this.background.getStylesheets().add(getClass().getResource("/css/theme/default.css").toExternalForm());
                 break;
@@ -1477,6 +1481,13 @@ public class GNDecorator {
                 // add theme
                 this.background.getStylesheets().add(getClass().getResource("/css/theme/warning.css").toExternalForm());
                 break;
+            case CUSTOM:
+                this.background.getStylesheets().clear();
+                // add css
+                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                // add theme
+//                this.background.getStylesheets().add(getClass().getResource("/css/theme/custom.css").toExternalForm());
+                break;
         }
     }
 
@@ -1502,7 +1513,7 @@ public class GNDecorator {
     };
 
     public enum Theme {
-        DEFAULT, DARKULA, DANGER, INFO, PRIMARY, SECONDARY, WARNING, SUCCESS
+        DEFAULT, DARKULA, DANGER, INFO, PRIMARY, SECONDARY, WARNING, SUCCESS, CUSTOM
     };
 
     

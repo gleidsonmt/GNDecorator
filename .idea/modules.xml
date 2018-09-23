@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GNDecorator.iml" filepath="$PROJECT_DIR$/GNDecorator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GNDecorator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GNDecorator_main.iml" group="GNDecorator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GNDecorator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GNDecorator_test.iml" group="GNDecorator" />
+    </modules>
+  </component>
+</project>

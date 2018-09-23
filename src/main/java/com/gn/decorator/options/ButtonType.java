@@ -22,15 +22,6 @@ package com.gn.decorator.options;
  * Creation  17/04/2018
  */
 public enum ButtonType {
-    FULL_SCREEN, FULL_EFFECT
+    FULL_SCREEN, FULL_EFFECT, USER
 
-//    public boolean effect;
-//
-//    ButtonType(boolean effect) {
-//        this.effect = effect;
-//
-//        if (effect) {
-//            System.out.println("pinto de mulher");
-//        }
-//    }
 }

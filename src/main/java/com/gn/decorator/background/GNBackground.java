@@ -21,6 +21,7 @@ import com.gn.decorator.GNDecorator;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -35,15 +36,12 @@ public class GNBackground extends StackPane {
         super();
         getStyleClass().add("gn-decorator");
         setAlignment(Pos.CENTER);
-//        setCache(true);
-//        setCacheHint(CacheHint.SPEED);
     }
+
 
     @Override
     public String getUserAgentStylesheet() {
         return USER_AGENT_STYLESHEET;
     }
 
-    
-    
 }

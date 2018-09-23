@@ -19,7 +19,12 @@ package com.gn;
 
 import com.gn.decorator.GNDecorator;
 import com.gn.decorator.options.ButtonType;
+import com.jfoenix.controls.JFXTabPane;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Region;
@@ -39,19 +44,16 @@ public class Demo extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXML.fxml"));
 
-        Region region = new Region();
-        
+
         GNDecorator window = new GNDecorator();
-//        window.getScene().getStylesheets().add(getClass().getResource("/css/demo1.css").toString());
         window.setTitle("GNDecoration");
         window.setContent(root);
-        window.addButton(ButtonType.FULL_SCREEN);
-//        window.initTheme(GNDecorator.Theme.DARKULA);
-        window.centralizeTitle();
-//        window.fullBody(400);
-//        window.setFullScreen(true);
+        window.addButton(ButtonType.FULL_EFFECT);
+        window.initTheme(GNDecorator.Theme.DARKULA);
         window.show();
-        
+
+        window.getScene().getStylesheets().addAll(getClass().getResource("/css/theme/custom.css").toExternalForm());
+
 //        ScenicView.show(window.getScene());
     }
 

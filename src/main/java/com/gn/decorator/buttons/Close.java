@@ -17,6 +17,7 @@
 
 package com.gn.decorator.buttons;
 
+import com.gn.decorator.background.GNBackground;
 import com.sun.javafx.css.converters.PaintConverter;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import javafx.css.SimpleStyleableObjectProperty;
 import javafx.css.Styleable;
 import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleableProperty;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Skin;
@@ -42,13 +44,13 @@ import javafx.scene.paint.Paint;
  */
 public class Close extends Button {
     
-    
-    private final ImageView viewMinimize = new ImageView(new Image("img/close.png"));
+    private static final String USER_AGENT_STYLESHEET = GNBackground.class.getResource("/css/controls/buttons.css").toExternalForm();
+    private final ImageView viewClose = new ImageView(new Image("/img/close.png"));
     
     public Close(){
         getStyleClass().add("gn-close");
         super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        super.setGraphic(viewMinimize);
+        super.setGraphic(viewClose);
     }
     
     @Override
@@ -58,7 +60,7 @@ public class Close extends Button {
 
     @Override
     public String getUserAgentStylesheet() {
-        return getClass().getResource("/css/controls/buttons.css").toExternalForm();
+        return USER_AGENT_STYLESHEET;
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,
@@ -66,7 +68,7 @@ public class Close extends Button {
             "defaultFill",
             Color.WHITE);
 
-    public Paint getdefaultFill() {
+    public Paint getDefaultFill() {
         return defaultFill.get();
     }
 
@@ -74,8 +76,9 @@ public class Close extends Button {
         return this.defaultFill;
     }
 
-    public void setdefaultFill(Paint color) {
+    public void setDefaultFill(Paint color) {
         this.defaultFill.set(color);
+        this.setStyle("-gn-fill : white");
     }
 
     private static class StyleableProperties {

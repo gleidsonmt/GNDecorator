@@ -49,7 +49,7 @@ public class FullScreen extends Button {
     private final ImageView viewUnFullScreen = new ImageView(new Image("img/unfullscreen.png"));
     
     public FullScreen(){
-        getStyleClass().add("-gn-full-screen");
+        getStyleClass().add("gn-full-screen");
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         this.setGraphic(viewFullScreen);
     }

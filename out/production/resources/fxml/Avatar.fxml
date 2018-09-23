@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+
+<HBox alignment="CENTER" onMouseClicked="#fuckAll" prefHeight="36.0" prefWidth="221.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.decorator.Controller">
+   <children>
+      <Label fx:id="user" prefHeight="18.0" prefWidth="161.0" text="Gleidson Neves da Silveira" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</HBox>
