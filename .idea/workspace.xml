@@ -1,7 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="087ddaf0-c2aa-4bf9-85ea-459fe47f7c54" name="Default Changelist" comment="" />
+    <list default="true" id="087ddaf0-c2aa-4bf9-85ea-459fe47f7c54" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/Demo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/BodyCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/GNDecorator$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/GNDecorator$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/GNDecorator$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/GNDecorator$Style.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/GNDecorator$Theme.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/GNDecorator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/background/GNBackground.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/background/UserDetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Close$StyleableProperties$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Close$StyleableProperties.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Close.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/FullScreen$StyleableProperties$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/FullScreen$StyleableProperties.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/FullScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Maximize$StyleableProperties$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Maximize$StyleableProperties.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Maximize.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Minimize$StyleableProperties$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Minimize$StyleableProperties.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/Minimize.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/buttons/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/decorator/options/ButtonType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/prototype/GNWindowBar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/gn/prototype/GNWindowProto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/controls/buttons.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/controls/teste.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/controls/user.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/decorator/decorator.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/decorator/squeleton.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/demo1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/custom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/danger.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/darkula.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/info.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/primary.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/roboto.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/secondary.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/success.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/css/theme/warning.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fonts/Roboto-Black.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fonts/Roboto-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fonts/Roboto-Light.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fonts/Roboto-Medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fonts/Roboto-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fonts/Roboto-Thin.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fxml/Avatar.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fxml/Body.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fxml/FXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fxml/FXML1.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fxml/FXML_1.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/fxml/demo.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/avatar.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/avatar_circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/fullscreen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/maximize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/minimize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/restore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/unfullscreen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/wall.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/img/wall2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/basic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/danger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/darkula.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/demo1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/gif1.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/gif2.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/gif3.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/info.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/javafx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/login.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/primary.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/primarySctructure.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/secondary.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/screenshot/warning.png" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -73,7 +155,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/decorator/GNDecorator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="747" column="27" lean-forward="true" selection-start-line="747" selection-start-column="27" selection-end-line="747" selection-end-column="27" />
+              <caret line="747" column="27" selection-start-line="747" selection-start-column="27" selection-end-line="747" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#9663#9664#0" expanded="true" />
@@ -112,7 +194,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="57">
-              <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+              <caret line="62" selection-start-line="62" selection-end-line="62" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -124,7 +206,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/decorator/background/GNBackground.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="47">
-              <caret line="32" column="87" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="118" />
+              <caret line="32" column="87" lean-forward="true" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="118" />
             </state>
           </provider>
         </entry>
@@ -152,7 +234,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/css/theme/default.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="148">
-              <caret line="28" lean-forward="true" selection-start-line="5" selection-end-line="28" />
+              <caret line="28" selection-start-line="5" selection-end-line="28" />
             </state>
           </provider>
         </entry>
@@ -625,7 +707,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/android-sdk" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537726099172" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537726133927" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Bibliotecas/Desktop/Jfoenix/jfoenix-8.0.7.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -895,7 +977,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/decorator/background/GNBackground.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
-          <caret line="32" column="87" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="118" />
+          <caret line="32" column="87" lean-forward="true" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="118" />
         </state>
       </provider>
     </entry>
@@ -914,7 +996,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/css/theme/default.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
-          <caret line="28" lean-forward="true" selection-start-line="5" selection-end-line="28" />
+          <caret line="28" selection-start-line="5" selection-end-line="28" />
         </state>
       </provider>
     </entry>
@@ -928,7 +1010,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -938,7 +1020,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gn/decorator/GNDecorator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="747" column="27" lean-forward="true" selection-start-line="747" selection-start-column="27" selection-end-line="747" selection-end-column="27" />
+          <caret line="747" column="27" selection-start-line="747" selection-start-column="27" selection-end-line="747" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#9663#9664#0" expanded="true" />
