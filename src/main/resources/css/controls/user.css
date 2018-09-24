@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-/* 
+/*
     Created on : 28/04/2018, 11:23:12
     Author     : Gleidson Neves da Silveira
 */
@@ -24,13 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     -fx-border-width : 0 1 1 1;
     -fx-padding : 0 5 0 5;
 }
-.gn-user .label {
-    -fx-cursor : hand;
-}
 
 .gn-user .label:hover {
-    
-   -fx-underline : true;
+    -fx-underline : false;
+}
+
+.gn-user .label {
+    -fx-cursor : hand;
 }
 
 .gn-detail .gn-header{
@@ -44,6 +44,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     -fx-text-fill : white;
     -fx-font-size : 12;
     -fx-fomt-family : Roboto Regular;
+}
+
+.gn-action {
+    -fx-background-color : white;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.3) , 15, 0.0 , 0 , 2 );
+}
+
+.gn-action:pressed {
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.3) , 15, 0.0 , 0 , 4 );
 }
 
 /*.gn-detail .btn-action {

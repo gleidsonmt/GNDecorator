@@ -17,38 +17,31 @@
 
 package com.gn.decorator.buttons;
 
-import com.gn.decorator.background.UserDetail;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 /**
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Creation  28/04/2018
  */
-public class User extends HBox {
+public class UserView extends HBox {
 
     private final StringProperty name = new SimpleStringProperty();
-    private final Label view = new Label();
-    private UserDetail userDetail;
-    
-    public User() {
-        view.textProperty().bind(name);
-    }
-    
-    public User(String name){
+    private final Label view          = new Label();
+
+    private UserControl userDetail;
+
+    public UserView(String name, UserControl userControl){
         super();
         this.view.setText(name);
         this.name.set(name);
         this.view.textProperty().bind(this.name);
         configLayout();
-        userDetail = new UserDetail(this);
+        userDetail = userControl;
     }
     
     private void configLayout(){
@@ -57,7 +50,7 @@ public class User extends HBox {
         this.setAlignment(Pos.CENTER);
         this.setCursor(Cursor.HAND);
         this.setOnMouseClicked(e -> {
-            userDetail.show();
+            userDetail.show(this);
         });
     }
 
@@ -74,7 +67,7 @@ public class User extends HBox {
         return name;
     }
     
-    public UserDetail getUserDetail(){
+    private UserControl getUserDetail(){
         return this.userDetail;
     }
     

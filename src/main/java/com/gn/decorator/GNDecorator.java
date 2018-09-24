@@ -19,6 +19,7 @@ package com.gn.decorator;
 import com.gn.decorator.background.GNBackground;
 import com.gn.decorator.buttons.*;
 import com.gn.decorator.options.ButtonType;
+import com.gn.decorator.options.ComponentType;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.NamedArg;
@@ -315,7 +316,7 @@ public class GNDecorator {
     public void setColor(Color color){
         this.body.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
-    
+
     public boolean isFullScreen(){
         return stage.isFullScreen();
     }
@@ -1308,8 +1309,19 @@ public class GNDecorator {
                 fullScreen();
                 configFullScreen();
                 break;
-            case USER : {
+            case USER :
+
                 user = new User("Gleidson Neves da Silveira");
+                controls.getChildren().add(user);
+                user.toBack();
+            break;
+        }
+    }
+
+    public void addComponent(ComponentType componentType, UserControl box){
+        switch (componentType){
+            case USER : {
+                UserView user = new UserView(box.confTitle(), box);
                 controls.getChildren().add(user);
                 user.toBack();
             }
