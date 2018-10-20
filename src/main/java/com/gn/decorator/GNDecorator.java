@@ -18,8 +18,8 @@ package com.gn.decorator;
 
 import com.gn.decorator.background.GNBackground;
 import com.gn.decorator.buttons.*;
+import com.gn.decorator.component.GNControl;
 import com.gn.decorator.options.ButtonType;
-import com.gn.decorator.options.ComponentType;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.NamedArg;
@@ -114,12 +114,12 @@ public class GNDecorator {
     private final HBox          menu             = new HBox();
     private final HBox          title_content    = new HBox();
     
-    private final Close      btn_close      = new Close();
-    private final Maximize   btn_maximize   = new Maximize();
-    private final Minimize   btn_minimize   = new Minimize();
-    private final FullScreen btn_fullScreen = new FullScreen();
-    private final Label      title          = new Label("Application");
-    private final SVGPath    icon           = new SVGPath();
+    private final Close        btn_close      = new Close();
+    private final Maximize     btn_maximize   = new Maximize();
+    private final Minimize     btn_minimize   = new Minimize();
+    private final GNFullscreen btn_fullScreen = new GNFullscreen();
+    private final Label        title          = new Label("Application");
+    private final SVGPath      icon           = new SVGPath();
     
     private final ImageView viewMinimize    = new ImageView(new Image("img/minimize.png"));
     private final ImageView viewMaximize    = new ImageView(new Image("img/maximize.png"));
@@ -134,9 +134,7 @@ public class GNDecorator {
     private Rectangle2D bounds       = null;
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
-    private User user = null;
-    
-    
+
     private final BooleanProperty resizableProperty = new SimpleBooleanProperty(GNDecorator.this, "resizableProperty", true);
     private final StringProperty  titleProperty     = new SimpleStringProperty(GNDecorator.this, "textProperty", "title");
     private final BooleanProperty maximizedProperty = new SimpleBooleanProperty(GNDecorator.this, "maximizedProperty", false);
@@ -164,14 +162,6 @@ public class GNDecorator {
             }
         }
     };
-    
-    /********************************************************************************************
-     * 
-     * 
-     *                      Construtors
-     *      
-     * 
-     ********************************************************************************************/
     
     /**
      * Cria uma decoração | Create a decoration.
@@ -207,19 +197,11 @@ public class GNDecorator {
         btn_fullScreen.minWidthProperty().bind(buttonWidth);
         btn_fullScreen.prefWidthProperty().bind(buttonWidth);
     }
-    
-    /********************************************************************************************
-     *
-     *
-     *                              Public methods
-     *
-     *
-     ********************************************************************************************/
-    
+
     /**
-     * Palco desta decoração | Stage this decoration.
+     * Decoration stage.
      *
-     * @return
+     * @return Decoration stage
      */
     public Stage getStage() {
         return this.stage;
@@ -373,12 +355,6 @@ public class GNDecorator {
         this.buttonWidth.set(width);
         this.buttonHeight.set(height);
     }
-    
-    public User getUser(){
-        return this.user;
-    }
-    
-    
     
     /**
      * Configura o palco | Config the stage.
@@ -644,9 +620,8 @@ public class GNDecorator {
     private HBox controls(){
         controls.getStyleClass().add("gn-buttons");
         controls.setAlignment(Pos.CENTER);
-        
         double prefWidth = buttonWidth.get(), prefHeiht = buttonHeight.get();
-        
+
         btn_minimize.setGraphic(viewMinimize);
         btn_maximize.setGraphic(viewMaximize);
         btn_close.setGraphic(viewClose);
@@ -698,14 +673,34 @@ public class GNDecorator {
         HBox.setHgrow(title_content, Priority.ALWAYS);
         return title_content;
     }
-    
+
+    /**
+     * Centralize title.
+     * center the title using the half-width of the
+     * stage and subtract the width of the right and left controls
+     */
     public void centralizeTitle(){
-        title_content.setAlignment(Pos.CENTER);
-        title.setAlignment(Pos.CENTER);
-        double esquerda = menu.getMinWidth();
-        double direita = getButtonWidth() * controls.getChildren().size();
-        double x = direita - esquerda;
-        title.setTranslateX(x / 2);
+        Platform.runLater(()->{
+            title_content.setAlignment(Pos.CENTER);
+            title.setAlignment(Pos.CENTER);
+
+
+            double countR = 0;
+
+            for(Node node : controls.getChildren()){
+                if(node instanceof Button){
+                    countR += ((Button) node).getWidth();
+                } else if(node instanceof HBox){
+                    countR += ((HBox) node).getWidth();
+                }
+            }
+
+            title.setTranslateX(countR / 2);
+        });
+    }
+
+    private void updateTitle(){
+        title.setTranslateX(getStage().getWidth() / 4);
     }
     
     /**
@@ -1308,27 +1303,24 @@ public class GNDecorator {
             case FULL_SCREEN :
                 fullScreen();
                 configFullScreen();
-                break;
-            case USER :
-
-                user = new User("Gleidson Neves da Silveira");
-                controls.getChildren().add(user);
-                user.toBack();
             break;
         }
     }
 
-    public void addComponent(ComponentType componentType, UserControl box){
-        switch (componentType){
-            case USER : {
-                UserView user = new UserView(box.confTitle(), box);
-                controls.getChildren().add(user);
-                user.toBack();
-            }
-        }
+    public void addCustom(GNControl control){
+        updateControls(control);
     }
 
-    private FullScreen fullScreen(){
+    private void updateControls(GNControl node){
+
+        node.setMaxHeight(getBarHeight());
+        node.setMinHeight(getBarHeight());
+        node.setPrefHeight(getBarHeight());
+        controls.getChildren().add(node);
+        node.toBack();
+    }
+
+    private GNFullscreen fullScreen(){
         btn_fullScreen.updateState(true );
         controls.getChildren().add(btn_fullScreen);
 
@@ -1341,7 +1333,7 @@ public class GNDecorator {
             if (!stage.isFullScreen()) {
                 stage.setFullScreen(true);
                 configCursor(false);
-                viewBar(false);
+                viewBar(true);
                 viewBorders(false);
                 btn_fullScreen.updateState(false);
                 this.controls.getChildren().removeAll(btn_maximize, btn_minimize);
@@ -1350,9 +1342,9 @@ public class GNDecorator {
                 this.controls.getChildren().addAll(btn_minimize, btn_maximize);
                 btn_maximize.toFront();
                 btn_close.toFront();
-                viewBorders(true);
                 stage.setFullScreen(false);
                 configCursor(true);
+                viewBorders(true);
                 btn_fullScreen.updateState(true);
             }
         });

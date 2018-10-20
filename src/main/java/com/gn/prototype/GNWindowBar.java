@@ -139,9 +139,8 @@ public class GNWindowBar extends StackPane {
     }
 
     /**
-     * Palco desta decoração | Stage this decoration.
-     *
-     * @return
+     * Decoration Stage.
+     * @return Decoration Stage.
      */
     public Stage getStage() {
         return this.stage;

@@ -3,10 +3,6 @@
     Author     : Gleidson Neves da Silveira
 */
 
-.gn-close {
-    -fx-background-color : blue;
-}
-
 .button, .button:focused, .button:hover {
     -fx-background-color : transparent;
     -fx-border-width : 0;
@@ -24,4 +20,12 @@
 .gn-maximize
 {
     -fx-cursor : default;
+}
+
+.gn-full-screen,
+.gn-close,
+.gn-minimize,
+.gn-maximize
+{
+    -fx-background-color : transparent;
 }

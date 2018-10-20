@@ -17,16 +17,14 @@
 package com.gn;
 
 import com.gn.decorator.GNDecorator;
-import com.gn.decorator.buttons.UserControl;
+import com.gn.decorator.component.FullScreen;
 import com.gn.decorator.options.ButtonType;
-import com.gn.decorator.options.ComponentType;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.scenicview.ScenicView;
+
+import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -42,33 +40,18 @@ public class Demo extends Application {
         GNDecorator window = new GNDecorator();
         window.setContent(content);
         window.initTheme(GNDecorator.Theme.PRIMARY);
-        window.addButton(ButtonType.FULL_EFFECT);
-        window.addComponent(ComponentType.USER, new UserControl() {
-            @Override
-            public String confTitle() {
-                return "Gleidson Neves da Silveira";
-            }
+//        window.addButton(ButtonType.FULL_EFFECT);
 
-            @Override
-            protected String confSub() {
-                return "Member since 2018";
-            }
 
-            @Override
-            protected Image confAvatar() {
-                return new Image("img/avatar.jpg");
-            }
-
-            @Override
-            protected Color confColor(){
-                return Color.web("#4285f4");
-            }
-        });
         window.setTitle("Application");
+        window.addButton(ButtonType.FULL_EFFECT);
+//        window.addCustom(new FullScreen());
+        window.centralizeTitle();
         window.show();
 
-        window.getScene().getStylesheets().addAll(getClass().getResource("/css/custom.css").toExternalForm());
-        ScenicView.show(window.getScene());
+//        window.getScene().getStylesheets().addAll(getClass().getResource("/css/custom.css").toExternalForm());
+
+//        ScenicView.show(window.getScene());
     }
 
     public static void main(String[] args) {
