@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GNDecorator.iml" filepath="$PROJECT_DIR$/GNDecorator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GNDecorator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GNDecorator_main.iml" group="GNDecorator" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GNDecorator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GNDecorator_test.iml" group="GNDecorator" />
     </modules>
   </component>
 </project>
