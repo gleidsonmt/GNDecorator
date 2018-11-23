@@ -10,7 +10,6 @@
     -elegant : #2E2E2E;
     -primary : #4285f4;
     -fx-background-color : -elegant;
-    -fx-border-color: white;
 }
 
 .gn-buttons * {
@@ -41,7 +40,7 @@
  ******************************************************************************/
 
 .scroll-pane .scroll-bar:horizontal, .scroll-pane .scroll-bar:vertical {
-    -fx-background-color: transparent;
+    -fx-background-color: -elegant;
 }
 
 
@@ -49,23 +48,23 @@
     -fx-background-color: rgba(255,255,255,.5);
     /*-fx-border-color: rgba(0, 0, 0, .5);*/
     -fx-background-insets: 2;
-    -fx-background-radius: 20;
+    -fx-background-radius: 0;
     -fx-padding : 0;
 }
 
 .scroll-pane .scroll-bar:horizontal  > .track, .scroll-pane .scroll-bar:vertical > .track{
-    -fx-background-color: transparent;
+    -fx-background-color: -elegant;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
 }
 
 .scroll-pane .scroll-bar:horizontal .track-background, .scroll-pane .scroll-bar:vertical .track-background {
-    -fx-background-color: transparent;
+    -fx-background-color: -elegant;
     -fx-background-insets: 0;
 }
 
 .scroll-pane .corner {
-    -fx-background-color : transparent;
+    -fx-background-color : -elegant;
 }
 
 .scroll-bar > .thumb:hover {
@@ -79,7 +78,7 @@
 
 .scroll-bar > .increment-button,
 .scroll-bar > .decrement-button {
-    -fx-background-color: transparent;
+    -fx-background-color: -elegant;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
     -fx-padding: 0em; /* 3 */

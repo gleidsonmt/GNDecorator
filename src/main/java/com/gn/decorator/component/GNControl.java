@@ -60,8 +60,8 @@ public abstract class GNControl extends HBox implements ComponentBase {
         return status();
     }
 
-    abstract Node icon();
-    abstract Node status();
-    abstract Node action();
+    protected abstract Node icon();
+    protected abstract Node status();
+    protected abstract Node action();
 
 }

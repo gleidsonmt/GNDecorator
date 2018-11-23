@@ -17,14 +17,11 @@
 package com.gn;
 
 import com.gn.decorator.GNDecorator;
-import com.gn.decorator.component.FullScreen;
 import com.gn.decorator.options.ButtonType;
 import javafx.application.Application;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.scenicview.ScenicView;
-
-import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -39,7 +36,7 @@ public class Demo extends Application {
         content.setPrefSize(400,400);
         GNDecorator window = new GNDecorator();
         window.setContent(content);
-        window.initTheme(GNDecorator.Theme.PRIMARY);
+        window.initTheme(GNDecorator.Theme.DARKULA);
 //        window.addButton(ButtonType.FULL_EFFECT);
 
 
@@ -51,7 +48,7 @@ public class Demo extends Application {
 
 //        window.getScene().getStylesheets().addAll(getClass().getResource("/css/custom.css").toExternalForm());
 
-//        ScenicView.show(window.getScene());
+        ScenicView.show(window.getScene());
     }
 
     public static void main(String[] args) {
