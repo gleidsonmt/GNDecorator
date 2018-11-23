@@ -121,9 +121,9 @@ public class GNDecorator {
     private final Label        title          = new Label("Application");
     private final SVGPath      icon           = new SVGPath();
     
-    private final ImageView viewMinimize    = new ImageView(new Image("img/minimize.png"));
-    private final ImageView viewMaximize    = new ImageView(new Image("img/maximize.png"));
-    private final ImageView viewClose       = new ImageView(new Image("img/close.png"));
+    private final ImageView viewMinimize    = new ImageView(new Image("/com/gn/resources/img/minimize.png"));
+    private final ImageView viewMaximize    = new ImageView(new Image("/com/gn/resources/img/maximize.png"));
+    private final ImageView viewClose       = new ImageView(new Image("/com/gn/resources/img/close.png"));
 
     private static double initX = -1;
     private static double initY = -1;
@@ -1437,58 +1437,58 @@ public class GNDecorator {
         switch(theme){
             case DEFAULT :
                 this.background.getStylesheets().clear();
-                this.background.getStylesheets().add(getClass().getResource("/css/theme/default.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/default.css").toExternalForm());
                 break;
             case DARKULA :
                 this.background.getStylesheets().clear();
-                this.background.getStylesheets().add(getClass().getResource("/css/theme/darkula.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/darkula.css").toExternalForm());
                 break;
             case DANGER:
                 this.background.getStylesheets().clear();
                 // add css
-                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.background.getStylesheets().add(getClass().getResource("/css/theme/danger.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/danger.css").toExternalForm());
                 break;
             case INFO :
                 this.background.getStylesheets().clear();
                 // add css
-                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.background.getStylesheets().add(getClass().getResource("/css/theme/info.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/info.css").toExternalForm());
             break;
             case PRIMARY:
                 this.background.getStylesheets().clear();
                 // add css
-                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.background.getStylesheets().add(getClass().getResource("/css/theme/primary.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/primary.css").toExternalForm());
             break;
             case SECONDARY:
                 this.background.getStylesheets().clear();
                 // add css
-                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.background.getStylesheets().add(getClass().getResource("/css/theme/secondary.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/secondary.css").toExternalForm());
             break;
             case SUCCESS:
                 this.background.getStylesheets().clear();
                 // add css
-                this.scene.getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.scene.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.background.getStylesheets().add(getClass().getResource("/css/theme/success.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/success.css").toExternalForm());
                 break;
             case WARNING:
                 this.background.getStylesheets().clear();
                 // add css
-                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/roboto.css").toExternalForm());
                 // add theme
-                this.background.getStylesheets().add(getClass().getResource("/css/theme/warning.css").toExternalForm());
+                this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/warning.css").toExternalForm());
                 break;
             case CUSTOM:
                 this.background.getStylesheets().clear();
                 // add css
-                this.background.getScene().getStylesheets().add(getClass().getResource("/css/theme/roboto.css").toExternalForm());
+                this.background.getScene().getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/roboto.css").toExternalForm());
                 // add theme
 //                this.background.getStylesheets().add(getClass().getResource("/css/theme/custom.css").toExternalForm());
                 break;

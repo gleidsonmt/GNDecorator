@@ -43,8 +43,8 @@ import javafx.scene.paint.Paint;
 public class GNFullscreen extends Button  {
     
     
-    private final ImageView viewFullScreen = new ImageView(new Image("img/fullscreen.png"));
-    private final ImageView viewUnFullScreen = new ImageView(new Image("img/unfullscreen.png"));
+    private final ImageView viewFullScreen = new ImageView(new Image("/com/gn/resources/img/fullscreen.png"));
+    private final ImageView viewUnFullScreen = new ImageView(new Image("/com/gn/resources/img/unfullscreen.png"));
     
     public GNFullscreen(){
         getStyleClass().add("gn-full-screen");
@@ -67,7 +67,7 @@ public class GNFullscreen extends Button  {
 
     @Override
     public String getUserAgentStylesheet() {
-        return getClass().getResource("/css/controls/buttons.css").toExternalForm();
+        return getClass().getResource("/com/gn/resources/css/controls/buttons.css").toExternalForm();
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,

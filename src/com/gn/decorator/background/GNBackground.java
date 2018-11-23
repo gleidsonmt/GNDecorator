@@ -30,7 +30,7 @@ import javafx.scene.layout.StackPane;
  */
 public class GNBackground extends StackPane {
 
-    private static final String USER_AGENT_STYLESHEET = GNBackground.class.getResource("/css/decorator/decorator.css").toExternalForm();
+    private static final String USER_AGENT_STYLESHEET = GNBackground.class.getResource("/com/gn/resources/css/decorator/decorator.css").toExternalForm();
     
     public GNBackground() {
         super();

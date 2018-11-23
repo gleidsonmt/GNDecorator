@@ -45,7 +45,7 @@ import javafx.scene.paint.Paint;
 public class Minimize extends Button {
     
     
-    private final ImageView viewMinimize = new ImageView(new Image("img/minimize.png"));
+    private final ImageView viewMinimize = new ImageView(new Image("/com/gn/resources/img/minimize.png"));
     
     public Minimize(){
         getStyleClass().add("gn-minimize");
@@ -60,7 +60,7 @@ public class Minimize extends Button {
 
     @Override
     public String getUserAgentStylesheet() {
-        return getClass().getResource("/css/controls/buttons.css").toExternalForm();
+        return getClass().getResource("/com/gn/resources/css/controls/buttons.css").toExternalForm();
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,

@@ -36,7 +36,7 @@ public class App extends Application {
         content.setPrefSize(400,400);
         GNDecorator window = new GNDecorator();
         window.setContent(content);
-        window.initTheme(GNDecorator.Theme.DARKULA);
+        window.initTheme(GNDecorator.Theme.DEFAULT);
 //        window.addButton(ButtonType.FULL_EFFECT);
 
 
@@ -48,7 +48,7 @@ public class App extends Application {
 
 //        window.getScene().getStylesheets().addAll(getClass().getResource("/css/custom.css").toExternalForm());
 
-        ScenicView.show(window.getScene());
+//        ScenicView.show(window.getScene());
     }
 
     public static void main(String[] args) {

@@ -45,8 +45,8 @@ import javafx.scene.paint.Paint;
 public class Maximize extends Button {
     
     
-    private final ImageView viewMaximize = new ImageView(new Image("img/maximize.png"));
-    private final ImageView viewRestore = new ImageView(new Image("img/restore.png"));
+    private final ImageView viewMaximize = new ImageView(new Image("/com/gn/resources/img/maximize.png"));
+    private final ImageView viewRestore = new ImageView(new Image("/com/gn/resources/img/restore.png"));
     
     public Maximize(){
         getStyleClass().add("gn-maximize");
@@ -66,7 +66,7 @@ public class Maximize extends Button {
 
     @Override
     public String getUserAgentStylesheet() {
-        return getClass().getResource("/css/controls/buttons.css").toExternalForm();
+        return getClass().getResource("/com/gn/resources/css/controls/buttons.css").toExternalForm();
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,

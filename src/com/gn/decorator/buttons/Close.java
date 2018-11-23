@@ -44,8 +44,8 @@ import javafx.scene.paint.Paint;
  */
 public class Close extends Button {
     
-    private static final String USER_AGENT_STYLESHEET = GNBackground.class.getResource("/css/controls/buttons.css").toExternalForm();
-    private final ImageView viewClose = new ImageView(new Image("/img/close.png"));
+    private static final String USER_AGENT_STYLESHEET = GNBackground.class.getResource("/com/gn/resources/css/controls/buttons.css").toExternalForm();
+    private final ImageView viewClose = new ImageView(new Image("/com/gn/resources/img/close.png"));
     
     public Close(){
         getStyleClass().add("gn-close");
