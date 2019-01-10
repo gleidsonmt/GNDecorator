@@ -23,6 +23,14 @@
 
  > Create a custom view for nodes.
  
+```java
+  GNDecorator window = new GNDecorator();
+  window.setContent(root);
+  window.initTheme(GNDecorator.Theme.DARKULA);
+  window.setIcon(icon);
+  window.setTitle("Title");
+ ```
+ 
 ##### View Default
 ![demo1](src/com/gn/resources/screenshot/basic.png)
 ##### View Darkula
