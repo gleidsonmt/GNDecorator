@@ -21,12 +21,13 @@
   GNDecorator is a simple decoration project for javaFx applications.
 </h5>
 
-#### Basic decoration
-
+ > Create a custom view for nodes.
+ 
+##### View Default
 ![demo1](src/com/gn/resources/screenshot/basic.png)
-### Darkula
+##### View Darkula
 ![demo1](src/com/gn/resources/screenshot/darkula.png)
-### With gradient and image
+##### With gradient and image
 ![demo1](src/com/gn/resources/screenshot/demo1.png)
 
 ### Adaptable when the bar is moved
