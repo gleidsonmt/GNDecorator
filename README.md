@@ -1,4 +1,9 @@
 
+
+![Version](https://img.shields.io/badge/Version-2.1.2-green.svg?style=for-the-badge)
+[![Release](https://img.shields.io/badge/Release-v2.1.2-blue.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/releases/tag/1.0)
+[![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/blob/master/LICENSE) 
+
 ### GNDecorator is a simple decoration project for javaFx applications.
 
 #### Basic decoration
