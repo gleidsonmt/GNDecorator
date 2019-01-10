@@ -50,39 +50,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
- * Protótipo de decoração com barra de navegação | Prototype of decoration with
- * navigation bar.<br>
- *
- * <p>
- * Cria um node com barras (AnchorPane) fixas nos cantos e nas extremidades
- * eixos (Paths), e um barra(Hbox) no tpo contendo tres paineis(HBox) um esquerdo, um central e
- * um no direito, o da direita é dedicada a apresentação, o do meio ao titulo da janela e o da esquerada
- * aos buttons de controle | Creates a node with fixed (AnchorPane) bars in corners and ends Paths, and a
- * bar (Hbox) in the tpo containing three panels (HBox) one left, one central
- * and one in the right, the one in the right is dedicated to the presentation,
- * the middle to the window title and the left control buttons.
- * </p><br>
- * <p>
- * As barras são vermelhas e os eixos são pretos, as vermelhas representam o
- * redimensionamento da largura e comprimento e os pretos os dois ao mesmo tempo
- * em uma direção específica | The bars are red and the axes are black, the reds
- * represent the resizing of the width and length and the blacks the two at the
- * same time in a specific direction.
- * </p>
- *
- *
- * <p>
- * <b>Example:</b></p>
- *
- * <pre><code>
- * GNDecorationProto decoration = new GNDecorationProto();
- * decoration.viewBar(true); // View resize bars
- * decoration.show();
- *
- * </code></pre>
- *
- * <p>
- *
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Created on 12/04/2018
  */
@@ -94,7 +61,7 @@ public class GNDecorator {
     private Scene scene = null;
 
     private final AnchorPane body        = new AnchorPane();
-    public  final ScrollPane container   = new ScrollPane();
+    private final ScrollPane container   = new ScrollPane();
     private final StackPane  content     = new StackPane();
     private final StackPane  areaContent = new StackPane(this.container);
 
@@ -135,6 +102,8 @@ public class GNDecorator {
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
 
+    private Button btn_ico = new Button();
+
     private final BooleanProperty resizableProperty = new SimpleBooleanProperty(GNDecorator.this, "resizableProperty", true);
     private final StringProperty  titleProperty     = new SimpleStringProperty(GNDecorator.this, "textProperty", "title");
     private final BooleanProperty maximizedProperty = new SimpleBooleanProperty(GNDecorator.this, "maximizedProperty", false);
@@ -163,9 +132,6 @@ public class GNDecorator {
         }
     };
     
-    /**
-     * Cria uma decoração | Create a decoration.
-     */
     public GNDecorator() {
         super();
         background =  new GNBackground();
@@ -198,11 +164,6 @@ public class GNDecorator {
         btn_fullScreen.prefWidthProperty().bind(buttonWidth);
     }
 
-    /**
-     * Decoration stage.
-     *
-     * @return Decoration stage
-     */
     public Stage getStage() {
         return this.stage;
     }
@@ -240,12 +201,6 @@ public class GNDecorator {
         return this.background;
     }
 
-
-    /**
-     * Verifica se o palco está maximizado | Checks if the stage is maximized.
-     *
-     * @return true if it is, if not false.
-     */
     public boolean isMaximized() {
         return stage.getWidth() == Screen.getPrimary().getVisualBounds().getWidth()
                 && stage.getHeight() == Screen.getPrimary().getVisualBounds().getHeight()
@@ -281,9 +236,6 @@ public class GNDecorator {
         return this.resizableProperty;
     }
     
-    /**
-     * @param body o corpo para configurar.
-     */
     public void setContent(Node body) {
         if(!this.content.getChildren().isEmpty())
             this.content.getChildren().clear();
@@ -355,10 +307,7 @@ public class GNDecorator {
         this.buttonWidth.set(width);
         this.buttonHeight.set(height);
     }
-    
-    /**
-     * Configura o palco | Config the stage.
-     */
+
     private void configStage() {
         this.stage = new Stage(StageStyle.UNDECORATED);
         this.scene = new Scene(background);
@@ -372,9 +321,6 @@ public class GNDecorator {
         stage.heightProperty().divide(scene.widthProperty());
     }
 
-    /**
-     * Configura o layout | Config the layout.
-     */
     private void configLayout() {
         this.background.getStyleClass().add("gn-decorator");
         this.body.getStyleClass().add("gn-body");
@@ -418,11 +364,6 @@ public class GNDecorator {
         viewBars(false);
     }
 
-    /**
-     * Criar a região com os limites de bordas.
-     *
-     * @return Região configurada.
-     */
     private Region createRegion() {
         
         AnchorPane.setTopAnchor(areaContent, barHeight.get());
@@ -433,11 +374,7 @@ public class GNDecorator {
         return areaContent;
     }
 
-    /**
-     * Cria um eixo no topo esquerdo | Creates an axis on top left.
-     *
-     * @return the axis.
-     */
+
     private Path axisTopLeft() {
         top_left.setFill(Color.BLACK);
         top_left.setCursor(Cursor.NW_RESIZE);
@@ -448,11 +385,6 @@ public class GNDecorator {
         return top_left;
     }
 
-    /**
-     * Cria um eixo no topo direito | Creates an axis at the top right.
-     *
-     * @return the axis.
-     */
     private Path axisTopRight() {
         top_right.setCursor(Cursor.NE_RESIZE);
         top_right.setId("top_right");
@@ -463,11 +395,6 @@ public class GNDecorator {
         return top_right;
     }
 
-    /**
-     * Cria um eixo no fundo esquerdo | Creates an axis on the left bottom.
-     *
-     * @return the axis.
-     */
     private Path axisBottomLeft() {
         bottom_left.setCursor(Cursor.SW_RESIZE);
         bottom_left.setId("bottom_left");
@@ -478,11 +405,6 @@ public class GNDecorator {
         return bottom_left;
     }
 
-    /**
-     * Cria um eixo no fundo esquerdo | Creates an axis on the left bottom.
-     *
-     * @return the axis.
-     */
     private Path axisBottomRight() {
         bottom_right.setCursor(Cursor.SE_RESIZE);
         bottom_right.setId("bottom_right");
@@ -493,11 +415,6 @@ public class GNDecorator {
         return bottom_right;
     }
 
-    /**
-     * Desenha os eixos | Draw the axes.
-     *
-     * @param path the axis.
-     */
     private void pathLines(Path path) {
         path.setFill(Color.BLACK);
         path.setStroke(Color.BLACK);
@@ -511,12 +428,7 @@ public class GNDecorator {
         ClosePath closePath = new ClosePath();
         path.getElements().addAll(moveTo, line1, line2, line3, line4, line5, closePath);
     }
-    
-    /**
-     * Cria uma barra na esquerda | Create bar in left.
-     *
-     * @return One bar of left.
-     */
+
     private AnchorPane left() {
         left.setId("left");
         left.setCursor(Cursor.W_RESIZE);
@@ -528,11 +440,6 @@ public class GNDecorator {
         return left;
     }
 
-    /**
-     * Cria uma barra na direita | Create bar in right.
-     *
-     * @return One bar of right.
-     */
     private AnchorPane right() {
         right.setId("right");
         right.setCursor(Cursor.E_RESIZE);
@@ -544,11 +451,6 @@ public class GNDecorator {
         return right;
     }
 
-    /**
-     * Cria uma barra no topo | Create bar in top.
-     *
-     * @return One bar of top.
-     */
     private AnchorPane top() {
         top.setId("top");
         top.setCursor(Cursor.N_RESIZE);
@@ -560,10 +462,6 @@ public class GNDecorator {
         return top;
     }
 
-    /**
-     * Cria uma barra no fundo | Create bar in bottom.
-     * @return One bar of bottom.
-     */
     private AnchorPane bottom() {
         bottom.setId("bottom");
         bottom.setCursor(Cursor.S_RESIZE);
@@ -575,18 +473,10 @@ public class GNDecorator {
         return bottom;
     }
     
-    /**
-     * Configura as barass | Config the bars.
-     * @param bar The bar for configuration.
-     */
     private void bars(AnchorPane bar) {
         bar.setStyle("-fx-background-color : red");
     }
     
-    /**
-     * Configura a barra da decoração | Config the bar of decor.
-     * @return The bar content.
-     */
     private AnchorPane bar(){
         bar.getStyleClass().add("gn-bar");
         bar.setMinHeight(barHeight.get());
@@ -596,11 +486,6 @@ public class GNDecorator {
         return bar;
     }
     
-
-    /**
-     * Configura o content da barra | Config the content of bar.
-     * @return The bar content. 
-     */
     private HBox barContent() {
         bar_content.setId("barContent");
         bar_content.setPrefHeight(barHeight.get());
@@ -611,12 +496,7 @@ public class GNDecorator {
         AnchorPane.setLeftAnchor(bar_content, 0D);
         return bar_content;
     }
-    
-    /**
-     * Configura os controles básicos da decoração |  
-     * Config os controles básicos da decoração Configure basic decor controls.
-     * @return The controls.
-     */
+
     private HBox controls(){
         controls.getStyleClass().add("gn-buttons");
         controls.setAlignment(Pos.CENTER);
@@ -629,7 +509,7 @@ public class GNDecorator {
         btn_minimize.setMinSize(prefWidth, prefHeiht);
         btn_maximize.setMinSize(prefWidth, prefHeiht);
         btn_close.setMinSize(prefWidth, prefHeiht);
-        
+
         btn_minimize.setPrefSize(prefWidth, prefHeiht);
         btn_maximize.setPrefSize(prefWidth, prefHeiht);
         btn_close.setPrefSize(prefWidth, prefHeiht);
@@ -643,28 +523,26 @@ public class GNDecorator {
         controls.setMinWidth(buttonWidth.get() * controls.getChildren().size());
     }
     
-    /**
-     * Configura o container de menu direito | Configure the right menu container.
-     * @return The container of menu.
-     */
     private HBox menu(){
         menu.getStyleClass().add("gn-menu");
         menu.setMinWidth(barHeight.get());
         menu.setMinHeight(barHeight.get());
-        Button btn_ico = new Button();
+
+        btn_ico.setStyle("-fx-background-color : transparent;");
+
         icon.setId("icon");
         icon.setContent("M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z");
         btn_ico.setGraphic(icon);
         icon.setFill(Color.web("#999"));
-        menu.getChildren().add(icon);
+        menu.getChildren().add(btn_ico);
         menu.setAlignment(Pos.CENTER);
         return menu;
     }
-    
-    /**
-     * Configura o container de titulo | Configure the title container.
-     * @return The container of menu.
-     */
+
+    public void setIcon(Node node){
+        btn_ico.setGraphic(node);
+    }
+
     private HBox titleContent() {
         title_content.setId("menu");
         title_content.getChildren().add(title);
@@ -724,7 +602,23 @@ public class GNDecorator {
         this.stage.setHeight(minHeight);
         this.stage.setMinHeight(minHeight);
     }
-    
+
+    public void fullBody() {
+        AnchorPane.setTopAnchor(this.areaContent, 0D);
+        this.bar.toFront();
+
+//        this.bar_content.getChildren().remove(menu);
+//        this.bar_content.getChildren().remove(title_content);
+//
+//        this.bar_content.setAlignment(Pos.CENTER_RIGHT);
+
+//        top_left.toFront();
+//        top_right.toFront();
+
+//        this.stage.setHeight(minHeight);
+//        this.stage.setMinHeight(minHeight);
+    }
+
     /**
      * Sets the body of the application as background. This method makes the
      * content occupy every area of the decoration, however when a component not
@@ -1311,6 +1205,10 @@ public class GNDecorator {
         updateControls(control);
     }
 
+    public void removeCustom(GNControl control){
+        controls.getChildren().remove(control);
+    }
+
     private void updateControls(GNControl node){
 
         node.setMaxHeight(getBarHeight());
@@ -1495,10 +1393,6 @@ public class GNDecorator {
         }
     }
 
-    /**
-     * Inicializa o palco com a decoração | Initialize the stage with
-     * decoration.
-     */
     public void show() {
         stage.show();
         stage.widthProperty().addListener(new ChangeListener<Number>() {
@@ -1521,10 +1415,6 @@ public class GNDecorator {
     };
 
     
-    /**
-     * Pega os parametros do stage para definir a posição e o tamanho.
-     * @return Um box com as dimensões.
-     */
     private BoundingBox initRestaure(){
         double x = stage.getX();
         double y = stage.getY();
@@ -1540,17 +1430,3 @@ public class GNDecorator {
     }
 }
 
-/* 
-
-Notas : 
-
-1) a posição x no evento de getStage().setX()... não sofre lag ao ser alterado se o palco 
-for do estilo tranparent.
-
-2) se o palco for do estilo transparent causa uma lentidão na ui
-
-3) com o palco transparent mesmo a posição x não sofrendo o delay.. o layou interno sofre.
-
-
-
-*/
