@@ -15,7 +15,11 @@
 
 <h1></h1>
 
-### GNDecorator is a simple decoration project for javaFx applications.
+<h1>GNDecorator</h1>
+
+<h5 > 
+  GNDecorator is a simple decoration project for javaFx applications.
+</h5>
 
 #### Basic decoration
 
