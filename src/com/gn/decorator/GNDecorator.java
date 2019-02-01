@@ -605,7 +605,10 @@ public class GNDecorator {
 
     public void fullBody() {
         AnchorPane.setTopAnchor(this.areaContent, 0D);
-        this.bar.toFront();
+
+        bar.toFront();
+        title_content.setMouseTransparent(true);
+        menu.setMouseTransparent(true);
 
 //        this.bar_content.getChildren().remove(menu);
 //        this.bar_content.getChildren().remove(title_content);
