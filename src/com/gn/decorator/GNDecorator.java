@@ -577,10 +577,6 @@ public class GNDecorator {
         });
     }
 
-    private void updateTitle(){
-        title.setTranslateX(getStage().getWidth() / 4);
-    }
-    
     /**
      * Sets the body of the application as background.
      * This method makes the content occupy every area of the decoration,
@@ -604,22 +600,12 @@ public class GNDecorator {
     }
 
     public void fullBody() {
-        AnchorPane.setTopAnchor(this.areaContent, 0D);
-
+        AnchorPane.setTopAnchor(areaContent, 0D);
         bar.toFront();
-        title_content.setMouseTransparent(true);
-        menu.setMouseTransparent(true);
-
-//        this.bar_content.getChildren().remove(menu);
-//        this.bar_content.getChildren().remove(title_content);
-//
-//        this.bar_content.setAlignment(Pos.CENTER_RIGHT);
-
-//        top_left.toFront();
-//        top_right.toFront();
-
-//        this.stage.setHeight(minHeight);
-//        this.stage.setMinHeight(minHeight);
+        bar_content.getChildren().removeAll(title_content, menu);
+        AnchorPane.clearConstraints(bar);
+        AnchorPane.setTopAnchor(bar, 0D);
+        AnchorPane.setRightAnchor(bar, 0D);
     }
 
     /**
