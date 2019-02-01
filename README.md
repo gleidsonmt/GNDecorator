@@ -1,7 +1,7 @@
 
 
 ![Version](https://img.shields.io/badge/Version-2.1.21-green.svg?style=for-the-badge)
-[![Release](https://img.shields.io/badge/Release-v2.1.21-alpha-blue.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/releases/tag/1.0)
+[![Release](https://img.shields.io/badge/Release-v2.1.21--alpha-blue.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/releases/tag/1.0)
 [![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/blob/master/LICENSE) 
 
 <h1></h1>
