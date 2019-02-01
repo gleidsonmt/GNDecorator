@@ -16,6 +16,8 @@
  */
 package com.gn.decorator.component;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -27,8 +29,14 @@ import javafx.scene.layout.HBox;
  */
 public abstract class GNControl extends HBox implements ComponentBase {
 
+    private StringProperty text;
+    private String subtitle;
 
-    public GNControl() {
+    public GNControl(String text, String subtitle) {
+
+        this.text = new SimpleStringProperty(text);
+        this.subtitle = subtitle;
+
         this.setAlignment(Pos.CENTER);
         if(createAction() != null){
             if(createIcon() != null && createStatus() != null) {
@@ -60,8 +68,24 @@ public abstract class GNControl extends HBox implements ComponentBase {
         return status();
     }
 
-    protected abstract Node icon();
-    protected abstract Node status();
-    protected abstract Node action();
+    public String getText() {
+        return this.text.get();
+    }
+
+    public StringProperty textProperty(){
+        return text;
+    }
+
+    public void setText(String text){
+        this.text.set(text);
+    }
+
+    public String getSubtitle(){
+        return subtitle;
+    }
+
+    public abstract Node icon();
+    public abstract Node status();
+    public abstract Node action();
 
 }
