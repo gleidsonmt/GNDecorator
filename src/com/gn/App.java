@@ -19,6 +19,8 @@ package com.gn;
 import com.gn.decorator.GNDecorator;
 import com.gn.decorator.options.ButtonType;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.scenicview.ScenicView;
@@ -31,24 +33,30 @@ import org.scenicview.ScenicView;
 public class App extends Application {
 
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/com/gn/resources/sample.fxml"));
         VBox content = new VBox();
         content.setPrefSize(400,400);
         GNDecorator window = new GNDecorator();
-        window.setContent(content);
-        window.initTheme(GNDecorator.Theme.DEFAULT);
+        window.setContent(root);
+        window.initTheme(GNDecorator.Theme.DARKULA);
 //        window.addButton(ButtonType.FULL_EFFECT);
 
 
         window.setTitle("Application");
         window.addButton(ButtonType.FULL_EFFECT);
+        window.setIcon(null);
+        window.setTitle(null);
+        window.fullBody();
+        window.fullBody();
 //        window.addCustom(new FullScreen());
         window.centralizeTitle();
         window.show();
 
-//        window.getScene().getStylesheets().addAll(getClass().getResource("/css/custom.css").toExternalForm());
+//        window.getScene().getStylesheets().addAll(getClass().getResource("/com/gn/resources/css/custom.css").toExternalForm());
 
-//        ScenicView.show(window.getScene());
+        ScenicView.show(window.getScene());
     }
 
     public static void main(String[] args) {

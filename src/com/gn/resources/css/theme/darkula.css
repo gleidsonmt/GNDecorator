@@ -20,7 +20,6 @@
     -gn-fill : white;
     -fx-text-fill : -primary;
     -fx-fill : white;
-    -fx-font-family: 'Roboto Medium';
 }
 
 .gn-buttons *:hover
