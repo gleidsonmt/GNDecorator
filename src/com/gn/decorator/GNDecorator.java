@@ -50,6 +50,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
+ * Create a beautiful decoration for nodes.
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Created on 12/04/2018
  */
@@ -116,7 +117,7 @@ public class GNDecorator {
     private final TranslateTransition open = new TranslateTransition(Duration.millis(100D), this.bar);
     private final TranslateTransition close = new TranslateTransition(Duration.millis(100D), this.bar);
     
-    private final ChangeListener<Object> restaureFullScreen = new ChangeListener<Object>() {
+    private final ChangeListener<Object> restoreFullScreen = new ChangeListener<Object>() {
         @Override
         public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
             if (newValue != null) {
@@ -127,7 +128,8 @@ public class GNDecorator {
                     GNDecorator.this.bar.setVisible(true);
                     viewBorders(true);
                 }
-                if(isResizable() && !isMaximized()) configCursor(true); else configCursor(false);
+                if(isResizable() && !isMaximized()) configCursor(true);
+                else configCursor(false);
             }
         }
     };
@@ -259,7 +261,7 @@ public class GNDecorator {
         if(full){
             stage.setFullScreen(true);
             AnchorPane.setTopAnchor(this.areaContent, 0D);
-            stage.fullScreenProperty().addListener(restaureFullScreen);
+            stage.fullScreenProperty().addListener(restoreFullScreen);
             viewBorders(false);
             configCursor(false);
             if(bar.isVisible()) bar.setVisible(false);
@@ -500,26 +502,26 @@ public class GNDecorator {
     private HBox controls(){
         controls.getStyleClass().add("gn-buttons");
         controls.setAlignment(Pos.CENTER);
-        double prefWidth = buttonWidth.get(), prefHeiht = buttonHeight.get();
+        double prefWidth = buttonWidth.get(), prefHeight = buttonHeight.get();
 
         btn_minimize.setGraphic(viewMinimize);
         btn_maximize.setGraphic(viewMaximize);
         btn_close.setGraphic(viewClose);
         
-        btn_minimize.setMinSize(prefWidth, prefHeiht);
-        btn_maximize.setMinSize(prefWidth, prefHeiht);
-        btn_close.setMinSize(prefWidth, prefHeiht);
+        btn_minimize.setMinSize(prefWidth, prefHeight);
+        btn_maximize.setMinSize(prefWidth, prefHeight);
+        btn_close.setMinSize(prefWidth, prefHeight);
 
-        btn_minimize.setPrefSize(prefWidth, prefHeiht);
-        btn_maximize.setPrefSize(prefWidth, prefHeiht);
-        btn_close.setPrefSize(prefWidth, prefHeiht);
+        btn_minimize.setPrefSize(prefWidth, prefHeight);
+        btn_maximize.setPrefSize(prefWidth, prefHeight);
+        btn_close.setPrefSize(prefWidth, prefHeight);
         
         controls.getChildren().addAll(btn_minimize, btn_maximize, btn_close);
         controls.setMinWidth(buttonWidth.get() * controls.getChildren().size());
         return controls;
     }
 
-    public void atualizeMinWidth(){
+    private void atualizeMinWidth(){
         controls.setMinWidth(buttonWidth.get() * controls.getChildren().size());
     }
     
@@ -539,6 +541,10 @@ public class GNDecorator {
         return menu;
     }
 
+    /**
+     * Set icon for this decoration.
+     * @param node icon.
+     */
     public void setIcon(Node node){
         btn_ico.setGraphic(node);
     }
@@ -599,7 +605,22 @@ public class GNDecorator {
         this.stage.setMinHeight(minHeight);
     }
 
+    /**
+     * Sets the body of the application as background. This method makes the content occupy every area of the
+     * decoration, however when a component not resized by width or height is scaled a scroolpane launches a
+     * bar to define the border limits.
+     */
     public void fullBody() {
+        AnchorPane.setTopAnchor(areaContent, 0D);
+        bar.toFront();
+        top.toFront();
+    }
+
+    /**
+     * This method position actions maximize, minimize and close.
+     * The bar is set to a minimum size to contain only your children and is position in left.
+     */
+    public void floatActions(){
         AnchorPane.setTopAnchor(areaContent, 0D);
         bar.toFront();
         bar_content.getChildren().removeAll(title_content, menu);
@@ -1141,13 +1162,11 @@ public class GNDecorator {
         }
     }
 
-
-    
     /**
      * Visualizar as barras de redimensionamento | View the resize bars
      * @param view The bars of decor.
      */
-    public void viewBars(boolean view){
+    private void viewBars(boolean view){
         if(view){
             top_left.setOpacity(1);
             top_right.setOpacity(1);
@@ -1299,7 +1318,7 @@ public class GNDecorator {
             }
         });
 
-        stage.fullScreenProperty().addListener(restaureFullScreen);
+        stage.fullScreenProperty().addListener(restoreFullScreen);
     }
     
     private void viewBar(boolean view){
