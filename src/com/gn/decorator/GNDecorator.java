@@ -241,7 +241,11 @@ public class GNDecorator {
     public void setContent(Node body) {
         if(!this.content.getChildren().isEmpty())
             this.content.getChildren().clear();
-        
+
+        if(body instanceof Pane){
+            ((Pane) body).setMinSize(0,0);
+        }
+
         this.content.getChildren().add(body);
     }
     
