@@ -616,8 +616,24 @@ public class GNDecorator {
      */
     public void fullBody() {
         AnchorPane.setTopAnchor(areaContent, 0D);
+
         bar.toFront();
         top.toFront();
+
+        top_left.toFront();
+        top_right.toFront();
+
+
+    }
+
+    public void fullBody(Insets insets) {
+        AnchorPane.setTopAnchor(areaContent, 0D);
+        AnchorPane.setRightAnchor(areaContent, 0D);
+
+        bar.toFront();
+        top.toFront();
+        right.toFront();
+        left.toFront();
     }
 
     /**
@@ -631,6 +647,21 @@ public class GNDecorator {
         AnchorPane.clearConstraints(bar);
         AnchorPane.setTopAnchor(bar, 0D);
         AnchorPane.setRightAnchor(bar, 0D);
+    }
+
+    /**
+     * This method position actions maximize, minimize and close.
+     * The bar is set to a minimum size to contain only your children and is position in left.
+     */
+    public void floatActions(Region bar2){
+        AnchorPane.setTopAnchor(areaContent, 0D);
+        bar.toFront();
+        bar_content.getChildren().removeAll(title_content, menu);
+        AnchorPane.clearConstraints(bar);
+        AnchorPane.setTopAnchor(bar, 0D);
+        AnchorPane.setRightAnchor(bar, 0D);
+
+        addBarActions(bar2);
     }
 
     /**
@@ -940,39 +971,45 @@ public class GNDecorator {
             }
         });
 
+
+        addBarActions(bar);
+
+    }
+
+    public void addBarActions(Region bar){
         bar.setOnMousePressed(event -> {
             initX = event.getScreenX();
             initY = event.getScreenY();
         });
 
         bar.setOnMouseDragged(e -> {
-            
+
             if (!e.isPrimaryButtonDown() || initX == -1) {
                 return;
             }
-            
+
             if (e.isStillSincePress()) {
                 return;
             }
-            
+
 
             if (savedBounds == null) {
-                    savedBounds = initialBound;
+                savedBounds = initialBound;
             }
 
             if(isMaximized() && isResizable()){
-                
+
                 stage.setX(e.getScreenX() - savedBounds.getWidth() / 2);
-                stage.setY(0);  
+                stage.setY(0);
                 stage.setWidth(savedBounds.getWidth());
                 stage.setHeight(savedBounds.getHeight());
-                
+
                 // verifica se a posicao não atinji o limite da borda
                 if(stage.getX() < bounds.getMinX()){
                 } else if((stage.getX() + savedBounds.getWidth() )  > bounds.getMaxX()){
                     stage.setX(bounds.getMaxX() - savedBounds.getWidth());
                 }
-                
+
                 setMaximized(false);
                 btn_maximize.updateState(true);
             }
@@ -982,7 +1019,7 @@ public class GNDecorator {
             double deltax = newX - initX;
             double deltay = newY - initY;
             initX = newX;
-            initY = newY;            
+            initY = newY;
             stage.setX(stage.getX() + deltax);
             setStageY(stage, stage.getY() + deltay);
             if(isResizable()) configCursor(true);
@@ -990,7 +1027,7 @@ public class GNDecorator {
             btn_maximize.setId("maximize");
             bar.setCursor(Cursor.MOVE);
         });
-        
+
 
         bar.setOnMouseReleased(event -> {
             if (stage.isResizable()) {
@@ -1006,7 +1043,6 @@ public class GNDecorator {
                 maximizeOrRestore();
             }
         });
-
     }
 
 

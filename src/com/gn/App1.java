@@ -30,7 +30,7 @@ import org.scenicview.ScenicView;
  * Create on  23/09/2018
  * Version 1.0
  */
-public class App extends Application {
+public class App1 extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -39,7 +39,7 @@ public class App extends Application {
         VBox content = new VBox();
         content.setPrefSize(400,400);
         GNDecorator window = new GNDecorator();
-        window.setContent(root);
+        window.setContent(content);
         window.initTheme(GNDecorator.Theme.DARKULA);
 //        window.addButton(ButtonType.FULL_EFFECT);
 
@@ -54,7 +54,7 @@ public class App extends Application {
         window.centralizeTitle();
         window.show();
 
-//        window.getScene().getStylesheets().addAll(getClass().getResource("/com/gn/resources/css/custom.css").toExternalForm());
+        window.getScene().getStylesheets().addAll(getClass().getResource("/com/gn/resources/css/custom.css").toExternalForm());
 
         ScenicView.show(window.getScene());
     }
