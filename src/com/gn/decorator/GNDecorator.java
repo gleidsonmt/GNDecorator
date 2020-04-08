@@ -116,6 +116,9 @@ public class GNDecorator {
     
     private final TranslateTransition open = new TranslateTransition(Duration.millis(100D), this.bar);
     private final TranslateTransition close = new TranslateTransition(Duration.millis(100D), this.bar);
+
+    private EventHandler<MouseEvent> mouseDraggedB;
+    private EventHandler<MouseEvent> mousePressedB;
     
     private final ChangeListener<Object> restoreFullScreen = new ChangeListener<Object>() {
         @Override
@@ -209,18 +212,25 @@ public class GNDecorator {
                 && stage.getX() == Screen.getPrimary().getVisualBounds().getMinX()
                 && stage.getY() == Screen.getPrimary().getVisualBounds().getMinY();
     }
-    
+
+
+
     public void setResizable(boolean resizable){
         this.resizableProperty.set(resizable);
-        
+
         Platform.runLater(() -> {
             configCursor(resizable);
-            bar.setOnMouseDragged(null);
-            bar.setOnMousePressed(null);
-            
+
             if(!resizable) {
                 btn_maximize.setDisable(true);
                 bar.setOnMouseClicked(null);
+
+                bar.setOnMouseDragged(null);
+                bar.setOnMousePressed(null);
+            } else { // Solving bug
+                btn_maximize.setDisable(false);
+                bar.setOnMouseDragged(mouseDraggedB);
+                bar.setOnMousePressed(mousePressedB);
             }
 //            if (isMaximized()) {
 //                btn_maximize.setId("restore");
@@ -982,6 +992,8 @@ public class GNDecorator {
             initY = event.getScreenY();
         });
 
+        mousePressedB = (EventHandler<MouseEvent>) bar.getOnMousePressed();
+
         bar.setOnMouseDragged(e -> {
 
             if (!e.isPrimaryButtonDown() || initX == -1) {
@@ -1012,7 +1024,10 @@ public class GNDecorator {
 
                 setMaximized(false);
                 btn_maximize.updateState(true);
+
             }
+
+            viewBorders(true);
 
             newX = e.getScreenX();
             newY = e.getScreenY();
@@ -1028,6 +1043,7 @@ public class GNDecorator {
             bar.setCursor(Cursor.MOVE);
         });
 
+        mouseDraggedB = (EventHandler<MouseEvent>) bar.getOnMouseDragged();
 
         bar.setOnMouseReleased(event -> {
             if (stage.isResizable()) {
@@ -1043,6 +1059,7 @@ public class GNDecorator {
                 maximizeOrRestore();
             }
         });
+
     }
 
 
