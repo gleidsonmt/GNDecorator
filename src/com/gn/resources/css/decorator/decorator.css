@@ -2,8 +2,8 @@
 /* 
     Created on : 18/04/2018, 14:06:46
     Author     : Gleidson Neves da Silveira
+    last edited : 31/05
 */
-
 
 .gn-decorator {
     -grey : #00000020;
@@ -26,8 +26,21 @@
     -fx-background-color : transparent;
 }
 
-.gn-decorator .gn-bar {
+.gn-decorator .gn-menu-bar {
     -fx-background-color : transparent;
+}
+
+.gn-menu-bar
+{
+  -fx-border-width : 0px;
+  -fx-padding : 0px;
+  -fx-background-insets : 0px;
+}
+
+.gn-menu-bar>*.container>*.menu-button>*.label  {
+  -fx-padding : 3px;
+  -fx-background-insets : 0px;
+  -fx-border-width : 0px;
 }
 
 .gn-decorator .gn-bar .gn-buttons {

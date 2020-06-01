@@ -26,6 +26,7 @@ import javafx.beans.NamedArg;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
@@ -35,9 +36,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -49,14 +48,19 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Create a beautiful decoration for nodes.
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Created on 12/04/2018
  */
+@SuppressWarnings("unused")
 public class GNDecorator {
 
-    private GNBackground background = null;
+    private final GNBackground background;
     
     private Stage stage = null;
     private Scene scene = null;
@@ -79,7 +83,7 @@ public class GNDecorator {
     private final AnchorPane    bar              = new AnchorPane();
     private final HBox          bar_content      = new HBox();
     private final HBox          controls         = new HBox();
-    private final HBox          menu             = new HBox();
+    private final MenuBar       menus            = new MenuBar();
     private final HBox          title_content    = new HBox();
     
     private final Close        btn_close      = new Close();
@@ -103,14 +107,12 @@ public class GNDecorator {
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
 
-    private Button btn_ico = new Button();
-
     private final BooleanProperty resizableProperty = new SimpleBooleanProperty(GNDecorator.this, "resizableProperty", true);
     private final StringProperty  titleProperty     = new SimpleStringProperty(GNDecorator.this, "textProperty", "title");
     private final BooleanProperty maximizedProperty = new SimpleBooleanProperty(GNDecorator.this, "maximizedProperty", false);
    
     private DoubleProperty barHeight = new SimpleDoubleProperty(GNDecorator.this, "barSize", 30);
-    private DoubleProperty buttonHeight = new SimpleDoubleProperty(GNDecorator.this, "buttonHeiht", 30);
+    private DoubleProperty buttonHeight = new SimpleDoubleProperty(GNDecorator.this, "buttonHeight", 30);
     private DoubleProperty buttonWidth = new SimpleDoubleProperty(GNDecorator.this, "buttonWidth", 30);
     
     
@@ -119,21 +121,20 @@ public class GNDecorator {
 
     private EventHandler<MouseEvent> mouseDraggedB;
     private EventHandler<MouseEvent> mousePressedB;
+
+    public enum Style { DEFAULT, DARK }
+    public enum Theme { DEFAULT, DARK, DANGER, INFO, PRIMARY, SECONDARY, WARNING, SUCCESS, CUSTOM }
     
-    private final ChangeListener<Object> restoreFullScreen = new ChangeListener<Object>() {
-        @Override
-        public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object newValue) {
-            if (newValue != null) {
-                configCursor(true);
-                AnchorPane.setTopAnchor(GNDecorator.this.areaContent, barHeight.get());
-                btn_fullScreen.updateState(true);
-                if(!GNDecorator.this.bar.isVisible()){
-                    GNDecorator.this.bar.setVisible(true);
-                    viewBorders(true);
-                }
-                if(isResizable() && !isMaximized()) configCursor(true);
-                else configCursor(false);
+    private final ChangeListener<Object> restoreFullScreen = (observable, oldValue, newValue) -> {
+        if (newValue != null) {
+            configCursor(true);
+            AnchorPane.setTopAnchor(GNDecorator.this.areaContent, barHeight.get());
+            btn_fullScreen.updateState(true);
+            if (!GNDecorator.this.bar.isVisible()) {
+                GNDecorator.this.bar.setVisible(true);
+                viewBorders(true);
             }
+            configCursor(isResizable() && !isMaximized());
         }
     };
     
@@ -143,10 +144,11 @@ public class GNDecorator {
         configLayout();
         addActions();
         configStage();
+
         bounds = Screen.getPrimary().getVisualBounds();
         title.textProperty().bind(titleProperty);
         controls.minHeightProperty().bind(barHeight);
-        menu.minHeightProperty().bind(barHeight);
+        menus.minHeightProperty().bind(barHeight);
         title_content.minHeightProperty().bind(barHeight);
         this.bar.minHeightProperty().bind(barHeight);
         
@@ -212,8 +214,6 @@ public class GNDecorator {
                 && stage.getX() == Screen.getPrimary().getVisualBounds().getMinX()
                 && stage.getY() == Screen.getPrimary().getVisualBounds().getMinY();
     }
-
-
 
     public void setResizable(boolean resizable){
         this.resizableProperty.set(resizable);
@@ -535,32 +535,33 @@ public class GNDecorator {
         return controls;
     }
 
-    private void atualizeMinWidth(){
+    private void updateMinWidth(){
         controls.setMinWidth(buttonWidth.get() * controls.getChildren().size());
     }
     
-    private HBox menu(){
-        menu.getStyleClass().add("gn-menu");
-        menu.setMinWidth(barHeight.get());
-        menu.setMinHeight(barHeight.get());
+    private MenuBar menu(){
+        menus.getStyleClass().add("gn-menu-bar");
+//        menu.setMinWidth(barHeight.get());
+        menus.setMinHeight(barHeight.get());
 
-        btn_ico.setStyle("-fx-background-color : transparent;");
-
-        icon.setId("icon");
-        icon.setContent("M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z");
-        btn_ico.setGraphic(icon);
-        icon.setFill(Color.web("#999"));
-        menu.getChildren().add(btn_ico);
-        menu.setAlignment(Pos.CENTER);
-        return menu;
+//        btn_ico.setStyle("-fx-background-color : transparent;");
+//
+//        icon.setId("icon");
+//        icon.setContent("M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z");
+//        btn_ico.setGraphic(icon);
+//        icon.setFill(Color.web("#999"));
+//        menu.getChildren().add(btn_ico);
+//        menu.setAlignment(Pos.CENTER);
+        return menus;
     }
 
     /**
      * Set icon for this decoration.
      * @param node icon.
      */
+    @Deprecated
     public void setIcon(Node node){
-        btn_ico.setGraphic(node);
+//        menus.getChildren().add(node);
     }
 
     private HBox titleContent() {
@@ -569,12 +570,13 @@ public class GNDecorator {
         title_content.setAlignment(Pos.CENTER_LEFT);
         title.setAlignment(Pos.CENTER_LEFT);
         HBox.setHgrow(title_content, Priority.ALWAYS);
+        HBox.setMargin(title, new Insets(0,0,0,10));
         return title_content;
     }
 
     /**
      * Centralize title.
-     * center the title using the half-width of the
+     * Center the title using the half-width of the
      * stage and subtract the width of the right and left controls
      */
     public void centralizeTitle(){
@@ -636,6 +638,7 @@ public class GNDecorator {
 
     }
 
+    @Deprecated
     public void fullBody(Insets insets) {
         AnchorPane.setTopAnchor(areaContent, 0D);
         AnchorPane.setRightAnchor(areaContent, 0D);
@@ -653,7 +656,7 @@ public class GNDecorator {
     public void floatActions(){
         AnchorPane.setTopAnchor(areaContent, 0D);
         bar.toFront();
-        bar_content.getChildren().removeAll(title_content, menu);
+        bar_content.getChildren().removeAll(title_content, menus);
         AnchorPane.clearConstraints(bar);
         AnchorPane.setTopAnchor(bar, 0D);
         AnchorPane.setRightAnchor(bar, 0D);
@@ -666,7 +669,7 @@ public class GNDecorator {
     public void floatActions(Region bar2){
         AnchorPane.setTopAnchor(areaContent, 0D);
 //        bar.toFront();
-        bar_content.getChildren().removeAll(title_content, menu);
+        bar_content.getChildren().removeAll(title_content, menus);
         AnchorPane.clearConstraints(bar);
         AnchorPane.setTopAnchor(bar, 0D);
         AnchorPane.setRightAnchor(bar, 0D);
@@ -1266,31 +1269,210 @@ public class GNDecorator {
         }
     }
 
+    public void addControl(Control control){
+        updateControls(control);
+    }
+
+    public void addControl(int index, Control control){
+        updateControls(index, control);
+    }
+
+    private void updateControls(Node node){
+
+        if(node instanceof Region){
+            ((Region) node).setMaxHeight(getBarHeight());
+            ((Region) node).setMinHeight(getBarHeight());
+            ((Region) node).setPrefHeight(getBarHeight());
+        }
+        controls.getChildren().add(node);
+//        node.toBack();
+
+
+    }
+
+    private void updateControls(Control control){
+
+        if(control instanceof Control){
+            ((Region) control).setMaxHeight(getBarHeight());
+            ((Region) control).setMinHeight(getBarHeight());
+            ((Region) control).setPrefHeight(getBarHeight());
+        }
+
+        control.getProperties().put("custom-control", "gn-custom-control");
+        controls.getChildren().add(control);
+        control.toBack();
+    }
+
+    private void updateControls(int index, Node control){
+
+        if(control instanceof Region){
+            ((Region) control).setMaxHeight(getBarHeight());
+            ((Region) control).setMinHeight(getBarHeight());
+            ((Region) control).setPrefHeight(getBarHeight());
+        }
+        control.getProperties().put("custom-control", "gn-custom-control");
+
+        if(controls.getChildren().size() - index < 0){
+            System.err.println("The index does not exists");
+        }
+
+        controls.getChildren().add(controls.getChildren().size() - index, control);
+//        node.toBack();
+    }
+
+    public void hideControls(){
+        controls.getChildren().stream()
+                .filter(e -> e instanceof Control && e.getProperties().containsValue("gn-custom-control"))
+                .forEach(e -> e.setVisible(false));
+    }
+
+    public void removeControls(){
+        controls.getChildren().stream()
+                .filter(e -> e instanceof Control && e.getProperties().containsValue("gn-custom-control"))
+                .collect(Collectors.toSet()).forEach(e -> controls.getChildren().removeAll(e));
+    }
+
+    public void showControls(){
+        controls.getChildren().stream()
+                .filter(e -> e instanceof Control && e.getProperties().containsValue("gn-custom-control"))
+                .forEach(e -> e.setVisible(true));
+    }
+
+//    public ObservableList<Control> getControls(){
+//       return FXCollections.observableArrayList(controls.getChildren().stream()
+//                .filter(e -> e instanceof Control && e.getProperties().containsValue("gn-custom-control"))
+//                .map( e -> (Control) e)
+//                .collect(Collectors.toSet()));
+//    }
+
+    @Deprecated
+    public void hideCustoms(){
+        controls.getChildren().stream()
+                .filter( e -> e instanceof Node)
+                .forEach(e -> e.setVisible(false));
+    }
+
+    @Deprecated
+    public void showCustoms(){
+        controls.getChildren().stream()
+                .filter(e -> e instanceof Node)
+                .forEach(e ->{
+                    e.setVisible(true);
+                });
+    }
+
+    @Deprecated
     public void addCustom(GNControl control){
         updateControls(control);
     }
 
+    @Deprecated
+    public void addCustom(int index, GNControl control){
+        updateControls(index, control);
+    }
+
+
+    @Deprecated
     public void removeCustom(GNControl control){
         controls.getChildren().remove(control);
     }
 
-    private void updateControls(GNControl node){
+    @Deprecated
+    public List<GNControl> getCustoms(){
 
-        node.setMaxHeight(getBarHeight());
-        node.setMinHeight(getBarHeight());
-        node.setPrefHeight(getBarHeight());
-        controls.getChildren().add(node);
-        node.toBack();
+        List<GNControl> list = new ArrayList<>();
+         controls.getChildren()
+                .stream()
+                .filter(e -> e instanceof GNControl)
+                .map(e -> (GNControl) e)
+                .forEach(list::add);
+
+        return list;
     }
+
+    @Deprecated
+    public void addCustom(int index, Node node){
+        updateControls(index, node);
+    }
+
+    @Deprecated
+    public void addCustom(Node node){
+        updateControls(node);
+    }
+
+    public void addMenu(Menu menu){
+        menu.getStyleClass().add("gn-menu-item");
+        menus.getMenus().add(menu);
+    }
+
+    public void addMenu(int index, Menu menu){
+        menu.getStyleClass().add("gn-menu-item");
+        menus.getMenus().add(index, menu);
+    }
+
+//    public void addMenu(int index, Node node){
+//        menus.getChildren().add(index, node);
+//    }
+//
+//    public void removeMenu(Node node){
+//        menus.getChildren().remove(node);
+//    }
+//
+//    public void removeMenu(int index){
+//        menus.getChildren().remove(index);
+//    }
+//
+//    public List<Node> getMenus(){
+//        return menus.getChildren();
+//    }
 
     private GNFullscreen fullScreen(){
         btn_fullScreen.updateState(true );
         controls.getChildren().add(btn_fullScreen);
-
         btn_fullScreen.toBack();
         return this.btn_fullScreen;
     }
-    
+
+    public void block(){
+        controls.getChildren().forEach(
+                e -> e.setMouseTransparent(true)
+        );
+
+        menus.setMouseTransparent(true);
+
+        bar.setMouseTransparent(true);
+
+        top_left.setMouseTransparent(true);
+        top_right.setMouseTransparent(true);
+        bottom_left.setMouseTransparent(true);
+        bottom_right.setMouseTransparent(true);
+
+        left.setMouseTransparent(true);
+        right.setMouseTransparent(true);
+        top.setMouseTransparent(true);
+        bottom.setMouseTransparent(true);
+    }
+
+    public void unblock(){
+        controls.getChildren().forEach(
+                e -> e.setMouseTransparent(false)
+        );
+
+//        menus.getChildren().forEach(e -> e.setMouseTransparent(false));
+
+        bar.setMouseTransparent(false);
+
+        top_left.setMouseTransparent(false);
+        top_right.setMouseTransparent(false);
+        bottom_left.setMouseTransparent(false);
+        bottom_right.setMouseTransparent(false);
+
+        left.setMouseTransparent(false);
+        right.setMouseTransparent(false);
+        top.setMouseTransparent(false);
+        bottom.setMouseTransparent(false);
+    }
+
     private void configFullEffect(){
         btn_fullScreen.setOnMouseClicked(e -> {
             if (!stage.isFullScreen()) {
@@ -1300,7 +1482,7 @@ public class GNDecorator {
                 viewBorders(false);
                 btn_fullScreen.updateState(false);
                 this.controls.getChildren().removeAll(btn_maximize, btn_minimize);
-                atualizeMinWidth();
+                updateMinWidth();
             } else {
                 this.controls.getChildren().addAll(btn_minimize, btn_maximize);
                 btn_maximize.toFront();
@@ -1402,7 +1584,7 @@ public class GNDecorator {
                 this.background.getStylesheets().clear();
                 this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/default.css").toExternalForm());
                 break;
-            case DARKULA :
+            case DARK :
                 this.background.getStylesheets().clear();
                 this.background.getStylesheets().add(getClass().getResource("/com/gn/resources/css/theme/darkula.css").toExternalForm());
                 break;
@@ -1446,27 +1628,16 @@ public class GNDecorator {
 
     public void show() {
         stage.show();
-        stage.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                background.setPrefWidth(newValue.doubleValue());
-                body.setPrefWidth(newValue.doubleValue());
-                AnchorPane.setRightAnchor(content, newValue.doubleValue());
-            }
+        stage.widthProperty().addListener((observable, oldValue, newValue) -> {
+            background.setPrefWidth(newValue.doubleValue());
+            body.setPrefWidth(newValue.doubleValue());
+            AnchorPane.setRightAnchor(content, newValue.doubleValue());
         });
-        initRestaure();
+        initRestore();
     }
     
-    public enum Style {
-        DEFAULT, DARK
-    };
 
-    public enum Theme {
-        DEFAULT, DARKULA, DANGER, INFO, PRIMARY, SECONDARY, WARNING, SUCCESS, CUSTOM
-    };
-
-    
-    private BoundingBox initRestaure(){
+    private void initRestore(){
         double x = stage.getX();
         double y = stage.getY();
         double width = stage.getWidth();
@@ -1477,7 +1648,6 @@ public class GNDecorator {
             height = Screen.getPrimary().getVisualBounds().getHeight() - 5;
         }
         this.initialBound = new BoundingBox(x, y, width, height);
-        return this.initialBound;
     }
 }
 

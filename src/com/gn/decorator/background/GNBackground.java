@@ -43,5 +43,4 @@ public class GNBackground extends StackPane {
     public String getUserAgentStylesheet() {
         return USER_AGENT_STYLESHEET;
     }
-
 }

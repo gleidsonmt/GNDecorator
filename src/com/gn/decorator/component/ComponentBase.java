@@ -23,6 +23,7 @@ import javafx.scene.Node;
  * Create on  19/10/2018
  * Version 1.0
  */
+@Deprecated
 public interface ComponentBase {
 
     Node createIcon();
