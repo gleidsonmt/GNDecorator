@@ -21,15 +21,7 @@
   GNDecorator is a simple decoration project for javaFx applications.
 </h5>
 
- > Create a custom view for nodes.
- 
-```java
-  GNDecorator window = new GNDecorator();
-  window.setContent(root);
-  window.initTheme(GNDecorator.Theme.DARKULA);
-  window.setIcon(icon);
-  window.setTitle("Title");
- ```
+
  
 ##### View Default
 ![demo1](src/com/gn/resources/screenshot/basic.png)
@@ -57,3 +49,40 @@
 
 ![Structure](src/com/gn/resources/screenshot/primarySctructure.png)
 
+### Full Screen animation
+![gif2](src/com/gn/resources/screenshot/explanation.jpg)
+
+ > Constrotors
+ 
+```java
+  GNDecorator decorator = new GNDecorator();
+ ```
+
+ > Setting content
+```java
+    decorator.setContent(content);
+    decorator.fullBody() // the content occupies all of size
+    decorator.floatActions(); // the controls are float
+  ```
+
+ > Menus
+```java
+    Menu menu = new Menu("File");
+    menu.getItems().add(new MenuItem("Open"));
+    menu.getItems().add(new MenuItem("Close"));
+    decorator.addMenu(menu);
+    decorator.addMenu(1, menu);// add with a index
+  ```
+
+ > Tittle
+```java
+    decorator.setTitle("JavaFx Application");
+    decorator.centralizeTitle(); // Centralize
+  ```
+
+ > Controls
+```java
+    ButtonTest a1 = new ButtonTest("Button 1");
+    decorator.addMenu(a1);
+    decorator.addMenu(index, a1); // add with a index
+  ```
