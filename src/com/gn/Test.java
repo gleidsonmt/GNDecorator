@@ -20,12 +20,16 @@ import com.gn.decorator.GNDecorator;
 import com.gn.decorator.buttons.ButtonTest;
 import com.gn.decorator.options.ButtonType;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
@@ -94,12 +98,17 @@ public class Test extends Application {
 
         Menu btn_ico = new Menu();
         btn_ico.setStyle("-fx-background-color : transparent;");
+        btn_ico.show();
+        btn_ico.getItems().clear();
+
+//        System.out.println(btn_ico.fire());
 
         SVGPath icon = new SVGPath();
         icon.setId("icon");
         icon.setContent("M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z");
         btn_ico.setGraphic(icon);
         icon.setFill(Color.web("#999"));
+        icon.setOnMouseClicked(event -> System.out.println("teste"));
 
         window.addMenu(btn_ico);
         window.addMenu(menu);

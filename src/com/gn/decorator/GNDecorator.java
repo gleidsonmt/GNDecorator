@@ -17,8 +17,10 @@
 package com.gn.decorator;
 
 import com.gn.decorator.background.GNBackground;
-import com.gn.decorator.buttons.*;
-import com.gn.decorator.component.GNControl;
+import com.gn.decorator.buttons.Close;
+import com.gn.decorator.buttons.GNFullscreen;
+import com.gn.decorator.buttons.Maximize;
+import com.gn.decorator.buttons.Minimize;
 import com.gn.decorator.options.ButtonType;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -48,8 +50,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -1277,6 +1277,14 @@ public class GNDecorator {
         updateControls(index, control);
     }
 
+    public void removeControl(Control control){
+        this.controls.getChildren().remove(control);
+    }
+
+    public void removeControl(int index){
+        this.controls.getChildren().remove(index);
+    }
+
     private void updateControls(Node node){
 
         if(node instanceof Region){
@@ -1338,66 +1346,11 @@ public class GNDecorator {
                 .forEach(e -> e.setVisible(true));
     }
 
-//    public ObservableList<Control> getControls(){
-//       return FXCollections.observableArrayList(controls.getChildren().stream()
-//                .filter(e -> e instanceof Control && e.getProperties().containsValue("gn-custom-control"))
-//                .map( e -> (Control) e)
-//                .collect(Collectors.toSet()));
-//    }
-
-    @Deprecated
-    public void hideCustoms(){
-        controls.getChildren().stream()
-                .filter( e -> e instanceof Node)
-                .forEach(e -> e.setVisible(false));
-    }
-
-    @Deprecated
-    public void showCustoms(){
-        controls.getChildren().stream()
-                .filter(e -> e instanceof Node)
-                .forEach(e ->{
-                    e.setVisible(true);
-                });
-    }
-
-    @Deprecated
-    public void addCustom(GNControl control){
-        updateControls(control);
-    }
-
-    @Deprecated
-    public void addCustom(int index, GNControl control){
-        updateControls(index, control);
-    }
-
-
-    @Deprecated
-    public void removeCustom(GNControl control){
-        controls.getChildren().remove(control);
-    }
-
-    @Deprecated
-    public List<GNControl> getCustoms(){
-
-        List<GNControl> list = new ArrayList<>();
-         controls.getChildren()
-                .stream()
-                .filter(e -> e instanceof GNControl)
-                .map(e -> (GNControl) e)
-                .forEach(list::add);
-
-        return list;
-    }
-
-    @Deprecated
-    public void addCustom(int index, Node node){
-        updateControls(index, node);
-    }
-
-    @Deprecated
-    public void addCustom(Node node){
-        updateControls(node);
+    public ObservableList<Control> getControls(){
+       return FXCollections.observableArrayList(controls.getChildren().stream()
+                .filter(e -> e instanceof Control && e.getProperties().containsValue("gn-custom-control"))
+                .map( e -> (Control) e)
+                .collect(Collectors.toSet()));
     }
 
     public void addMenu(Menu menu){
@@ -1410,21 +1363,9 @@ public class GNDecorator {
         menus.getMenus().add(index, menu);
     }
 
-//    public void addMenu(int index, Node node){
-//        menus.getChildren().add(index, node);
-//    }
-//
-//    public void removeMenu(Node node){
-//        menus.getChildren().remove(node);
-//    }
-//
-//    public void removeMenu(int index){
-//        menus.getChildren().remove(index);
-//    }
-//
-//    public List<Node> getMenus(){
-//        return menus.getChildren();
-//    }
+    public ObservableList<Menu> getMenus(){
+        return menus.getMenus();
+    }
 
     private GNFullscreen fullScreen(){
         btn_fullScreen.updateState(true );
@@ -1458,7 +1399,7 @@ public class GNDecorator {
                 e -> e.setMouseTransparent(false)
         );
 
-//        menus.getChildren().forEach(e -> e.setMouseTransparent(false));
+        menus.setMouseTransparent(false);
 
         bar.setMouseTransparent(false);
 
