@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.gn.decorator.buttons;
+package io.github.Gleidson28.decorator.buttons;
 
-import com.gn.decorator.background.GNBackground;
+import com.sun.javafx.css.converters.EffectConverter;
 import com.sun.javafx.css.converters.PaintConverter;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 import java.util.ArrayList;
@@ -28,10 +28,10 @@ import javafx.css.SimpleStyleableObjectProperty;
 import javafx.css.Styleable;
 import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleableProperty;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Skin;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -42,33 +42,33 @@ import javafx.scene.paint.Paint;
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Creation  15/04/2018
  */
-public class Close extends Button {
+public class Minimize extends Button {
     
-    private static final String USER_AGENT_STYLESHEET = GNBackground.class.getResource("/com/gn/resources/css/controls/buttons.css").toExternalForm();
-    private final ImageView viewClose = new ImageView(new Image("/com/gn/resources/img/close.png"));
     
-    public Close(){
-        getStyleClass().add("gn-close");
+    private final ImageView viewMinimize = new ImageView(new Image("/com/gn/resources/img/minimize.png"));
+    
+    public Minimize(){
+        getStyleClass().add("gn-minimize");
         super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        super.setGraphic(viewClose);
+        super.setGraphic(viewMinimize);
     }
     
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new ButtonSkin(Close.this);
+        return new ButtonSkin(Minimize.this);
     }
 
     @Override
     public String getUserAgentStylesheet() {
-        return USER_AGENT_STYLESHEET;
+        return getClass().getResource("/com/gn/resources/css/controls/buttons.css").toExternalForm();
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,
-            Close.this,
+            Minimize.this,
             "defaultFill",
             Color.WHITE);
 
-    public Paint getDefaultFill() {
+    public Paint getdefaultFill() {
         return defaultFill.get();
     }
 
@@ -76,23 +76,22 @@ public class Close extends Button {
         return this.defaultFill;
     }
 
-    public void setDefaultFill(Paint color) {
+    public void setdefaultFill(Paint color) {
         this.defaultFill.set(color);
-        this.setStyle("-gn-fill : white");
     }
 
     private static class StyleableProperties {
 
-        private static final CssMetaData<Close, Paint> DEFAULT_FILL
-                = new CssMetaData<Close, Paint>("-gn-fill",
+        private static final CssMetaData<Minimize, Paint> DEFAULT_FILL
+                = new CssMetaData<Minimize, Paint>("-gn-fill",
                         PaintConverter.getInstance(), Color.RED) {
             @Override
-            public boolean isSettable(Close control) {
+            public boolean isSettable(Minimize control) {
                 return control.defaultFill == null || !control.defaultFill.isBound();
             }
 
             @Override
-            public StyleableProperty<Paint> getStyleableProperty(Close control) {
+            public StyleableProperty<Paint> getStyleableProperty(Minimize control) {
                 return control.defaultFillProperty();
             }
         };
@@ -117,7 +116,7 @@ public class Close extends Button {
             final List<CssMetaData<? extends Styleable, ?>> styleables
                     = new ArrayList<>(Button.getClassCssMetaData());
             styleables.addAll(getClassCssMetaData());
-            styleables.addAll(Close.getClassCssMetaData());
+            styleables.addAll(Minimize.getClassCssMetaData());
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
         return STYLEABLES;

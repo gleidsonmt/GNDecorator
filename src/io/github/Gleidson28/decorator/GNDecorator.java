@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gn.decorator;
+package io.github.Gleidson28.decorator;
 
 import com.gn.decorator.background.GNBackground;
 import com.gn.decorator.buttons.Close;

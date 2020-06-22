@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Gleidson Neves da Silveira
+ * Copyright (C) 2018 Gleidson Neves da Silveira
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,18 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gn.decorator.buttons;
 
-import javafx.scene.control.Button;
+package io.github.Gleidson28.decorator.options;
 
 /**
- * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  31/05/2020
+ * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
+ * Creation  17/04/2018
  */
-public class ButtonTest extends Button {
+public enum ButtonType {
 
-    public ButtonTest(String text) {
-        this.getStyleClass().add("btn-test");
-        this.setText(text);
-    }
+    FULL_SCREEN, FULL_EFFECT
+
 }

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.gn.decorator.background;
+package io.github.Gleidson28.decorator.background;
 
 import com.gn.decorator.GNDecorator;
 import javafx.geometry.NodeOrientation;

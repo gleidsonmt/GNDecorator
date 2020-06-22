@@ -14,11 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gn;
+package io.github.Gleidson28;
 
-import com.gn.decorator.GNDecorator;
-import com.gn.decorator.buttons.ButtonTest;
-import com.gn.decorator.options.ButtonType;
+import io.github.Gleidson28.decorator.GNDecorator;
+import io.github.Gleidson28.decorator.buttons.ButtonTest;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
