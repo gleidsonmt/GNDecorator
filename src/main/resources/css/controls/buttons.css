@@ -1,0 +1,31 @@
+/* 
+    Created on : 15/04/2018, 20:43:40
+    Author     : Gleidson Neves da Silveira
+*/
+
+.gn-buttons .button, .gn-buttons .button:focused, .gn-buttons .button:hover {
+    -fx-background-color : transparent;
+    -fx-border-width : 0;
+    -fx-cursor : default;
+}
+
+.gn-buttons .button *{
+    -gn-fill : #808080;
+    -fx-effect : innershadow( gaussian , -gn-fill , 10,1,21,21 );
+}
+
+.gn-full-screen,
+.gn-close,
+.gn-minimize, 
+.gn-maximize
+{
+    -fx-cursor : default;
+}
+
+.gn-full-screen,
+.gn-close,
+.gn-minimize,
+.gn-maximize
+{
+    -fx-background-color : transparent;
+}
