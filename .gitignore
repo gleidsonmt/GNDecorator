@@ -9,3 +9,5 @@ GNDecorator.iml
 /gradle.properties
 /build.gradle
 /gradle/
+/build/
+/lib/
