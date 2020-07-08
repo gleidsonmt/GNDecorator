@@ -14,18 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.Gleidson28.decorator.buttons;
+package io.github.gleidson28.test.components;
 
-import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  31/05/2020
+ * Create on  06/07/2020
  */
-public class ButtonTest extends Button {
+public class Bar extends HBox {
 
-    public ButtonTest(String text) {
-        this.getStyleClass().add("btn-test");
-        this.setText(text);
+    public Bar() {
+
+        this.setPrefSize(200,40);
+
+        this.setStyle("-fx-background-color : green");
     }
 }

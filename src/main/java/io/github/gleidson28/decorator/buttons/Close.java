@@ -15,60 +15,59 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.Gleidson28.decorator.buttons;
+package io.github.gleidson28.decorator.buttons;
 
+import io.github.gleidson28.decorator.background.GNBackground;
 import com.sun.javafx.css.converters.PaintConverter;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
-import javafx.css.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import javafx.css.CssMetaData;
+import javafx.css.SimpleStyleableObjectProperty;
+import javafx.css.Styleable;
+import javafx.css.StyleableObjectProperty;
+import javafx.css.StyleableProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Creation  15/04/2018
  */
-public class Maximize extends Button {
+public class Close extends Button {
     
+    private static final String USER_AGENT_STYLESHEET = GNBackground.class.getResource("/css/controls/buttons.css").toExternalForm();
+    private final ImageView viewClose = new ImageView(new Image("/img/close.png"));
     
-    private final ImageView viewMaximize = new ImageView(new Image("/img/maximize.png"));
-    private final ImageView viewRestore = new ImageView(new Image("/img/restore.png"));
-    
-    public Maximize(){
-        getStyleClass().add("gn-maximize");
-        this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        this.setGraphic(viewMaximize);
-    }
-    
-    public void updateState(boolean maximize){
-        if(maximize)this.setGraphic(viewMaximize);
-        else this.setGraphic(viewRestore);
+    public Close(){
+        getStyleClass().add("gn-close");
+        super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        super.setGraphic(viewClose);
     }
     
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new ButtonSkin(Maximize.this);
+        return new ButtonSkin(Close.this);
     }
 
     @Override
     public String getUserAgentStylesheet() {
-        return getClass().getResource("/css/controls/buttons.css").toExternalForm();
+        return USER_AGENT_STYLESHEET;
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,
-            Maximize.this,
+            Close.this,
             "defaultFill",
             Color.WHITE);
 
-    public Paint getdefaultFill() {
+    public Paint getDefaultFill() {
         return defaultFill.get();
     }
 
@@ -76,22 +75,23 @@ public class Maximize extends Button {
         return this.defaultFill;
     }
 
-    public void setdefaultFill(Paint color) {
+    public void setDefaultFill(Paint color) {
         this.defaultFill.set(color);
+        this.setStyle("-gn-fill : white");
     }
 
     private static class StyleableProperties {
 
-        private static final CssMetaData<Maximize, Paint> DEFAULT_FILL
-                = new CssMetaData<Maximize, Paint>("-gn-fill",
+        private static final CssMetaData<Close, Paint> DEFAULT_FILL
+                = new CssMetaData<Close, Paint>("-gn-fill",
                         PaintConverter.getInstance(), Color.RED) {
             @Override
-            public boolean isSettable(Maximize control) {
+            public boolean isSettable(Close control) {
                 return control.defaultFill == null || !control.defaultFill.isBound();
             }
 
             @Override
-            public StyleableProperty<Paint> getStyleableProperty(Maximize control) {
+            public StyleableProperty<Paint> getStyleableProperty(Close control) {
                 return control.defaultFillProperty();
             }
         };
@@ -116,7 +116,7 @@ public class Maximize extends Button {
             final List<CssMetaData<? extends Styleable, ?>> styleables
                     = new ArrayList<>(Button.getClassCssMetaData());
             styleables.addAll(getClassCssMetaData());
-            styleables.addAll(Maximize.getClassCssMetaData());
+            styleables.addAll(Close.getClassCssMetaData());
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
         return STYLEABLES;

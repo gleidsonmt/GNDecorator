@@ -15,9 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.Gleidson28.decorator.buttons;
+package io.github.gleidson28.decorator.buttons;
 
-import com.sun.javafx.css.converters.EffectConverter;
 import com.sun.javafx.css.converters.PaintConverter;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ import javafx.css.StyleableProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Skin;
-import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -42,29 +40,38 @@ import javafx.scene.paint.Paint;
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Creation  15/04/2018
  */
-public class Minimize extends Button {
+public class GNFullscreen extends Button  {
     
     
-    private final ImageView viewMinimize = new ImageView(new Image("/img/minimize.png"));
+    private final ImageView viewFullScreen = new ImageView(new Image("/img/fullscreen.png"));
+    private final ImageView viewUnFullScreen = new ImageView(new Image("/img/unfullscreen.png"));
     
-    public Minimize(){
-        getStyleClass().add("gn-minimize");
-        super.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        super.setGraphic(viewMinimize);
+    public GNFullscreen(){
+        getStyleClass().add("gn-full-screen");
+        this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        this.setGraphic(viewFullScreen);
+    }
+    
+    public void updateState(boolean fullscreen) {
+        if (fullscreen) {
+            this.setGraphic(viewFullScreen);
+        } else {
+            this.setGraphic(viewUnFullScreen);
+        }
     }
     
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new ButtonSkin(Minimize.this);
+        return new ButtonSkin(GNFullscreen.this);
     }
 
     @Override
     public String getUserAgentStylesheet() {
-        return getClass().getResource("/css/controls/buttons.css").toExternalForm();
+        return getClass().getResource("/com/gn/resources/css/controls/buttons.css").toExternalForm();
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,
-            Minimize.this,
+            GNFullscreen.this,
             "defaultFill",
             Color.WHITE);
 
@@ -82,16 +89,16 @@ public class Minimize extends Button {
 
     private static class StyleableProperties {
 
-        private static final CssMetaData<Minimize, Paint> DEFAULT_FILL
-                = new CssMetaData<Minimize, Paint>("-gn-fill",
+        private static final CssMetaData<GNFullscreen, Paint> DEFAULT_FILL
+                = new CssMetaData<GNFullscreen, Paint>("-gn-fill",
                         PaintConverter.getInstance(), Color.RED) {
             @Override
-            public boolean isSettable(Minimize control) {
+            public boolean isSettable(GNFullscreen control) {
                 return control.defaultFill == null || !control.defaultFill.isBound();
             }
 
             @Override
-            public StyleableProperty<Paint> getStyleableProperty(Minimize control) {
+            public StyleableProperty<Paint> getStyleableProperty(GNFullscreen control) {
                 return control.defaultFillProperty();
             }
         };
@@ -116,7 +123,7 @@ public class Minimize extends Button {
             final List<CssMetaData<? extends Styleable, ?>> styleables
                     = new ArrayList<>(Button.getClassCssMetaData());
             styleables.addAll(getClassCssMetaData());
-            styleables.addAll(Minimize.getClassCssMetaData());
+            styleables.addAll(GNFullscreen.getClassCssMetaData());
             STYLEABLES = Collections.unmodifiableList(styleables);
         }
         return STYLEABLES;

@@ -9,7 +9,7 @@
     -fx-cursor : default;
 }
 
-.gn-buttons .button *{
+.gn-buttons .button * {
     -gn-fill : #808080;
     -fx-effect : innershadow( gaussian , -gn-fill , 10,1,21,21 );
 }

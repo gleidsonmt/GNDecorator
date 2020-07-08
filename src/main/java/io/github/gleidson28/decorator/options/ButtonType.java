@@ -15,32 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.Gleidson28.decorator.background;
-
-import io.github.Gleidson28.decorator.GNDecorator;
-import javafx.geometry.NodeOrientation;
-import javafx.geometry.Pos;
-import javafx.scene.CacheHint;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.StackPane;
+package io.github.gleidson28.decorator.options;
 
 /**
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Creation  20/04/2018
+ * Creation  17/04/2018
  */
-public class GNBackground extends StackPane {
+public enum ButtonType {
 
-    private static final String USER_AGENT_STYLESHEET = GNBackground.class.getResource("/css/decorator/decorator.css").toExternalForm();
-    
-    public GNBackground() {
-        super();
-        getStyleClass().add("gn-decorator");
-        setAlignment(Pos.CENTER);
-    }
+    FULL_SCREEN, FULL_EFFECT
 
-
-    @Override
-    public String getUserAgentStylesheet() {
-        return USER_AGENT_STYLESHEET;
-    }
 }

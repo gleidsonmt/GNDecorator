@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.Gleidson28.decorator;
+package io.github.gleidson28.decorator;
 
-import io.github.Gleidson28.decorator.background.GNBackground;
-import io.github.Gleidson28.decorator.buttons.Close;
-import io.github.Gleidson28.decorator.buttons.GNFullscreen;
-import io.github.Gleidson28.decorator.buttons.Maximize;
-import io.github.Gleidson28.decorator.buttons.Minimize;
-import io.github.Gleidson28.decorator.options.ButtonType;
+import io.github.gleidson28.decorator.background.GNBackground;
+import io.github.gleidson28.decorator.buttons.Close;
+import io.github.gleidson28.decorator.buttons.GNFullscreen;
+import io.github.gleidson28.decorator.buttons.Maximize;
+import io.github.gleidson28.decorator.buttons.Minimize;
+import io.github.gleidson28.decorator.options.ButtonType;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.NamedArg;
@@ -164,7 +164,9 @@ public class GNDecorator {
         }).forEachOrdered((node) -> {
             ((Button) node).prefWidthProperty().bind(buttonWidth);
         });
-        
+
+        areaContent.setId("area-content");
+
         btn_fullScreen.minHeightProperty().bind(buttonHeight);
         btn_fullScreen.prefHeightProperty().bind(buttonHeight);
         btn_fullScreen.minWidthProperty().bind(buttonWidth);

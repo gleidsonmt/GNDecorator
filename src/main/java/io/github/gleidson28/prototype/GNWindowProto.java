@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.Gleidson28.prototype;
+package io.github.gleidson28.prototype;
 
 import java.io.IOException;
 import java.util.logging.Level;

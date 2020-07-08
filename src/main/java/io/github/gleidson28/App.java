@@ -15,32 +15,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.Gleidson28;
+package io.github.gleidson28;
 
-import io.github.Gleidson28.decorator.GNDecorator;
-import io.github.Gleidson28.decorator.buttons.ButtonTest;
+import io.github.gleidson28.decorator.GNDecorator;
+import io.github.gleidson28.decorator.buttons.ButtonTest;
+import io.github.gleidson28.test.components.LeftBar;
+import io.github.gleidson28.test.components.XYStage;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
+import org.scenicview.ScenicView;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  23/09/2018
  * Version 1.0
  */
-public class Test extends Application {
+public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -52,8 +49,10 @@ public class Test extends Application {
         content.setPrefSize(400,400);
         GNDecorator window = new GNDecorator();
 
+
 //        window.hideCustoms();
         Button btn = new Button("Action");
+
         btn.setOnMouseClicked(event ->{
 //            window.removeControls();
             window.floatActions();
@@ -124,7 +123,7 @@ public class Test extends Application {
 
 //        window.getScene().getStylesheets().addAll(getClass().getResource("/com/gn/resources/css/custom.css").toExternalForm());
 
-//        ScenicView.show(window.getScene());
+        ScenicView.show(window.getScene());
     }
 
     public static void main(String[] args) {

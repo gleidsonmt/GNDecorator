@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Gleidson Neves da Silveira
+ * Copyright (C) Gleidson Neves da Silveira
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,15 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package io.github.gleidson28.test.components;
 
-package io.github.Gleidson28.decorator.options;
+import javafx.scene.control.ScrollPane;
 
 /**
- * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Creation  17/04/2018
+ * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
+ * Create on  06/07/2020
  */
-public enum ButtonType {
+public class AreaContent extends ScrollPane {
 
-    FULL_SCREEN, FULL_EFFECT
+    public AreaContent() {
 
+
+        this.setFitToWidth(true);
+        this.setFitToHeight(true);
+    }
 }
