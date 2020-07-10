@@ -33,12 +33,12 @@ public class LeftBar extends Pane implements StageChanges {
 
     private final Stage stage;
 
-    protected LeftBar(Stage stage) {
+    protected LeftBar(GNDecoratorT decoratorT) {
         this.getStyleClass().add("gn-left-bar");
         this.setId("gn-left-bar");
         this.setCursor(Cursor.W_RESIZE);
         this.setMinWidth(3D);
-        this.stage = stage;
+        this.stage = decoratorT.getStage();
         this.setBackground(new Background(
                 new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         configActions();

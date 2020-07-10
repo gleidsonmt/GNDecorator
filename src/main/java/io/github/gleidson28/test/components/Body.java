@@ -25,7 +25,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class Body extends AnchorPane implements AlignUtils {
 
-    public Body(Container container,
+    public Body(Container container, Bar bar,
                 TopBar topBar, RightBar rightBar,
                 BottomBar bottomBar, LeftBar leftBar,
                 TopLeftAnchor topLeftAnchor, TopRightAnchor topRightAnchor,
@@ -34,7 +34,7 @@ public class Body extends AnchorPane implements AlignUtils {
         this.getStyleClass().add("gn-body");
         this.setId("gn-body");
 
-        this.getChildren().addAll(container, topBar, rightBar,
+        this.getChildren().addAll(container, bar, topBar, rightBar,
                 bottomBar, leftBar, topLeftAnchor, topRightAnchor,
                 bottomLeftAnchor, bottomRightAnchor);
 
@@ -47,6 +47,8 @@ public class Body extends AnchorPane implements AlignUtils {
         alignTopRightAnchor(topRightAnchor);
         alignBottomLeftAnchor(bottomLeftAnchor);
         alignBottomRightAnchor(bottomRightAnchor);
+
+        alignTopAnchor(bar);
 
         fullBody(container);
 

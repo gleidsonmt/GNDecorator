@@ -16,6 +16,7 @@
  */
 package io.github.gleidson28.test.components;
 
+import javafx.geometry.BoundingBox;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -31,7 +32,7 @@ public class GNDecoratorT {
 
     private final Stage stage = new Stage(StageStyle.UNDECORATED);
 
-    private final LeftBar   leftBar     = new LeftBar(stage);
+    private final LeftBar   leftBar     = new LeftBar(this);
     private final RightBar  rightBar    = new RightBar(stage);
     private final TopBar    topBar      = new TopBar(stage);
     private final BottomBar bottomBar   = new BottomBar(stage);
@@ -41,19 +42,21 @@ public class GNDecoratorT {
     private final BottomLeftAnchor  bottomLeftAnchor = new BottomLeftAnchor(stage);
     private final BottomRightAnchor bottomRightAnchor = new BottomRightAnchor(stage);
 
-    private final Bar bar       = new Bar();
+    private final Bar bar       = new Bar(this);
 
     private final AreaContent   areaContent   = new AreaContent();
     private final Container     container     = new Container(areaContent);
 
-
-    private final Body body = new Body(container, topBar,
+    private final Body body = new Body(container, bar, topBar,
             rightBar, bottomBar, leftBar, topLeftAnchor, topRightAnchor,
             bottomLeftAnchor, bottomRightAnchor);
 
     private final Background background = new Background(body);
 
     private final Scene scene = new Scene(background, 800,600);
+
+
+    private BoundingBox noMaximizedBounds = null;
 
     public GNDecoratorT() {
         configStage();
@@ -78,13 +81,23 @@ public class GNDecoratorT {
 
     public void show(){
         this.stage.show();
+        this.noMaximizedBounds = new BoundingBox(this.stage.getX(), this.stage.getY(),
+                this.stage.getWidth(), this.stage.getHeight());
     }
 
-    public Stage getStage(){
+    BoundingBox getNoMaximizedBounds(){
+        return this.noMaximizedBounds;
+    }
+
+    void setBounds(BoundingBox save){
+        this.noMaximizedBounds = save;
+    }
+
+    Stage getStage(){
         return this.stage;
     }
 
-    public Scene getScene(){
+    Scene getScene(){
         return this.scene;
     }
 

@@ -19,6 +19,7 @@ package io.github.gleidson28;
 
 import io.github.gleidson28.test.components.GNDecoratorT;
 import io.github.gleidson28.test.components.LeftBar;
+import io.github.gleidson28.test.components.StageEvent;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -41,14 +42,12 @@ public class Test extends Application {
         content.setStyle("-fx-background-color : green;");
 
 
-
         GNDecoratorT decorator = new GNDecoratorT();
         decorator.setContent(content);
 
 
-
         decorator.show();
-        decorator.testWithScenicView();
+//        decorator.testWithScenicView();
     }
 
     public static void main(String[] args) {
