@@ -24,15 +24,18 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.util.Stack;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class Bar extends HBox implements StageChanges {
+public class Bar extends HBox implements StageChanges, StageReposition {
 
     private final Stage stage;
     private final GNDecoratorT decorator;
@@ -42,7 +45,7 @@ public class Bar extends HBox implements StageChanges {
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
 
-    private Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+    private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
     public Bar(GNDecoratorT decorator) {
 
@@ -71,6 +74,13 @@ public class Bar extends HBox implements StageChanges {
             }
         });
 
+        this.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2){
+                decorator.getStage().setMaximized(!decorator.getStage().isMaximized());
+                decorator.getStage().centerOnScreen();
+            }
+        });
+
         this.setOnMouseDragged(event -> {
             if (!event.isPrimaryButtonDown() || getInitX() == -1 ) {
                 return;
@@ -85,35 +95,16 @@ public class Bar extends HBox implements StageChanges {
             }
 
             BoundingBox olderBounds = decorator.getNoMaximizedBounds();
-//            System.out.println(stage.getX());
-
-            double x = decorator.getStage().getX();
 
             if(decorator.getStage().isMaximized()){
 
-
-                double width = decorator.getNoMaximizedBounds().getWidth();
-
-                System.out.println(decorator.getNoMaximizedBounds().getWidth());
-                System.out.println(event.getSceneX() - stage.getWidth());
-                System.out.println(stage.getWidth() - event.getSceneX());
-//                System.out.println(decorator.getBounds().get());
-
-//                System.out.println(decorator.getStage().getX());
-
                 if(bounds.getMaxX() < (event.getScreenX() + decorator.getNoMaximizedBounds().getWidth())) {
                     stage.setX(bounds.getMaxX() - (decorator.getNoMaximizedBounds().getWidth()));
-                    System.out.println("first");
-//                } else if( stage.getX() <= 0 && stage.getHeight() == bounds.getMaxY()){
-//                } else if( bounds.getMinX() < (event.getScreenX() +  decorator.getBounds().getWidth() )) {
                 } else if(bounds.getMinX() < (decorator.getNoMaximizedBounds().getWidth() - event.getScreenX())) {
                     stage.setX(0);
-                    System.out.println("second");
                 } else {
                     stage.setX(event.getScreenX() - (decorator.getNoMaximizedBounds().getWidth() / 2));
-                    System.out.println("third");
                 }
-
 
                 if(decorator.getNoMaximizedBounds().getHeight() > bounds.getMaxY()){
                     stage.setHeight(bounds.getMaxY() - 100);
@@ -124,21 +115,39 @@ public class Bar extends HBox implements StageChanges {
                 if(decorator.getNoMaximizedBounds().getWidth() > bounds.getMaxX()){
                     stage.setWidth(bounds.getWidth() - 200);
                 } else {
-                    stage.setWidth(decorator.getNoMaximizedBounds().getWidth() - olderBounds.getWidth());
+                    stage.setWidth(decorator.getNoMaximizedBounds().getWidth());
                 }
-
-//                stage.setX(event.getScreenX() - (decorator.getBounds().getWidth() / 2));
-//                stage.setX(bounds.getMaxX() - (decorator.getBounds().getWidth()));
                 stage.setY(0);
-//                stage.setHeight(decorator.getBounds().getHeight());
-//
                 stage.setMaximized(false);
-
-//                if(stage.getX() < decorator.getBounds().getMinX()){
-//                } else if((stage.getX() + olderBounds.getWidth() )  > olderBounds.getMaxX()){
-//                    stage.setX(decorator.getBounds().getMaxX() - stage.getWidth());
-//                }
             } else {
+
+                Stage stage = decorator.getTranslucentStage();
+                decorator.getStage().setAlwaysOnTop(true);
+
+                if(isOnTopLeft(event)) {
+                    repositionOnTopLeft(stage,0);
+                    stage.show();
+                } else if(isOnBottomLeft(event)) {
+                    repositionOnBottomLeft(stage,20);
+                    stage.show();
+                } else if(isOnTopRight(event)) {
+                    repositionOnTopRight(stage,20);
+                    stage.show();
+                } else if(isOnBottomRight(event)) {
+                    repositionOnBottomRight(stage,20);
+                    stage.show();
+                } else if(isOnRight(event)) {
+                    repositionOnRight(stage,20);
+                    stage.show();
+                } else if(isOnLeft(event)) {
+                    repositionOnLeft(stage,20);
+                    stage.show();
+                } else if(isOnTop(event)){
+                    repositionOnTop(stage,20);
+                    stage.show();
+                } else {
+                    decorator.getTranslucentStage().close();
+                }
 
                 setNewX(event.getScreenX());
                 setNewY(event.getScreenY());
@@ -159,6 +168,57 @@ public class Bar extends HBox implements StageChanges {
 
         this.setOnMouseReleased(event -> {
             this.setCursor(Cursor.HAND);
+            Stage stage = decorator.getStage();
+            this.decorator.getStage().setAlwaysOnTop(false);
+
+            if(isOnTopLeft(event)) {
+                repositionOnTopLeft(stage,0);
+            } else if(isOnBottomLeft(event)) {
+                repositionOnBottomLeft(stage,0);
+            } else if(isOnTopRight(event)) {
+                repositionOnTopRight(stage,0);
+            } else if(isOnBottomRight(event)) {
+                repositionOnBottomRight(stage,0);
+            } else if(isOnRight(event)) {
+                repositionOnRight(stage,0);
+            } else if(isOnLeft(event)) {
+                repositionOnLeft(stage,0);
+            } else if(isOnTop(event)){
+                repositionOnTop(stage,0);
+            } else {
+                decorator.getTranslucentStage().close();
+            }
+
+            decorator.getTranslucentStage().close();
+
         });
+    }
+
+    private boolean isOnTopLeft(MouseEvent event){
+        return event.getScreenY() <= 0 && event.getScreenX() <= 0;
+    }
+
+    private boolean isOnBottomLeft(MouseEvent event){
+        return event.getScreenX() <= 0 && event.getScreenY() >= bounds.getMaxY();
+    }
+
+    private boolean isOnTopRight(MouseEvent event){
+        return event.getScreenX() >= (bounds.getMaxX() -2) && event.getScreenY() <= bounds.getMinY();
+    }
+
+    private boolean isOnBottomRight(MouseEvent event){
+        return event.getScreenX() >= (bounds.getMaxX() - 2) && event.getScreenY() >= bounds.getMaxY();
+    }
+
+    private boolean isOnRight(MouseEvent event){
+        return event.getScreenX() >= ( bounds.getMaxX() -2 );
+    }
+
+    private boolean isOnLeft(MouseEvent event){
+        return event.getScreenX() <= 0;
+    }
+
+    private boolean isOnTop(MouseEvent event){
+        return event.getScreenY() <= 0;
     }
 }
