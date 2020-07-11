@@ -18,14 +18,12 @@ package io.github.gleidson28.test.components;
 
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
-import jdk.nashorn.internal.objects.NativeObject;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
 interface AlignUtils {
-
 
     default void alignTopAnchor(Node node){
         AnchorPane.setTopAnchor(node, 0D);
