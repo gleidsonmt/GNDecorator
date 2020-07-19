@@ -26,7 +26,7 @@ public class AreaContent extends ScrollPane {
 
     public AreaContent() {
 
-
+        this.setId("gn-scroll");
         this.setFitToWidth(true);
         this.setFitToHeight(true);
     }

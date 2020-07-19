@@ -17,18 +17,23 @@
 package io.github.gleidson28.test.components;
 
 import io.github.gleidson28.decorator.GNDecorator;
+import io.github.gleidson28.decorator.background.GNBackground;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.BoundingBox;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.Objects;
 import java.util.Stack;
 
 /**
@@ -37,32 +42,75 @@ import java.util.Stack;
  */
 public class Bar extends HBox implements StageChanges, StageReposition {
 
-    private final Stage stage;
-    private final GNDecoratorT decorator;
+    private Stage stage;
+    private GNDecoratorT decorator;
 
     private ObservableList<Button> defaultControls;
+
+    private HBox controlsContainer = new HBox();
+    private HBox titleContainer = new HBox(new Label("JavaFx Decorator"));
+    private MenuBar menuBar = new MenuBar();
 
     private BoundingBox savedBounds  = null;
     private BoundingBox initialBound = null;
 
     private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
+
+//    private static final String USER_AGENT_STYLESHEET =
+//            GNBackground.class.getResource("/css/bar.css").toExternalForm();
+
     public Bar(GNDecoratorT decorator) {
-
+        this.setId("gn-bar");
         defaultControls = FXCollections.observableArrayList(
-            new Maximize(decorator)
+            new Minimize(decorator), new Maximize(decorator), new Close(decorator)
         );
+        confLayout(decorator);
 
-        this.setPrefSize(200,40);
-        this.setStyle("-fx-background-color : blue");
+    }
+
+    private void confLayout(GNDecoratorT decorator){
+
+        this.menuBar.getStyleClass().add("menuBar");
+        this.titleContainer.getStyleClass().add("titleContainer");
+        this.controlsContainer.getStyleClass().add("controlsContainer");
+
+        controlsContainer.setSpacing(0D);
+        this.menuBar.setPadding(new Insets(0D));
+
+        controlsContainer.prefHeightProperty().bind(decorator.barHeightProperty());
+        menuBar.prefHeightProperty().bind(decorator.barHeightProperty());
+
+        defaultControls.forEach(e ->
+                e.prefHeightProperty().
+                        bind(decorator.barHeightProperty()));
+
+
+
+        System.out.println(this.menuBar.lookup("container"));
+
+        controlsContainer.setAlignment(Pos.CENTER_RIGHT);
+
+        this.setAlignment(Pos.CENTER);
+        titleContainer.setAlignment(Pos.CENTER);
+        controlsContainer.getChildren().setAll(defaultControls);
+
+        this.getChildren().add(menuBar);
+        this.getChildren().add(titleContainer);
+        this.getChildren().add(controlsContainer);
+
+//        this.menuBar.getMenus().add(new Menu("File"));
+
+        HBox.setHgrow(controlsContainer, Priority.ALWAYS);
+        HBox.setHgrow(titleContainer, Priority.ALWAYS);
+        HBox.setHgrow(menuBar, Priority.ALWAYS);
+
+        this.setPrefHeight(30D);
         this.decorator = decorator;
         this.stage = decorator.getStage();
 
         this.setAlignment(Pos.CENTER);
         configActions();
-
-
-        this.getChildren().setAll(defaultControls);
     }
 
     private void configActions(){
@@ -71,13 +119,18 @@ public class Bar extends HBox implements StageChanges, StageReposition {
                 setInitX(event.getScreenX());
                 setInitY(event.getScreenY());
                 event.consume();
+
             }
         });
 
         this.setOnMouseClicked(event -> {
             if(event.getClickCount() == 2){
-                decorator.getStage().setMaximized(!decorator.getStage().isMaximized());
-                decorator.getStage().centerOnScreen();
+                if(!decorator.isMaximized()) {
+                    this.fireEvent(new StageEvent(StageEvent.MAXIMIZE, decorator));
+                } else {
+                    this.fireEvent(new StageEvent(StageEvent.RESTORE, decorator));
+                }
+
             }
         });
 
@@ -90,29 +143,25 @@ public class Bar extends HBox implements StageChanges, StageReposition {
                 return;
             }
 
-            if (savedBounds == null) {
-                savedBounds = decorator.getNoMaximizedBounds();
-            }
+//            maximize.setRestore(decorator.isMaximized());
 
-            BoundingBox olderBounds = decorator.getNoMaximizedBounds();
+            if(decorator.isMaximized()) {
 
-            if(decorator.getStage().isMaximized()){
-
-                if(bounds.getMaxX() < (event.getScreenX() + decorator.getNoMaximizedBounds().getWidth())) {
+                if (bounds.getMaxX() < (event.getScreenX() + decorator.getNoMaximizedBounds().getWidth())) {
                     stage.setX(bounds.getMaxX() - (decorator.getNoMaximizedBounds().getWidth()));
-                } else if(bounds.getMinX() < (decorator.getNoMaximizedBounds().getWidth() - event.getScreenX())) {
+                } else if (bounds.getMinX() < (decorator.getNoMaximizedBounds().getWidth() - event.getScreenX())) {
                     stage.setX(0);
                 } else {
                     stage.setX(event.getScreenX() - (decorator.getNoMaximizedBounds().getWidth() / 2));
                 }
 
-                if(decorator.getNoMaximizedBounds().getHeight() > bounds.getMaxY()){
+                if (decorator.getNoMaximizedBounds().getHeight() > bounds.getMaxY()) {
                     stage.setHeight(bounds.getMaxY() - 100);
                 } else {
                     stage.setHeight(decorator.getNoMaximizedBounds().getHeight());
                 }
 
-                if(decorator.getNoMaximizedBounds().getWidth() > bounds.getMaxX()){
+                if (decorator.getNoMaximizedBounds().getWidth() > bounds.getMaxX()) {
                     stage.setWidth(bounds.getWidth() - 200);
                 } else {
                     stage.setWidth(decorator.getNoMaximizedBounds().getWidth());
@@ -160,9 +209,11 @@ public class Bar extends HBox implements StageChanges, StageReposition {
 
                 this.stage.setX(this.stage.getX() + deltaX);
                 setStageY(this.stage, this.stage.getY() + deltaY);
+
             }
 
             this.setCursor(Cursor.MOVE);
+            decorator.setMaximized(false);
 
         });
 
@@ -185,6 +236,8 @@ public class Bar extends HBox implements StageChanges, StageReposition {
                 repositionOnLeft(stage,0);
             } else if(isOnTop(event)){
                 repositionOnTop(stage,0);
+                decorator.setMaximized(true);
+
             } else {
                 decorator.getTranslucentStage().close();
             }
@@ -221,4 +274,13 @@ public class Bar extends HBox implements StageChanges, StageReposition {
     private boolean isOnTop(MouseEvent event){
         return event.getScreenY() <= 0;
     }
+
+    public MenuBar getMenuBar() {
+        return menuBar;
+    }
+
+    //    @Override
+//    public String getUserAgentStylesheet() {
+//        return USER_AGENT_STYLESHEET;
+//    }
 }

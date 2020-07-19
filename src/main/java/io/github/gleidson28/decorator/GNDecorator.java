@@ -668,16 +668,16 @@ public class GNDecorator {
      * This method position actions maximize, minimize and close.
      * The bar is set to a minimum size to contain only your children and is position in left.
      */
-    public void floatActions(Region bar2){
-        AnchorPane.setTopAnchor(areaContent, 0D);
-//        bar.toFront();
-        bar_content.getChildren().removeAll(title_content, menus);
-        AnchorPane.clearConstraints(bar);
-        AnchorPane.setTopAnchor(bar, 0D);
-        AnchorPane.setRightAnchor(bar, 0D);
-
-        addBarActions(bar2);
-    }
+//    public void floatActions(Region bar2){
+//        AnchorPane.setTopAnchor(areaContent, 0D);
+////        bar.toFront();
+//        bar_content.getChildren().removeAll(title_content, menus);
+//        AnchorPane.clearConstraints(bar);
+//        AnchorPane.setTopAnchor(bar, 0D);
+//        AnchorPane.setRightAnchor(bar, 0D);
+//
+//        addBarActions(bar2);
+//    }
 
     /**
      * Sets the body of the application as background. This method makes the

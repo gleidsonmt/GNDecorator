@@ -16,18 +16,10 @@
  */
 package io.github.gleidson28.test.components;
 
-import javafx.scene.layout.StackPane;
-
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  06/07/2020
+ * Create on  11/07/2020
  */
-public class Container extends StackPane  {
-
-    public Container(AreaContent areaContent) {
-        this.getStyleClass().add("gn-container");
-        this.setId("gn-container");
-
-        this.getChildren().add(areaContent);
-    }
+public enum  Theme {
+    DEFAULT, MAC_YOSEMITE
 }

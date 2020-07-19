@@ -16,18 +16,24 @@
  */
 package io.github.gleidson28.test.components;
 
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.input.MouseEvent;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  06/07/2020
+ * Create on  09/07/2020
  */
-public class Container extends StackPane  {
+public class Minimize extends Button {
 
-    public Container(AreaContent areaContent) {
-        this.getStyleClass().add("gn-container");
-        this.setId("gn-container");
+    public Minimize(GNDecoratorT decorator) {
 
-        this.getChildren().add(areaContent);
+        this.setText("-");
+        this.setId("gn-minimize");
+        this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+        this.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            decorator.getStage().setIconified(true);
+        });
     }
 }

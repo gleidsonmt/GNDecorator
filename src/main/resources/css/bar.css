@@ -1,0 +1,33 @@
+
+#gn-bar {
+    -fx-background-color : transparent;
+}
+
+#gn-bar > .controlsContainer {
+    -fx-background-color : transparent;
+}
+
+#gn-bar > .controlsContainer .button {
+    -fx-background-color : transparent;
+}
+
+#gn-bar > .controlsContainer > #gn-close {
+    -fx-graphic : url("/img/mac-close.png");
+    -fx-scale-x : 0.8;
+    -fx-scale-y : 0.8;
+    -fx-padding : 0px;
+}
+
+#gn-bar > .controlsContainer > #gn-minimize {
+    -fx-graphic : url("/img/mac-minimize.png");
+    -fx-scale-x : 0.8;
+    -fx-scale-y : 0.8;
+    -fx-padding : 0px;
+}
+
+#gn-bar > .controlsContainer > #gn-maximize {
+    -fx-graphic : url("/img/mac-maximize.png");
+    -fx-scale-x : 0.8;
+    -fx-scale-y : 0.8;
+    -fx-padding : 0px;
+}

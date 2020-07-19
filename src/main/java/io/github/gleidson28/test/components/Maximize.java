@@ -16,7 +16,13 @@
  */
 package io.github.gleidson28.test.components;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.BooleanPropertyBase;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.css.PseudoClass;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -25,19 +31,53 @@ import javafx.scene.input.MouseEvent;
  */
 public class Maximize extends Button {
 
+    private static final PseudoClass RESTORE_PSEUDO_CLASS
+            = PseudoClass.getPseudoClass("restore");
+
+    private final BooleanProperty restore = new BooleanPropertyBase(false) {
+        public void invalidated() {
+            pseudoClassStateChanged(RESTORE_PSEUDO_CLASS, get());
+        }
+
+        @Override public Object getBean() {
+            return Maximize.this;
+        }
+
+        @Override public String getName() {
+            return "restore";
+        }
+    };
+
+    void setRestore(boolean restore) {
+        this.restore.set(restore);
+    }
+
+    private boolean isRestore() {
+        return this.restore.get();
+    }
+
     public Maximize(GNDecoratorT decorator) {
 
         this.setText("[ ]");
+        this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        if(decorator.isMaximized()) this.setId("gn-restore");
+        else this.setId("gn-maximize");
 
-        if(decorator.getStage().isMaximized()) this.setId("gn-maximize");
-        else this.setId("gn-restore");
-
+        
         this.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+//            decorator.setMaximized(!decorator.isMaximized());
 
-            if(!decorator.getStage().isMaximized()){
+            if(!decorator.isMaximized()) {
                 this.fireEvent(new StageEvent(StageEvent.MAXIMIZE, decorator));
-            } else this.fireEvent(new StageEvent(StageEvent.RESTORE, decorator));
+                setRestore(true);
+            } else {
+                setRestore(false);
+                this.fireEvent(new StageEvent(StageEvent.RESTORE, decorator));
+            }
+        });
 
+        decorator.maximizedProperty().addListener((observable, oldValue, newValue) -> {
+            setRestore(newValue);
         });
     }
 }

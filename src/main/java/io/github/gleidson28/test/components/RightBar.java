@@ -39,8 +39,6 @@ public class RightBar extends Pane implements StageChanges {
         this.setMinWidth(3D);
         this.setCursor(Cursor.E_RESIZE);
         this.stage = stage;
-        this.setBackground(new Background(
-                new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         configActions();
     }
 

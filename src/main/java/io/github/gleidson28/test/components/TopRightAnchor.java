@@ -40,8 +40,8 @@ public class TopRightAnchor extends Path implements StageChanges {
     }
 
     private void configPaths(){
-        this.setFill(Color.YELLOW);
-        this.setStroke(Color.YELLOW);
+        this.setFill(Color.TRANSPARENT);
+        this.setStroke(Color.TRANSPARENT);
         this.setStrokeType(StrokeType.INSIDE);
 
         MoveTo moveTo = new MoveTo(100D, -40D);

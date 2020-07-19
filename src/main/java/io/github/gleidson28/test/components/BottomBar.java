@@ -39,8 +39,6 @@ public class BottomBar extends Pane implements StageChanges {
         this.setCursor(Cursor.S_RESIZE);
         this.setMinHeight(3D);
         this.stage = stage;
-        this.setBackground(new Background(
-                new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         configActions();
     }
 

@@ -21,8 +21,10 @@ import io.github.gleidson28.test.components.GNDecoratorT;
 import io.github.gleidson28.test.components.LeftBar;
 import io.github.gleidson28.test.components.StageEvent;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -36,15 +38,21 @@ public class Test extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        HBox content = new HBox(new Button("Hello World with a button!"), new Button("hello 2 tra afsçdfjk asdfadf"));
+        HBox content = new HBox(new Label("Hello GNDecorator!"));
         content.setAlignment(Pos.CENTER);
-        content.setPrefSize(1000,600);
-        content.setStyle("-fx-background-color : green;");
+//        content.setPrefSize(1200,800);
+//        content.setStyle("-fx-background-color : green; -fx-border-color : blue;");
 
 
         GNDecoratorT decorator = new GNDecoratorT();
-        decorator.setContent(content);
+        decorator.setContent(content,1200,800);
 
+        decorator.addMenu(new Menu("Archive"));
+//        decorator.setBarHeight(80D);
+//        decorator.setButtonsWidth(100);
+//        decorator.setContent(content);
+
+//        decorator.setMaximized(true);
 
         decorator.show();
 //        decorator.testWithScenicView();

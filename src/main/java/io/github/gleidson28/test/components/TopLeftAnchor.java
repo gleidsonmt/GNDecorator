@@ -40,8 +40,8 @@ public class TopLeftAnchor extends Path implements StageChanges {
     }
 
     private void configPaths(){
-        this.setFill(Color.YELLOW);
-        this.setStroke(Color.YELLOW);
+        this.setFill(Color.TRANSPARENT);
+        this.setStroke(Color.TRANSPARENT);
         this.setStrokeType(StrokeType.INSIDE);
 
         this.setFillRule(FillRule.EVEN_ODD);

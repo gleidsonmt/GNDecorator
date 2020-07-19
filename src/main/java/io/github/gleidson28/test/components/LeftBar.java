@@ -16,6 +16,7 @@
  */
 package io.github.gleidson28.test.components;
 
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.layout.Background;
@@ -32,15 +33,15 @@ import javafx.stage.Stage;
 public class LeftBar extends Pane implements StageChanges {
 
     private final Stage stage;
+    private final GNDecoratorT decorator;
 
-    protected LeftBar(GNDecoratorT decoratorT) {
+    protected LeftBar(GNDecoratorT decorator) {
         this.getStyleClass().add("gn-left-bar");
         this.setId("gn-left-bar");
         this.setCursor(Cursor.W_RESIZE);
         this.setMinWidth(3D);
-        this.stage = decoratorT.getStage();
-        this.setBackground(new Background(
-                new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        this.stage = decorator.getStage();
+        this.decorator = decorator;
         configActions();
     }
 
@@ -51,6 +52,11 @@ public class LeftBar extends Pane implements StageChanges {
                 setInitX(event.getScreenX());
                 setInitY(event.getScreenY());
                 event.consume();
+
+//                if(!decorator.isMaximized()){
+//                    new BoundingBox(this.stage.getX(), this.stage.getY(),
+//                            this.stage.getWidth(), this.stage.getHeight());
+//                }
             }
         });
 

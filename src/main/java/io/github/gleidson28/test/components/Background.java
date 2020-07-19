@@ -17,6 +17,11 @@
 
 package io.github.gleidson28.test.components;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.BooleanPropertyBase;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 
@@ -26,11 +31,28 @@ import javafx.scene.layout.StackPane;
  */
 public class Background extends StackPane {
 
-    private static final String USER_AGENT_STYLESHEET
-            = Background.class.getResource("/css/decorator/decorator.css")
+    private static final PseudoClass MAXIMIZE_PSEUDO_CLASS
+            = PseudoClass.getPseudoClass("maximized");
+
+    private final BooleanProperty maximized = new BooleanPropertyBase(false) {
+        public void invalidated() {
+            pseudoClassStateChanged(MAXIMIZE_PSEUDO_CLASS, get());
+        }
+
+        @Override public Object getBean() {
+            return Background.this;
+        }
+
+        @Override public String getName() {
+            return "maximized";
+        }
+    };
+
+    private static final String DEFAULT_STYLESHEET
+            = Background.class.getResource("/theme/default.css")
             .toExternalForm();
 
-    public Background(Body body) {
+    public Background(Body body, GNDecoratorT decorator) {
 
         this.getStyleClass().add("gn-background");
         this.setId("gn-background");
@@ -38,11 +60,21 @@ public class Background extends StackPane {
         this.setAlignment(Pos.CENTER);
         this.getChildren().addAll(body);
 
-        this.setStyle("-fx-background-color : transparent;");
+        this.getStylesheets().add(DEFAULT_STYLESHEET);
+
+        decorator.maximizedProperty().
+                addListener((observable, oldValue, newValue) -> setMaximize(newValue));
     }
 
-    @Override
-    public String getUserAgentStylesheet() {
-        return USER_AGENT_STYLESHEET;
+    public boolean isMaximized() {
+        return maximized.get();
+    }
+
+    public BooleanProperty maximizeProperty() {
+        return maximized;
+    }
+
+    public void setMaximize(boolean maximize) {
+        this.maximized.set(maximize);
     }
 }

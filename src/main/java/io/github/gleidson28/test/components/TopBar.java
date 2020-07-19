@@ -39,8 +39,6 @@ public class TopBar extends Pane implements StageChanges {
         this.setMinHeight(3D);
         this.setCursor(Cursor.N_RESIZE);
         this.stage = stage;
-        this.setBackground(new Background(
-                new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         configActions();
     }
 

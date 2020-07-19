@@ -71,16 +71,17 @@ public class StageEvent extends Event {
         decorator.getStage().setWidth(bounds.getWidth());
         decorator.getStage().setHeight(bounds.getHeight());
 
-        decorator.getStage().setMaximized(true);
+        decorator.setMaximized(true);
     }
 
     private void restoreEvent(){
-        decorator.getStage().setX(decorator.getNoMaximizedBounds().getMinX());
-        decorator.getStage().setY(decorator.getNoMaximizedBounds().getMinY());
-        decorator.getStage().setWidth(decorator.getNoMaximizedBounds().getWidth());
-        decorator.getStage().setHeight(decorator.getNoMaximizedBounds().getHeight());
-
-        decorator.getStage().setMaximized(false);
+//        if(!decorator.isMaximized()) {
+            decorator.getStage().setX(decorator.getNoMaximizedBounds().getMinX());
+            decorator.getStage().setY(decorator.getNoMaximizedBounds().getMinY());
+            decorator.getStage().setWidth(decorator.getNoMaximizedBounds().getWidth());
+            decorator.getStage().setHeight(decorator.getNoMaximizedBounds().getHeight());
+//        }
+        decorator.setMaximized(false);
     }
 
     private void minimizeEvent(){
