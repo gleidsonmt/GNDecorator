@@ -15,6 +15,10 @@ plugins {
     id 'application'
 }
 
+repositories {
+    mavenCentral()
+}
+
 apply plugin: 'com.bmuschko.nexus'
 
 archivesBaseName = 'GNDecorator'

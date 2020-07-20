@@ -11,15 +11,22 @@
     -fx-border-width : 0px;
 }
 
-#gn-background  #gn-bar,
-#gn-bar .titleContainer
-
+#gn-background  #gn-bar
 {
     -fx-background-color : transparent;
 }
 
-#gn-bar .menuBar {
-    -fx-background-color : green;
+#gn-bar .titleContainer {
+    -fx-background-color : transparent;
+}
+
+#gn-bar .menu-button {
+    -fx-pref-height : 40px;
+}
+
+#gn-bar .menuBar
+{
+    -fx-background-color : transparent;
 }
 
 #gn-bar .controlsContainer > #gn-close,

@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  08/07/2020
  */
-public class BottomRightAnchor extends Path implements StageChanges {
+public class BottomRightAnchor extends Path implements StageChanges, StageBar {
 
     private final Stage stage;
 
@@ -85,5 +85,10 @@ public class BottomRightAnchor extends Path implements StageChanges {
                 event.consume();
             }
         });
+    }
+
+    @Override
+    public void changeCursor() {
+        this.setCursor(Cursor.SE_RESIZE);
     }
 }

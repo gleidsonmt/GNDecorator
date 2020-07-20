@@ -30,7 +30,7 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class LeftBar extends Pane implements StageChanges {
+public class LeftBar extends Pane implements StageChanges, StageBar {
 
     private final Stage stage;
     private final GNDecoratorT decorator;
@@ -86,5 +86,10 @@ public class LeftBar extends Pane implements StageChanges {
                 event.consume();
             }
         });
+    }
+
+    @Override
+    public void changeCursor() {
+        this.setCursor(Cursor.W_RESIZE);
     }
 }

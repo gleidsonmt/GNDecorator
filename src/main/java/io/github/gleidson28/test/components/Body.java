@@ -17,6 +17,10 @@
 package io.github.gleidson28.test.components;
 
 import io.github.gleidson28.test.components.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -25,7 +29,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class Body extends AnchorPane implements AlignUtils {
 
-    public Body(Container container, Bar bar,
+    public Body(GNDecoratorT decorator, Container container, Bar bar,
                 TopBar topBar, RightBar rightBar,
                 BottomBar bottomBar, LeftBar leftBar,
                 TopLeftAnchor topLeftAnchor, TopRightAnchor topRightAnchor,
@@ -37,6 +41,22 @@ public class Body extends AnchorPane implements AlignUtils {
         this.getChildren().addAll(container, bar, topBar, rightBar,
                 bottomBar, leftBar, topLeftAnchor, topRightAnchor,
                 bottomLeftAnchor, bottomRightAnchor);
+
+        decorator.resizableProperty().addListener((observable, oldValue, newValue) -> {
+
+            if(newValue){
+                getChildren().stream().
+                        filter(e -> e instanceof StageBar)
+                        .map( e -> (StageBar) e)
+                        .forEach(StageBar::changeCursor);
+            } else {
+                getChildren().stream().
+                        filter(e -> e instanceof StageBar)
+                        .map( e -> (StageBar) e)
+                        .forEach(e -> ((Node) e).setCursor(Cursor.DEFAULT));
+            }
+            bar.disableActions(!newValue);
+        });
 
         alignTopAnchor(topBar);
         alignRightAnchor(rightBar);

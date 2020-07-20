@@ -60,6 +60,8 @@ public class Background extends StackPane {
         this.setAlignment(Pos.CENTER);
         this.getChildren().addAll(body);
 
+
+
         this.getStylesheets().add(DEFAULT_STYLESHEET);
 
         decorator.maximizedProperty().

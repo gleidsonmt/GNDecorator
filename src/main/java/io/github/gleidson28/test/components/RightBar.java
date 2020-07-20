@@ -16,20 +16,15 @@
  */
 package io.github.gleidson28.test.components;
 
-import javafx.geometry.Insets;
 import javafx.scene.Cursor;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class RightBar extends Pane implements StageChanges {
+public class RightBar extends Pane implements StageChanges, StageBar {
 
     private final Stage stage;
 
@@ -73,5 +68,10 @@ public class RightBar extends Pane implements StageChanges {
                 event.consume();
             }
         });
+    }
+
+    @Override
+    public void changeCursor() {
+        this.setCursor(Cursor.E_RESIZE);
     }
 }

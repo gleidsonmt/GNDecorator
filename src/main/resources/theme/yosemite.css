@@ -1,0 +1,116 @@
+
+
+#gn-background {
+    -fx-background-color : white;
+    -icon-fill : white;
+    -fx-border-color : #00000060;
+    -fx-border-width : 1px;
+}
+
+#gn-background:maximized {
+    -fx-border-width : 0px;
+}
+
+#gn-background  #gn-bar
+{
+    -fx-background-color : transparent;
+}
+
+#gn-bar .titleContainer {
+    -fx-background-color : transparent;
+}
+
+#gn-bar .menu-button {
+    -fx-pref-height : 40px;
+}
+
+#gn-bar .controlsContainer
+{
+    -fx-background-color : transparent;
+}
+
+#gn-bar .menuBar
+{
+    -fx-background-color : transparent;
+}
+
+#gn-bar .controlsContainer > #gn-close,
+#gn-bar .controlsContainer > #gn-maximize,
+#gn-bar .controlsContainer > #gn-minimize
+{
+    -fx-background-color : transparent;
+    -fx-background-radius : 0px;
+    -fx-padding : 0px;
+}
+
+#gn-bar > .controlsContainer {
+    -fx-padding : 0px;
+    -fx-spacing : 0px;
+}
+
+#gn-bar > .controlsContainer > #gn-close {
+   -fx-graphic : url("/img/mac-close.png");
+   -fx-scale-x : 0.8;
+   -fx-scale-y : 0.8;
+   -fx-padding : 0px;
+}
+
+#gn-bar > .controlsContainer > #gn-close:hover {
+   -fx-graphic : url("/img/mac-close-hover.png");
+}
+
+#gn-bar > .controlsContainer > #gn-close:pressed {
+   -fx-graphic : url("/img/mac-close-pressed.png");
+}
+
+#gn-bar > .controlsContainer > #gn-maximize:disabled {
+   -fx-graphic : url("/img/mac-disabled.png");
+}
+
+#gn-bar > .controlsContainer > #gn-maximize {
+    -fx-graphic : url("/img/mac-maximize.png");
+    -fx-scale-x : 0.8;
+    -fx-scale-y : 0.8;
+    -fx-padding : 0px;
+}
+
+#gn-bar > .controlsContainer > #gn-maximize:pressed,
+#gn-bar > .controlsContainer > #gn-maximize:hover:pressed,
+#gn-bar > .controlsContainer > #gn-maximize:restore:pressed
+{
+   -fx-graphic : url("/img/mac-maximize-pressed.png");
+}
+
+#gn-bar > .controlsContainer > #gn-maximize:restore {
+    -fx-graphic : url("/img/mac-maximize.png");
+}
+
+#gn-bar > .controlsContainer > #gn-maximize:hover
+{
+    -fx-graphic : url("/img/mac-maximize-hover.png");
+}
+
+#gn-bar > .controlsContainer > #gn-minimize {
+    -fx-graphic : url("/img/mac-minimize.png");
+    -fx-scale-x : 0.8;
+    -fx-scale-y : 0.8;
+    -fx-padding : 0px;
+}
+
+#gn-bar > .controlsContainer > #gn-minimize:hover {
+    -fx-graphic : url("/img/mac-minimize-hover.png");
+}
+
+
+/*****************************************
+
+    ScrollPane
+
+******************************************/
+
+#gn-scroll, #gn-scroll .viewport
+{
+    -fx-background-color: transparent, transparent;
+    -fx-focus-color : transparent;
+    -fx-focus-faint-color : transparent;
+}

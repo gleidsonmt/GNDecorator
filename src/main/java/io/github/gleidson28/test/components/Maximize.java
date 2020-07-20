@@ -65,7 +65,6 @@ public class Maximize extends Button {
 
         
         this.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-//            decorator.setMaximized(!decorator.isMaximized());
 
             if(!decorator.isMaximized()) {
                 this.fireEvent(new StageEvent(StageEvent.MAXIMIZE, decorator));

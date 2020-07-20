@@ -16,18 +16,18 @@
  */
 package io.github.gleidson28.test.components;
 
-import javafx.beans.NamedArg;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.ObservableList;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -38,6 +38,7 @@ import org.scenicview.ScenicView;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
+@SuppressWarnings("unused")
 public class GNDecoratorT {
 
     private final DoubleProperty barHeight
@@ -48,11 +49,14 @@ public class GNDecoratorT {
             = new SimpleBooleanProperty(GNDecoratorT.class,
             "maximizedProperty", false);
 
+    private final BooleanProperty resizable
+            = new SimpleBooleanProperty(GNDecoratorT.class,
+            "resizableProperty", true);
+
     private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
     private double initialWidth  = 800;
     private double initialHeight = 600;
-
 
     private final Stage stage = new Stage(StageStyle.UNDECORATED);
 
@@ -71,7 +75,7 @@ public class GNDecoratorT {
     private final AreaContent   areaContent   = new AreaContent();
     private final Container     container     = new Container(areaContent);
 
-    private final Body body = new Body(container, bar, topBar,
+    private final Body body = new Body(this, container, bar, topBar,
             rightBar, bottomBar, leftBar, topLeftAnchor, topRightAnchor,
             bottomLeftAnchor, bottomRightAnchor);
 
@@ -81,6 +85,14 @@ public class GNDecoratorT {
     private final TranslucentStage translucentStage = new TranslucentStage(this);
 
     private BoundingBox noMaximizedBounds = null;
+
+    /*****************************************************************************
+     *
+     *
+     *                  Construtors
+     *
+     *
+     *****************************************************************************/
 
     public GNDecoratorT() {
         configStage();
@@ -95,8 +107,6 @@ public class GNDecoratorT {
  
     public void setContent(Pane content){
 
-        System.out.println("width = " + initialWidth);
-
         if(content.getPrefWidth() != -1 && content.getPrefHeight() != -1){
             setContent(content, content.getPrefWidth(), content.getPrefHeight());
             initialWidth = content.getPrefWidth();
@@ -110,6 +120,10 @@ public class GNDecoratorT {
         } else {
             setContent(content, initialWidth, initialHeight);
         }
+    }
+
+    public Node getContent(){
+        return areaContent.getContent();
     }
 
     public void setContent(Pane content, double width, double height){
@@ -129,6 +143,14 @@ public class GNDecoratorT {
     }
 
 
+    /*****************************************************************************
+     *
+     *
+     *                  Initializing
+     *
+     *
+     *****************************************************************************/
+
     public void show(){
         if (maximized.get()) {
             this.stage.setWidth(bounds.getWidth());
@@ -140,20 +162,95 @@ public class GNDecoratorT {
         this.stage.show();
     }
 
+    /*****************************************************************************
+     *
+     *
+     *                  Properties
+     *
+     *
+     *****************************************************************************/
+
+    /**
+     * If stage is maximized.
+     * @return The one state of stage.
+     */
     public boolean isMaximized() {
         return maximized.get();
+    }
+
+    public boolean isResizable(){
+        return resizable.get();
     }
 
     public BooleanProperty maximizedProperty() {
         return maximized;
     }
 
+    public BooleanProperty resizableProperty(){
+        return resizable;
+    }
+
     public void setMaximized(boolean maximized) {
         this.maximized.set(maximized);
     }
-    
+
+    public void setResizable(boolean resizable){
+        this.resizable.set(resizable);
+    }
+
+    public void setIconified(boolean value) {
+        stage.setIconified(value);
+    }
+
+    /*****************************************************************************
+     *
+     *
+     *                  Add Custom Controls
+     *
+     *
+     *****************************************************************************/
+
+    /**
+     * Add a menu for menu bar.
+     * @param menu for bar.
+     */
     public void addMenu(Menu menu){
         this.bar.getMenuBar().getMenus().add(menu);
+    }
+
+    /*****************************************************************************
+     *
+     *
+     *                  Customize
+     *
+     *
+     *****************************************************************************/
+
+    /**
+     * Get icons from stage.
+     * @return The icons from this decorator.
+     */
+    public final ObservableList<Image> getIcons() {
+        return stage.getIcons();
+    }
+
+    public void initTheme(Theme theme){
+        switch (theme) {
+            case MAC_YOSEMITE:
+
+                background.getStylesheets().remove(GNDecoratorT.class.
+                        getResource("/theme/default.css").toExternalForm());
+
+                background.getStylesheets().add(
+                        GNDecoratorT.class.
+                                getResource("/theme/yosemite.css").toExternalForm()
+                );
+
+                bar.addAutoHover();
+                bar.invertControls(true);
+
+                break;
+        }
     }
 
     /**
@@ -189,8 +286,5 @@ public class GNDecoratorT {
         ScenicView.show(this.scene);
     }
 
-    public void initTheme(Theme theme){
-        switch (theme) {
-        }
-    }
+
 }
