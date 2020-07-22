@@ -58,6 +58,20 @@ public class Body extends AnchorPane implements AlignUtils {
             bar.disableActions(!newValue);
         });
 
+        decorator.maximizedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue){
+                getChildren().stream().
+                        filter(e -> e instanceof StageBar)
+                        .map( e -> (StageBar) e)
+                        .forEach(e -> ((Node) e).setCursor(Cursor.DEFAULT));
+            } else {
+                getChildren().stream().
+                        filter(e -> e instanceof StageBar)
+                        .map( e -> (StageBar) e)
+                        .forEach(StageBar::changeCursor);
+            }
+        });
+
         alignTopAnchor(topBar);
         alignRightAnchor(rightBar);
         alignBottomAnchor(bottomBar);

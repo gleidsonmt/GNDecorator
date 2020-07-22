@@ -25,8 +25,7 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-//@SuppressWarnings("unused")
-public class XYStage {
+class XYStage {
 
     private static XYStage instance;
 
@@ -36,13 +35,9 @@ public class XYStage {
     private double newX = 0;
     private double newY = 0;
 
-    XYStage(){}
-
     static XYStage getInstance(){
-        if(instance == null)
-            return new XYStage();
-        else
-            return instance;
+        if(instance == null) return new XYStage();
+        else return instance;
     }
 
     public double getInitX() {

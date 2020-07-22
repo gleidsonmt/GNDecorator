@@ -1,7 +1,7 @@
 
 
 #gn-background {
-    -fx-background-color : white;
+    -fx-background-color : -background-color;
     -icon-fill : white;
     -fx-border-color : #00000060;
     -fx-border-width : 1px;
@@ -16,8 +16,16 @@
     -fx-background-color : transparent;
 }
 
+#gn-bar .titleContainer Label {
+    -fx-text-fill : -text-fill;
+}
+
 #gn-bar .titleContainer {
     -fx-background-color : transparent;
+}
+
+#gn-bar .menu-button .text {
+    -fx-fill : -text-fill;
 }
 
 #gn-bar .menu-button {

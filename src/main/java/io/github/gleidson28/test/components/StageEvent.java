@@ -26,18 +26,18 @@ import javafx.stage.Screen;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  09/07/2020
  */
-public class StageEvent extends Event {
+class StageEvent extends Event {
 
     public static final EventType<StageEvent> ANY = new EventType<>(Event.ANY, "ALL_STAGE_EVENT");
 
     static final EventType<StageEvent> MAXIMIZE = new EventType<>(ANY, "MAXIMIZE");
-    static final EventType<StageEvent> RESTORE = new EventType<>(ANY, "RESTORE");
+    static final EventType<StageEvent> RESTORE  = new EventType<>(ANY, "RESTORE");
     static final EventType<StageEvent> MINIMIZE = new EventType<>(ANY, "MINIMIZE");
-    static final EventType<StageEvent> CLOSE = new EventType<>(ANY, "CLOSE");
+    static final EventType<StageEvent> CLOSE    = new EventType<>(ANY, "CLOSE");
 
-    private GNDecoratorT decorator;
+    private final GNDecoratorT decorator;
 
-    private Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+    private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
     StageEvent(EventType<? extends Event> eventType,GNDecoratorT decorator) {
         super(eventType);
@@ -75,12 +75,11 @@ public class StageEvent extends Event {
     }
 
     private void restoreEvent(){
-//        if(!decorator.isMaximized()) {
-            decorator.getStage().setX(decorator.getNoMaximizedBounds().getMinX());
-            decorator.getStage().setY(decorator.getNoMaximizedBounds().getMinY());
-            decorator.getStage().setWidth(decorator.getNoMaximizedBounds().getWidth());
-            decorator.getStage().setHeight(decorator.getNoMaximizedBounds().getHeight());
-//        }
+        decorator.getStage().setX(decorator.getNoMaximizedBounds().getMinX());
+        decorator.getStage().setY(decorator.getNoMaximizedBounds().getMinY());
+        decorator.getStage().setWidth(decorator.getNoMaximizedBounds().getWidth());
+        decorator.getStage().setHeight(decorator.getNoMaximizedBounds().getHeight());
+
         decorator.setMaximized(false);
     }
 

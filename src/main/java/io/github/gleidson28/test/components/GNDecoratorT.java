@@ -53,6 +53,8 @@ public class GNDecoratorT {
             = new SimpleBooleanProperty(GNDecoratorT.class,
             "resizableProperty", true);
 
+    private boolean dark = false;
+
     private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
     private double initialWidth  = 800;
@@ -234,12 +236,11 @@ public class GNDecoratorT {
         return stage.getIcons();
     }
 
-    public void initTheme(Theme theme){
+    public void switchTheme(Theme theme){
         switch (theme) {
             case MAC_YOSEMITE:
 
-                background.getStylesheets().remove(GNDecoratorT.class.
-                        getResource("/theme/default.css").toExternalForm());
+                background.getStylesheets().remove(background.getStylesheets().size() -1);
 
                 background.getStylesheets().add(
                         GNDecoratorT.class.
@@ -250,14 +251,57 @@ public class GNDecoratorT {
                 bar.invertControls(true);
 
                 break;
+            case DEFAULT: {
+                background.getStylesheets().remove(background.getStylesheets().size() -1);
+
+                background.getStylesheets().add(
+                        GNDecoratorT.class.
+                                getResource("/theme/default.css").toExternalForm()
+                );
+
+                bar.invertControls(false);
+                bar.removeAutoHover();
+            }
         }
     }
+
+    public void setDark(boolean value){
+        dark = value;
+        if(value) {
+            background.getStylesheets().remove(
+                    GNDecoratorT.class.
+                            getResource("/theme/light.css").toExternalForm()
+            );
+            background.getStylesheets().add(0, GNDecoratorT.class.
+                    getResource("/theme/dark.css").toExternalForm());
+
+        } else {
+
+                background.getStylesheets().remove(
+                        GNDecoratorT.class.
+                                getResource("/theme/dark.css").toExternalForm()
+                );
+                background.getStylesheets().add(0, GNDecoratorT.class.
+                        getResource("/theme/light.css").toExternalForm());
+        }
+    }
+
+    public boolean isDark() {
+        return dark;
+    }
+
+
 
     /**
      *
      * Tests
      *
      * */
+
+    public void addStylesheets(String... stylesheet) {
+        stage.getScene().getStylesheets().addAll(stylesheet);
+    }
+
     BoundingBox getNoMaximizedBounds(){
         return this.noMaximizedBounds;
     }

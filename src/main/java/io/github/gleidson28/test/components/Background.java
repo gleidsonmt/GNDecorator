@@ -17,6 +17,7 @@
 
 package io.github.gleidson28.test.components;
 
+import io.github.gleidson28.decorator.background.GNBackground;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.BooleanPropertyBase;
 import javafx.beans.value.ChangeListener;
@@ -31,8 +32,11 @@ import javafx.scene.layout.StackPane;
  */
 public class Background extends StackPane {
 
-    private static final PseudoClass MAXIMIZE_PSEUDO_CLASS
-            = PseudoClass.getPseudoClass("maximized");
+    private static final PseudoClass MAXIMIZE_PSEUDO_CLASS =
+            PseudoClass.getPseudoClass("maximized");
+
+    private static final String USER_AGENT_STYLESHEET =
+            GNBackground.class.getResource("/theme/agent.css").toExternalForm();
 
     private final BooleanProperty maximized = new BooleanPropertyBase(false) {
         public void invalidated() {
@@ -52,6 +56,10 @@ public class Background extends StackPane {
             = Background.class.getResource("/theme/default.css")
             .toExternalForm();
 
+    private static final String LIGHT_STYLESHEET
+            = Background.class.getResource("/theme/light.css")
+            .toExternalForm();
+
     public Background(Body body, GNDecoratorT decorator) {
 
         this.getStyleClass().add("gn-background");
@@ -62,6 +70,7 @@ public class Background extends StackPane {
 
 
 
+        this.getStylesheets().add(LIGHT_STYLESHEET);
         this.getStylesheets().add(DEFAULT_STYLESHEET);
 
         decorator.maximizedProperty().
@@ -78,5 +87,10 @@ public class Background extends StackPane {
 
     public void setMaximize(boolean maximize) {
         this.maximized.set(maximize);
+    }
+
+    @Override
+    public String getUserAgentStylesheet() {
+        return USER_AGENT_STYLESHEET;
     }
 }

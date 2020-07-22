@@ -16,11 +16,11 @@
  */
 package io.github.gleidson28.test.components;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
-import javafx.geometry.BoundingBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -40,26 +40,20 @@ import javafx.stage.Stage;
  */
 class Bar extends HBox implements StageChanges, StageReposition {
 
-    private Stage stage;
-    private GNDecoratorT decorator;
-
-    private ObservableList<Button> defaultControls;
-
-    private HBox controlsContainer = new HBox();
-    private HBox titleContainer = new HBox(new Label("JavaFx Decorator"));
-    private MenuBar menuBar = new MenuBar();
-
-    private BoundingBox savedBounds  = null;
-    private BoundingBox initialBound = null;
-
     private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+
+    private GNDecoratorT    decorator;
+    private Stage           stage;
+
+    private final ObservableList<Button> defaultControls;
+
+    private final HBox      controlsContainer   = new HBox();
+    private final HBox      titleContainer      = new HBox(new Label("JavaFx Decorator"));
+    private final MenuBar   menuBar             = new MenuBar();
 
     private final Minimize minimize;
     private final Maximize maximize;
     private final Close    close;
-
-//    private static final String USER_AGENT_STYLESHEET =
-//            GNBackground.class.getResource("/css/bar.css").toExternalForm();
 
     Bar(GNDecoratorT decorator) {
         this.setId("gn-bar");
@@ -76,11 +70,18 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
     }
 
+    private final ChangeListener<Boolean> autoHover = (observable, oldValue, newValue) -> hoverButtons(newValue);
+
     public void addAutoHover(){
         defaultControls.forEach(e -> e.hoverProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    hoverButtons(newValue);
-        }));
+                .addListener(autoHover)
+        );
+    }
+
+    public void removeAutoHover(){
+        defaultControls.forEach(e -> e.hoverProperty()
+                .removeListener(autoHover)
+        );
     }
 
     public void hoverButtons(boolean value){
@@ -94,6 +95,16 @@ class Bar extends HBox implements StageChanges, StageReposition {
             getChildren().removeAll(controlsContainer, menuBar);
             getChildren().add(0, controlsContainer);
             getChildren().add(2, menuBar);
+
+            controlsContainer.getChildren().clear();
+            controlsContainer.getChildren().addAll(close, minimize, maximize);
+        } else {
+            getChildren().removeAll(controlsContainer, menuBar);
+            getChildren().add(0, menuBar);
+            getChildren().add(2, controlsContainer);
+
+            controlsContainer.getChildren().clear();
+            controlsContainer.getChildren().addAll(minimize, maximize, close);
         }
     }
 
