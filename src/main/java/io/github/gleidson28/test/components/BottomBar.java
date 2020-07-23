@@ -24,11 +24,11 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class BottomBar extends Pane implements StageChanges, StageBar {
+class BottomBar extends Pane implements StageChanges, StageBar {
 
     private final Stage stage;
 
-    protected BottomBar(Stage stage) {
+    BottomBar(Stage stage) {
         this.getStyleClass().add("gn-bottom-bar");
         this.setId("gn-bottom-bar");
         this.setCursor(Cursor.S_RESIZE);

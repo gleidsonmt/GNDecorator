@@ -30,7 +30,7 @@ import javafx.scene.layout.StackPane;
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Creation  20/04/2018
  */
-public class Background extends StackPane {
+class Background extends StackPane {
 
     private static final PseudoClass MAXIMIZE_PSEUDO_CLASS =
             PseudoClass.getPseudoClass("maximized");
@@ -60,7 +60,7 @@ public class Background extends StackPane {
             = Background.class.getResource("/theme/light.css")
             .toExternalForm();
 
-    public Background(Body body, GNDecoratorT decorator) {
+    Background(Body body, GNDecoratorT decorator) {
 
         this.getStyleClass().add("gn-background");
         this.setId("gn-background");

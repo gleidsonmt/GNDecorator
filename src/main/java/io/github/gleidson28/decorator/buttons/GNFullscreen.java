@@ -67,7 +67,7 @@ public class GNFullscreen extends Button  {
 
     @Override
     public String getUserAgentStylesheet() {
-        return getClass().getResource("/com/gn/resources/css/controls/buttons.css").toExternalForm();
+        return getClass().getResource("/css/controls/buttons.css").toExternalForm();
     }
 
     private final StyleableObjectProperty<Paint> defaultFill = new SimpleStyleableObjectProperty<>(StyleableProperties.DEFAULT_FILL,

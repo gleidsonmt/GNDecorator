@@ -29,7 +29,7 @@ import javafx.scene.input.MouseEvent;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  09/07/2020
  */
-public class Maximize extends Button {
+class Maximize extends Button {
 
     private static final PseudoClass RESTORE_PSEUDO_CLASS
             = PseudoClass.getPseudoClass("restore");
@@ -56,7 +56,7 @@ public class Maximize extends Button {
         return this.restore.get();
     }
 
-    public Maximize(GNDecoratorT decorator) {
+    Maximize(GNDecoratorT decorator) {
 
         this.setText("[ ]");
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -78,5 +78,6 @@ public class Maximize extends Button {
         decorator.maximizedProperty().addListener((observable, oldValue, newValue) -> {
             setRestore(newValue);
         });
+
     }
 }

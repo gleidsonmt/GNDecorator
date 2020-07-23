@@ -1518,7 +1518,6 @@ public class GNDecorator {
             AnchorPane.setTopAnchor(this.areaContent, 0D);
             close.play();
         }
-        
     }
     
     public void initTheme(Theme theme){

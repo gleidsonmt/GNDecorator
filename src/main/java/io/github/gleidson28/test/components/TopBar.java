@@ -29,11 +29,11 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class TopBar extends Pane implements StageChanges, StageBar {
+class TopBar extends Pane implements StageChanges, StageBar {
 
     private final Stage stage;
 
-    protected TopBar(Stage stage) {
+    TopBar(Stage stage) {
         this.getStyleClass().add("gn-top-bar");
         this.setId("gn-top-bar");
         this.setMinHeight(3D);

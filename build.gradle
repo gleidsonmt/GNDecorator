@@ -25,7 +25,7 @@ archivesBaseName = 'GNDecorator'
 group = "io.github.Gleidson28"
 //version = "0.1.2"
 version = "0.3.1"
-mainClassName = 'io.github.gleidson28.Test'
+mainClassName = 'io.github.gleidson28.Mac'
 
 jar {
     manifest {

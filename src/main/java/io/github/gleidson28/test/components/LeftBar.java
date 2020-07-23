@@ -30,12 +30,12 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class LeftBar extends Pane implements StageChanges, StageBar {
+class LeftBar extends Pane implements StageChanges, StageBar {
 
     private final Stage stage;
     private final GNDecoratorT decorator;
 
-    protected LeftBar(GNDecoratorT decorator) {
+    LeftBar(GNDecoratorT decorator) {
         this.getStyleClass().add("gn-left-bar");
         this.setId("gn-left-bar");
         this.setCursor(Cursor.W_RESIZE);

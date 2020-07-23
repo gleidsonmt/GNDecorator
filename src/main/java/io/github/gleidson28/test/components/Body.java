@@ -27,9 +27,9 @@ import javafx.scene.layout.AnchorPane;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class Body extends AnchorPane implements AlignUtils {
+class Body extends AnchorPane implements AlignUtils {
 
-    public Body(GNDecoratorT decorator, Container container, Bar bar,
+    Body(GNDecoratorT decorator, Container container, Bar bar,
                 TopBar topBar, RightBar rightBar,
                 BottomBar bottomBar, LeftBar leftBar,
                 TopLeftAnchor topLeftAnchor, TopRightAnchor topRightAnchor,
@@ -72,6 +72,20 @@ public class Body extends AnchorPane implements AlignUtils {
             }
         });
 
+        decorator.getStage().fullScreenProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue) {
+                getChildren().stream()
+                        .filter( e -> e instanceof StageBar )
+                        .map( e -> (StageBar) e)
+                        .forEach( e -> ((Node) e).setCursor(Cursor.DEFAULT));
+            } else {
+                getChildren().stream()
+                        .filter(e -> e instanceof StageBar)
+                        .map(e -> (StageBar) e)
+                        .forEach(StageBar::changeCursor);
+            }
+        });
+
         alignTopAnchor(topBar);
         alignRightAnchor(rightBar);
         alignBottomAnchor(bottomBar);
@@ -84,7 +98,11 @@ public class Body extends AnchorPane implements AlignUtils {
 
         alignTopAnchor(bar);
 
-        fullBody(container);
+        alignContent(container,bar.getPrefHeight());
 
+    }
+
+    void fullBody(Container container){
+        alignContent(container, 0);
     }
 }

@@ -25,6 +25,8 @@ import javafx.scene.layout.AnchorPane;
  */
 interface AlignUtils {
 
+
+
     default void alignTopAnchor(Node node){
         AnchorPane.setTopAnchor(node, 0D);
         AnchorPane.setRightAnchor(node, 0D);
@@ -71,6 +73,13 @@ interface AlignUtils {
 
     default void fullBody(Node node){
         AnchorPane.setTopAnchor(node, 0D);
+        AnchorPane.setRightAnchor(node, 0D);
+        AnchorPane.setLeftAnchor(node, 0D);
+        AnchorPane.setBottomAnchor(node, 0D);
+    }
+
+    default void alignContent(Node node, double barHeight){
+        AnchorPane.setTopAnchor(node, barHeight);
         AnchorPane.setRightAnchor(node, 0D);
         AnchorPane.setLeftAnchor(node, 0D);
         AnchorPane.setBottomAnchor(node, 0D);

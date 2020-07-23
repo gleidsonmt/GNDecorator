@@ -16,22 +16,24 @@
  */
 package io.github.gleidson28.test.components;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.animation.TranslateTransition;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.scenicview.ScenicView;
 
 /**
@@ -52,6 +54,15 @@ public class GNDecoratorT {
     private final BooleanProperty resizable
             = new SimpleBooleanProperty(GNDecoratorT.class,
             "resizableProperty", true);
+
+    private final StringProperty titleProperty
+            = new SimpleStringProperty(GNDecoratorT.this, "titleProperty", "GNDecorator");
+
+    private final TranslateTransition open
+            = new TranslateTransition(Duration.millis(100D), this.bar);
+
+    private final TranslateTransition close
+            = new TranslateTransition(Duration.millis(100D), this.bar);
 
     private boolean dark = false;
 
@@ -98,6 +109,7 @@ public class GNDecoratorT {
 
     public GNDecoratorT() {
         configStage();
+        viewBar(false);
     }
 
     private void configStage() {
@@ -105,8 +117,33 @@ public class GNDecoratorT {
         this.stage.setScene(this.scene);
         this.stage.setMinWidth(254.0D);
         this.stage.setMinHeight(57.0D);
+
+        this.stage.setFullScreenExitKeyCombination(KeyCombination.valueOf("F11"));
+
+        stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> {
+            viewBar(newValue);
+        });
     }
- 
+
+    public void setContent(Parent content){
+
+        Pane _content = (Pane) content;
+
+        if(_content.getPrefWidth() != -1 && _content.getPrefHeight() != -1){
+            setContent(_content, _content.getPrefWidth(), _content.getPrefHeight());
+            initialWidth = _content.getPrefWidth();
+            initialHeight = _content.getPrefHeight();
+        } else if(_content.getPrefWidth() != -1){
+            setContent(_content, _content.getPrefWidth(), initialHeight);
+            initialHeight = _content.getPrefHeight();
+        } else if(_content.getPrefHeight() != -1){
+            setContent(_content, initialWidth, _content.getPrefHeight());
+            initialWidth = _content.getPrefHeight();
+        } else {
+            setContent(_content, initialWidth, initialHeight);
+        }
+    }
+
     public void setContent(Pane content){
 
         if(content.getPrefWidth() != -1 && content.getPrefHeight() != -1){
@@ -204,6 +241,20 @@ public class GNDecoratorT {
         stage.setIconified(value);
     }
 
+    public String getTitle() {
+        return titleProperty.get();
+    }
+
+    public StringProperty titleProperty() {
+        return titleProperty;
+    }
+
+    public void setTitle(String title) {
+        this.titleProperty.set(title);
+    }
+
+
+
     /*****************************************************************************
      *
      *
@@ -265,6 +316,76 @@ public class GNDecoratorT {
         }
     }
 
+
+//    EventHandler<MouseEvent> handler = (MouseEvent event) -> {
+//
+//        if (event.getY() == 0 && stage.isFullScreen()) {
+//            viewBar(true);
+//            System.err.println("fuck");
+//            this.background.setOnMouseMoved(null);
+//        }
+//    };
+
+    public void setFullScreen(boolean value){
+        stage.setFullScreen(true);
+//        setMaximized(true);
+
+//        this.background.setOnMouseMoved(handler);
+//
+        bar.setVisible(!value);
+
+        body.fullBody(container);
+
+//
+//        this.bar.setOnMouseExited(e -> {
+//            if (stage.isFullScreen() && e.getY() > 0) {
+//                viewBar(false);
+//                this.background.setOnMouseMoved(handler);
+//            }
+//        });
+//
+//
+//
+//        this.bar.setOnMouseMoved(e -> {
+//            if (stage.isFullScreen()) {
+//                this.background.setOnMouseMoved(null);
+//            }
+//        });
+//
+//        this.bar.setOnMouseEntered(e -> {
+//            if (stage.isFullScreen()) {
+//                this.background.setOnMouseMoved(null);
+//            }
+//        });
+    }
+
+    private void viewBar(boolean view){
+
+//        bar.setTranslateY(-(barHeight.get()));
+
+        open.setFromY(-(barHeight.get()));
+        open.setByY(barHeight.get());
+
+        close.setFromY(barHeight.get() * -1);
+
+        close.setByY( (barHeight.get() ));
+
+        System.out.println(view);
+
+        if(!view) {
+            open.play();
+            AnchorPane.setTopAnchor(this.container, barHeight.get());
+            bar.setVisible(true);
+        } else {
+            AnchorPane.setTopAnchor(this.container, 0D);
+            close.play();
+            bar.setVisible(false);
+        }
+
+    }
+
+
+
     public void setDark(boolean value){
         dark = value;
         if(value) {
@@ -290,7 +411,9 @@ public class GNDecoratorT {
         return dark;
     }
 
-
+    public void addStylesheets(String... stylesheet) {
+        stage.getScene().getStylesheets().addAll(stylesheet);
+    }
 
     /**
      *
@@ -298,9 +421,6 @@ public class GNDecoratorT {
      *
      * */
 
-    public void addStylesheets(String... stylesheet) {
-        stage.getScene().getStylesheets().addAll(stylesheet);
-    }
 
     BoundingBox getNoMaximizedBounds(){
         return this.noMaximizedBounds;

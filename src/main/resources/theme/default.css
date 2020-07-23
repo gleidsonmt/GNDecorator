@@ -2,13 +2,16 @@
 
 #gn-background {
     -fx-background-color : -background-color;
-    -icon-fill : white;
     -fx-border-color : #00000060;
     -fx-border-width : 1px;
 }
 
 #gn-background:maximized {
     -fx-border-width : 0px;
+}
+
+#gn-container {
+    -fx-background-color : transparent;
 }
 
 #gn-background  #gn-bar

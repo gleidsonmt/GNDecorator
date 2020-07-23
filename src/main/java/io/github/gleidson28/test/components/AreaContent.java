@@ -22,7 +22,7 @@ import javafx.scene.control.ScrollPane;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class AreaContent extends ScrollPane {
+class AreaContent extends ScrollPane {
 
     public AreaContent() {
 

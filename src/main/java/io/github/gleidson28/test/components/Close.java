@@ -24,9 +24,9 @@ import javafx.scene.input.MouseEvent;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  09/07/2020
  */
-public class Close extends Button {
+class Close extends Button {
 
-    public Close(GNDecoratorT decorator) {
+    Close(GNDecoratorT decorator) {
 
         this.setText("X");
         this.setId("gn-close");

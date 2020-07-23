@@ -47,8 +47,9 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
     private final ObservableList<Button> defaultControls;
 
+    private final Label     title               = new Label("JavaFx Decorator");
+    private final HBox      titleContainer      = new HBox(title);
     private final HBox      controlsContainer   = new HBox();
-    private final HBox      titleContainer      = new HBox(new Label("JavaFx Decorator"));
     private final MenuBar   menuBar             = new MenuBar();
 
     private final Minimize minimize;
@@ -68,6 +69,7 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
         confLayout(decorator);
 
+        decorator.titleProperty().bindBidirectional(title.textProperty());
     }
 
     private final ChangeListener<Boolean> autoHover = (observable, oldValue, newValue) -> hoverButtons(newValue);

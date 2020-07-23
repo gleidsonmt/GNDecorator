@@ -19,8 +19,7 @@ package io.github.gleidson28;
 
 import io.github.gleidson28.decorator.GNDecorator;
 import io.github.gleidson28.decorator.buttons.ButtonTest;
-import io.github.gleidson28.test.components.LeftBar;
-import io.github.gleidson28.test.components.XYStage;
+import io.github.gleidson28.decorator.options.ButtonType;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -64,7 +63,7 @@ public class App extends Application {
 //            window.setResizable(true);
         });
 
-//        window.addButton(ButtonType.FULL_EFFECT);
+        window.addButton(ButtonType.FULL_EFFECT);
         content.getChildren().add(btn);
         window.setContent(content);
 

@@ -25,11 +25,11 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  08/07/2020
  */
-public class BottomLeftAnchor extends Path implements StageChanges, StageBar {
+class BottomLeftAnchor extends Path implements StageChanges, StageBar {
 
     private final Stage stage;
 
-    protected BottomLeftAnchor(Stage stage) {
+    BottomLeftAnchor(Stage stage) {
         this.getStyleClass().add("gn-bottom-left");
         this.setId("gn-bottom-left");
         this.setCursor(Cursor.SW_RESIZE);

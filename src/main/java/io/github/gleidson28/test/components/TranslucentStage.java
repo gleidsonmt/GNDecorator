@@ -28,7 +28,7 @@ import javafx.stage.StageStyle;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  10/07/2020
  */
-public class TranslucentStage extends Stage implements StageReposition {
+class TranslucentStage extends Stage implements StageReposition {
 
     private final GNDecoratorT decorator;
 

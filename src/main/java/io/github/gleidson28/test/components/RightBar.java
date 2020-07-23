@@ -24,11 +24,11 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class RightBar extends Pane implements StageChanges, StageBar {
+class RightBar extends Pane implements StageChanges, StageBar {
 
     private final Stage stage;
 
-    protected RightBar(Stage stage) {
+    RightBar(Stage stage) {
         this.getStyleClass().add("gn-right-bar");
         this.setId("gn-right-bar");
         this.setMinWidth(3D);

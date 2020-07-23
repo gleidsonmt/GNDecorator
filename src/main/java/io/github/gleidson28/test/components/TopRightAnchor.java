@@ -25,11 +25,11 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  08/07/2020
  */
-public class TopRightAnchor extends Path implements StageChanges, StageBar {
+class TopRightAnchor extends Path implements StageChanges, StageBar {
 
     private final Stage stage;
 
-    protected TopRightAnchor(Stage stage) {
+    TopRightAnchor(Stage stage) {
         this.getStyleClass().add("gn-top-right");
         this.setId("gn-top-right");
         this.setCursor(Cursor.NE_RESIZE);

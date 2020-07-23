@@ -28,7 +28,8 @@ import javafx.stage.Screen;
  */
 class StageEvent extends Event {
 
-    public static final EventType<StageEvent> ANY = new EventType<>(Event.ANY, "ALL_STAGE_EVENT");
+    public static final EventType<StageEvent> ANY =
+            new EventType<>(Event.ANY, "ALL_STAGE_EVENT");
 
     static final EventType<StageEvent> MAXIMIZE = new EventType<>(ANY, "MAXIMIZE");
     static final EventType<StageEvent> RESTORE  = new EventType<>(ANY, "RESTORE");

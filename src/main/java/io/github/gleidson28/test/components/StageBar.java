@@ -16,8 +16,6 @@
  */
 package io.github.gleidson28.test.components;
 
-import javafx.stage.Stage;
-
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  07/07/2020

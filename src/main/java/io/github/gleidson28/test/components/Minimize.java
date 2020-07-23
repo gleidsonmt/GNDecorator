@@ -24,9 +24,9 @@ import javafx.scene.input.MouseEvent;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  09/07/2020
  */
-public class Minimize extends Button {
+class Minimize extends Button {
 
-    public Minimize(GNDecoratorT decorator) {
+    Minimize(GNDecoratorT decorator) {
 
         this.setText("-");
         this.setId("gn-minimize");

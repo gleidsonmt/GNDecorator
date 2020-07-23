@@ -22,8 +22,11 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.Mnemonic;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -32,32 +35,60 @@ import javafx.stage.Stage;
  * Create on  23/09/2018
  * Version 1.0
  */
-public class Test extends Application {
+public class Mac extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        HBox content = new HBox(new Label("Hello GNDecorator!"));
-        content.setAlignment(Pos.CENTER);
+        Parent content = new HBox(new Button("Hello GNDecorator!"));
+//        content.setAlignment(Pos.CENTER);
+
+        Parent f = new Button();
+//        f.getpre
+
 
         GNDecoratorT decorator = new GNDecoratorT();
-        decorator.setContent(content,1200,800);
+//        decorator.setContent(content,1200,800);
+        decorator.setContent(f);
 
-        Menu file = new Menu("File");
-        MenuItem open = new MenuItem("Open");
-        MenuItem save = new MenuItem("Save");
-        MenuItem openRecent = new MenuItem("OpenRecent");
-        file.getItems().addAll(open, save, openRecent);
-        decorator.addMenu(file);
+        decorator.setTitle("GNDecorator 0.3");
+
+        Menu options = new Menu("Options");
+        MenuItem macTheme = new MenuItem("Mac Yosemite theme");
+        MenuItem defaultTheme = new MenuItem("Default Theme");
+        MenuItem switchLight = new MenuItem("Switch Light");
+        MenuItem fullscreen = new MenuItem("Fullscreen");
+        options.getItems().addAll(macTheme, defaultTheme, switchLight, fullscreen);
+        decorator.addMenu(options);
         decorator.addMenu(new Menu("Edit"));
 
-        decorator.initTheme(Theme.MAC_YOSEMITE);
+        macTheme.setOnAction( e -> {
+            decorator.switchTheme(Theme.MAC_YOSEMITE);
+        });
+
+        defaultTheme.setOnAction( e -> {
+            decorator.switchTheme(Theme.DEFAULT);
+        });
+
+        switchLight.setOnAction(e -> {
+            decorator.setDark(!decorator.isDark());
+        });
+
+        fullscreen.setOnAction(e -> {
+            decorator.setFullScreen(true);
+        });
+
+        decorator.setFullScreen(true);
+
+//        decorator.setDark(true);
+        decorator.addStylesheets(getClass().getResource("/theme/master.css").toExternalForm());
+
+//        decorator.initTheme(Theme.MAC_YOSEMITE);
 
         decorator.show();
 
 //        decorator.testWithScenicView();
 
-        decorator.isMaximized();
 
 //        stage.setScene(new Scene(content,800,600));
 //        stage.setMaximized(true);
