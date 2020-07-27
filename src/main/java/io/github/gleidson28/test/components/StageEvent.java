@@ -58,28 +58,27 @@ class StageEvent extends Event {
 
     private void maximizeEvent(){
 
-        decorator.setBounds(
+        decorator.noMaximizedBounds =
                 new BoundingBox(
-                        decorator.getStage().getX(),
-                        decorator.getStage().getY(),
-                        decorator.getStage().getWidth(),
-                        decorator.getStage().getHeight()
-                )
-        );
+                        decorator.stage.getX(),
+                        decorator.stage.getY(),
+                        decorator.stage.getWidth(),
+                        decorator.stage.getHeight()
+                );
 
-        decorator.getStage().setX(bounds.getMinX());
-        decorator.getStage().setY(bounds.getMinY());
-        decorator.getStage().setWidth(bounds.getWidth());
-        decorator.getStage().setHeight(bounds.getHeight());
+        decorator.stage.setX(bounds.getMinX());
+        decorator.stage.setY(bounds.getMinY());
+        decorator.stage.setWidth(bounds.getWidth());
+        decorator.stage.setHeight(bounds.getHeight());
 
         decorator.setMaximized(true);
     }
 
     private void restoreEvent(){
-        decorator.getStage().setX(decorator.getNoMaximizedBounds().getMinX());
-        decorator.getStage().setY(decorator.getNoMaximizedBounds().getMinY());
-        decorator.getStage().setWidth(decorator.getNoMaximizedBounds().getWidth());
-        decorator.getStage().setHeight(decorator.getNoMaximizedBounds().getHeight());
+        decorator.stage.setX(decorator.noMaximizedBounds.getMinX());
+        decorator.stage.setY(decorator.noMaximizedBounds.getMinY());
+        decorator.stage.setWidth(decorator.noMaximizedBounds.getWidth());
+        decorator.stage.setHeight(decorator.noMaximizedBounds.getHeight());
 
         decorator.setMaximized(false);
     }

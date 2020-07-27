@@ -40,7 +40,7 @@ class LeftBar extends Pane implements StageChanges, StageBar {
         this.setId("gn-left-bar");
         this.setCursor(Cursor.W_RESIZE);
         this.setMinWidth(3D);
-        this.stage = decorator.getStage();
+        this.stage = decorator.stage;
         this.decorator = decorator;
         configActions();
     }

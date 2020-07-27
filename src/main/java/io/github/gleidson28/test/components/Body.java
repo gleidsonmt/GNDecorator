@@ -72,7 +72,7 @@ class Body extends AnchorPane implements AlignUtils {
             }
         });
 
-        decorator.getStage().fullScreenProperty().addListener((observable, oldValue, newValue) -> {
+        decorator.stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue) {
                 getChildren().stream()
                         .filter( e -> e instanceof StageBar )

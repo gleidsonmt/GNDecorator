@@ -25,6 +25,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.Mnemonic;
 import javafx.scene.layout.HBox;
@@ -43,15 +44,15 @@ public class Mac extends Application {
         Parent content = new HBox(new Button("Hello GNDecorator!"));
 //        content.setAlignment(Pos.CENTER);
 
-        Parent f = new Button();
+//        Parent f = new ComboBox<>();
 //        f.getpre
 
 
         GNDecoratorT decorator = new GNDecoratorT();
 //        decorator.setContent(content,1200,800);
-        decorator.setContent(f);
+        decorator.setContent(content);
 
-        decorator.setTitle("GNDecorator 0.3");
+//        decorator.setTitle("GNDecorator 0.3");
 
         Menu options = new Menu("Options");
         MenuItem macTheme = new MenuItem("Mac Yosemite theme");
@@ -62,23 +63,25 @@ public class Mac extends Application {
         decorator.addMenu(options);
         decorator.addMenu(new Menu("Edit"));
 
-        macTheme.setOnAction( e -> {
-            decorator.switchTheme(Theme.MAC_YOSEMITE);
-        });
+        macTheme.setOnAction( e -> decorator.switchTheme(Theme.MAC_YOSEMITE));
 
-        defaultTheme.setOnAction( e -> {
-            decorator.switchTheme(Theme.DEFAULT);
-        });
+        defaultTheme.setOnAction( e -> decorator.switchTheme(Theme.DEFAULT));
 
-        switchLight.setOnAction(e -> {
-            decorator.setDark(!decorator.isDark());
-        });
+        switchLight.setOnAction(e -> decorator.setDark(!decorator.isDark()));
 
         fullscreen.setOnAction(e -> {
             decorator.setFullScreen(true);
         });
 
+//        decorator.setFullBody(true);
+//
+//        decorator.pro
         decorator.setFullScreen(true);
+        decorator.addControl(new Button("Custom Control"));
+        decorator.addControl(new ComboBox<>());
+//        decorator.setMaximized(true);
+//        decorator.setResizable(true);
+//        decorator.getIcons().add(new Image("/img/close.png"));
 
 //        decorator.setDark(true);
         decorator.addStylesheets(getClass().getResource("/theme/master.css").toExternalForm());
@@ -87,7 +90,7 @@ public class Mac extends Application {
 
         decorator.show();
 
-//        decorator.testWithScenicView();
+        decorator.testWithScenicView();
 
 
 //        stage.setScene(new Scene(content,800,600));

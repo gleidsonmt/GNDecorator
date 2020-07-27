@@ -24,17 +24,22 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
 import javafx.scene.control.Menu;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.scenicview.ScenicView;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -43,7 +48,7 @@ import org.scenicview.ScenicView;
 @SuppressWarnings("unused")
 public class GNDecoratorT {
 
-    private final DoubleProperty barHeight
+    final DoubleProperty barHeight
             = new SimpleDoubleProperty(GNDecoratorT.class,
             "BarHeightProperty",30);
 
@@ -55,8 +60,13 @@ public class GNDecoratorT {
             = new SimpleBooleanProperty(GNDecoratorT.class,
             "resizableProperty", true);
 
-    private final StringProperty titleProperty
-            = new SimpleStringProperty(GNDecoratorT.this, "titleProperty", "GNDecorator");
+    private final StringProperty title
+            = new SimpleStringProperty(GNDecoratorT.this,
+            "titleProperty", "GNDecorator");
+
+    private final BooleanProperty fullBody
+            = new SimpleBooleanProperty(GNDecoratorT.this,
+            "fullBodyProperty", false);
 
     private final TranslateTransition open
             = new TranslateTransition(Duration.millis(100D), this.bar);
@@ -64,48 +74,45 @@ public class GNDecoratorT {
     private final TranslateTransition close
             = new TranslateTransition(Duration.millis(100D), this.bar);
 
-    private boolean dark = false;
+    private final Rectangle2D bounds
+            = Screen.getPrimary().getVisualBounds();
 
-    private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
-
-    private double initialWidth  = 800;
-    private double initialHeight = 600;
-
-    private final Stage stage = new Stage(StageStyle.UNDECORATED);
+    final Stage stage = new Stage(StageStyle.UNDECORATED);
 
     private final LeftBar   leftBar     = new LeftBar(this);
     private final RightBar  rightBar    = new RightBar(stage);
     private final TopBar    topBar      = new TopBar(stage);
     private final BottomBar bottomBar   = new BottomBar(stage);
 
-    private final TopLeftAnchor     topLeftAnchor    = new TopLeftAnchor(stage);
-    private final TopRightAnchor    topRightAnchor   = new TopRightAnchor(stage);
-    private final BottomLeftAnchor  bottomLeftAnchor = new BottomLeftAnchor(stage);
-    private final BottomRightAnchor bottomRightAnchor = new BottomRightAnchor(stage);
+    private final TopLeftAnchor     topLeftAnchor       = new TopLeftAnchor(stage);
+    private final TopRightAnchor    topRightAnchor      = new TopRightAnchor(stage);
+    private final BottomLeftAnchor  bottomLeftAnchor    = new BottomLeftAnchor(stage);
+    private final BottomRightAnchor bottomRightAnchor   = new BottomRightAnchor(stage);
 
     private final Bar bar       = new Bar(this);
 
     private final AreaContent   areaContent   = new AreaContent();
     private final Container     container     = new Container(areaContent);
 
-    private final Body body = new Body(this, container, bar, topBar,
+    private final Body body
+            = new Body(this, container, bar, topBar,
             rightBar, bottomBar, leftBar, topLeftAnchor, topRightAnchor,
             bottomLeftAnchor, bottomRightAnchor);
 
-    private final Background background = new Background(body, this);
+    private final Background background
+            = new Background(body, this);
 
-    private final Scene scene = new Scene(background);
-    private final TranslucentStage translucentStage = new TranslucentStage(this);
+    private final Scene scene
+            = new Scene(background);
 
-    private BoundingBox noMaximizedBounds = null;
+    final TranslucentStage translucentStage
+            = new TranslucentStage(this);
 
-    /*****************************************************************************
-     *
-     *
-     *                  Construtors
-     *
-     *
-     *****************************************************************************/
+    private double  initialWidth    = 800;
+    private double  initialHeight   = 600;
+    private boolean dark            = false;
+
+    BoundingBox noMaximizedBounds;
 
     public GNDecoratorT() {
         configStage();
@@ -120,15 +127,23 @@ public class GNDecoratorT {
 
         this.stage.setFullScreenExitKeyCombination(KeyCombination.valueOf("F11"));
 
-        stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> {
-            viewBar(newValue);
+        stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> viewBar(newValue));
+
+        fullBody.addListener((observable, oldValue, newValue) -> {
+            if(newValue) body.alignTopAnchor(container);
+            else body.alignContent(container, bar.getHeight());
         });
     }
 
     public void setContent(Parent content){
+       Region _content = (Region) content;
+       setContent(_content);
+    }
 
-        Pane _content = (Pane) content;
-
+    public void setContent(Region _content){
+        
+        _content.setMinSize(0,0);
+        
         if(_content.getPrefWidth() != -1 && _content.getPrefHeight() != -1){
             setContent(_content, _content.getPrefWidth(), _content.getPrefHeight());
             initialWidth = _content.getPrefWidth();
@@ -161,11 +176,7 @@ public class GNDecoratorT {
         }
     }
 
-    public Node getContent(){
-        return areaContent.getContent();
-    }
-
-    public void setContent(Pane content, double width, double height){
+    public void setContent(Region content, double width, double height){
         this.areaContent.setContent(content);
 
         initialWidth = width;
@@ -181,14 +192,9 @@ public class GNDecoratorT {
         noMaximizedBounds = new BoundingBox( x, y, _width, _height);
     }
 
-
-    /*****************************************************************************
-     *
-     *
-     *                  Initializing
-     *
-     *
-     *****************************************************************************/
+    public Node getContent(){
+        return areaContent.getContent();
+    }
 
     public void show(){
         if (maximized.get()) {
@@ -200,14 +206,6 @@ public class GNDecoratorT {
         }
         this.stage.show();
     }
-
-    /*****************************************************************************
-     *
-     *
-     *                  Properties
-     *
-     *
-     *****************************************************************************/
 
     /**
      * If stage is maximized.
@@ -242,26 +240,52 @@ public class GNDecoratorT {
     }
 
     public String getTitle() {
-        return titleProperty.get();
+        return title.get();
     }
 
     public StringProperty titleProperty() {
-        return titleProperty;
+        return title;
     }
 
     public void setTitle(String title) {
-        this.titleProperty.set(title);
+        this.title.set(title);
     }
 
+    public boolean isFullBody() {
+        return fullBody.get();
+    }
 
+    public BooleanProperty fullBodyProperty() {
+        return fullBody;
+    }
 
-    /*****************************************************************************
-     *
-     *
-     *                  Add Custom Controls
-     *
-     *
-     *****************************************************************************/
+    public void setFullBody(boolean fullBody) {
+        this.fullBody.set(fullBody);
+    }
+
+    public ReadOnlyDoubleProperty widthProperty() {
+        return this.stage.widthProperty();
+    }
+
+    public double getWidth() {
+        return this.stage.getWidth();
+    }
+
+    public ReadOnlyDoubleProperty heightProperty() {
+        return this.stage.heightProperty();
+    }
+
+    public double getHeight() {
+        return this.stage.getHeight();
+    }
+
+    public double getX() {
+        return this.stage.getX();
+    }
+
+    public double getY() {
+        return this.stage.getY();
+    }
 
     /**
      * Add a menu for menu bar.
@@ -271,13 +295,29 @@ public class GNDecoratorT {
         this.bar.getMenuBar().getMenus().add(menu);
     }
 
-    /*****************************************************************************
-     *
-     *
-     *                  Customize
-     *
-     *
-     *****************************************************************************/
+    public void addControl(Control control){
+        this.bar.getCustomControls().add(control);
+    }
+
+    public void addControl(int index, Control control){
+        this.bar.getCustomControls().add(index, control);
+    }
+
+    public void addControls(Control... control){
+        this.bar.getCustomControls().addAll(control);
+    }
+
+    public void addControls(int index, Control... controls){
+        this.bar.getCustomControls().addAll(index, Arrays.asList(controls));
+    }
+    
+    public void blockControls(){
+        this.bar.getCustomBar().block();
+    }
+
+    public void unblockControls(){
+        this.bar.getCustomBar().unblock();
+    }
 
     /**
      * Get icons from stage.
@@ -336,32 +376,9 @@ public class GNDecoratorT {
 
         body.fullBody(container);
 
-//
-//        this.bar.setOnMouseExited(e -> {
-//            if (stage.isFullScreen() && e.getY() > 0) {
-//                viewBar(false);
-//                this.background.setOnMouseMoved(handler);
-//            }
-//        });
-//
-//
-//
-//        this.bar.setOnMouseMoved(e -> {
-//            if (stage.isFullScreen()) {
-//                this.background.setOnMouseMoved(null);
-//            }
-//        });
-//
-//        this.bar.setOnMouseEntered(e -> {
-//            if (stage.isFullScreen()) {
-//                this.background.setOnMouseMoved(null);
-//            }
-//        });
     }
 
     private void viewBar(boolean view){
-
-//        bar.setTranslateY(-(barHeight.get()));
 
         open.setFromY(-(barHeight.get()));
         open.setByY(barHeight.get());
@@ -374,7 +391,11 @@ public class GNDecoratorT {
 
         if(!view) {
             open.play();
-            AnchorPane.setTopAnchor(this.container, barHeight.get());
+            if(isFullBody()){
+                AnchorPane.setTopAnchor(this.container, 0D);
+            } else {
+                AnchorPane.setTopAnchor(this.container, barHeight.get());
+            }
             bar.setVisible(true);
         } else {
             AnchorPane.setTopAnchor(this.container, 0D);
@@ -383,8 +404,6 @@ public class GNDecoratorT {
         }
 
     }
-
-
 
     public void setDark(boolean value){
         dark = value;
@@ -415,40 +434,12 @@ public class GNDecoratorT {
         stage.getScene().getStylesheets().addAll(stylesheet);
     }
 
-    /**
-     *
-     * Tests
-     *
-     * */
-
-
-    BoundingBox getNoMaximizedBounds(){
-        return this.noMaximizedBounds;
-    }
-
-    void setBounds(BoundingBox save){
-        this.noMaximizedBounds = save;
-    }
-
-    public Stage getStage(){
-        return this.stage;
-    }
-
-    public Scene getScene(){
-        return this.scene;
-    }
-
-    TranslucentStage getTranslucentStage(){
-        return translucentStage;
-    }
-
-    DoubleProperty barHeightProperty(){
-        return this.barHeight;
+    public Node lookup(String value){
+        return this.scene.lookup(value);
     }
 
     public void testWithScenicView(){
         ScenicView.show(this.scene);
     }
-
 
 }

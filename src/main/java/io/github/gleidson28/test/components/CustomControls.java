@@ -16,23 +16,24 @@
  */
 package io.github.gleidson28.test.components;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  09/07/2020
+ * Create on  27/07/2020
  */
-class Close extends Button {
+class CustomControls extends HBox {
 
-    Close(GNDecoratorT decorator) {
-
-        this.setText("X");
-        this.setId("gn-close");
-        this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        this.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            decorator.stage.close();
-        });
+    public CustomControls() {
+        this.setId("gn-custom-controls");
     }
+    
+    public void block(){
+        getChildren().forEach( e -> e.setMouseTransparent(true));        
+    }
+
+    public void unblock(){
+        getChildren().forEach( e -> e.setMouseTransparent(false));
+    }
+    
 }

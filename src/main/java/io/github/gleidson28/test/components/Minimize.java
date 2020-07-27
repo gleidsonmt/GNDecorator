@@ -33,7 +33,7 @@ class Minimize extends Button {
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
         this.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            decorator.getStage().setIconified(true);
+            decorator.stage.setIconified(true);
         });
     }
 }

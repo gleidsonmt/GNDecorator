@@ -25,7 +25,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseEvent;
@@ -47,10 +49,11 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
     private final ObservableList<Button> defaultControls;
 
-    private final Label     title               = new Label("JavaFx Decorator");
-    private final HBox      titleContainer      = new HBox(title);
-    private final HBox      controlsContainer   = new HBox();
-    private final MenuBar   menuBar             = new MenuBar();
+    private final Label          title               = new Label();
+    private final HBox           titleContainer      = new HBox(title);
+    private final HBox           controlsContainer   = new HBox();
+    private final CustomControls customControls      = new CustomControls();
+    private final MenuBar        menuBar             = new MenuBar();
 
     private final Minimize minimize;
     private final Maximize maximize;
@@ -72,7 +75,16 @@ class Bar extends HBox implements StageChanges, StageReposition {
         decorator.titleProperty().bindBidirectional(title.textProperty());
     }
 
-    private final ChangeListener<Boolean> autoHover = (observable, oldValue, newValue) -> hoverButtons(newValue);
+    public CustomControls getCustomBar(){
+        return customControls;
+    }
+
+    public ObservableList<Node> getCustomControls(){
+        return this.customControls.getChildren();
+    }
+
+    private final ChangeListener<Boolean> autoHover
+            = (observable, oldValue, newValue) -> hoverButtons(newValue);
 
     public void addAutoHover(){
         defaultControls.forEach(e -> e.hoverProperty()
@@ -119,12 +131,12 @@ class Bar extends HBox implements StageChanges, StageReposition {
         controlsContainer.setSpacing(0D);
         this.menuBar.setPadding(new Insets(0D));
 
-        controlsContainer.prefHeightProperty().bind(decorator.barHeightProperty());
-        menuBar.prefHeightProperty().bind(decorator.barHeightProperty());
+        controlsContainer.prefHeightProperty().bind(decorator.barHeight);
+        menuBar.prefHeightProperty().bind(decorator.barHeight);
 
         defaultControls.forEach(e ->
                 e.prefHeightProperty().
-                        bind(decorator.barHeightProperty()));
+                        bind(decorator.barHeight));
 
         controlsContainer.setAlignment(Pos.CENTER_RIGHT);
 
@@ -136,15 +148,14 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
         this.getChildren().add(menuBar);
         this.getChildren().add(titleContainer);
+        this.getChildren().add(customControls);
         this.getChildren().add(controlsContainer);
-
-//        this.menuBar.getMenus().add(new Menu("File"));
 
         HBox.setHgrow(titleContainer, Priority.ALWAYS);
 
         this.setPrefHeight(30D);
         this.decorator = decorator;
-        this.stage = decorator.getStage();
+        this.stage = decorator.stage;
 
         this.setAlignment(Pos.CENTER);
         configActions();
@@ -187,24 +198,24 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
             if(decorator.isMaximized() && decorator.isResizable()) {
 
-                if (bounds.getMaxX() < (event.getScreenX() + decorator.getNoMaximizedBounds().getWidth())) {
-                    stage.setX(bounds.getMaxX() - (decorator.getNoMaximizedBounds().getWidth()));
-                } else if (bounds.getMinX() < (decorator.getNoMaximizedBounds().getWidth() - event.getScreenX())) {
+                if (bounds.getMaxX() < (event.getScreenX() + decorator.noMaximizedBounds.getWidth())) {
+                    stage.setX(bounds.getMaxX() - (decorator.noMaximizedBounds.getWidth()));
+                } else if (bounds.getMinX() < (decorator.noMaximizedBounds.getWidth() - event.getScreenX())) {
                     stage.setX(0);
                 } else {
-                    stage.setX(event.getScreenX() - (decorator.getNoMaximizedBounds().getWidth() / 2));
+                    stage.setX(event.getScreenX() - (decorator.noMaximizedBounds.getWidth() / 2));
                 }
 
-                if (decorator.getNoMaximizedBounds().getHeight() > bounds.getMaxY()) {
+                if (decorator.noMaximizedBounds.getHeight() > bounds.getMaxY()) {
                     stage.setHeight(bounds.getMaxY() - 100);
                 } else {
-                    stage.setHeight(decorator.getNoMaximizedBounds().getHeight());
+                    stage.setHeight(decorator.noMaximizedBounds.getHeight());
                 }
 
-                if (decorator.getNoMaximizedBounds().getWidth() > bounds.getMaxX()) {
+                if (decorator.noMaximizedBounds.getWidth() > bounds.getMaxX()) {
                     stage.setWidth(bounds.getWidth() - 200);
                 } else {
-                    stage.setWidth(decorator.getNoMaximizedBounds().getWidth());
+                    stage.setWidth(decorator.noMaximizedBounds.getWidth());
                 }
                 stage.setY(0);
                 stage.setMaximized(false);
@@ -212,8 +223,8 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
                 if(decorator.isResizable()) {
 
-                    Stage stage = decorator.getTranslucentStage();
-                    decorator.getStage().setAlwaysOnTop(true);
+                    Stage stage = decorator.translucentStage;
+                    decorator.stage.setAlwaysOnTop(true);
 
                     if (isOnTopLeft(event)) {
                         repositionOnTopLeft(stage, 0);
@@ -237,7 +248,7 @@ class Bar extends HBox implements StageChanges, StageReposition {
                         repositionOnTop(stage, 20);
                         stage.show();
                     } else {
-                        decorator.getTranslucentStage().close();
+                        decorator.translucentStage.close();
                     }
                 }
 
@@ -265,8 +276,8 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
             if(decorator.isResizable()) {
 
-                Stage stage = decorator.getStage();
-                this.decorator.getStage().setAlwaysOnTop(false);
+                Stage stage = decorator.stage;
+                this.decorator.stage.setAlwaysOnTop(false);
 
                 if (isOnTopLeft(event)) {
                     repositionOnTopLeft(stage, 0);
@@ -285,10 +296,10 @@ class Bar extends HBox implements StageChanges, StageReposition {
                     decorator.setMaximized(true);
 
                 } else {
-                    decorator.getTranslucentStage().close();
+                    decorator.translucentStage.close();
                 }
 
-                decorator.getTranslucentStage().close();
+                decorator.translucentStage.close();
             }
 
         });
