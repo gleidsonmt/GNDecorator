@@ -38,44 +38,17 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent content = new HBox(new Button("Hello GNDecorator!"));
+        Parent content = new HBox();
 
         GNDecorator decorator = new GNDecorator();
         decorator.setContent(content);
 
+
         decorator.setTitle("GNDecorator 0.3");
 
-        Menu options = new Menu("Options");
-        MenuItem macTheme = new MenuItem("Mac Yosemite theme");
-        MenuItem defaultTheme = new MenuItem("Default Theme");
-        MenuItem switchLight = new MenuItem("Switch Light");
-        MenuItem fullscreen = new MenuItem("Fullscreen");
-        options.getItems().addAll(macTheme, defaultTheme, switchLight, fullscreen);
-        decorator.addMenu(options);
-        decorator.addMenu(new Menu("Edit"));
-
-        Menu menuAction = new Menu("Menu Action");
-
-        menuAction.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
-            System.out.println("menu action event");
-        });
-
-        decorator.addMenu(menuAction);
-
-        macTheme.setOnAction( e -> decorator.switchTheme(Theme.MAC_YOSEMITE));
-
-        defaultTheme.setOnAction( e -> decorator.switchTheme(Theme.DEFAULT));
-
-        switchLight.setOnAction(e -> decorator.setDark(!decorator.isDark()));
-
-        fullscreen.setOnAction(e -> {
-            decorator.setFullScreen(true);
-        });
-
         decorator.setMinHeight(300D);
-        decorator.addControl(new Button("Custom Control"));
-        decorator.addControl(new ComboBox<>());
-        decorator.addStylesheets(getClass().getResource("/theme/master.css").toExternalForm());
+        decorator.fullBody();
+        decorator.switchTheme(Theme.MAC_YOSEMITE);
 
         decorator.show();
     }

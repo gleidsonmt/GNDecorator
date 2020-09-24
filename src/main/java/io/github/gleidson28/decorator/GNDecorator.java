@@ -268,6 +268,10 @@ public class GNDecorator {
         this.fullBody.set(fullBody);
     }
 
+    public void fullBody(){
+        this.fullBody.set(true);
+    }
+
     public ReadOnlyDoubleProperty widthProperty() {
         return this.stage.widthProperty();
     }
