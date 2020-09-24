@@ -24,16 +24,16 @@
 
  
 ##### View Default
-![demo1](src/Gleidson28/resources/screenshot/basic.png)
+![demo1](src/Gleidson28/resources/screens/basic.png)
 ##### View Darkula
-![demo1](src/Gleidson28/resources/screenshot/darkula.png)
+![demo1](src/Gleidson28/resources/screens/darkula.png)
 ##### With gradient and image
-![demo1](src/Gleidson28/resources/screenshot/demo1.png)
+![demo1](src/Gleidson28/resources/screens/demo1.png)
 
 ### Adaptable when the bar is moved
-![gif1](src/Gleidson28/resources/screenshot/gif1.gif)
+![gif1](src/Gleidson28/resources/screens/gif1.gif)
 ### Full Screen animation
-![gif2](src/Gleidson28/resources/screenshot/gif2.gif)
+![gif2](src/Gleidson28/resources/screens/gif2.gif)
 
 # Basic structure 
 
@@ -47,10 +47,10 @@
 
 ## Structure - by Scenic View
 
-![Structure](src/Gleidson28/resources/screenshot/primarySctructure.png)
+![Structure](src/Gleidson28/resources/screens/primarySctructure.png)
 
 ### Full Screen animation
-![gif2](src/Gleidson28/resources/screenshot/explanation.jpg)
+![gif2](src/Gleidson28/resources/screens/explanation.jpg)
 
  > Constrotors
  
