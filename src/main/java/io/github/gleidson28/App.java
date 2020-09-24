@@ -18,18 +18,16 @@
 package io.github.gleidson28;
 
 import io.github.gleidson28.decorator.GNDecorator;
-import io.github.gleidson28.decorator.buttons.ButtonTest;
-import io.github.gleidson28.decorator.options.ButtonType;
+import io.github.gleidson28.decorator.Theme;
 import javafx.application.Application;
-import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.SVGPath;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import org.scenicview.ScenicView;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -40,89 +38,46 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Parent content = new HBox(new Button("Hello GNDecorator!"));
 
-//        Parent root = FXMLLoader.load(getClass().getResource("/com/gn/resources/sample.fxml"));
+        GNDecorator decorator = new GNDecorator();
+        decorator.setContent(content);
 
-        VBox content = new VBox();
-        content.setAlignment(Pos.CENTER);
-        content.setPrefSize(400,400);
-        GNDecorator window = new GNDecorator();
+        decorator.setTitle("GNDecorator 0.3");
 
+        Menu options = new Menu("Options");
+        MenuItem macTheme = new MenuItem("Mac Yosemite theme");
+        MenuItem defaultTheme = new MenuItem("Default Theme");
+        MenuItem switchLight = new MenuItem("Switch Light");
+        MenuItem fullscreen = new MenuItem("Fullscreen");
+        options.getItems().addAll(macTheme, defaultTheme, switchLight, fullscreen);
+        decorator.addMenu(options);
+        decorator.addMenu(new Menu("Edit"));
 
-//        window.hideCustoms();
-        Button btn = new Button("Action");
+        Menu menuAction = new Menu("Menu Action");
 
-        btn.setOnMouseClicked(event ->{
-//            window.removeControls();
-            window.floatActions();
-//            window.hideControls();
-
-//            System.out.println("controls " + window.getControls());
-//            window.showCustoms();
-//            window.block();
-//            window.setResizable(true);
+        menuAction.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
+            System.out.println("menu action event");
         });
 
-        window.addButton(ButtonType.FULL_EFFECT);
-        content.getChildren().add(btn);
-        window.setContent(content);
+        decorator.addMenu(menuAction);
 
+        macTheme.setOnAction( e -> decorator.switchTheme(Theme.MAC_YOSEMITE));
 
-        window.setTitle("Application");
-//        window.addButton(ButtonType.FULL_EFFECT);
-        window.setTitle(null);
+        defaultTheme.setOnAction( e -> decorator.switchTheme(Theme.DEFAULT));
 
-        ButtonTest a1 = new ButtonTest("Button 1");
-        ButtonTest a2 = new ButtonTest("Button 2");
-        ButtonTest a3 = new ButtonTest("Button 3");
+        switchLight.setOnAction(e -> decorator.setDark(!decorator.isDark()));
 
+        fullscreen.setOnAction(e -> {
+            decorator.setFullScreen(true);
+        });
 
-        window.addControl(2, a1);
-        window.addControl(4,a2);
-        window.addControl(a3);
+        decorator.setMinHeight(300D);
+        decorator.addControl(new Button("Custom Control"));
+        decorator.addControl(new ComboBox<>());
+        decorator.addStylesheets(getClass().getResource("/theme/master.css").toExternalForm());
 
-
-        Menu menu = new Menu("File");
-        menu.getItems().add(new MenuItem("Open"));
-        menu.getItems().add(new MenuItem("Close"));
-
-        Menu menu1 = new Menu("Save");
-        menu1.getItems().add(new MenuItem("Save"));
-        menu1.getItems().add(new MenuItem("Save as"));
-
-        Menu menu2 = new Menu("About");
-        menu2.getItems().add(new MenuItem("About us"));
-        menu2.getItems().add(new MenuItem("Exit"));
-
-        Menu btn_ico = new Menu();
-        btn_ico.setStyle("-fx-background-color : transparent;");
-        btn_ico.show();
-        btn_ico.getItems().clear();
-
-//        System.out.println(btn_ico.fire());
-
-        SVGPath icon = new SVGPath();
-        icon.setId("icon");
-        icon.setContent("M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z");
-        btn_ico.setGraphic(icon);
-        icon.setFill(Color.web("#999"));
-        icon.setOnMouseClicked(event -> System.out.println("teste"));
-
-        window.addMenu(btn_ico);
-        window.addMenu(menu);
-        window.addMenu(2,menu1);
-        window.addMenu(menu2);
-
-
-//        window.setMaximized(true);
-        window.fullBody();
-//        window.addCustom(new FullScreen());
-//        window.centralizeTitle();
-        window.show();
-
-//        window.getScene().getStylesheets().addAll(getClass().getResource("/com/gn/resources/css/custom.css").toExternalForm());
-
-        ScenicView.show(window.getScene());
+        decorator.show();
     }
 
     public static void main(String[] args) {

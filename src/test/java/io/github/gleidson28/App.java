@@ -16,12 +16,12 @@
  */
 package io.github.gleidson28;
 
-import io.github.gleidson28.test.components.GNDecoratorT;
+import io.github.gleidson28.decorator.GNDecorator;
+import io.github.gleidson28.decorator.Theme;
 import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -34,31 +34,46 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        HBox content = new HBox(new Label("Hello GNDecorator!"));
-        content.setAlignment(Pos.CENTER);
-//        content.setPrefSize(1200,800);
-//        content.setStyle("-fx-background-color : green; -fx-border-color : blue;");
+        Parent content = new HBox(new Button("Hello GNDecorator!"));
 
+        GNDecorator decorator = new GNDecorator();
+        decorator.setContent(content);
 
-        GNDecoratorT decorator = new GNDecoratorT();
-        decorator.setContent(content, 1200, 800);
+        decorator.setTitle("GNDecorator 0.3");
 
-        Menu file = new Menu("File");
-        MenuItem open = new MenuItem("Open");
-        MenuItem save = new MenuItem("Save");
-        MenuItem openRecent = new MenuItem("OpenRecent");
-        file.getItems().addAll(open, save, openRecent);
-        decorator.addMenu(new Menu("File"));
+        Menu options = new Menu("Options");
+        MenuItem macTheme = new MenuItem("Mac Yosemite theme");
+        MenuItem defaultTheme = new MenuItem("Default Theme");
+        MenuItem switchLight = new MenuItem("Switch Light");
+        MenuItem fullscreen = new MenuItem("Fullscreen");
+        options.getItems().addAll(macTheme, defaultTheme, switchLight, fullscreen);
+        decorator.addMenu(options);
         decorator.addMenu(new Menu("Edit"));
 
-//        decorator.setBarHeight(80D);
-//        decorator.setButtonsWidth(100);
-//        decorator.setContent(content);
+        Menu menuAction = new Menu("Menu Action");
 
-//        decorator.setMaximized(true);
+        menuAction.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
+            System.out.println("menu action event");
+        });
+
+        decorator.addMenu(menuAction);
+
+        macTheme.setOnAction( e -> decorator.switchTheme(Theme.MAC_YOSEMITE));
+
+        defaultTheme.setOnAction( e -> decorator.switchTheme(Theme.DEFAULT));
+
+        switchLight.setOnAction(e -> decorator.setDark(!decorator.isDark()));
+
+        fullscreen.setOnAction(e -> {
+            decorator.setFullScreen(true);
+        });
+
+        decorator.setMinHeight(300D);
+        decorator.addControl(new Button("Custom Control"));
+        decorator.addControl(new ComboBox<>());
+        decorator.addStylesheets(getClass().getResource("/theme/master.css").toExternalForm());
 
         decorator.show();
-//        decorator.testWithScenicView();
     }
 
     public static void main(String[] args) {
