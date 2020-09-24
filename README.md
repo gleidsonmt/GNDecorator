@@ -79,3 +79,6 @@
     decorator.addControl(a1);
     decorator.addControl(index, a1); // add with a index
   ```
+
+## On Youtube
+[Basic Tutorial](https://youtu.be/hZsYU7UbWmU)
