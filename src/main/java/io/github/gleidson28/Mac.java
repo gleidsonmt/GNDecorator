@@ -28,6 +28,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.Mnemonic;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -52,7 +53,7 @@ public class Mac extends Application {
 //        decorator.setContent(content,1200,800);
         decorator.setContent(content);
 
-//        decorator.setTitle("GNDecorator 0.3");
+        decorator.setTitle("GNDecorator 0.3");
 
         Menu options = new Menu("Options");
         MenuItem macTheme = new MenuItem("Mac Yosemite theme");
@@ -62,6 +63,14 @@ public class Mac extends Application {
         options.getItems().addAll(macTheme, defaultTheme, switchLight, fullscreen);
         decorator.addMenu(options);
         decorator.addMenu(new Menu("Edit"));
+
+        Menu menuAction = new Menu("Menu Action");
+
+        menuAction.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
+            System.out.println("menu action event");
+        });
+
+        decorator.addMenu(menuAction);
 
         macTheme.setOnAction( e -> decorator.switchTheme(Theme.MAC_YOSEMITE));
 
@@ -73,12 +82,17 @@ public class Mac extends Application {
             decorator.setFullScreen(true);
         });
 
-//        decorator.setFullBody(true);
+        decorator.setFullBody(true);
 //
-//        decorator.pro
-        decorator.setFullScreen(true);
+//        decorator.setMaximized(true);
+        decorator.setMinHeight(300D);
+//        decorator.setFullScreen(true);
         decorator.addControl(new Button("Custom Control"));
         decorator.addControl(new ComboBox<>());
+        
+//        decorator.setWidth(500);
+//        decorator.setHeight(500);
+        
 //        decorator.setMaximized(true);
 //        decorator.setResizable(true);
 //        decorator.getIcons().add(new Image("/img/close.png"));
@@ -90,7 +104,7 @@ public class Mac extends Application {
 
         decorator.show();
 
-        decorator.testWithScenicView();
+//        decorator.testWithScenicView();
 
 
 //        stage.setScene(new Scene(content,800,600));

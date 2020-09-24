@@ -108,17 +108,22 @@ class Bar extends HBox implements StageChanges, StageReposition {
         if (value) {
             getChildren().removeAll(controlsContainer, menuBar);
             getChildren().add(0, controlsContainer);
-            getChildren().add(2, menuBar);
-
-            controlsContainer.getChildren().clear();
-            controlsContainer.getChildren().addAll(close, minimize, maximize);
+            getChildren().add(1, menuBar);
+            customControls.setAlignment(Pos.CENTER_RIGHT);
+//            controlsContainer.getChildren().clear();
+//            controlsContainer.getChildren().addAll(close, minimize, maximize);
         } else {
+            System.out.println(getChildren());
             getChildren().removeAll(controlsContainer, menuBar);
             getChildren().add(0, menuBar);
-            getChildren().add(2, controlsContainer);
-
-            controlsContainer.getChildren().clear();
-            controlsContainer.getChildren().addAll(minimize, maximize, close);
+            getChildren().add(3, controlsContainer);
+//
+//            System.out.println(controlsContainer.getChildren());
+//            controlsContainer.getChildren().clear();
+////            controlsContainer.getChildren().add(controlsContainer.getChildren().size(), minimize);
+////            controlsContainer.getChildren().add(1, maximize);
+////            controlsContainer.getChildren().add(2, close);
+//            controlsContainer.getChildren().addAll(minimize, maximize, close);
         }
     }
 
@@ -142,7 +147,7 @@ class Bar extends HBox implements StageChanges, StageReposition {
 
         titleContainer.setPadding(new Insets(0,0,0,4));
 
-        this.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.TOP_RIGHT);
         titleContainer.setAlignment(Pos.CENTER_LEFT);
         controlsContainer.getChildren().setAll(defaultControls);
 
@@ -151,7 +156,7 @@ class Bar extends HBox implements StageChanges, StageReposition {
         this.getChildren().add(customControls);
         this.getChildren().add(controlsContainer);
 
-        HBox.setHgrow(titleContainer, Priority.ALWAYS);
+        HBox.setHgrow(customControls, Priority.ALWAYS);
 
         this.setPrefHeight(30D);
         this.decorator = decorator;

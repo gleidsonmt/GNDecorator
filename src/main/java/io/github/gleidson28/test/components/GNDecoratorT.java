@@ -196,14 +196,20 @@ public class GNDecoratorT {
         return areaContent.getContent();
     }
 
-    public void show(){
-        if (maximized.get()) {
+    public void show() {
+        if(maximized.get()){
             this.stage.setWidth(bounds.getWidth());
             this.stage.setHeight(bounds.getHeight());
-        } else {
+        } else if(Double.isNaN(this.stage.getWidth())
+                && Double.isNaN(this.stage.getHeight())){
             this.stage.setWidth(initialWidth);
             this.stage.setHeight(initialHeight);
+        } else if(Double.isNaN(this.stage.getWidth())){
+            this.stage.setWidth(initialWidth);
+        } else if(Double.isNaN(this.stage.getHeight())){
+            this.stage.setHeight(initialHeight);
         }
+        this.stage.centerOnScreen();
         this.stage.show();
     }
 
@@ -267,6 +273,32 @@ public class GNDecoratorT {
         return this.stage.widthProperty();
     }
 
+    public void setMinSize(double width, double height) {
+        this.stage.setMinWidth(width);
+        this.stage.setMinHeight(height);
+    }
+
+    public void setHeight(double height) {
+        this.stage.setHeight(height);
+    }
+
+    public void setMinHeight(double height) {
+        this.stage.setMinHeight(height);
+    }
+
+    public void setWidth(double width) {
+        this.stage.setWidth(width);
+    }
+
+    public void setMinWidth(double width) {
+        this.stage.setMinWidth(width);
+    }
+
+    public void setSize(double width, double height) {
+        this.stage.setWidth(width);
+        this.stage.setHeight(height);
+    }
+    
     public double getWidth() {
         return this.stage.getWidth();
     }
@@ -295,6 +327,14 @@ public class GNDecoratorT {
         this.bar.getMenuBar().getMenus().add(menu);
     }
 
+    public void addMenu(int index, Menu menu){
+        this.bar.getMenuBar().getMenus().add(index, menu);
+    }
+    
+    public ObservableList<Menu> getMenus(){
+        return this.bar.getMenuBar().getMenus();
+    }
+
     public void addControl(Control control){
         this.bar.getCustomControls().add(control);
     }
@@ -311,12 +351,36 @@ public class GNDecoratorT {
         this.bar.getCustomControls().addAll(index, Arrays.asList(controls));
     }
     
+    public ObservableList<Node> getCustomControls(){
+        return this.bar.getCustomControls();
+    }
+    
+    public void removeControl(Control control){
+        this.bar.getCustomControls().remove(control);
+    }
+
+    public void removeControl(int index){
+        this.bar.getCustomControls().remove(index);
+    }
+
+    public void removeControls(Control... controls){
+        this.bar.getCustomControls().removeAll(Arrays.asList(controls));
+    }
+
     public void blockControls(){
         this.bar.getCustomBar().block();
     }
 
     public void unblockControls(){
         this.bar.getCustomBar().unblock();
+    }
+    
+    public void hideCustomControls(){
+        this.bar.getCustomBar().hide();
+    }
+
+    public void showCustomControls(){
+        this.bar.getCustomBar().show();
     }
 
     /**
@@ -327,7 +391,7 @@ public class GNDecoratorT {
         return stage.getIcons();
     }
 
-    public void switchTheme(Theme theme){
+    public void switchTheme(Theme theme){;
         switch (theme) {
             case MAC_YOSEMITE:
 
@@ -432,6 +496,10 @@ public class GNDecoratorT {
 
     public void addStylesheets(String... stylesheet) {
         stage.getScene().getStylesheets().addAll(stylesheet);
+    }
+
+    public ObservableList<String> getStylesheets(){
+        return this.scene.getStylesheets();
     }
 
     public Node lookup(String value){

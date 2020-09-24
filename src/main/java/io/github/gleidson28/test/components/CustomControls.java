@@ -35,5 +35,13 @@ class CustomControls extends HBox {
     public void unblock(){
         getChildren().forEach( e -> e.setMouseTransparent(false));
     }
+
+    public void hide(){
+        getChildren().forEach( e -> e.setVisible(false));
+    }
+
+    public void show(){
+        getChildren().forEach( e -> e.setVisible(true));
+    }
     
 }
