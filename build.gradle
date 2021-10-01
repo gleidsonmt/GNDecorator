@@ -24,8 +24,8 @@ apply plugin: 'com.bmuschko.nexus'
 archivesBaseName = 'GNDecorator'
 group = "io.github.Gleidson28"
 //version = "0.1.2"
-version = "0.3.1"
-mainClassName = 'io.github.gleidson28.Mac'
+version = "0.3.3"
+mainClassName = 'io.github.gleidson28.App'
 
 jar {
     manifest {

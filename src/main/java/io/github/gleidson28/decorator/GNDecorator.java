@@ -35,6 +35,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import org.scenicview.ScenicView;
 
@@ -136,6 +137,7 @@ public class GNDecorator {
 
     public void setContent(Parent content){
        Region _content = (Region) content;
+       content.requestFocus();
        setContent(_content);
     }
 
@@ -322,6 +324,10 @@ public class GNDecorator {
         return this.stage.getY();
     }
 
+    public Window getWindow(){
+        return this.stage.getScene().getWindow();
+    }
+
     /**
      * Add a menu for menu bar.
      * @param menu for bar.
@@ -370,12 +376,22 @@ public class GNDecorator {
         this.bar.getCustomControls().removeAll(Arrays.asList(controls));
     }
 
-    public void blockControls(){
-        this.bar.getCustomBar().block();
+    public void lockControls(){
+        //this.bar.getCustomBar().unblock();
+        this.bar.setMouseTransparent(true);
+
+        this.body.getChildren().stream().filter( p -> p instanceof StageChanges).forEach(c -> c.setMouseTransparent(true));
     }
 
-    public void unblockControls(){
-        this.bar.getCustomBar().unblock();
+    public void unLockControls(){
+        //this.bar.getCustomBar().unblock();
+        this.bar.setMouseTransparent(true);
+
+        this.body.getChildren().stream().filter( p -> p instanceof StageChanges).forEach(c -> c.setMouseTransparent(false));
+    }
+    
+    public boolean isLocked(){
+        return  this.bar.isMouseTransparent();
     }
     
     public void hideCustomControls(){

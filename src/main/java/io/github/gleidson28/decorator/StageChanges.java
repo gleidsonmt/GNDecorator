@@ -19,6 +19,7 @@ package io.github.gleidson28.decorator;
 import javafx.stage.Stage;
 
 /**
+ * Interface for access the stage changes.
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  07/07/2020
  */
