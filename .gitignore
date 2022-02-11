@@ -11,3 +11,4 @@ GNDecorator.iml
 /build/
 /libs/
 /.gradle/
+publishInfo.gradle

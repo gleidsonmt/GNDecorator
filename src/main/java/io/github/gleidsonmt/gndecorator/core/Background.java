@@ -52,11 +52,11 @@ public class Background extends StackPane {
     };
 
     private static final String DEFAULT_STYLESHEET
-            = Background.class.getResource("/io.github.gleidson.gndecorator/theme/default.css")
+            = Background.class.getResource("/io.github.gleidsonmt.gndecorator/theme/default.css")
             .toExternalForm();
 
     private static final String LIGHT_STYLESHEET
-            = Background.class.getResource("/io.github.gleidson.gndecorator/theme/light.css")
+            = Background.class.getResource("/io.github.gleidsonmt.gndecorator/theme/light.css")
             .toExternalForm();
 
     public Background(Body body, GNDecorator decorator) {

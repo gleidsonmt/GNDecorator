@@ -116,7 +116,8 @@ public class GNDecorator {
     public BoundingBox noMaximizedBounds;
 
     public GNDecorator() {
-
+        configStage();
+        viewBar(false);
     }
 
     private void configStage() {
@@ -199,8 +200,7 @@ public class GNDecorator {
 
     public void show() {
 
-        configStage();
-        viewBar(false);
+
 
         if(maximized.get()){
             this.stage.setWidth(bounds.getWidth());
@@ -420,7 +420,7 @@ public class GNDecorator {
                 background.getStylesheets().remove(background.getStylesheets().size() - 1);
                 background.getStylesheets().add(
                         Objects.requireNonNull(GNDecorator.class.
-                                getResource("/io.github.gleidson.gndecorator/theme/yosemite.css")).toExternalForm()
+                                getResource("/io.github.gleidsonmt.gndecorator/theme/yosemite.css")).toExternalForm()
                 );
                 bar.addAutoHover();
                 bar.invertControls(true);
@@ -430,7 +430,7 @@ public class GNDecorator {
 
                 background.getStylesheets().add(
                         Objects.requireNonNull(GNDecorator.class.
-                                getResource("/io.github.gleidson.gndecorator/theme/default.css")).toExternalForm()
+                                getResource("/io.github.gleidsonmt.gndecorator/theme/default.css")).toExternalForm()
                 );
 
                 bar.invertControls(false);
@@ -491,19 +491,19 @@ public class GNDecorator {
         if(value) {
             background.getStylesheets().remove(
                     Objects.requireNonNull(GNDecorator.class.
-                            getResource("/io.github.gleidson.gndecorator/theme/light.css")).toExternalForm()
+                            getResource("/io.github.gleidsonmt.gndecorator/theme/light.css")).toExternalForm()
             );
             background.getStylesheets().add(0, Objects.requireNonNull(GNDecorator.class.
-                    getResource("/io.github.gleidson.gndecorator/theme/dark.css")).toExternalForm());
+                    getResource("/io.github.gleidsonmt.gndecorator/theme/dark.css")).toExternalForm());
 
         } else {
 
                 background.getStylesheets().remove(
                         Objects.requireNonNull(GNDecorator.class.
-                                getResource("/io.github.gleidson.gndecorator/theme/dark.css")).toExternalForm()
+                                getResource("/io.github.gleidsonmt.gndecorator/theme/dark.css")).toExternalForm()
                 );
                 background.getStylesheets().add(0, Objects.requireNonNull(GNDecorator.class.
-                        getResource("/io.github.gleidson.gndecorator/theme/light.css")).toExternalForm());
+                        getResource("/io.github.gleidsonmt.gndecorator/theme/light.css")).toExternalForm());
         }
     }
 

@@ -2,11 +2,12 @@
 plugins {
     id 'java'
     id 'application'
+    id 'maven-publish'
     id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
-group 'io.gihub.gleidsonmt'
-version '1.0.1+17'
+group 'io.github.gleidsonmt'
+version '1.0.3'
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
@@ -29,5 +30,25 @@ application {
 }
 
 dependencies {
-    implementation files('libs/scenicView.jar');
+    implementation files('libs/scenicView.jar')
 }
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/gleidsonmt/GNDecorator")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
