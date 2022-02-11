@@ -24,18 +24,13 @@
 
  
 ##### View Default
-![demo1](src/com/gn/resources/screenshot/basic.png)
+![demo1](src/main/resources/screens/default.png)
 ##### View Darkula
-![demo1](src/com/gn/resources/screenshot/darkula.png)
+![demo1](src/main/resources/screens/dark.png)
 ##### With gradient and image
-![demo1](src/com/gn/resources/screenshot/demo1.png)
+![demo1](src/main/resources/screens/mac.png)
 
-### Adaptable when the bar is moved
-![gif1](src/com/gn/resources/screenshot/gif1.gif)
-### Full Screen animation
-![gif2](src/com/gn/resources/screenshot/gif2.gif)
-
-# Basic structure 
+# Basic Structure 
 
         root -> SstackPane
                 body -> AnchorPane
@@ -47,10 +42,10 @@
 
 ## Structure - by Scenic View
 
-![Structure](src/com/gn/resources/screenshot/primarySctructure.png)
+![Structure](src/main/resources/screens/primarySctructure.png)
 
-### Full Screen animation
-![gif2](src/com/gn/resources/screenshot/explanation.jpg)
+### Default Structure
+![gif2](src/main/resources/screens/explanation.jpg)
 
  > Constrotors
  
@@ -62,7 +57,6 @@
 ```java
     decorator.setContent(content);
     decorator.fullBody() // the content occupies all of size
-    decorator.floatActions(); // the controls are float
   ```
 
  > Menus
@@ -77,12 +71,14 @@
  > Tittle
 ```java
     decorator.setTitle("JavaFx Application");
-    decorator.centralizeTitle(); // Centralize
   ```
 
  > Controls
 ```java
     ButtonTest a1 = new ButtonTest("Button 1");
-    decorator.addMenu(a1);
-    decorator.addMenu(index, a1); // add with a index
+    decorator.addControl(a1);
+    decorator.addControl(index, a1); // add with a index
   ```
+
+## On Youtube
+[Apresentation](https://youtu.be/hZsYU7UbWmU)

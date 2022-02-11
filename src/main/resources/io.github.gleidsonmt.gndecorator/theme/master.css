@@ -1,0 +1,9 @@
+
+
+
+.context-menu {
+    -fx-background-color : -background-color;
+}
+
+.menu-bar .menu .text { -fx-fill : -text-fill; }
+.label .text, .context-menu .text { -fx-fill : -text-fill; }

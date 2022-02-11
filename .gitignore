@@ -3,3 +3,12 @@
 /out/**
 scenicView.properties
 GNDecorator.iml
+/README - Copia.md
+/src/META-INF/
+/secring.gpg
+/gradle.properties
+/gradle/
+/build/
+/libs/
+/.gradle/
+publishInfo.gradle
