@@ -9,6 +9,6 @@ GNDecorator.iml
 /gradle.properties
 /gradle/
 /build/
-/libs/
+/vendor/
 /.gradle/
 publishInfo.gradle
