@@ -7,7 +7,6 @@ GNDecorator.iml
 /src/META-INF/
 /secring.gpg
 /gradle.properties
-/gradle/
 /build/
 /vendor/
 /.gradle/
