@@ -25,7 +25,7 @@ javafx {
 }
 
 application {
-    mainClassName = 'io.github.gleidsonmt.gndecorator.App'
+    mainClass = 'io.github.gleidsonmt.gndecorator.App'
     mainModule = 'io.github.gleidsonmt.gndecorator'
 }
 
