@@ -28,10 +28,8 @@ import javafx.stage.Stage;
 class XYStage {
 
     private static XYStage instance;
-
     private double initX = 0;
     private double initY = 0;
-
     private double newX = 0;
     private double newY = 0;
 

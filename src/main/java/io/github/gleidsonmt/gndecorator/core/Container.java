@@ -23,7 +23,6 @@ import javafx.scene.layout.StackPane;
  * Create on  06/07/2020
  */
 public class Container extends StackPane  {
-
     public Container(AreaContent areaContent) {
         this.getStyleClass().add("gn-container");
         this.setId("gn-container");

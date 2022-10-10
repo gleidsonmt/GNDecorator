@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'io.github.gleidsonmt'
-version '1.0.3'
+version '2.1.25'
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
@@ -30,7 +30,7 @@ application {
 }
 
 dependencies {
-    implementation files('libs/scenicView.jar')
+    implementation files('vendor/scenicView.jar')
 }
 
 publishing {
