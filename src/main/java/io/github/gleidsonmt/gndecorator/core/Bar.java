@@ -45,19 +45,19 @@ public class Bar extends HBox implements StageChanges, StageReposition {
     private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
     private GNDecorator decorator;
-    private Stage           stage;
+    private Stage stage;
 
     private final ObservableList<Button> defaultControls;
 
-    private final Label          title               = new Label();
-    private final HBox           titleContainer      = new HBox(title);
-    private final HBox           controlsContainer   = new HBox();
-    private final CustomControls customControls      = new CustomControls();
-    private final MenuBar        menuBar             = new MenuBar();
+    private final Label title = new Label();
+    private final HBox titleContainer = new HBox(title);
+    private final HBox controlsContainer = new HBox();
+    private final CustomControls customControls = new CustomControls();
+    private final MenuBar menuBar = new MenuBar();
 
     private final Minimize minimize;
     private final Maximize maximize;
-    private final Close    close;
+    private final Close close;
 
     public Bar(GNDecorator decorator) {
         this.setId("gn-bar");
@@ -67,7 +67,7 @@ public class Bar extends HBox implements StageChanges, StageReposition {
         close = new Close(decorator);
 
         defaultControls = FXCollections.observableArrayList(
-            minimize, maximize, close
+                minimize, maximize, close
         );
 
         confLayout(decorator);
@@ -75,41 +75,41 @@ public class Bar extends HBox implements StageChanges, StageReposition {
         decorator.titleProperty().bindBidirectional(title.textProperty());
     }
 
-    public CustomControls getCustomBar(){
+    public CustomControls getCustomBar() {
         return customControls;
     }
 
-    public ObservableList<Node> getCustomControls(){
+    public ObservableList<Node> getCustomControls() {
         return this.customControls.getChildren();
     }
 
     private final ChangeListener<Boolean> autoHover
             = (observable, oldValue, newValue) -> hoverButtons(newValue);
 
-    public void addAutoHover(){
+    public void addAutoHover() {
         defaultControls.forEach(e -> e.hoverProperty()
                 .addListener(autoHover)
         );
     }
 
-    public void removeAutoHover(){
+    public void removeAutoHover() {
         defaultControls.forEach(e -> e.hoverProperty()
                 .removeListener(autoHover)
         );
     }
 
-    public void hoverButtons(boolean value){
+    public void hoverButtons(boolean value) {
         close.pseudoClassStateChanged(PseudoClass.getPseudoClass("hover"), value);
         maximize.pseudoClassStateChanged(PseudoClass.getPseudoClass("hover"), value);
         minimize.pseudoClassStateChanged(PseudoClass.getPseudoClass("hover"), value);
     }
 
-    public void invertControls(boolean value){
+    public void invertControls(boolean value) {
         if (value) {
             getChildren().removeAll(controlsContainer, menuBar);
             getChildren().add(0, controlsContainer);
             getChildren().add(1, menuBar);
-            customControls.setAlignment(Pos.CENTER_RIGHT);
+//            customControls.setAlignment(Pos.CENTER_RIGHT);
 //            controlsContainer.getChildren().clear();
 //            controlsContainer.getChildren().addAll(close, minimize, maximize);
         } else {
@@ -127,7 +127,7 @@ public class Bar extends HBox implements StageChanges, StageReposition {
         }
     }
 
-    private void confLayout(GNDecorator decorator){
+    private void confLayout(GNDecorator decorator) {
 
         this.menuBar.getStyleClass().add("menuBar");
         this.titleContainer.getStyleClass().add("titleContainer");
@@ -145,7 +145,7 @@ public class Bar extends HBox implements StageChanges, StageReposition {
 
         controlsContainer.setAlignment(Pos.CENTER_RIGHT);
 
-        titleContainer.setPadding(new Insets(0,0,0,4));
+        titleContainer.setPadding(new Insets(0, 0, 0, 4));
 
         this.setAlignment(Pos.TOP_RIGHT);
         titleContainer.setAlignment(Pos.CENTER_LEFT);
@@ -166,11 +166,11 @@ public class Bar extends HBox implements StageChanges, StageReposition {
         configActions();
     }
 
-    private final EventHandler<MouseEvent> maximizeFromBar = new EventHandler<MouseEvent>() {
+    private final EventHandler<MouseEvent> maximizeFromBar = new EventHandler<>() {
         @Override
         public void handle(MouseEvent event) {
-            if(event.getClickCount() == 2){
-                if(!decorator.isMaximized()) {
+            if (event.getClickCount() == 2) {
+                if (!decorator.isMaximized()) {
                     fireEvent(new StageEvent(StageEvent.MAXIMIZE, decorator));
                 } else {
                     fireEvent(new StageEvent(StageEvent.RESTORE, decorator));
@@ -180,7 +180,7 @@ public class Bar extends HBox implements StageChanges, StageReposition {
         }
     };
 
-    private void configActions(){
+    private void configActions() {
         this.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown()) {
                 setInitX(event.getScreenX());
@@ -192,149 +192,35 @@ public class Bar extends HBox implements StageChanges, StageReposition {
 
         this.setOnMouseClicked(maximizeFromBar);
 
-        this.setOnMouseDragged(event -> {
-            if (!event.isPrimaryButtonDown() || getInitX() == -1 ) {
-                return;
-            }
-
-            if (event.isStillSincePress()) {
-                return;
-            }
-
-            if(decorator.isMaximized() && decorator.isResizable()) {
-
-                if (bounds.getMaxX() < (event.getScreenX() + decorator.noMaximizedBounds.getWidth())) {
-                    stage.setX(bounds.getMaxX() - (decorator.noMaximizedBounds.getWidth()));
-                } else if (bounds.getMinX() < (decorator.noMaximizedBounds.getWidth() - event.getScreenX())) {
-                    stage.setX(0);
-                } else {
-                    stage.setX(event.getScreenX() - (decorator.noMaximizedBounds.getWidth() / 2));
-                }
-
-                if (decorator.noMaximizedBounds.getHeight() > bounds.getMaxY()) {
-                    stage.setHeight(bounds.getMaxY() - 100);
-                } else {
-                    stage.setHeight(decorator.noMaximizedBounds.getHeight());
-                }
-
-                if (decorator.noMaximizedBounds.getWidth() > bounds.getMaxX()) {
-                    stage.setWidth(bounds.getWidth() - 200);
-                } else {
-                    stage.setWidth(decorator.noMaximizedBounds.getWidth());
-                }
-                stage.setY(0);
-                stage.setMaximized(false);
-            } else {
-
-                if(decorator.isResizable()) {
-
-                    Stage stage = decorator.translucentStage;
-                    decorator.stage.setAlwaysOnTop(true);
-
-                    if (isOnTopLeft(event)) {
-                        repositionOnTopLeft(stage, 0);
-                        stage.show();
-                    } else if (isOnBottomLeft(event)) {
-                        repositionOnBottomLeft(stage, 20);
-                        stage.show();
-                    } else if (isOnTopRight(event)) {
-                        repositionOnTopRight(stage, 20);
-                        stage.show();
-                    } else if (isOnBottomRight(event)) {
-                        repositionOnBottomRight(stage, 20);
-                        stage.show();
-                    } else if (isOnRight(event)) {
-                        repositionOnRight(stage, 20);
-                        stage.show();
-                    } else if (isOnLeft(event)) {
-                        repositionOnLeft(stage, 20);
-                        stage.show();
-                    } else if (isOnTop(event)) {
-                        repositionOnTop(stage, 20);
-                        stage.show();
-                    } else {
-                        decorator.translucentStage.close();
-                    }
-                }
-
-                setNewX(event.getScreenX());
-                setNewY(event.getScreenY());
-
-                double deltaX = getNewX() - getInitX();
-                double deltaY = getNewY() - getInitY();
-
-                setInitX(getNewX());
-                setInitY(getNewY());
-
-                this.stage.setX(this.stage.getX() + deltaX);
-                setStageY(this.stage, this.stage.getY() + deltaY);
-
-            }
-
-            this.setCursor(Cursor.MOVE);
-            decorator.setMaximized(false);
-
-        });
-
-        this.setOnMouseReleased(event -> {
-            this.setCursor(Cursor.HAND);
-
-            if(decorator.isResizable()) {
-
-                Stage stage = decorator.stage;
-                this.decorator.stage.setAlwaysOnTop(false);
-
-                if (isOnTopLeft(event)) {
-                    repositionOnTopLeft(stage, 0);
-                } else if (isOnBottomLeft(event)) {
-                    repositionOnBottomLeft(stage, 0);
-                } else if (isOnTopRight(event)) {
-                    repositionOnTopRight(stage, 0);
-                } else if (isOnBottomRight(event)) {
-                    repositionOnBottomRight(stage, 0);
-                } else if (isOnRight(event)) {
-                    repositionOnRight(stage, 0);
-                } else if (isOnLeft(event)) {
-                    repositionOnLeft(stage, 0);
-                } else if (isOnTop(event)) {
-                    repositionOnTop(stage, 0);
-                    decorator.setMaximized(true);
-
-                } else {
-                    decorator.translucentStage.close();
-                }
-
-                decorator.translucentStage.close();
-            }
-
-        });
+        this.setOnMouseDragged(this::mouseDraggedEvent);
+        this.setOnMouseReleased(this::mouseReleasedEvent);
     }
 
-    private boolean isOnTopLeft(MouseEvent event){
+    private boolean isOnTopLeft(MouseEvent event) {
         return event.getScreenY() <= 0 && event.getScreenX() <= 0;
     }
 
-    private boolean isOnBottomLeft(MouseEvent event){
+    private boolean isOnBottomLeft(MouseEvent event) {
         return event.getScreenX() <= 0 && event.getScreenY() >= bounds.getMaxY();
     }
 
-    private boolean isOnTopRight(MouseEvent event){
-        return event.getScreenX() >= (bounds.getMaxX() -2) && event.getScreenY() <= bounds.getMinY();
+    private boolean isOnTopRight(MouseEvent event) {
+        return event.getScreenX() >= (bounds.getMaxX() - 2) && event.getScreenY() <= bounds.getMinY();
     }
 
-    private boolean isOnBottomRight(MouseEvent event){
+    private boolean isOnBottomRight(MouseEvent event) {
         return event.getScreenX() >= (bounds.getMaxX() - 2) && event.getScreenY() >= bounds.getMaxY();
     }
 
-    private boolean isOnRight(MouseEvent event){
-        return event.getScreenX() >= ( bounds.getMaxX() -2 );
+    private boolean isOnRight(MouseEvent event) {
+        return event.getScreenX() >= (bounds.getMaxX() - 2);
     }
 
-    private boolean isOnLeft(MouseEvent event){
+    private boolean isOnLeft(MouseEvent event) {
         return event.getScreenX() <= 0;
     }
 
-    private boolean isOnTop(MouseEvent event){
+    private boolean isOnTop(MouseEvent event) {
         return event.getScreenY() <= 0;
     }
 
@@ -350,5 +236,122 @@ public class Bar extends HBox implements StageChanges, StageReposition {
             maximize.setDisable(false);
             setOnMouseClicked(maximizeFromBar);
         }
+    }
+
+    private void mouseDraggedEvent(MouseEvent event) {
+        if (!event.isPrimaryButtonDown() || getInitX() == -1) {
+            return;
+        }
+
+        if (event.isStillSincePress()) {
+            return;
+        }
+
+        if (decorator.isMaximized() && decorator.isResizable()) {
+
+            if (bounds.getMaxX() < (event.getScreenX() + decorator.noMaximizedBounds.getWidth())) {
+                stage.setX(bounds.getMaxX() - (decorator.noMaximizedBounds.getWidth()));
+            } else if (bounds.getMinX() < (decorator.noMaximizedBounds.getWidth() - event.getScreenX())) {
+                stage.setX(0);
+            } else {
+                stage.setX(event.getScreenX() - (decorator.noMaximizedBounds.getWidth() / 2));
+            }
+
+            if (decorator.noMaximizedBounds.getHeight() > bounds.getMaxY()) {
+                stage.setHeight(bounds.getMaxY() - 100);
+            } else {
+                stage.setHeight(decorator.noMaximizedBounds.getHeight());
+            }
+
+            if (decorator.noMaximizedBounds.getWidth() > bounds.getMaxX()) {
+                stage.setWidth(bounds.getWidth() - 200);
+            } else {
+                stage.setWidth(decorator.noMaximizedBounds.getWidth());
+            }
+            stage.setY(0);
+            stage.setMaximized(false);
+        } else {
+
+            if (decorator.isResizable()) {
+
+                Stage stage = decorator.translucentStage;
+                decorator.stage.setAlwaysOnTop(true);
+
+                if (isOnTopLeft(event)) {
+                    repositionOnTopLeft(stage, 0);
+                    stage.show();
+                } else if (isOnBottomLeft(event)) {
+                    repositionOnBottomLeft(stage, 20);
+                    stage.show();
+                } else if (isOnTopRight(event)) {
+                    repositionOnTopRight(stage, 20);
+                    stage.show();
+                } else if (isOnBottomRight(event)) {
+                    repositionOnBottomRight(stage, 20);
+                    stage.show();
+                } else if (isOnRight(event)) {
+                    repositionOnRight(stage, 20);
+                    stage.show();
+                } else if (isOnLeft(event)) {
+                    repositionOnLeft(stage, 20);
+                    stage.show();
+                } else if (isOnTop(event)) {
+                    repositionOnTop(stage, 20);
+                    stage.show();
+                } else {
+                    decorator.translucentStage.close();
+                }
+            }
+
+            setNewX(event.getScreenX());
+            setNewY(event.getScreenY());
+
+            double deltaX = getNewX() - getInitX();
+            double deltaY = getNewY() - getInitY();
+
+            setInitX(getNewX());
+            setInitY(getNewY());
+
+            this.stage.setX(this.stage.getX() + deltaX);
+            setStageY(this.stage, this.stage.getY() + deltaY);
+
+        }
+
+        this.setCursor(Cursor.MOVE);
+        decorator.setMaximized(false);
+
+    }
+
+    private void mouseReleasedEvent(MouseEvent event) {
+        this.setCursor(Cursor.HAND);
+
+        if (decorator.isResizable()) {
+
+            Stage stage = decorator.stage;
+            this.decorator.stage.setAlwaysOnTop(false);
+
+            if (isOnTopLeft(event)) {
+                repositionOnTopLeft(stage, 0);
+            } else if (isOnBottomLeft(event)) {
+                repositionOnBottomLeft(stage, 0);
+            } else if (isOnTopRight(event)) {
+                repositionOnTopRight(stage, 0);
+            } else if (isOnBottomRight(event)) {
+                repositionOnBottomRight(stage, 0);
+            } else if (isOnRight(event)) {
+                repositionOnRight(stage, 0);
+            } else if (isOnLeft(event)) {
+                repositionOnLeft(stage, 0);
+            } else if (isOnTop(event)) {
+                repositionOnTop(stage, 0);
+                decorator.setMaximized(true);
+
+            } else {
+                decorator.translucentStage.close();
+            }
+
+            decorator.translucentStage.close();
+        }
+
     }
 }

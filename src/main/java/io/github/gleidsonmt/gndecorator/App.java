@@ -58,7 +58,7 @@ public class App extends Application {
         decorator.setMinHeight(300D);
 
 //        decorator.fullBody();
-//        decorator.switchTheme(Theme.MAC_YOSEMITE);
+        decorator.switchTheme(Theme.MAC_YOSEMITE);
 //        decorator.testWithScenicView();
         decorator.show();
 
@@ -82,6 +82,7 @@ public class App extends Application {
 //
         decorator.addControl(new Button("wlecome"));
         decorator.addMenu(menuFile);
+
 
 //        ScenicView.show(decorator.getWindow().getScene());
 
