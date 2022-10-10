@@ -61,8 +61,11 @@ publishing {
 //            url = "https://maven.pkg.github.com/octocat/hello-world"
             url = "https://maven.pkg.github.com/gleidsonmt/GNDecorator"
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = project.findProperty("gpr.user") ?:  System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+
+//                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+//                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
             }
         }
     }
