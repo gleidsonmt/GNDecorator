@@ -22,6 +22,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.scenicview.ScenicView;
@@ -54,23 +56,32 @@ public class App extends Application {
         content.getChildren().add(block);
 
         decorator.setMinHeight(300D);
+
 //        decorator.fullBody();
 //        decorator.switchTheme(Theme.MAC_YOSEMITE);
 //        decorator.testWithScenicView();
         decorator.show();
 
-//        Menu menu = new Menu("File");
+        Menu menuFile = new Menu("File");
+        MenuItem menuNew = new MenuItem("New");
+        MenuItem menuOpen = new MenuItem("Open");
+        Menu menuOpenRecent = new Menu("Open Recent");
+        MenuItem menuR1 = new MenuItem("File 1");
+        MenuItem menuR2 = new MenuItem("File 2");
+        menuOpenRecent.getItems().addAll(menuR1, menuR2);
+        MenuItem close = new MenuItem("Close");
+        MenuItem save = new MenuItem("Save");
+        MenuItem saveAs = new MenuItem("Save As");
+        MenuItem revert = new MenuItem("Revert");
+        MenuItem preferences = new MenuItem("Preferences");
+        MenuItem quit = new MenuItem("Quit");
+
+        menuFile.getItems().addAll(menuNew, menuOpen, menuOpenRecent,
+                new SeparatorMenuItem(), close, save, saveAs, revert, new SeparatorMenuItem(),
+                preferences, new SeparatorMenuItem(), quit);
 //
-//        menu.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                System.out.println("show");
-//            }
-//        });
-//
-//        decorator.addControl(new Button("wlecome"));
-//        decorator.addMenu(menu);
-//        decorator.set
+        decorator.addControl(new Button("wlecome"));
+        decorator.addMenu(menuFile);
 
 //        ScenicView.show(decorator.getWindow().getScene());
 

@@ -20,6 +20,7 @@ package io.github.gleidsonmt.gndecorator.core;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  11/07/2020
  */
+@Deprecated
 public enum Light {
     DEFAULT, DARK
 }

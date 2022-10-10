@@ -25,9 +25,7 @@ import javafx.stage.Stage;
  * Create on  11/07/paddingpadding
  */
 interface StageReposition {
-
     Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
-
     double padding = 20;
 
     default void repositionOnTop(Stage stage, double padding){
