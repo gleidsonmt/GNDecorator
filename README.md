@@ -7,7 +7,7 @@
 <h1></h1>
 
 <p align="center">
-  <img src="BackLogo.png"  />
+  <img src="logo_flier.png"  />
 </p>
 
 <h1></h1>

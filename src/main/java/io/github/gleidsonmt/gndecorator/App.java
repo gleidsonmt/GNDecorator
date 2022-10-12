@@ -26,6 +26,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  23/09/2018
@@ -40,7 +42,8 @@ public class App extends Application {
         GNDecorator decorator = new GNDecorator();
         decorator.setContent(content);
 
-        decorator.getIcons().add(new Image("/logos/logo_32.png"));
+
+        decorator.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/logo/logo_256.png")).toExternalForm()));
 
 
         decorator.setTitle(null);
