@@ -103,9 +103,6 @@ publishing {
                         credentials {
                             username = project.properties["github.user"]
                             password = project.properties["github.token"]
-//                            username = System.getenv("GITHUB_ACTOR")
-
-//                            password = System.getenv("GITHUB_TOKEN")
                         }
                     }
                 }
