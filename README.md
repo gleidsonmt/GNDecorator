@@ -7,7 +7,7 @@
 <h1></h1>
 
 <p align="center">
-  <img src="src/logo.png"  />
+  <img src="BackLogo.png"  />
 </p>
 
 <h1></h1>
