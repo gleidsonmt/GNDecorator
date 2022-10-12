@@ -21,7 +21,6 @@
   GNDecorator is a simple decoration project for javaFx applications.
 </h5>
 
-
  
 ##### View Default
 ![demo1](src/main/resources/screens/default.png)
