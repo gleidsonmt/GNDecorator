@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'maven-publish'
     id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'signing'
 }
 
 group 'io.github.gleidsonmt'
@@ -31,72 +32,38 @@ application {
 
 dependencies {
     implementation files('vendor/scenicView.jar')
-
-
 }
 
-//publishing {
-//    repositories {
-//        maven {
-//            name = "GitHubPackages"
-//            url = uri("https://maven.pkg.github.com/gleidsonmt/GNDecorator")
-//            credentials {
-//                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-//                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-//            }
-//        }
-//    }
-//
-//    publications {
-//        gpr(MavenPublication) {
-//            from(components.java)
-//        }
-//    }
-//}
 
-
-//publishing {
-//
-//    repositories {
-//        maven {
-//            name = "GitHubPackages"
-//            url = "https://maven.pkg.github.com/gleidsonmt/GNDecorator"
-//            credentials {
-//                username = System.getenv("GITHUB_ACTOR")
-//                password = System.getenv("GITHUB_TOKEN")
-//            }
-//        }
-//    }
-//}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
-    archiveClassifier = "sources"
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
 
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+signing {
+    sign configurations.archives
+}
 
 publishing {
-    repositories {
-        maven {
 
-            name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/gleidsonmt/GNDecorator"
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-            }
-        }
-
-    }
     publications {
 
         mavenJava(MavenPublication) {
             from components.java
-            artifact sourceJar
+
             pom {
                 name = 'GNDecorator'
                 description = 'Custom window decorator for javafx apps.'
-                url = 'https://github.com/gleidsonmt/GNDecorator'
+                url = 'https://github.com/gleidsonmt/gndecorator'
 
                 licenses {
                     license {
@@ -112,13 +79,36 @@ publishing {
                     }
                 }
 
-//                scm {
-//                    url = 'https://github.com/gleidsonmt/GNDecorator'
-//                    connection = 'scm:https://github.com/gleidsonmt/GNDecorator.git'
-//                    developerConnection = 'scm:git://github.com/gleidsonmt/GNDecorator.git'
-//                }
+                scm {
+                    url = 'https://github.com/gleidsonmt/gndecorator'
+                    connection = 'scm:https://github.com/gleidsonmt/gndecorator.git'
+                    developerConnection = 'scm:git://github.com/gleidsonmt/gndecorator.git'
+                }
 
+                repositories {
 
+                    maven {
+                        name = "GNDecorator"
+                        url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                        credentials {
+                            username = project.properties["ossrhUser"]
+                            password = project.properties["ossrhPassword"]
+
+                        }
+                    }
+
+                    maven {
+                        name = "GitHubPackages"
+                        url = "https://maven.pkg.github.com/gleidsonmt/gndecorator"
+                        credentials {
+                            username = project.properties["github.user"]
+                            password = project.properties["github.token"]
+//                            username = System.getenv("GITHUB_ACTOR")
+
+//                            password = System.getenv("GITHUB_TOKEN")
+                        }
+                    }
+                }
             }
         }
     }

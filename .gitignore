@@ -1,5 +1,6 @@
 ./gitignore
 .idea/**
+.gradle/**
 /out/**
 scenicView.properties
 GNDecorator.iml
@@ -12,14 +13,6 @@ GNDecorator.iml
 /.gradle/
 publishInfo.gradle
 
+gradle.properties
 
-/build/classes/
-/build/distributions/
-/build/generated/
-/build/publications/
-/build/reports/
-/build/resources/
-/build/scripts/
-/build/test-results/
-/build/tmp/
 
