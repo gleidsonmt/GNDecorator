@@ -18,15 +18,13 @@
 package io.github.gleidsonmt.gndecorator;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import org.scenicview.ScenicView;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -41,6 +39,8 @@ public class App extends Application {
 
         GNDecorator decorator = new GNDecorator();
         decorator.setContent(content);
+
+        decorator.getIcons().add(new Image("/logos/logo_32.png"));
 
 
         decorator.setTitle(null);

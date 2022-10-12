@@ -3,14 +3,13 @@ plugins {
     id 'application'
     id 'maven-publish'
     id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.beryx.jlink' version '2.24.1'
     id 'signing'
 }
 
 group 'io.github.gleidsonmt'
 version '2.1.25'
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 repositories {
     mavenCentral()
@@ -109,5 +108,33 @@ publishing {
             }
         }
     }
+}
+
+jlink {
+    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'GNDecorator'
+    }
+
+    jpackage {
+
+//        imageOptions = [
+//                '--icon', 'logo_full.ico'
+//        ]
+        installerType = 'exe'
+        installerOptions = [
+                '--description', "A decorator stage for javafx apps.",
+                '--copyright', 'Copyrigth © 2021-2022 GLEIDSON NEVES DA SILVEIRA'
+//                , '--icon', 'logo_32.ico'
+
+        ]
+
+        addExtraDependencies("javafx")
+    }
+}
+
+jlinkZip {
+    group = 'distribution'
 }
 
