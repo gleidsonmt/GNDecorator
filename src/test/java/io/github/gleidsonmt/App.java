@@ -71,7 +71,7 @@ public class App extends Application {
         decorator.setMinHeight(300D);
         decorator.addControl(new Button("Custom Control"));
         decorator.addControl(new ComboBox<>());
-        decorator.addStylesheets(getClass().getResource("/io.github.gleidsonmt.gndecorator/theme/master.css").toExternalForm());
+        decorator.addStylesheets(getClass().getResource("/theme/master.css").toExternalForm());
 
         decorator.show();
     }
