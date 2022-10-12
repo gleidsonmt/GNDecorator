@@ -2,17 +2,18 @@
 .idea/**
 .gradle/**
 /out/**
+/build/**
 scenicView.properties
 GNDecorator.iml
 /README - Copia.md
 /src/META-INF/
 /secring.gpg
 /gradle.properties
+gradle.properties
 
 /vendor/
 /.gradle/
 publishInfo.gradle
 
-gradle.properties
 
 
