@@ -70,33 +70,21 @@ Begin to use... Java Code!
 
 ```java
   GNDecorator decorator = new GNDecorator();
- ```
-
-> Setting content
-```java
-    decorator.setContent(content);
-    decorator.fullBody() // the content occupies all of size
-  ```
-
-> Menus
-```java
-    Menu menu = new Menu("File");
-    menu.getItems().add(new MenuItem("Open"));
-    menu.getItems().add(new MenuItem("Close"));
-    decorator.addMenu(menu);
-    decorator.addMenu(1, menu);// add with a index
-  ```
-
-> Tittle
-```java
-    decorator.setTitle("JavaFx Application");
-  ```
-
-> Controls
-```java
-    ButtonTest a1 = new ButtonTest("Button 1");
-    decorator.addControl(a1);
-    decorator.addControl(index, a1); // add with a index
+  decorator.setTitle("JavaFx Application");
+  decorator.setContent(content);
+  decorator.fullBody() // the content occupies all of size
+    
+ // Adding menus 
+  Menu menu = new Menu("File");
+  menu.getItems().add(new MenuItem("Open"));
+  menu.getItems().add(new MenuItem("Close"));
+  decorator.addMenu(menu);
+  decorator.addMenu(1, menu);// add with a index
+        
+  // Adding custom controls
+  ButtonTest a1 = new ButtonTest("Button 1");
+  decorator.addControl(a1);
+  decorator.addControl(index, a1); // add with a index
   ```
 
 
