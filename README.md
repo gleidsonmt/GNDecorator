@@ -137,10 +137,10 @@ Para contribuir com <nome_do_projeto>, siga estas etapas:
 1. Fork this repository.
 2. Creates a branch: `git checkout -b <branch_name>`.
 3. Do your changes and commit: `git commit -m '<commit_message>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+4. Send a branch to origin: `git push origin GNDecorator / <local>`
 5. Creates pull request.
 
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+However, you don't know [How to create a pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 ## 😄 Seja um dos contribuidores<br>
 
