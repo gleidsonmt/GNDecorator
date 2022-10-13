@@ -15,8 +15,7 @@
 # 📑 Contents
 
 <!-- TOC -->
-
-  * [🚀 Installig Decorator](#-installig-decorator)
+* [🚀 Installing Decorator](#-installing-decorator)
 * [🧬  Basic Structure](#-basic-structure)
   * [Structure - by Scenic View](#structure---by-scenic-view)
     * [Default Structure](#default-structure)
@@ -29,7 +28,6 @@
   * [😄 Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
   * [📝 Licença](#-licena)
 <!-- TOC -->
-
 
 # 🚀 Installing Decorator
 
