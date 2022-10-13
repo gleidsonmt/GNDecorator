@@ -119,16 +119,18 @@ Begin to use... Java Code!
 ## 📺 On Youtube
 [Apresentation](https://youtu.be/hZsYU7UbWmU)
 
-### 🛠 Ajustes e melhorias
+### 🛠 Enhancements
 
 Next steps:
 
 - [x] Add Yosemite Theme
-- [x] Public methods to update window icons.
-- [ ] Code outside the scope
-
-
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
+- [ ] Add Windows Theme
+- [ ] The theme in blank to customize
+- [ ] Public methods to update window icons with css.
+- [ ] Code outside the scope (Clean Code)
+- [ ] Default Property to change bar height
+- [ ] Badges to add in custom bar
+- [ ] Customizable search bar (maybe isn't a good idea)
 
 ## 📫 Contribuindo para <nome_do_projeto>
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
