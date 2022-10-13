@@ -146,8 +146,8 @@ However, if you don't know [How to create a pull Request](https://help.github.co
 
 Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
 
-## 📝 Licença
+## 📝 License
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+This project is under license. See the file [LICENSE](LICENSE.md) to more details.
 
-[⬆ Voltar ao topo](#nome-do-projeto)<br>
+[⬆ Back to the top](#-GNDecorator)<br>
