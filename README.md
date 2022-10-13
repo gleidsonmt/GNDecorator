@@ -1,5 +1,5 @@
 <h1 align="center">GNDecorator</h1>
-
+<h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
 <h1></h1>
 
 ![Version](https://img.shields.io/badge/Version-2.1.27-green.svg?style=for-the-badge)
@@ -13,17 +13,10 @@
 </p>
 
 <h1></h1>
-<h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
-
-<h1></h1>
-
 
 <h5 > 
   GNDecorator is a simple decoration project for javaFx applications.
 </h5>
-
-<script !src=""></script>>
-
  
 ##### View Default
 ![demo1](src/main/resources/screens/default.png)
