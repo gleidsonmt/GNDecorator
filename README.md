@@ -41,7 +41,7 @@ For installing decorator, you this options:
 
 
 If you use maven:
-```
+```xml
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
   <artifactId>gndecorator</artifactId>
@@ -50,7 +50,7 @@ If you use maven:
 ```
 
 .. or gradle:
-```
+```groovy
     implementation 'io.github.gleidsonmt:gndecorator:2.1.25'
 ```
 
