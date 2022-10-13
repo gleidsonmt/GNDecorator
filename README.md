@@ -29,6 +29,14 @@
   * [📝 Licença](#-licena)
 <!-- TOC -->
 
+# 💻 Environment
+
+
+This lib is a compnent for JavaFx:   Get in the offical website [JavaFx](https://openjfx.io/), Tutorial [Getting Started](https://openjfx.io/openjfx-docs/)
+
+I have a great workstation here, then I've using a gradle 7.2 and Java and JavaFx +16 on Windows. (I really want to test in other systems in future).
+
+
 # 🚀 Installing Decorator
 
 Now you have many ways to get that!
@@ -62,33 +70,21 @@ Begin to use... Java Code!
 
 ```java
   GNDecorator decorator = new GNDecorator();
- ```
-
-> Setting content
-```java
-    decorator.setContent(content);
-    decorator.fullBody() // the content occupies all of size
-  ```
-
-> Menus
-```java
-    Menu menu = new Menu("File");
-    menu.getItems().add(new MenuItem("Open"));
-    menu.getItems().add(new MenuItem("Close"));
-    decorator.addMenu(menu);
-    decorator.addMenu(1, menu);// add with a index
-  ```
-
-> Tittle
-```java
-    decorator.setTitle("JavaFx Application");
-  ```
-
-> Controls
-```java
-    ButtonTest a1 = new ButtonTest("Button 1");
-    decorator.addControl(a1);
-    decorator.addControl(index, a1); // add with a index
+  decorator.setTitle("JavaFx Application");
+  decorator.setContent(content);
+  decorator.fullBody() // the content occupies all of size
+    
+ // Adding menus 
+  Menu menu = new Menu("File");
+  menu.getItems().add(new MenuItem("Open"));
+  menu.getItems().add(new MenuItem("Close"));
+  decorator.addMenu(menu);
+  decorator.addMenu(1, menu);// add with a index
+        
+  // Adding custom controls
+  ButtonTest a1 = new ButtonTest("Button 1");
+  decorator.addControl(a1);
+  decorator.addControl(index, a1); // add with a index
   ```
 
 
@@ -119,28 +115,30 @@ Begin to use... Java Code!
 ## 📺 On Youtube
 [Apresentation](https://youtu.be/hZsYU7UbWmU)
 
-### 🛠 Ajustes e melhorias
+### 🛠 Enhancements
 
 Next steps:
 
 - [x] Add Yosemite Theme
-- [x] Public methods to update window icons.
-- [ ] Code outside the scope
+- [ ] Add Windows Theme
+- [ ] The theme in blank to customize
+- [ ] Public methods to update window icons with css.
+- [ ] Code outside the scope (Clean Code)
+- [ ] Default Property to change bar height
+- [ ] Badges to add in custom bar
+- [ ] Customizable search bar (maybe isn't a good idea)
 
-
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
-
-## 📫 Contribuindo para <nome_do_projeto>
+## 📫 Contributing to Project
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
-Para contribuir com <nome_do_projeto>, siga estas etapas:
+To contributing to project, follow these steps:
 
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
+1. Fork this repository.
+2. Creates a branch: `git checkout -b <branch_name>`.
+3. Do your changes and commit: `git commit -m '<commit_message>'`
+4. Send a branch to origin: `git push origin GNDecorator / <local>`
+5. Creates pull request.
 
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+However, if you don't know [How to create a pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 ## 😄 Seja um dos contribuidores<br>
 
