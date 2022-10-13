@@ -132,7 +132,7 @@ Adicione comandos de execução e exemplos que você acha que os usuários achar
 
 ## 📫 Contributing to Project
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
-Para contribuir com <nome_do_projeto>, siga estas etapas:
+To contributing to project, follow these steps:
 
 1. Fork this repository.
 2. Creates a branch: `git checkout -b <branch_name>`.
