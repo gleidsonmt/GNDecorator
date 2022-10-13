@@ -29,6 +29,15 @@
   * [📝 Licença](#-licena)
 <!-- TOC -->
 
+## 💻 Environment
+
+
+This lib is a compnent for JavaFx:   Get in the offical website [JavaFx](https://openjfx.io/),</br>
+Tutorial [Getting Started](https://openjfx.io/openjfx-docs/)
+
+I have a great workstation here, then I've using a gradle 7.2 and Java and JavaFx +16 on Windows. (I really want to test in other systems in future).
+
+
 # 🚀 Installing Decorator
 
 Now you have many ways to get that!
