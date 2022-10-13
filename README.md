@@ -1,8 +1,10 @@
+<h1 align="center">GNDecorator</h1>
 
+<h1></h1>
 
 ![Version](https://img.shields.io/badge/Version-2.1.27-green.svg?style=for-the-badge)
-[![Release](https://img.shields.io/badge/Release-v2.1.21--alpha-blue.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/releases/tag/1.0)
-[![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/blob/master/LICENSE) 
+[![Release](https://img.shields.io/badge/Release-v2.1.21--alpha-blue.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.24)
+[![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE) 
 
 <h1></h1>
 
@@ -15,11 +17,12 @@
 
 <h1></h1>
 
-<h1>GNDecorator</h1>
 
 <h5 > 
   GNDecorator is a simple decoration project for javaFx applications.
 </h5>
+
+<script !src=""></script>>
 
  
 ##### View Default
