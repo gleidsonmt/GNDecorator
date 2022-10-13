@@ -4,7 +4,7 @@
 <h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
 <h1></h1>
 
-![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.gleidsonmt/gndecorator?server=https%3A%2F%2Fs01.oss.sonatype.org&style=for-the-badge)
+[![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.gleidsonmt/gndecorator?server=https%3A%2F%2Fs01.oss.sonatype.org&style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
 [![Release](https://img.shields.io/badge/Release-v2.1.25--beta-green.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
 [![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE) 
 
@@ -36,6 +36,7 @@
 
 For installing decorator, follow this steps:
 
+Now you have many ways to get that!.
 You can get the dependency in GitHub packages in this project, on the left side, or get a release.
 Note ** Release has the first changes I made ***
 
