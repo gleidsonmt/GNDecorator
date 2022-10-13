@@ -15,7 +15,9 @@
 # 📑 Contents
 
 <!-- TOC -->
+* [💻 Environment](#-environment)
 * [🚀 Installing Decorator](#-installing-decorator)
+* [☕ Using Decorator](#-using-decorator)
 * [🧬  Basic Structure](#-basic-structure)
   * [Structure - by Scenic View](#structure---by-scenic-view)
     * [Default Structure](#default-structure)
@@ -23,8 +25,8 @@
         * [View Darkula](#view-darkula)
         * [With gradient and image](#with-gradient-and-image)
   * [📺 On Youtube](#-on-youtube)
-    * [🛠 Ajustes e melhorias](#-ajustes-e-melhorias)
-  * [📫 Contribuindo para <nome_do_projeto>](#-contribuindo-para--nome_do_projeto-)
+    * [🛠 Enhancements](#-enhancements)
+  * [📫 Contributing to Project](#-contributing-to-project)
   * [😄 Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
   * [📝 Licença](#-licena)
 <!-- TOC -->
