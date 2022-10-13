@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'io.github.gleidsonmt'
-version '2.1.25'
+version project.properties["version"]
 
 
 repositories {
