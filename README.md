@@ -31,16 +31,18 @@
 
 # 🚀 Installing Decorator
 
-Now you have many ways to get that!.
-Note ** Release has the first changes I made ***
+Now you have many ways to get that!
+!🗒️Note ** The release has the first changes I made and releases in nexus are more stable 🥸***
 
-For installing decorator, you this options:
+👌In code blocks find the copy button... is cooler, it automatically knows if your target is a pom.xml or gradle.build
 
-  * For Pros - Click on the badge release or click badge nexus, and you're going to redirect to hosted sources.
-  * For Github Users - On the right side you can see the packages and releases, click on.
+For installing decorator, you have this options:
 
+  * For Pros - Click on the badge release or click badge nexus on the top of this document, and you're going to redirect to hosted sources.
+  * For Github Users - On the right side, you can see the packages and releases, click on them and download it, in case you are in packages just copy them into your build file.
+  * For Faster users - Just copy and paste the code bellow
 
-If you use maven:
+If you use maven add in pom.xml:
 ```xml
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
@@ -49,7 +51,7 @@ If you use maven:
 </dependency>
 ```
 
-.. or gradle:
+.. or in gradle.build:
 ```groovy
     implementation 'io.github.gleidsonmt:gndecorator:2.1.25'
 ```
