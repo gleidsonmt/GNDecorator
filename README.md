@@ -142,9 +142,9 @@ To contributing to project, follow these steps:
 
 However, if you don't know [How to create a pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-## 😄 Seja um dos contribuidores<br>
+## 😄 Be a contritubutor<br>
 
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
+🤖I really need more friends.. Send me a  <a href='mailto:gleidisonmt@gmail.com'> email <a/>.
 
 ## 📝 Licença
 
