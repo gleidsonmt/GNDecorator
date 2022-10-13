@@ -144,7 +144,7 @@ However, if you don't know [How to create a pull Request](https://help.github.co
 
 ## 😄 Be a contritubutor<br>
 
-🤖I really need more friends.. Send me a  <a href='mailto:gleidisonmt@gmail.com'> email <a/>.
+🤖I really need more friends.. Send me a  <a href='mailto:gleidisonmt@gmail.com?subject=Hi, I see you need my help!.. I am here.'> email <a/>.
 
 ## 📝 Licença
 
