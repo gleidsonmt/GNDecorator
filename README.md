@@ -12,7 +12,7 @@
   <img src="./src/main/resources/logo/logo_flier.png"  />
 </p>
 
-## 📑 Contents
+# 📑 Contents
 
 <!-- TOC -->
 
@@ -30,15 +30,17 @@
   * [📝 Licença](#-licena)
 <!-- TOC -->
 
-<h1></h1>
 
-## 🚀 Installig Decorator
+# 🚀 Installing Decorator
 
 For installing decorator, follow this steps:
 
 Now you have many ways to get that!.
-You can get the dependency in GitHub packages in this project, on the left side, or get a release.
 Note ** Release has the first changes I made ***
+
+1. Pro - Click on the badge release or click badge nexus, and you're going to redirect to hosted sources.
+2. Novice - 
+
 
 If you use maven:
 ```
