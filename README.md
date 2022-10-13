@@ -1,6 +1,15 @@
+
+
 <h1 align="center">GNDecorator</h1>
 <h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
 <h1></h1>
+<h1></h1>
+
+<p align="center">
+  <img src="./src/main/resources/logo/logo_flier.png"  />
+</p>
+
+## 📑 Contents
 
 <!-- TOC -->
 * [🧬Basic Structure](#basic-structure)
@@ -23,15 +32,12 @@
 [![Release](https://img.shields.io/badge/Release-v2.1.25--beta-green.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
 [![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE) 
 
-<h1></h1>
 
-<p align="center">
-  <img src="./src/main/resources/logo/logo_flier.png"  />
-</p>
 
 <h1></h1>
 
  > The project provides a simple decorator for your javafx apps.
+
 
 
 ```java
