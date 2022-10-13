@@ -119,14 +119,14 @@ jlink {
 
     jpackage {
 
-//        imageOptions = [
-//                '--icon', 'logo_full.ico'
-//        ]
+        imageOptions = [
+                '--icon', 'logo_256.ico'
+        ]
         installerType = 'exe'
         installerOptions = [
                 '--description', "A decorator stage for javafx apps.",
                 '--copyright', 'Copyrigth © 2021-2022 GLEIDSON NEVES DA SILVEIRA'
-//                , '--icon', 'logo_32.ico'
+                , '--icon', 'logo_256.ico'
 
         ]
 

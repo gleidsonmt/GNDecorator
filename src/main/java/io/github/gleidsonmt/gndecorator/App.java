@@ -43,7 +43,7 @@ public class App extends Application {
         decorator.setContent(content);
 
 
-        decorator.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/logo/logo_256.png")).toExternalForm()));
+        decorator.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/logo/logo_32.png")).toExternalForm()));
 
 
         decorator.setTitle(null);
