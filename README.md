@@ -33,13 +33,13 @@
 
 # 🚀 Installing Decorator
 
-For installing decorator, follow this steps:
-
 Now you have many ways to get that!.
 Note ** Release has the first changes I made ***
 
-1. Pro - Click on the badge release or click badge nexus, and you're going to redirect to hosted sources.
-2. Novice - 
+For installing decorator, you this options:
+
+  * For Pros - Click on the badge release or click badge nexus, and you're going to redirect to hosted sources.
+  * For Github Users - On the right side you can see the packages and releases, click on.
 
 
 If you use maven:
