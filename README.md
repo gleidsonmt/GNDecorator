@@ -140,7 +140,7 @@ Para contribuir com <nome_do_projeto>, siga estas etapas:
 4. Send a branch to origin: `git push origin GNDecorator / <local>`
 5. Creates pull request.
 
-However, you don't know [How to create a pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+However, if you don't know [How to create a pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 ## 😄 Seja um dos contribuidores<br>
 
