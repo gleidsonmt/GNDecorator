@@ -54,6 +54,10 @@ If you use maven:
     implementation 'io.github.gleidsonmt:gndecorator:2.1.25'
 ```
 
+# ☕ Using Decorator
+
+Begin to use... Java Code!
+
 ```java
   GNDecorator decorator = new GNDecorator();
  ```
