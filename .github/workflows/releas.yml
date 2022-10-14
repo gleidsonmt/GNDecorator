@@ -3,7 +3,7 @@ name: "Release"
 
 on: # yamllint disable-line rule:truthy
   push:
-    branches: [learning_action_release]
+    branches: [master]
     tags:
       - "**"
 
