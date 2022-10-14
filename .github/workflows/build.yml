@@ -1,7 +1,7 @@
 
 
 name: Java CI with gradle
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: Build by ${{ github.actor }} 🚀
 on:
   push:
     branches: [develop]
