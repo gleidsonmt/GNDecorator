@@ -10,12 +10,12 @@ jobs:
 #        id: get_latest_release
 #        env:
 #          repo: GNDecorator
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #          route: GET /repos/${{github.actor}}/${{env.repo}}/releases/latest
       #          route: GET /repos/{owner}/{repo}/releases/latest
-
       #          repo: request-action
+
       - uses: octokit/request-action@v2.x
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: "actions/github-script@v5"
         with:
           script: |
