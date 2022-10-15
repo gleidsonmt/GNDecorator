@@ -61,13 +61,13 @@ If you use maven add in pom.xml:
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
   <artifactId>gndecorator</artifactId>
-  <version>2.2.2+49</version>
+  <version>2.2.2+50</version>
 </dependency>
 ```
 
 .. or in gradle.build:
 ```groovy
-    implementation 'io.github.gleidsonmt:gndecorator:2.2.2+49'
+    implementation 'io.github.gleidsonmt:gndecorator:2.2.2+50'
 ```
 
 # ? Using Decorator
