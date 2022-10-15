@@ -1,7 +1,7 @@
 buildscript {
 
     Properties props = new Properties()
-    File propsFile = new File('gradle/wrapper/gradle-wrapper.properties')
+    File propsFile = new File('./version.properties')
     props.load(propsFile.newDataInputStream())
 
     project.version =
@@ -29,8 +29,6 @@ plugins {
 
 group 'io.github.gleidsonmt'
 //project.version = scmVersion.versionCreator(scmVersion.version + project.properties["artifactBuildNumber"])
-
-
 
 repositories {
     mavenCentral()
@@ -77,7 +75,7 @@ task replaceVersionInREADME {
 task incrementVersion (dependsOn: build) {
 //task incrementVersion () {
     Properties props = new Properties()
-    File propsFile = new File('gradle/wrapper/gradle-wrapper.properties')
+    File propsFile = new File('./version.properties')
     props.load(propsFile.newDataInputStream())
     Integer nextbuildnum = ( ((props.getProperty('artifactBuildNumber')) as BigDecimal) + 1 )
     props.setProperty('artifactBuildNumber', nextbuildnum.toString())
