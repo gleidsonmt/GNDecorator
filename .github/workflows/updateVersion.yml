@@ -7,13 +7,14 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: madhead/read-java-properties@latest
-        id: majorVersion
+      - name: read_property
+        uses: christian-draeger/read-properties@1.1.0
         with:
-          file: build.properties
-          property: majorVersion
-          default: 0.0.1
-      - run: echo ${{ steps.majorVersion }}
+          path: '.build.properties'
+          properties: 'majorVersion'
+
+        run: echo ${{ steps.read_property.outputs.majorVersion }}
+        # will print "the value of 'the.key.of.a.property'"
 
 #name: Custom Auto update versoin
 #run-name: Build by ${{ github.actor }} 🚀
