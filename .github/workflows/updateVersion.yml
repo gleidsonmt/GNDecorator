@@ -15,8 +15,8 @@ jobs:
           java-version: 17.0.1
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Build with gradle
-        run: ./gradlew build
+#      - name: Build with gradle
+#        run: ./gradlew build
       - name: Increment Version
         run: ./gradlew incrementVersion
 
