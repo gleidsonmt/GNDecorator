@@ -2,6 +2,8 @@
 # version 0.1.6
 I'm in master
 
+Stream:1
+
 <h1 align="center">GNDecorator</h1>
 <h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
 <h1></h1>
@@ -65,7 +67,7 @@ If you use maven add in pom.xml:
 
 .. or in gradle.build:
 ```groovy
-    implementation 'io.github.gleidsonmt:gndecorator:0.1.9-SNAPSHOT'
+    implementation 'io.github.gleidsonmt:gndecorator:unspecified-SNAPSHOT'
 ```
 
 # ? Using Decorator
