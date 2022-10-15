@@ -74,8 +74,8 @@ task replaceVersionInREADME {
 
 }
 
-//task incrementVersion (dependsOn: build) {
-task incrementVersion () {
+task incrementVersion (dependsOn: build) {
+//task incrementVersion () {
     Properties props = new Properties()
     File propsFile = new File('build.properties')
     props.load(propsFile.newDataInputStream())
@@ -83,8 +83,8 @@ task incrementVersion () {
     props.setProperty('artifactBuildNumber', nextbuildnum.toString())
     props.store(propsFile.newWriter(), null)
     props.load(propsFile.newDataInputStream())
-//    ant.replaceregexp(match:'artifactBuildNumber', replace:'artifactBuildNumber;'+nextbuildnum+';', byline:true) {
-//        file 'src/main/webapp/index.jsp'
+////    ant.replaceregexp(match:'artifactBuildNumber', replace:'artifactBuildNumber;'+nextbuildnum+';', byline:true) {
+////        file 'src/main/webapp/index.jsp'
 //    }
 }
 
