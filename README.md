@@ -1,5 +1,6 @@
 
-# v0.1.6
+# version 0.1.6
+I'm in master
 
 <h1 align="center">GNDecorator</h1>
 <h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
@@ -7,32 +8,32 @@
 
 [![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.gleidsonmt/gndecorator?server=https%3A%2F%2Fs01.oss.sonatype.org&style=for-the-badge)](https://central.sonatype.dev/artifact/io.github.gleidsonmt/gndecorator/2.1.25)
 [![Release](https://img.shields.io/badge/Release-v2.1.25--beta-green.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
-[![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE) 
+[![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE)
 
 <p align="center">
   <img src="./src/main/resources/logo/logo_flier.png"  />
 </p>
 
-# ? Contentsssss
+# 📑 Contentsssss
 
 <!-- TOC -->
-* [? Environment](#-environment)
-* [? Installing Decorator](#-installing-decorator)
-* [? Using Decorator](#-using-decorator)
-* [?  Basic Structure](#-basic-structure)
+* [💻 Environment](#-environment)
+* [🚀 Installing Decorator](#-installing-decorator)
+* [☕ Using Decorator](#-using-decorator)
+* [🧬  Basic Structure](#-basic-structure)
   * [Structure - by Scenic View](#structure---by-scenic-view)
     * [Default Structure](#default-structure)
-        * [View Default](#view-default)
-        * [View Darkula](#view-darkula)
-        * [With gradient and image](#with-gradient-and-image)
-  * [? On Youtube](#-on-youtube)
-    * [? Enhancements](#-enhancements)
-  * [? Contributing to Project](#-contributing-to-project)
-  * [? Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
-  * [? Licen?a](#-licena)
+      * [View Default](#view-default)
+      * [View Darkula](#view-darkula)
+      * [With gradient and image](#with-gradient-and-image)
+  * [📺 On Youtube](#-on-youtube)
+    * [🛠 Enhancements](#-enhancements)
+  * [📫 Contributing to Project](#-contributing-to-project)
+  * [😄 Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
+  * [📝 Licença](#-licena)
 <!-- TOC -->
 
-# ? Environment
+# 💻 Environment
 
 
 This lib is a compnent for JavaFx:   Get in the offical website [JavaFx](https://openjfx.io/), Tutorial [Getting Started](https://openjfx.io/openjfx-docs/)
@@ -40,18 +41,18 @@ This lib is a compnent for JavaFx:   Get in the offical website [JavaFx](https:/
 I have a great workstation here, then I've using a gradle 7.2 and Java and JavaFx +16 on Windows. (I really want to test in other systems in future).
 
 
-# ? Installing Decorator
+# 🚀 Installing Decorator
 
 Now you have many ways to get that!
-!??Note ** The release has the first changes I made and releases in nexus are more stable ?***
+!🗒️Note ** The release has the first changes I made and releases in nexus are more stable 🥸***
 
-?In code blocks find the copy button... is cooler, it automatically knows if your target is a pom.xml or gradle.build
+👌In code blocks find the copy button... is cooler, it automatically knows if your target is a pom.xml or gradle.build
 
 For installing decorator, you have this options:
 
-  * For Pros - Click on the badge release or click badge nexus on the top of this document, and you're going to redirect to hosted sources.
-  * For Github Users - On the right side, you can see the packages and releases, click on them and download it, in case you are in packages just copy them into your build file.
-  * For Faster users - Just copy and paste the code bellow
+* For Pros - Click on the badge release or click badge nexus on the top of this document, and you're going to redirect to hosted sources.
+* For Github Users - On the right side, you can see the packages and releases, click on them and download it, in case you are in packages just copy them into your build file.
+* For Faster users - Just copy and paste the code bellow
 
 If you use maven add in pom.xml:
 ```xml
@@ -64,10 +65,10 @@ If you use maven add in pom.xml:
 
 .. or in gradle.build:
 ```groovy
-    implementation 'io.github.gleidsonmt:gndecorator:2.1.25'
+    implementation 'io.github.gleidsonmt:gndecorator:2.1.24'
 ```
 
-# ? Using Decorator
+# ☕ Using Decorator
 
 Begin to use... Java Code!
 
@@ -91,14 +92,14 @@ Begin to use... Java Code!
   ```
 
 
-# ?  Basic Structure 
+# 🧬  Basic Structure
 
         root -> SstackPane
                 body -> AnchorPane
                         top_left -> Path
-                        top_right -> Path -- rotation 90?
-                        bottom_left -> Path -- rotation 270?
-                        bottom_right -> Path -- rotation 180?
+                        top_right -> Path -- rotation 90°
+                        bottom_left -> Path -- rotation 270°
+                        bottom_right -> Path -- rotation 180°
 
 
 ## Structure - by Scenic View
@@ -115,10 +116,10 @@ Begin to use... Java Code!
 ##### With gradient and image
 ![demo1](src/main/resources/screens/mac.png)
 
-## ? On Youtube
+## 📺 On Youtube
 [Apresentation](https://youtu.be/hZsYU7UbWmU)
 
-### ? Enhancements
+### 🛠 Enhancements
 
 Next steps:
 
@@ -131,8 +132,8 @@ Next steps:
 - [ ] Badges to add in custom bar
 - [ ] Customizable search bar (maybe isn't a good idea)
 
-## ? Contributing to Project
-<!---Se o seu README for longo ou se voc? tiver algum processo ou etapas espec?ficas que deseja que os contribuidores sigam, considere a cria??o de um arquivo CONTRIBUTING.md separado--->
+## 📫 Contributing to Project
+<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 To contributing to project, follow these steps:
 
 1. Fork this repository.
@@ -143,12 +144,12 @@ To contributing to project, follow these steps:
 
 However, if you don't know [How to create a pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-## ? Be a contritubutor<br>
+## 😄 Be a contritubutor<br>
 
-?I really need more friends.. Send me a  <a href='mailto:gleidisonmt@gmail.com?subject=Hi, I see you need my help!.. I am here.'> email <a/>.
+🤖I really need more friends.. Send me a  <a href='mailto:gleidisonmt@gmail.com?subject=Hi, I see you need my help!.. I am here.'> email <a/>.
 
-## ? License
+## 📝 License
 
 This project is under license. See the file [LICENSE](LICENSE.md) to more details.
 
-[? Back to the top](#GNDecorator)<br>
+[⬆ Back to the top](#GNDecorator)<br>

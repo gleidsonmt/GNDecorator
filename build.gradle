@@ -8,7 +8,7 @@ plugins {
 
 //    Only saving this site... nice!
 //    https://axion-release-plugin.readthedocs.io/en/latest/examples/examples/
-
+    id "com.legyver.update-readme-version" version "1.0.0"
     id 'signing'
 }
 
