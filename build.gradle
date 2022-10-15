@@ -16,7 +16,6 @@ plugins {
 group 'io.github.gleidsonmt'
 version scmVersion.version
 
-
 repositories {
     mavenCentral()
 }
@@ -39,6 +38,11 @@ dependencies {
     implementation files('vendor/scenicView.jar')
 }
 
+//springVersion=3.0.6.RELEASE
+//
+//task extraStuff{
+//    doStuff 'org.springframework:spring-web:${springVersion}@war'
+//}
 
 task replaceVersionInREADME {
     // Maven
@@ -46,7 +50,7 @@ task replaceVersionInREADME {
         fileset(dir: '.', includes: 'README.md')
     }
     // Gradle
-    ant.replaceregexp(match:'com\\.acme\\:mylibrary\\:([0-9\\.]+)', replace:"com.acme:mylibrary:${version}", flags:'g', byline:true) {
+    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9\\.]+)", replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true) {
         fileset(dir: '.', includes: 'README.md')
     }
 }
@@ -73,14 +77,6 @@ signing {
         gradle.taskGraph.allTasks.any { (it == PublishToMavenRepository) }
     }
     sign configurations.archives
-}
-scmVersion {
-    versionCreator("versionWithBranch")
-
-    hooks {
-        pre("fileUpdate", [file: "README.md", pattern: {v,p -> /v $v/}, replacement: {v, p -> "\$1$v"}])
-        pre("commit")
-    }
 }
 
 
