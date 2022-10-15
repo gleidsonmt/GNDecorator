@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - release_test
-
 jobs:
   logLatestRelease:
     runs-on: ubuntu-latest
@@ -14,10 +13,20 @@ jobs:
           repo: GNDecorator
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          route: GET /repos/${{github.actor}}/${{env.repo}}/releases/latest
+#          route: GET /repos/${{github.actor}}/${{env.repo}}/releases/latest
 #          route: GET /repos/{owner}/{repo}/releases/latest
           repo: request-action
-
-
+        script: |
+          await octokit.request('POST /repos/${{github.actor}}/${{env.repo}}/releases', {
+            owner: github.actor,
+            repo: env.repo,
+            tag_name: 'v2.1.26',
+            target_commitish: 'release_test',
+            name: 'v2.1.26',
+            body: 'Description of the release',
+            draft: false,
+            prerelease: false,
+            generate_release_notes: false
+          })
 
 #      - run: "echo latest release: ${{ steps.get_latest_release.outputs.data }}"
