@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Read value from Properties-file
-          id: read_property
         - uses: madhead/read-java-properties@latest
           id: version
           with:
