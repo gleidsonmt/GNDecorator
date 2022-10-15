@@ -1,22 +1,36 @@
+buildscript {
+
+    Properties props = new Properties()
+    File propsFile = new File('build.properties')
+    props.load(propsFile.newDataInputStream())
+
+    project.version =
+            props.getProperty("minorVersion") +
+                    "." + props.getProperty("majorVersion") +
+                    "." + props.getProperty("buildNumber") +
+                    "+" + props.getProperty("artifactBuildNumber")
+}
+
+
 plugins {
     id 'java'
     id 'application'
     id 'maven-publish'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
-    id 'pl.allegro.tech.build.axion-release' version '1.14.0'
 
 //    Only saving this site... nice!
 //    https://axion-release-plugin.readthedocs.io/en/latest/examples/examples/
-    id "com.legyver.update-readme-version" version "1.0.0"
+
 
     id 'signing'
 }
 
 
 group 'io.github.gleidsonmt'
-project.version = scmVersion.version
 //project.version = scmVersion.versionCreator(scmVersion.version + project.properties["artifactBuildNumber"])
+
+
 
 repositories {
     mavenCentral()
@@ -48,11 +62,11 @@ dependencies {
 
 task replaceVersionInREADME {
     // Maven
-    ant.replaceregexp(match:'<version>([0-9\\.]+)</version>', replace:"<version>${version}</version>", flags:'g', byline:true) {
+    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>', replace:"<version>${version}</version>", flags:'g', byline:true) {
         fileset(dir: '.', includes: 'README.md')
     }
     // Gradle
-    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9\\.]+)", replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true) {
+    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9+\\.]+)", replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true) {
         fileset(dir: '.', includes: 'README.md')
     }
 
@@ -72,17 +86,6 @@ task incrementVersion (dependsOn: build) {
 }
 
 
-
-task loadGitHubToken{
-    scmVersion.repository.customUsername.set(project.properties["github.user"])
-    scmVersion.repository.customPassword .set(project.properties["github.token"])
-}
-
-ant.propertyfile(
-        file: "gradle/wrapper/gradle-wrapper.properties") {
-    entry( key: "build", value: "propertyValue")
-    entry( key: "anotherProperty", operation: "del")
-}
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
