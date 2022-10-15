@@ -1,0 +1,31 @@
+name: "Release"
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches: [release]
+
+
+jobs:
+  release:
+    name: "Release"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+
+      - name: "Create release"
+        uses: "actions/github-script@v5"
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          script: |
+            await octokit.request('POST /repos/{owner}/{repo}/releases', {
+              owner: 'OWNER',
+              repo: 'REPO',
+              tag_name: 'v1.0.0',
+              target_commitish: 'main',
+              name: 'v1.0.0',
+              body: 'Description of the release',
+              draft: false,
+              prerelease: false,
+              generate_release_notes: false
+            })
