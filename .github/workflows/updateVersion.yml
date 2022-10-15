@@ -1,11 +1,12 @@
 name: Update Version
 
-on:
-  push:
-    branches:
-      releas_test
+
 
 jobs:
+  on:
+    push:
+      branches:
+        releas_test
   build:
 
     runs-on: windows-latest
