@@ -11,11 +11,13 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_latest_release
         env:
-          repo: 'GNDecorator'
+          repo: GNDecorator
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           route: GET /repos/${{github.actor}}/${{repo}}/releases/latest
 #          route: GET /repos/{owner}/{repo}/releases/latest
           repo: request-action
+
+
 
 #      - run: "echo latest release: ${{ steps.get_latest_release.outputs.data }}"
