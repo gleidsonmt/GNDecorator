@@ -19,8 +19,8 @@ jobs:
           uses: "actions/github-script@v5"
           script: |
             await octokit.request('POST /repos/${{github.actor}}/${{env.repo}}/releases', {
-              owner: github.actor,
-              repo: env.repo,
+              owner: gleidsonmt,
+              repo: GNDecorator,
               tag_name: 'v2.1.26',
               target_commitish: 'release_test',
               name: '${{env.repo}} v2.1.26',
@@ -28,6 +28,6 @@ jobs:
               draft: false,
               prerelease: false,
               generate_release_notes: false
-            })
+            });
 
 #      - run: "echo latest release: ${{ steps.get_latest_release.outputs.data }}"
