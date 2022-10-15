@@ -10,10 +10,13 @@ jobs:
     steps:
       - uses: octokit/request-action@v2.x
         id: get_latest_release
-        with:
-          route: GET /repos/{owner}/{repo}/releases/latest
-          owner: octokit
-          repo: request-action
         env:
+          owner: githu.actor
+          repo: GNDecorator
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          route: GET /repos/{$owner}/{$repo}/releases/latest
+          owner: github.actor
+          repo: request-action
+
       - run: "echo latest release: ${{ steps.get_latest_release.outputs.data }}"
