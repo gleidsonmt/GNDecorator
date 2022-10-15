@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Readin'g
+      - name: 'Reading'
       - uses: madhead/read-java-properties@latest
         id: version
         with:
