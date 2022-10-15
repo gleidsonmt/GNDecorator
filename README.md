@@ -29,7 +29,7 @@
     * [? Enhancements](#-enhancements)
   * [? Contributing to Project](#-contributing-to-project)
   * [? Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
-  * [? Licen�a](#-licena)
+  * [? Licen?a](#-licena)
 <!-- TOC -->
 
 # ? Environment
@@ -96,9 +96,9 @@ Begin to use... Java Code!
         root -> SstackPane
                 body -> AnchorPane
                         top_left -> Path
-                        top_right -> Path -- rotation 90�
-                        bottom_left -> Path -- rotation 270�
-                        bottom_right -> Path -- rotation 180�
+                        top_right -> Path -- rotation 90?
+                        bottom_left -> Path -- rotation 270?
+                        bottom_right -> Path -- rotation 180?
 
 
 ## Structure - by Scenic View
@@ -132,7 +132,7 @@ Next steps:
 - [ ] Customizable search bar (maybe isn't a good idea)
 
 ## ? Contributing to Project
-<!---Se o seu README for longo ou se voc� tiver algum processo ou etapas espec�ficas que deseja que os contribuidores sigam, considere a cria��o de um arquivo CONTRIBUTING.md separado--->
+<!---Se o seu README for longo ou se voc? tiver algum processo ou etapas espec?ficas que deseja que os contribuidores sigam, considere a cria??o de um arquivo CONTRIBUTING.md separado--->
 To contributing to project, follow these steps:
 
 1. Fork this repository.
