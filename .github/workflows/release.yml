@@ -2,7 +2,7 @@ name: Log latest release
 on:
   push:
     branches:
-      - master
+      - release_test
 
 jobs:
   logLatestRelease:
