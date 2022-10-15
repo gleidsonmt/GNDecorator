@@ -14,17 +14,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Write value to Properties-file
-      uses: christian-draeger/write-properties@1.1.0
-      with:
-#        path: './src/main/resources/application.properties'
-        path: 'build.properties'
-        property: |
-          'majorVersion'
-          'minorVersion'
-        value: |
-          'first value'
-          'second value'
+      - name: 'Readin'g
+      - uses: madhead/read-java-properties@latest
+        id: version
+        with:
+          file: build.properties
+          property: majorVersion
+          default: 0.0.1
+
+      - run: echo ${{ steps.version.outputs.value }}
+      # Project's version from gradle.properties or 0.0.1 if it is not defined there
+#    - name: Write value to Properties-file
+#      uses: christian-draeger/write-properties@1.1.0
+#      with:
+##        path: './src/main/resources/application.properties'
+#        path: 'build.properties'
+#        property: |
+#          'majorVersion'
+#          'minorVersion'
+#        value: |
+#          'first value'
+#          'second value'
+
           
 
 #          artifactBuildNumber=45
