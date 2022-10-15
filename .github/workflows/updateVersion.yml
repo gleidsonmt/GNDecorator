@@ -19,5 +19,8 @@ jobs:
 #        run: ./gradlew build
       - name: Increment Version
         run: ./gradlew incrementVersion
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9.1.1
+
 
 
