@@ -23,8 +23,8 @@ jobs:
           'majorVersion'
           'minorVersion'
         value: |
-          '1'
-          '2'
+          'first value'
+          'second value'
           
 
 #          artifactBuildNumber=45
