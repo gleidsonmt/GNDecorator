@@ -9,7 +9,7 @@ on:
 #    branches: [develop]
 
 jobs:
-  Exploring-actions:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: 'Reading'
