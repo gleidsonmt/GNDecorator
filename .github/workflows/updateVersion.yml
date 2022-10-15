@@ -1,8 +1,9 @@
 name: Update Version
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      releas_test
 
 jobs:
   build:
