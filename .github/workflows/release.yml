@@ -15,7 +15,7 @@ jobs:
           repo: GNDecorator
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          route: GET /repos/gleidsonmt/GNDecorator/releases/latest
+          route: GET /repos/{owner}/{repo}/releases/latest
           owner: github.actor
           repo: request-action
 
