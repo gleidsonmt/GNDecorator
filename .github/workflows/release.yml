@@ -22,8 +22,8 @@ jobs:
             repo: env.repo,
             tag_name: 'v2.1.26',
             target_commitish: 'release_test',
-            name: 'v2.1.26',
-            body: 'Description of the release',
+            name: '${{env.repo}} v2.1.26',
+            body: 'Testing action creating release',
             draft: false,
             prerelease: false,
             generate_release_notes: false
