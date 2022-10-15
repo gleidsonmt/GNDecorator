@@ -9,17 +9,18 @@ on:
 #    branches: [develop]
 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - name: 'Reading'
-    - uses: madhead/read-java-properties@latest
-      id: version
-      with:
-        file: build.properties
-        property: majorVersion
-        default: 0.0.1
+  Exploring-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Reading'
+      - uses: madhead/read-java-properties@latest
+        id: version
+        with:
+          file: build.properties
+          property: majorVersion
+          default: 0.0.1
 
-    - run: echo ${{ steps.version.outputs.value }}
+      - run: echo ${{ steps.version.outputs.value }}
 
       # Project's version from gradle.properties or 0.0.1 if it is not defined there
 #    - name: Write value to Properties-file
