@@ -1,5 +1,5 @@
 
-(version.) 0.1.0
+(version.) 0.1.4
 
 <h1 align="center">GNDecorator</h1>
 <h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
