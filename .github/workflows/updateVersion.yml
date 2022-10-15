@@ -8,13 +8,14 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: madhead/read-java-properties@latest
-        id: majorVersion
+      - name: Read value from Properties-file
+        id: read_property
+        uses: christian-draeger/read-properties@1.1.0
         with:
-          file: build.properties
-          property: majorVersion
-          default: 0.0.1
-
-      - run: echo ${{ steps.majorVersion.outputs.value }}
+          path: 'build.properties'
+          properties: 'majorVersion'
+      - name: Do something with your bumped release version
+        run: echo ${{ steps.read_property.outputs.majorVersion }}
+        # will print "the value of 'the.key.of.a.property'"
 
 
