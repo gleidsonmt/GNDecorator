@@ -30,7 +30,7 @@ I'm in master
     * [🛠 Enhancements](#-enhancements)
   * [📫 Contributing to Project](#-contributing-to-project)
   * [😄 Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
-  * [📝 Licença](#-licena)
+  * [�? Licença](#-licena)
 <!-- TOC -->
 
 # 💻 Environment
@@ -44,7 +44,7 @@ I have a great workstation here, then I've using a gradle 7.2 and Java and JavaF
 # 🚀 Installing Decorator
 
 Now you have many ways to get that!
-!🗒️Note ** The release has the first changes I made and releases in nexus are more stable 🥸***
+!🗒�?Note ** The release has the first changes I made and releases in nexus are more stable 🥸***
 
 👌In code blocks find the copy button... is cooler, it automatically knows if your target is a pom.xml or gradle.build
 
@@ -59,7 +59,7 @@ If you use maven add in pom.xml:
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
   <artifactId>gndecorator</artifactId>
-  <version>2.1.24</version>
+  <version>0.1.8-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -148,7 +148,7 @@ However, if you don't know [How to create a pull Request](https://help.github.co
 
 🤖I really need more friends.. Send me a  <a href='mailto:gleidisonmt@gmail.com?subject=Hi, I see you need my help!.. I am here.'> email <a/>.
 
-## 📝 License
+## �? License
 
 This project is under license. See the file [LICENSE](LICENSE.md) to more details.
 

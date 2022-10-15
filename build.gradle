@@ -9,6 +9,7 @@ plugins {
 //    Only saving this site... nice!
 //    https://axion-release-plugin.readthedocs.io/en/latest/examples/examples/
     id "com.legyver.update-readme-version" version "1.0.0"
+
     id 'signing'
 }
 
@@ -36,6 +37,18 @@ application {
 
 dependencies {
     implementation files('vendor/scenicView.jar')
+}
+
+
+task replaceVersionInREADME {
+    // Maven
+    ant.replaceregexp(match:'<version>([0-9\\.]+)</version>', replace:"<version>${version}</version>", flags:'g', byline:true) {
+        fileset(dir: '.', includes: 'README.md')
+    }
+    // Gradle
+    ant.replaceregexp(match:'com\\.acme\\:mylibrary\\:([0-9\\.]+)', replace:"com.acme:mylibrary:${version}", flags:'g', byline:true) {
+        fileset(dir: '.', includes: 'README.md')
+    }
 }
 
 
