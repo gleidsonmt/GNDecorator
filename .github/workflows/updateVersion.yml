@@ -8,14 +8,14 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Read value from Properties-file
-        id: read_property
-        uses: christian-draeger/read-properties@1.1.0
-        with:
-          path: 'build.properties'
-          properties: 'majorVersion'
-      - name: Do something with your bumped release version
-        run: echo ${{ steps.read_property.outputs.majorVersion }}
-        # will print "the value of 'the.key.of.a.property'"
+        - name: Read value from Properties-file
+          id: read_property
+          uses: christian-draeger/read-properties@1.1.0
+          with:
+            path: 'build.properties'
+            properties: 'majorVersion'
+        - name: Do something with your bumped release version
+          run: echo ${{ steps.read_property.outputs.majorVersion }}
+          # will print "the value of 'the.key.of.a.property'"
 
 
