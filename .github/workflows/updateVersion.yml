@@ -1,39 +1,23 @@
-name: Custom Auto update version
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Update Version
+
 on:
-  push:
-    branches: [release_test]
+  release:
+    types: [created]
+
 jobs:
-  - name: Read value from Properties-file
-    runs-on: ubuntu-latest
+  build:
+
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      id: read_property
-      uses: christian-draeger/read-properties@1.1.0
-      with:
-        path: 'build.properties'
-        properties: 'majorVersion'
-  - name: Do something with your bumped release version
-    run: echo ${{ steps.read_property.outputs.majorVersion }}
-  # will print "the value of 'the.key.of.a.property'"
-
-
-#name: Custom Auto update versoin
-#run-name: Build by ${{ github.actor }} 🚀
-#on:
-#  push:
-#    branches: [release_test]
-#
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: 'Reading'
-#      - uses: madhead/read-java-properties@latest
-#        id: version
-#        with:
-#          file: build.properties
-#          property: majorVersion
-#          default: 0.0.1
-#
-#      - run: echo ${{ steps.version.outputs.value }}
-
+      - name: Read Test
+      - uses: madhead/read-java-properties@latest
+        id: version
+        with:
+          file: build.properties
+          property: majorVerion
+          default: 0.0.1
+      - run: echo ${{ steps.version.outputs.value }}
