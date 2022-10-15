@@ -74,7 +74,8 @@ task replaceVersionInREADME {
 
 }
 
-task incrementVersion (dependsOn: build) {
+//task incrementVersion (dependsOn: build) {
+task incrementVersion () {
     Properties props = new Properties()
     File propsFile = new File('build.properties')
     props.load(propsFile.newDataInputStream())
