@@ -7,7 +7,7 @@ jobs:
   logLatestRelease:
     runs-on: ubuntu-latest
     steps:
-      - GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 #        id: get_latest_release
 #        env:
 #          repo: GNDecorator
@@ -15,8 +15,9 @@ jobs:
       #          route: GET /repos/{owner}/{repo}/releases/latest
       #          repo: request-action
 
+      - name : 'Create Release'
       - uses: octokit/request-action@v2.x
-
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: "actions/github-script@v5"
         with:
           script: |
