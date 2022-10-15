@@ -59,7 +59,7 @@ If you use maven add in pom.xml:
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
   <artifactId>gndecorator</artifactId>
-  <version>2.1.25</version>
+  <version>2.1.24</version>
 </dependency>
 ```
 
