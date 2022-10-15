@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: madhead/read-java-properties@latest
-        id: version
+        id: majorVersion
         with:
-          file: ./build.properties
+          file: build.properties
           property: majorVersion
           default: 0.0.1
       - run: echo ${{ steps.majorVersion }}
