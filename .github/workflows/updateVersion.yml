@@ -10,7 +10,7 @@ jobs:
       - uses: madhead/read-java-properties@latest
         id: version
         with:
-          file: build.properties
+          file: ./build.properties
           property: majorVersion
           default: 0.0.1
       - run: echo ${{ steps.majorVersion }}
