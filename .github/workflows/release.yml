@@ -11,8 +11,7 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_latest_release
         env:
-          owner: github.actor
-          repo: GNDecorator
+          repo: 'GNDecorator'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           route: GET /repos/${{owner}}/{repo}/releases/latest
