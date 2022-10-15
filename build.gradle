@@ -4,11 +4,12 @@ plugins {
     id 'maven-publish'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
+    id 'pl.allegro.tech.build.axion-release' version '1.14.0'
     id 'signing'
 }
 
 group 'io.github.gleidsonmt'
-version project.properties["version"]
+version scmVersion.version
 
 
 repositories {
