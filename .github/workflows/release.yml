@@ -7,7 +7,6 @@ jobs:
   logLatestRelease:
     runs-on: ubuntu-latest
     steps:
-#      - uses: octokit/request-action@v2.x
 #        id: get_latest_release
 #        env:
 #          repo: GNDecorator
@@ -16,19 +15,20 @@ jobs:
       #          route: GET /repos/{owner}/{repo}/releases/latest
 
       #          repo: request-action
-    - uses: "actions/github-script@v5"
-      with:
-        script: |
-          await octokit.request('POST /repos/${{github.actor}}/${{env.repo}}/releases', {
-            owner: gleidsonmt,
-            repo: GNDecorator,
-            tag_name: 'v2.1.26',
-            target_commitish: 'release_test',
-            name: '${{env.repo}} v2.1.26',
-            body: 'Testing action creating release',
-            draft: false,
-            prerelease: false,
-            generate_release_notes: false
-          });
+      - uses: octokit/request-action@v2.x
+      - uses: "actions/github-script@v5"
+        with:
+          script: |
+            await octokit.request('POST /repos/${{github.actor}}/${{env.repo}}/releases', {
+              owner: gleidsonmt,
+              repo: GNDecorator,
+              tag_name: 'v2.1.26',
+              target_commitish: 'release_test',
+              name: '${{env.repo}} v2.1.26',
+              body: 'Testing action creating release',
+              draft: false,
+              prerelease: false,
+              generate_release_notes: false
+            });
 
 #      - run: "echo latest release: ${{ steps.get_latest_release.outputs.data }}"
