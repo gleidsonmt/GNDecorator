@@ -8,14 +8,14 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-        - name: Read value from Properties-file
-        - uses: madhead/read-java-properties@latest
-          id: version
-          with:
-            file: build.properties
-            property: version
-            default: 0.0.1
-
-        - run: echo ${{ steps.version.outputs.value }}
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17.0.1
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with gradle
+        run: ./gradlew build
 
 
