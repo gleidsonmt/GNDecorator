@@ -1,5 +1,5 @@
 
-# version 1.0.2
+# (version.) 1.0.2
 
 <h1 align="center">GNDecorator</h1>
 <h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
@@ -29,7 +29,7 @@
     * [? Enhancements](#-enhancements)
   * [? Contributing to Project](#-contributing-to-project)
   * [? Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
-  * [? Licença](#-licena)
+  * [? Licenï¿½a](#-licena)
 <!-- TOC -->
 
 # ? Environment
@@ -96,9 +96,9 @@ Begin to use... Java Code!
         root -> SstackPane
                 body -> AnchorPane
                         top_left -> Path
-                        top_right -> Path -- rotation 90°
-                        bottom_left -> Path -- rotation 270°
-                        bottom_right -> Path -- rotation 180°
+                        top_right -> Path -- rotation 90ï¿½
+                        bottom_left -> Path -- rotation 270ï¿½
+                        bottom_right -> Path -- rotation 180ï¿½
 
 
 ## Structure - by Scenic View
@@ -132,7 +132,7 @@ Next steps:
 - [ ] Customizable search bar (maybe isn't a good idea)
 
 ## ? Contributing to Project
-<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
+<!---Se o seu README for longo ou se vocï¿½ tiver algum processo ou etapas especï¿½ficas que deseja que os contribuidores sigam, considere a criaï¿½ï¿½o de um arquivo CONTRIBUTING.md separado--->
 To contributing to project, follow these steps:
 
 1. Fork this repository.
