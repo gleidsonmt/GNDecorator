@@ -1,0 +1,33 @@
+
+
+name: Custom Auto update versoin
+run-name: Build by ${{ github.actor }} 🚀
+on:
+  push:
+    branches: [release_test]
+#  pull_request:
+#    branches: [develop]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Write value to Properties-file
+      uses: christian-draeger/write-properties@1.1.0
+      with:
+#        path: './src/main/resources/application.properties'
+        path: 'build.properties'
+        property: |
+          'majorVersion'
+          'minorVersion'
+        value: |
+          '1'
+          '2'
+          
+
+#          artifactBuildNumber=45
+#          majorVersion=2
+#          minorVersion=2
+#          buildNumber=2

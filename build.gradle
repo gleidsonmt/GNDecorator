@@ -19,9 +19,9 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
 
+//    id 'pl.allegro.tech.build.axion-release' version '1.14.0'
 //    Only saving this site... nice!
 //    https://axion-release-plugin.readthedocs.io/en/latest/examples/examples/
-
 
     id 'signing'
 }
@@ -59,6 +59,8 @@ dependencies {
 //task extraStuff{
 //    doStuff 'org.springframework:spring-web:${springVersion}@war'
 //}
+
+
 
 task replaceVersionInREADME {
     // Maven
