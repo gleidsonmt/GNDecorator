@@ -5,6 +5,10 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
     id 'pl.allegro.tech.build.axion-release' version '1.14.0'
+
+//    Only saving this site... nice!
+//    https://axion-release-plugin.readthedocs.io/en/latest/examples/examples/
+
     id 'signing'
 }
 
@@ -57,6 +61,15 @@ signing {
     }
     sign configurations.archives
 }
+scmVersion {
+    versionCreator("versionWithBranch")
+
+    hooks {
+        pre("fileUpdate", [file: "README.md", pattern: {v,p -> /(version.) $v/}, replacement: {v, p -> "\$1 $v"}])
+        pre("commit")
+    }
+}
+
 
 publishing {
 
