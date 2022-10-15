@@ -16,8 +16,9 @@ jobs:
       #          repo: request-action
 
       - name : 'Create Release'
-      - uses: octokit/request-action@v2.x
+        uses: octokit/request-action@v2.x
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Use script'
       - uses: "actions/github-script@v5"
         with:
           script: |
