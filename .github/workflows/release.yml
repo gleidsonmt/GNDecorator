@@ -7,15 +7,15 @@ jobs:
   logLatestRelease:
     runs-on: ubuntu-latest
     steps:
-      - uses: octokit/request-action@v2.x
-        id: get_latest_release
-        env:
-          repo: GNDecorator
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
+#      - uses: octokit/request-action@v2.x
+#        id: get_latest_release
+#        env:
+#          repo: GNDecorator
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
 #          route: GET /repos/${{github.actor}}/${{env.repo}}/releases/latest
 #          route: GET /repos/{owner}/{repo}/releases/latest
-          repo: request-action
+#          repo: request-action
       - uses: "actions/github-script@v5"
         script: |
           await octokit.request('POST /repos/${{github.actor}}/${{env.repo}}/releases', {
