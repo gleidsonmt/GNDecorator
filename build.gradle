@@ -32,6 +32,7 @@ ext {
     buildV = _props.getProperty("buildNumber")
     buildA = _props.getProperty("artifactBuildNumber")
 
+    fullVersion = project.version + "+" + buildA
 }
 
 
@@ -67,21 +68,21 @@ task replaceVersionInREADME {
 //
 //    def fullVersion = version + "+" + props.getProperty('artifactBuildNumber')
 //
-//    // Maven
-//    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>',
-//            replace:"<version>${version}</version>", flags:'g', byline:true, encoding: 'UTF-8') {
-//        fileset(dir: '.', includes: 'README.md')
-//    }
-//    // Gradle
-//    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9+#\\.]+)",
-//            replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true, encoding: 'UTF-8') {
-//        fileset(dir: '.', includes: 'README.md')
-//    }
-//
-//    ant.replaceregexp(match:'Build-([0-9+\\.]+)',
-//            replace:"Build-${fullVersion}", flags:'g', byline:true, encoding: 'UTF-8') {
-//        fileset(dir: '.', includes: 'README.md')
-//    }
+    // Maven
+    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>',
+            replace:"<version>${version}</version>", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
+    // Gradle
+    ant.replaceregexp(match: "${group}\\:${name}\\:([0-9+#\\.]+)",
+            replace:"${group}\\:${name}:${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
+
+    ant.replaceregexp(match:'Build-([0-9+\\.]+)',
+            replace:"Build-${fullVersion}", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
 
 
 
