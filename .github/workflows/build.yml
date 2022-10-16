@@ -28,8 +28,8 @@ jobs:
       - name: Build with gradle
         run: ./gradlew build -Pserver
 
-      - name: Add & Commit
-        uses: EndBug/add-and-commit@v9.1.1
+#      - name: Add & Commit
+#        uses: EndBug/add-and-commit@v9.1.1
 
 #        run: ./gradlew build
 #      - name: Increment Version
