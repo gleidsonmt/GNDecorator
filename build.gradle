@@ -1,15 +1,35 @@
+
+buildscript {
+
+    Properties props = new Properties()
+    File propsFile = new File('./version.properties')
+    props.load(propsFile.newDataInputStream())
+
+    project.version =
+                    props.getProperty("majorVersion") +
+                    "." + props.getProperty("minorVersion") +
+                    "." + props.getProperty("buildNumber")
+//                    "+" + props.getProperty("artifactBuildNumber")
+}
+
+
 plugins {
     id 'java'
     id 'application'
     id 'maven-publish'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
+
+//    id 'pl.allegro.tech.build.axion-release' version '1.14.0'
+//    Only saving this site... nice!
+//    https://axion-release-plugin.readthedocs.io/en/latest/examples/examples/
+
     id 'signing'
 }
 
-group 'io.github.gleidsonmt'
-version project.properties["version"]
 
+group 'io.github.gleidsonmt'
+//project.version = scmVersion.versionCreator(scmVersion.version + project.properties["artifactBuildNumber"])
 
 repositories {
     mavenCentral()
@@ -34,6 +54,62 @@ dependencies {
 }
 
 
+
+
+task replaceVersionInREADME {
+
+    Properties props = new Properties()
+    File propsFile = new File('./version.properties')
+    props.load(propsFile.newDataInputStream())
+
+    def fullVersion = version + "+" + props.getProperty('artifactBuildNumber')
+
+    // Maven
+    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>',
+            replace:"<version>${version}</version>", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
+    // Gradle
+    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9+#\\.]+)",
+            replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
+
+    ant.replaceregexp(match:'Build-([0-9+\\.]+)',
+            replace:"Build-${fullVersion}", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
+
+//    ant.replaceregexp(match:'v([0-9+\\.]+)',
+//            replace:"v${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+//        fileset(dir: '.', includes: 'README.md')
+//    }
+}
+
+task incrementVersion (dependsOn: build) {
+//task incrementVersion () {
+
+    Properties props = new Properties()
+    File propsFile = new File('./version.properties')
+    props.load(propsFile.newDataInputStream())
+    Integer nextbuildnum = ( ((props.getProperty('artifactBuildNumber')) as BigDecimal) + 1 )
+
+    props.setProperty('artifactBuildNumber',
+            nextbuildnum.toString())
+
+    props.setProperty('artifactBuildNumber', nextbuildnum.toString())
+
+    props.store(propsFile.newWriter(), null)
+    props.load(propsFile.newDataInputStream())
+
+    println "Your new Build artficat " + props.getProperty("artifactBuildNumber")
+////    ant.replaceregexp(match:'artifactBuildNumber', replace:'artifactBuildNumber;'+nextbuildnum+';', byline:true) {
+////        file 'src/main/webapp/index.jsp'
+//    }
+}
+
+
+
 task sourcesJar(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.allSource
@@ -56,6 +132,7 @@ signing {
     }
     sign configurations.archives
 }
+
 
 publishing {
 
