@@ -1,7 +1,7 @@
 
 
 name: Java CI with gradle
-run-name: Build by ${{ github.actor }} 🧬🧬🚀🚀🚀
+run-name: Build by ${{ github.actor }} 🧬🚀💻🛠
 on:
   push:
     branches: [develop]
