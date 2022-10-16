@@ -64,6 +64,10 @@ task replaceVersionInREADME {
         fileset(dir: '.', includes: 'README.md')
     }
 
+    ant.replaceregexp(match:'build([0-9+\\.]+)',
+            replace:"${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
 }
 
 task incrementVersion (dependsOn: build) {
