@@ -115,7 +115,18 @@ task replaceVersionInREADME {
 ////    }
 //}
 
-ask incrementBuildVersion {
+task buildInServer(dependsOn: build) {
+    group 'Java CI'
+
+    doLast {
+//        updateV = needsUpdate;
+
+        println 'Building in server...'
+        println "Act version ${project.version}"
+    }
+}
+
+task incrementBuildVersion(dependsOn: build) {
     group 'version'
 
     doLast{
