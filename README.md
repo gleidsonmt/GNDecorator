@@ -28,7 +28,7 @@ I'm in master
     * [? Enhancements](#-enhancements)
   * [? Contributing to Project](#-contributing-to-project)
   * [? Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
-  * [? Licença](#-licena)
+  * [? Licenï¿½a](#-licena)
 <!-- TOC -->
 
 # ? Environment
@@ -57,13 +57,13 @@ If you use maven add in pom.xml:
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
   <artifactId>gndecorator</artifactId>
-  <version>2.1.25</version>
+  <version>2.2.2+85</version>
 </dependency>
 ```
 
 .. or in gradle.build:
 ```groovy
-    implementation 'io.github.gleidsonmt:gndecorator:2.1.25'
+    implementation 'io.github.gleidsonmt:gndecorator:2.2.2+85'
 ```
 
 # ? Using Decorator
@@ -95,9 +95,9 @@ Begin to use... Java Code!
         root -> SstackPane
                 body -> AnchorPane
                         top_left -> Path
-                        top_right -> Path -- rotation 90°
-                        bottom_left -> Path -- rotation 270°
-                        bottom_right -> Path -- rotation 180°
+                        top_right -> Path -- rotation 90ï¿½
+                        bottom_left -> Path -- rotation 270ï¿½
+                        bottom_right -> Path -- rotation 180ï¿½
 
 
 ## Structure - by Scenic View
@@ -131,7 +131,7 @@ Next steps:
 - [ ] Customizable search bar (maybe isn't a good idea)
 
 ## ? Contributing to Project
-<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
+<!---Se o seu README for longo ou se vocï¿½ tiver algum processo ou etapas especï¿½ficas que deseja que os contribuidores sigam, considere a criaï¿½ï¿½o de um arquivo CONTRIBUTING.md separado--->
 To contributing to project, follow these steps:
 
 1. Fork this repository.
