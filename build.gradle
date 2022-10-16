@@ -1,18 +1,4 @@
 
-buildscript {
-
-    Properties props = new Properties()
-    File propsFile = new File('./version.properties')
-    props.load(propsFile.newDataInputStream())
-
-    project.version =
-                    props.getProperty("majorVersion") +
-                    "." + props.getProperty("minorVersion") +
-                    "." + props.getProperty("buildNumber")
-//                    "+" + props.getProperty("artifactBuildNumber")
-}
-
-
 plugins {
     id 'java'
     id 'application'
@@ -28,8 +14,29 @@ plugins {
 }
 
 
+ext {
+
+    Properties _props = new Properties()
+    File _propsFile = new File('./version.properties')
+    _props.load(_propsFile.newDataInputStream())
+
+    // Load act version from properties
+    project.version =
+            _props.getProperty("majorVersion") +
+                    "." + _props.getProperty("minorVersion") +
+                    "." + _props.getProperty("buildNumber")
+    "+" + _props.getProperty("artifactBuildNumber")
+
+    // Variables used in flows to update..
+    propsFile = _propsFile
+    props = _props
+    buildV = _props.getProperty("buildNumber")
+    buildA = _props.getProperty("artifactBuildNumber")
+
+}
+
+
 group 'io.github.gleidsonmt'
-//project.version = scmVersion.versionCreator(scmVersion.version + project.properties["artifactBuildNumber"])
 
 repositories {
     mavenCentral()
@@ -58,27 +65,27 @@ dependencies {
 
 task replaceVersionInREADME {
 
-    Properties props = new Properties()
-    File propsFile = new File('./version.properties')
-    props.load(propsFile.newDataInputStream())
-
-    def fullVersion = version + "+" + props.getProperty('artifactBuildNumber')
-
-    // Maven
-    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>',
-            replace:"<version>${version}</version>", flags:'g', byline:true, encoding: 'UTF-8') {
-        fileset(dir: '.', includes: 'README.md')
-    }
-    // Gradle
-    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9+#\\.]+)",
-            replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true, encoding: 'UTF-8') {
-        fileset(dir: '.', includes: 'README.md')
-    }
-
-    ant.replaceregexp(match:'Build-([0-9+\\.]+)',
-            replace:"Build-${fullVersion}", flags:'g', byline:true, encoding: 'UTF-8') {
-        fileset(dir: '.', includes: 'README.md')
-    }
+//    Properties props = new Properties()
+//    File propsFile = new File('./version.properties')
+//    props.load(propsFile.newDataInputStream())
+//
+//    def fullVersion = version + "+" + props.getProperty('artifactBuildNumber')
+//
+//    // Maven
+//    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>',
+//            replace:"<version>${version}</version>", flags:'g', byline:true, encoding: 'UTF-8') {
+//        fileset(dir: '.', includes: 'README.md')
+//    }
+//    // Gradle
+//    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9+#\\.]+)",
+//            replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+//        fileset(dir: '.', includes: 'README.md')
+//    }
+//
+//    ant.replaceregexp(match:'Build-([0-9+\\.]+)',
+//            replace:"Build-${fullVersion}", flags:'g', byline:true, encoding: 'UTF-8') {
+//        fileset(dir: '.', includes: 'README.md')
+//    }
 
 //    ant.replaceregexp(match:'v([0-9+\\.]+)',
 //            replace:"v${version}", flags:'g', byline:true, encoding: 'UTF-8') {
@@ -86,29 +93,67 @@ task replaceVersionInREADME {
 //    }
 }
 
-task incrementVersion (dependsOn: build) {
-//task incrementVersion () {
+//task incrementVersion (dependsOn: build) {
+////task incrementVersion () {
+//
+//    Properties props = new Properties()
+//    File propsFile = new File('./version.properties')
+//    props.load(propsFile.newDataInputStream())
+//    Integer nextbuildnum = ( ((props.getProperty('artifactBuildNumber')) as BigDecimal) + 1 )
+//
+//    props.setProperty('artifactBuildNumber',
+//            nextbuildnum.toString())
+//
+//    props.setProperty('artifactBuildNumber', nextbuildnum.toString())
+//
+//    props.store(propsFile.newWriter(), null)
+//    props.load(propsFile.newDataInputStream())
+//
+//    println "Your new Build artficat " + props.getProperty("artifactBuildNumber")
+//////    ant.replaceregexp(match:'artifactBuildNumber', replace:'artifactBuildNumber;'+nextbuildnum+';', byline:true) {
+//////        file 'src/main/webapp/index.jsp'
+////    }
+//}
 
-    Properties props = new Properties()
-    File propsFile = new File('./version.properties')
-    props.load(propsFile.newDataInputStream())
-    Integer nextbuildnum = ( ((props.getProperty('artifactBuildNumber')) as BigDecimal) + 1 )
+ask incrementBuildVersion {
+    group 'version'
 
-    props.setProperty('artifactBuildNumber',
-            nextbuildnum.toString())
-
-    props.setProperty('artifactBuildNumber', nextbuildnum.toString())
-
-    props.store(propsFile.newWriter(), null)
-    props.load(propsFile.newDataInputStream())
-
-    println "Your new Build artficat " + props.getProperty("artifactBuildNumber")
-////    ant.replaceregexp(match:'artifactBuildNumber', replace:'artifactBuildNumber;'+nextbuildnum+';', byline:true) {
-////        file 'src/main/webapp/index.jsp'
-//    }
+    doLast{
+        int sum = buildV as BigDecimal +1
+        props.setProperty('buildNumber', sum.toString())
+        println "Your new build version is ${props.getProperty("buildNumber")}"
+        save()
+    }
 }
 
+task incrementBuildArtifactVersion()  {
+    group 'build'
+    println 'incrementing build artifact'
+    if (!project.hasProperty("server")) {
+        println "update artifact"
+        int sum = buildA as BigDecimal + 1
+        props.setProperty('artifactBuildNumber', sum.toString())
+        println "Your new artifact version is ${props.getProperty("artifactBuildNumber")}"
+        props.store(propsFile.newWriter(), null)
+        props.load(propsFile.newDataInputStream())
+        println "Storing Properties."
+    } else println 'skipping.. it is a server build..'
 
+}
+
+buildInServer.onlyIf {
+    project.hasProperty('buildInServer')
+}
+
+incrementBuildVersion.onlyIf {
+    project.hasProperty('incrementBuildVersion')
+}
+
+ext.save = {
+    props.store(propsFile.newWriter(), null)
+    props.load(propsFile.newDataInputStream())
+    println "Storing Properties."
+}
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
