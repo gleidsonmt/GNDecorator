@@ -1,5 +1,3 @@
-I'm in master
-
 <h1 align="center">GNDecorator</h1>
 <h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
 <h1></h1>
