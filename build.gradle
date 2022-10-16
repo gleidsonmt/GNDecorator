@@ -24,27 +24,6 @@ ext {
             _props.getProperty("majorVersion") +
                     "." + _props.getProperty("minorVersion") +
                     "." + _props.getProperty("buildNumber")
-                    "+" + _props.getProperty("artifactBuildNumber")
-
-    // Variables used in flows to update..
-    propsFile = _propsFile
-    props = _props
-    buildV = _props.getProperty("buildNumber")
-    buildA = _props.getProperty("artifactBuildNumber")
-
-}
-
-ext {
-
-    Properties _props = new Properties()
-    File _propsFile = new File('./version.properties')
-    _props.load(_propsFile.newDataInputStream())
-
-    // Load act version from properties
-    project.version =
-            _props.getProperty("majorVersion") +
-                    "." + _props.getProperty("minorVersion") +
-                    "." + _props.getProperty("buildNumber")
     "+" + _props.getProperty("artifactBuildNumber")
 
     // Variables used in flows to update..
@@ -113,47 +92,21 @@ task replaceVersionInREADME {
 //    }
 }
 
-//task incrementVersion (dependsOn: build) {
-////task incrementVersion () {
-//
-//    Properties props = new Properties()
-//    File propsFile = new File('./version.properties')
-//    props.load(propsFile.newDataInputStream())
-//    Integer nextbuildnum = ( ((props.getProperty('artifactBuildNumber')) as BigDecimal) + 1 )
-//
-//    props.setProperty('artifactBuildNumber',
-//            nextbuildnum.toString())
-//
-//    props.setProperty('artifactBuildNumber', nextbuildnum.toString())
-//
-//    props.store(propsFile.newWriter(), null)
-//    props.load(propsFile.newDataInputStream())
-//
-//    println "Your new Build artficat " + props.getProperty("artifactBuildNumber")
-//////    ant.replaceregexp(match:'artifactBuildNumber', replace:'artifactBuildNumber;'+nextbuildnum+';', byline:true) {
-//////        file 'src/main/webapp/index.jsp'
-////    }
-//}
-
 task buildInServer(dependsOn: build) {
     group 'Java CI'
-
-    doLast {
+    println 'Needs to build in server..'
 //        updateV = needsUpdate;
 
-        println 'Building in server...'
-        println "Act version ${project.version}"
-    }
-}
+    if (project.hasProperty("server")) {
+        println 'Creating a new Build version'
 
-task incrementBuildVersion(dependsOn: build) {
-    group 'version'
-
-    doLast{
-        int sum = buildV as BigDecimal +1
+        int sum = buildV as BigDecimal + 1
         props.setProperty('buildNumber', sum.toString())
         println "Your new build version is ${props.getProperty("buildNumber")}"
-        save()
+        props.store(propsFile.newWriter(), null)
+        props.load(propsFile.newDataInputStream())
+        println 'Building in server...'
+        println "Act version ${project.version}"
     }
 }
 
@@ -169,14 +122,6 @@ task incrementBuildArtifactVersion()  {
         props.load(propsFile.newDataInputStream())
         println "Storing Properties."
     } else println 'skipping.. it is a server build..'
-}
-
-buildInServer.onlyIf {
-    project.hasProperty('buildInServer')
-}
-
-incrementBuildVersion.onlyIf {
-    project.hasProperty('incrementBuildVersion')
 }
 
 ext.save = {
