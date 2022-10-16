@@ -52,21 +52,15 @@ dependencies {
     implementation files('vendor/scenicView.jar')
 }
 
-//springVersion=3.0.6.RELEASE
-//
-//task extraStuff{
-//    doStuff 'org.springframework:spring-web:${springVersion}@war'
-//}
-
-
-
 task replaceVersionInREADME {
     // Maven
-    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>', replace:"<version>${version}</version>", flags:'g', byline:true) {
+    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>',
+            replace:"<version>${version}</version>", flags:'g', byline:true, encoding: 'UTF-8') {
         fileset(dir: '.', includes: 'README.md')
     }
     // Gradle
-    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9+\\.]+)", replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true) {
+    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9+#\\.]+)",
+            replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true, encoding: 'UTF-8') {
         fileset(dir: '.', includes: 'README.md')
     }
 
@@ -74,6 +68,7 @@ task replaceVersionInREADME {
 
 task incrementVersion (dependsOn: build) {
 //task incrementVersion () {
+
     Properties props = new Properties()
     File propsFile = new File('./version.properties')
     props.load(propsFile.newDataInputStream())
