@@ -1,3 +1,4 @@
+
 buildscript {
 
     Properties props = new Properties()
@@ -5,10 +6,10 @@ buildscript {
     props.load(propsFile.newDataInputStream())
 
     project.version =
-            props.getProperty("minorVersion") +
-                    "." + props.getProperty("majorVersion") +
-                    "." + props.getProperty("buildNumber") +
-                    "+" + props.getProperty("artifactBuildNumber")
+                    props.getProperty("majorVersion") +
+                    "." + props.getProperty("minorVersion") +
+                    "." + props.getProperty("buildNumber")
+//                    "+" + props.getProperty("artifactBuildNumber")
 }
 
 
@@ -52,7 +53,17 @@ dependencies {
     implementation files('vendor/scenicView.jar')
 }
 
+
+
+
 task replaceVersionInREADME {
+
+    Properties props = new Properties()
+    File propsFile = new File('./version.properties')
+    props.load(propsFile.newDataInputStream())
+
+    def fullVersion = version + "+" + props.getProperty('artifactBuildNumber')
+
     // Maven
     ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>',
             replace:"<version>${version}</version>", flags:'g', byline:true, encoding: 'UTF-8') {
@@ -64,10 +75,15 @@ task replaceVersionInREADME {
         fileset(dir: '.', includes: 'README.md')
     }
 
-    ant.replaceregexp(match:'build([0-9+\\.]+)',
-            replace:"${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+    ant.replaceregexp(match:'Build-([0-9+\\.]+)',
+            replace:"Build-${fullVersion}", flags:'g', byline:true, encoding: 'UTF-8') {
         fileset(dir: '.', includes: 'README.md')
     }
+
+//    ant.replaceregexp(match:'v([0-9+\\.]+)',
+//            replace:"v${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+//        fileset(dir: '.', includes: 'README.md')
+//    }
 }
 
 task incrementVersion (dependsOn: build) {
@@ -77,7 +93,12 @@ task incrementVersion (dependsOn: build) {
     File propsFile = new File('./version.properties')
     props.load(propsFile.newDataInputStream())
     Integer nextbuildnum = ( ((props.getProperty('artifactBuildNumber')) as BigDecimal) + 1 )
+
+    props.setProperty('artifactBuildNumber',
+            nextbuildnum.toString())
+
     props.setProperty('artifactBuildNumber', nextbuildnum.toString())
+
     props.store(propsFile.newWriter(), null)
     props.load(propsFile.newDataInputStream())
 
