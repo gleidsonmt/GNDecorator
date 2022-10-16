@@ -13,6 +13,26 @@ plugins {
     id 'signing'
 }
 
+ext {
+
+    Properties _props = new Properties()
+    File _propsFile = new File('./version.properties')
+    _props.load(_propsFile.newDataInputStream())
+
+    // Load act version from properties
+    project.version =
+            _props.getProperty("majorVersion") +
+                    "." + _props.getProperty("minorVersion") +
+                    "." + _props.getProperty("buildNumber")
+                    "+" + _props.getProperty("artifactBuildNumber")
+
+    // Variables used in flows to update..
+    propsFile = _propsFile
+    props = _props
+    buildV = _props.getProperty("buildNumber")
+    buildA = _props.getProperty("artifactBuildNumber")
+
+}
 
 ext {
 
@@ -42,7 +62,6 @@ repositories {
     mavenCentral()
 }
 
-
 javafx {
     version = '17.0.1'
     modules = [
@@ -60,10 +79,8 @@ dependencies {
     implementation files('vendor/scenicView.jar')
 }
 
-
-
-
 task replaceVersionInREADME {
+
 
 //    Properties props = new Properties()
 //    File propsFile = new File('./version.properties')
@@ -87,6 +104,9 @@ task replaceVersionInREADME {
 //        fileset(dir: '.', includes: 'README.md')
 //    }
 
+
+
+//  Release Badge
 //    ant.replaceregexp(match:'v([0-9+\\.]+)',
 //            replace:"v${version}", flags:'g', byline:true, encoding: 'UTF-8') {
 //        fileset(dir: '.', includes: 'README.md')
@@ -149,7 +169,6 @@ task incrementBuildArtifactVersion()  {
         props.load(propsFile.newDataInputStream())
         println "Storing Properties."
     } else println 'skipping.. it is a server build..'
-
 }
 
 buildInServer.onlyIf {
