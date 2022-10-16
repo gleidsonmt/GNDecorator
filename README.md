@@ -6,7 +6,7 @@ I'm in master
 
 [![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.gleidsonmt/gndecorator?server=https%3A%2F%2Fs01.oss.sonatype.org&style=for-the-badge)](https://central.sonatype.dev/artifact/io.github.gleidsonmt/gndecorator/2.1.25)
 [![Release](https://img.shields.io/badge/Release-v2.2.25-green.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
-![Build](https://img.shields.io/badge/Build-2.2.26+202-gold.svg?style=for-the-badge)
+![Build](https://img.shields.io/badge/Build-2 // .2 .26+209-gold.svg?style=for-the-badge)
 [![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE)
 
 <p align="center">
@@ -58,13 +58,13 @@ If you use maven add in pom.xml:
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
   <artifactId>gndecorator</artifactId>
-  <version>2.2.26</version>
+  <version>2 // .2 .26</version>
 </dependency>
 ```
 
 .. or in gradle.build:
 ```groovy
-    implementation 'io.github.gleidsonmt:gndecorator:2.2.26'
+    implementation 'io.github.gleidsonmt:gndecorator:2 // .2 .26'
 ```
 
 # ☕ Using Decorator
