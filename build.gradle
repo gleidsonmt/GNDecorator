@@ -1,20 +1,44 @@
+
 plugins {
     id 'java'
     id 'application'
     id 'maven-publish'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
+
+//    id 'pl.allegro.tech.build.axion-release' version '1.14.0'
+//    Only saving this site... nice!
+//    https://axion-release-plugin.readthedocs.io/en/latest/examples/examples/
+
     id 'signing'
 }
 
-group 'io.github.gleidsonmt'
-version project.properties["version"]
+ext {
 
+    Properties _props = new Properties()
+    File _propsFile = new File('./version.properties')
+    _props.load(_propsFile.newDataInputStream())
+
+    // Load act version from properties
+    project.version =
+            _props.getProperty("majorVersion") +
+                    "." + _props.getProperty("minorVersion") +
+                    "." + _props.getProperty("buildNumber")
+                    "+" + _props.getProperty("artifactBuildNumber")
+
+    // Variables used in flows to update..
+    propsFile = _propsFile
+    props = _props
+    buildV = _props.getProperty("buildNumber")
+    buildA = _props.getProperty("artifactBuildNumber")
+
+}
+
+group 'io.github.gleidsonmt'
 
 repositories {
     mavenCentral()
 }
-
 
 javafx {
     version = '17.0.1'
@@ -31,6 +55,95 @@ application {
 
 dependencies {
     implementation files('vendor/scenicView.jar')
+}
+
+task replaceVersionInREADME {
+
+    Properties props = new Properties()
+    File propsFile = new File('./version.properties')
+    props.load(propsFile.newDataInputStream())
+
+    def fullVersion = version + "+" + props.getProperty('artifactBuildNumber')
+
+//     Maven
+    ant.replaceregexp(match:'<version>([0-9+\\.]+)</version>',
+            replace:"<version>${version}</version>", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
+
+//     Gradle
+    ant.replaceregexp(match: "${project.group}\\:${project.name}\\:([0-9+#\\.]+)",
+            replace:"${project.group}\\:${project.name}:${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
+
+//  Build Badge
+
+    ant.replaceregexp(match:'Build-([0-9+\\.]+)',
+            replace:"Build-${fullVersion}", flags:'g', byline:true, encoding: 'UTF-8') {
+        fileset(dir: '.', includes: 'README.md')
+    }
+
+//  Release Badge
+//    ant.replaceregexp(match:'v([0-9+\\.]+)',
+//            replace:"v${version}", flags:'g', byline:true, encoding: 'UTF-8') {
+//        fileset(dir: '.', includes: 'README.md')
+//    }
+}
+
+task buildInServer(dependsOn: build) {
+    group 'Java CI'
+
+    doLast {
+//        updateV = needsUpdate;
+
+        println 'Building in server...'
+        println "Act version ${project.version}"
+    }
+}
+
+
+
+// Custom task to incriment my build version in githubactions
+task incrementBuildVersion {
+    group 'version'
+
+    doLast{
+        int sum = buildV as BigDecimal +1
+        props.setProperty('buildNumber', sum.toString())
+        println "Your new build version is ${props.getProperty("buildNumber")}"
+        save()
+    }
+}
+
+task incrementBuildArtifactVersion()  {
+    group 'build'
+    println 'incrementing build artifact'
+    if (!project.hasProperty("server")) {
+        println "update artifact"
+        int sum = buildA as BigDecimal + 1
+        props.setProperty('artifactBuildNumber', sum.toString())
+        println "Your new artifact version is ${props.getProperty("artifactBuildNumber")}"
+        props.store(propsFile.newWriter(), null)
+        props.load(propsFile.newDataInputStream())
+        println "Storing Properties."
+    } else println 'skipping.. it is a server build..'
+
+}
+
+
+ext.save = {
+    props.store(propsFile.newWriter(), null)
+    props.load(propsFile.newDataInputStream())
+    println "Storing Properties."
+}
+
+buildInServer.onlyIf {
+    project.hasProperty('buildInServer')
+}
+
+incrementBuildVersion.onlyIf {
+    project.hasProperty('incrementBuildVersion')
 }
 
 
@@ -56,6 +169,7 @@ signing {
     }
     sign configurations.archives
 }
+
 
 publishing {
 

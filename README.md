@@ -5,14 +5,15 @@ I'm in master
 <h1></h1>
 
 [![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.gleidsonmt/gndecorator?server=https%3A%2F%2Fs01.oss.sonatype.org&style=for-the-badge)](https://central.sonatype.dev/artifact/io.github.gleidsonmt/gndecorator/2.1.25)
-[![Release](https://img.shields.io/badge/Release-v2.1.25--beta-green.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
-[![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE) 
+[![Release](https://img.shields.io/badge/Release-v2.2.25-green.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
+![Build](https://img.shields.io/badge/Build-unspecified+262-gold.svg?style=for-the-badge)
+[![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE)
 
 <p align="center">
   <img src="./src/main/resources/logo/logo_flier.png"  />
 </p>
 
-# 📑 Contentsssss
+# 📑 Contents
 
 <!-- TOC -->
 * [💻 Environment](#-environment)
@@ -21,9 +22,9 @@ I'm in master
 * [🧬  Basic Structure](#-basic-structure)
   * [Structure - by Scenic View](#structure---by-scenic-view)
     * [Default Structure](#default-structure)
-        * [View Default](#view-default)
-        * [View Darkula](#view-darkula)
-        * [With gradient and image](#with-gradient-and-image)
+      * [View Default](#view-default)
+      * [View Darkula](#view-darkula)
+      * [With gradient and image](#with-gradient-and-image)
   * [📺 On Youtube](#-on-youtube)
     * [🛠 Enhancements](#-enhancements)
   * [📫 Contributing to Project](#-contributing-to-project)
@@ -48,22 +49,22 @@ Now you have many ways to get that!
 
 For installing decorator, you have this options:
 
-  * For Pros - Click on the badge release or click badge nexus on the top of this document, and you're going to redirect to hosted sources.
-  * For Github Users - On the right side, you can see the packages and releases, click on them and download it, in case you are in packages just copy them into your build file.
-  * For Faster users - Just copy and paste the code bellow
+* For Pros - Click on the badge release or click badge nexus on the top of this document, and you're going to redirect to hosted sources.
+* For Github Users - On the right side, you can see the packages and releases, click on them and download it, in case you are in packages just copy them into your build file.
+* For Faster users - Just copy and paste the code bellow
 
 If you use maven add in pom.xml:
 ```xml
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
   <artifactId>gndecorator</artifactId>
-  <version>2.1.25</version>
+  <version>unspecified</version>
 </dependency>
 ```
 
 .. or in gradle.build:
 ```groovy
-    implementation 'io.github.gleidsonmt:gndecorator:2.1.25'
+    implementation 'io.github.gleidsonmt:gndecorator:unspecified'
 ```
 
 # ☕ Using Decorator
@@ -90,7 +91,7 @@ Begin to use... Java Code!
   ```
 
 
-# 🧬  Basic Structure 
+# 🧬  Basic Structure
 
         root -> SstackPane
                 body -> AnchorPane
