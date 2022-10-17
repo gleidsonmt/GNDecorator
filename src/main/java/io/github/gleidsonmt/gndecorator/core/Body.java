@@ -16,16 +16,16 @@
  */
 package io.github.gleidsonmt.gndecorator.core;
 
-import io.github.gleidsonmt.gndecorator.GNDecorator;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
-/**
+/** Enviroment class for the container
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
 public class Body extends AnchorPane implements AlignUtils {
+
 
     public Body(GNDecorator decorator, Container container, Bar bar,
                 TopBar topBar, RightBar rightBar,
@@ -42,46 +42,37 @@ public class Body extends AnchorPane implements AlignUtils {
 
         decorator.resizableProperty().addListener((observable, oldValue, newValue) -> {
 
-            if(newValue){
-                getChildren().stream().
-                        filter(e -> e instanceof StageBar)
-                        .map( e -> (StageBar) e)
-                        .forEach(StageBar::changeCursor);
-            } else {
-                getChildren().stream().
-                        filter(e -> e instanceof StageBar)
-                        .map( e -> (StageBar) e)
-                        .forEach(e -> ((Node) e).setCursor(Cursor.DEFAULT));
-            }
+            if(newValue) getChildren().stream().
+                    filter(e -> e instanceof StageBar)
+                    .map(e -> (StageBar) e)
+                    .forEach(StageBar::changeCursor);
+            else getChildren().stream().
+                    filter(e -> e instanceof StageBar)
+                    .map(e -> (StageBar) e)
+                    .forEach(e -> ((Node) e).setCursor(Cursor.DEFAULT));
             bar.disableActions(!newValue);
         });
 
         decorator.maximizedProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue){
-                getChildren().stream().
-                        filter(e -> e instanceof StageBar)
-                        .map( e -> (StageBar) e)
-                        .forEach(e -> ((Node) e).setCursor(Cursor.DEFAULT));
-            } else {
-                getChildren().stream().
-                        filter(e -> e instanceof StageBar)
-                        .map( e -> (StageBar) e)
-                        .forEach(StageBar::changeCursor);
-            }
+            if(newValue) getChildren().stream().
+                    filter(e -> e instanceof StageBar)
+                    .map(e -> (StageBar) e)
+                    .forEach(e -> ((Node) e).setCursor(Cursor.DEFAULT));
+            else getChildren().stream().
+                    filter(e -> e instanceof StageBar)
+                    .map(e -> (StageBar) e)
+                    .forEach(StageBar::changeCursor);
         });
 
         decorator.stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue) {
-                getChildren().stream()
-                        .filter( e -> e instanceof StageBar )
-                        .map( e -> (StageBar) e)
-                        .forEach( e -> ((Node) e).setCursor(Cursor.DEFAULT));
-            } else {
-                getChildren().stream()
-                        .filter(e -> e instanceof StageBar)
-                        .map(e -> (StageBar) e)
-                        .forEach(StageBar::changeCursor);
-            }
+            if(newValue) getChildren().stream()
+                    .filter(e -> e instanceof StageBar)
+                    .map(e -> (StageBar) e)
+                    .forEach(e -> ((Node) e).setCursor(Cursor.DEFAULT));
+            else getChildren().stream()
+                    .filter(e -> e instanceof StageBar)
+                    .map(e -> (StageBar) e)
+                    .forEach(StageBar::changeCursor);
         });
 
         alignTopAnchor(topBar);
@@ -100,7 +91,7 @@ public class Body extends AnchorPane implements AlignUtils {
 
     }
 
-    void fullBody(Container container){
+    void fullBody(Container container) {
         alignContent(container, 0);
     }
 }

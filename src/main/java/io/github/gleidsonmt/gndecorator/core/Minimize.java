@@ -16,7 +16,6 @@
  */
 package io.github.gleidsonmt.gndecorator.core;
 
-import io.github.gleidsonmt.gndecorator.GNDecorator;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.input.MouseEvent;

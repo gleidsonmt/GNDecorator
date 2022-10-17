@@ -26,7 +26,6 @@ import javafx.stage.Stage;
  * Create on  08/07/2020
  */
 public class TopRightAnchor extends Path implements StageChanges, StageBar {
-
     private final Stage stage;
 
     public TopRightAnchor(Stage stage) {

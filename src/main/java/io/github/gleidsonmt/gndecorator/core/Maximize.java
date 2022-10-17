@@ -16,18 +16,12 @@
  */
 package io.github.gleidsonmt.gndecorator.core;
 
-import io.github.gleidsonmt.gndecorator.GNDecorator;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.BooleanPropertyBase;
 import javafx.css.PseudoClass;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -37,7 +31,6 @@ class Maximize extends Button {
 
     private static final PseudoClass RESTORE_PSEUDO_CLASS
             = PseudoClass.getPseudoClass("restore");
-
     private final BooleanProperty restore = new BooleanPropertyBase(false) {
         public void invalidated() {
             pseudoClassStateChanged(RESTORE_PSEUDO_CLASS, get());

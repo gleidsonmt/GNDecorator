@@ -19,15 +19,17 @@ package io.github.gleidsonmt.gndecorator.core;
 import javafx.scene.control.ScrollPane;
 
 /**
+ * This class represents scrolling in application.
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
 public class AreaContent extends ScrollPane {
 
-    public AreaContent() {
+    AreaContent() {
 
         this.setId("gn-scroll");
         this.setFitToWidth(true);
         this.setFitToHeight(true);
+
     }
 }

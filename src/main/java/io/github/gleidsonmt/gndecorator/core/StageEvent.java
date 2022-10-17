@@ -16,7 +16,6 @@
  */
 package io.github.gleidsonmt.gndecorator.core;
 
-import io.github.gleidsonmt.gndecorator.GNDecorator;
 import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.geometry.BoundingBox;

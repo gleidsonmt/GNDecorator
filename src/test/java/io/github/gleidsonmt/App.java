@@ -16,7 +16,7 @@
  */
 package io.github.gleidsonmt;
 
-import io.github.gleidsonmt.gndecorator.GNDecorator;
+import io.github.gleidsonmt.gndecorator.core.GNDecorator;
 import io.github.gleidsonmt.gndecorator.Theme;
 import javafx.application.Application;
 import javafx.scene.Parent;

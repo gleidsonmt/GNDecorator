@@ -17,14 +17,17 @@
 
 package io.github.gleidsonmt.gndecorator;
 
+import io.github.gleidsonmt.gndecorator.core.Background;
+import io.github.gleidsonmt.gndecorator.core.GNDecorator;
 import javafx.application.Application;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.scenicview.ScenicView;
 
 import java.util.Objects;
 
@@ -35,36 +38,50 @@ import java.util.Objects;
  */
 public class App extends Application {
 
+    private GNDecorator decorator = new GNDecorator();
+
+
     @Override
     public void start(Stage stage) throws Exception {
-        HBox content = new HBox();
+        VBox body = new VBox();
+        body.setAlignment(Pos.CENTER);
 
-        GNDecorator decorator = new GNDecorator();
-        decorator.setContent(content);
-
-
+        decorator.setContent(body);
         decorator.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/logo/logo_32.png")).toExternalForm()));
-
-
         decorator.setTitle(null);
-
-        Button block = new Button("Block or unblock controls");
-        
-        block.setOnMouseClicked(event -> {
-            if(!decorator.isLocked())
-            decorator.lockControls();
-            else decorator.unLockControls();
-        });
-
-        content.getChildren().add(block);
 
         decorator.setMinHeight(300D);
 
 //        decorator.fullBody();
         decorator.switchTheme(Theme.MAC_YOSEMITE);
-//        decorator.testWithScenicView();
         decorator.show();
 
+        Button addMenus = new Button("Adiciona menus");
+        addMenus.setOnMouseClicked(this::handle);
+        decorator.addControl(addMenus);
+
+        Button addCustom = new Button("Add Custom");
+        addCustom.setOnMouseClicked(event -> decorator.addControl(new Button("Custom Control")));
+
+        Label lblWelcome = new Label("Welcome, Click on the buttons to see the behavior");
+        lblWelcome.setStyle("-fx-font-size : 18pt;");
+
+        Button block = new Button("Block or unblock controls");
+
+        block.setOnMouseClicked(event -> {
+            if(!decorator.isLocked())
+                decorator.lockControls();
+            else decorator.unLockControls();
+        });
+
+        VBox.setMargin(lblWelcome, new Insets(50));
+
+        body.getChildren().addAll(lblWelcome, addMenus, block, addCustom);
+
+        ScenicView.show(decorator.getWindow().getScene());
+    }
+
+    private void handle(MouseEvent mouseEvent) {
         Menu menuFile = new Menu("File");
         MenuItem menuNew = new MenuItem("New");
         MenuItem menuOpen = new MenuItem("Open");
@@ -82,13 +99,8 @@ public class App extends Application {
         menuFile.getItems().addAll(menuNew, menuOpen, menuOpenRecent,
                 new SeparatorMenuItem(), close, save, saveAs, revert, new SeparatorMenuItem(),
                 preferences, new SeparatorMenuItem(), quit);
-//
-        decorator.addControl(new Button("wlecome"));
+
         decorator.addMenu(menuFile);
-
-
-//        ScenicView.show(decorator.getWindow().getScene());
-
 
     }
 

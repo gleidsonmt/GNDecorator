@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.gleidsonmt.gndecorator;
+package io.github.gleidsonmt.gndecorator.core;
 
-import io.github.gleidsonmt.gndecorator.core.*;
+import io.github.gleidsonmt.gndecorator.Theme;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
@@ -47,7 +47,7 @@ import java.util.Objects;
  * Create on  06/07/2020
  */
 @SuppressWarnings("unused")
-public class GNDecorator {
+public final class GNDecorator {
 
     public final DoubleProperty barHeight
             = new SimpleDoubleProperty(GNDecorator.class,
@@ -101,7 +101,7 @@ public class GNDecorator {
             bottomLeftAnchor, bottomRightAnchor);
 
     private final Background background
-            = new Background(body, this);
+            = new Background(body);
 
     private final Scene scene
             = new Scene(background);
@@ -117,7 +117,7 @@ public class GNDecorator {
 
     public GNDecorator() {
         configStage();
-        viewBar(false);
+//        viewBar(true);
     }
 
     private void configStage() {
@@ -214,6 +214,7 @@ public class GNDecorator {
         } else if(Double.isNaN(this.stage.getHeight())){
             this.stage.setHeight(initialHeight);
         }
+
         this.stage.centerOnScreen();
         this.stage.show();
     }
@@ -398,14 +399,6 @@ public class GNDecorator {
         return  this.bar.isMouseTransparent();
     }
     
-//    public void hideCustomControls(){
-//        this.bar.getCustomBar().hide();
-//    }
-//
-//    public void showCustomControls(){
-//        this.bar.getCustomBar().show();
-//    }
-
     /**
      * Get icons from stage.
      * @return The icons from this decorator.
@@ -461,6 +454,7 @@ public class GNDecorator {
 
     }
 
+    @Deprecated
     private void viewBar(boolean view){
 
         open.setFromY(-(barHeight.get()));
@@ -486,6 +480,7 @@ public class GNDecorator {
 
     }
 
+    @Deprecated
     public void setDark(boolean value){
         dark = value;
         if(value) {
@@ -507,6 +502,7 @@ public class GNDecorator {
         }
     }
 
+    @Deprecated
     public boolean isDark() {
         return dark;
     }

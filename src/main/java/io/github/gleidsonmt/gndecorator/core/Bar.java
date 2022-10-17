@@ -16,7 +16,6 @@
  */
 package io.github.gleidsonmt.gndecorator.core;
 
-import io.github.gleidsonmt.gndecorator.GNDecorator;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -113,7 +112,6 @@ public class Bar extends HBox implements StageChanges, StageReposition {
 //            controlsContainer.getChildren().clear();
 //            controlsContainer.getChildren().addAll(close, minimize, maximize);
         } else {
-            System.out.println(getChildren());
             getChildren().removeAll(controlsContainer, menuBar);
             getChildren().add(0, menuBar);
             getChildren().add(3, controlsContainer);

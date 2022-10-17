@@ -4,6 +4,11 @@
     -fx-background-color : -background-color;
     -fx-border-color : #00000060;
     -fx-border-width : 1px;
+
+   -background-color : white;
+   -text-fill : black;
+   -icon-fill : black;
+
 }
 
 #gn-background:maximized {

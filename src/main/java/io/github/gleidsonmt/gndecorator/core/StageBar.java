@@ -22,6 +22,6 @@ package io.github.gleidsonmt.gndecorator.core;
  */
 @FunctionalInterface
 interface StageBar {
-
     void changeCursor();
+
 }

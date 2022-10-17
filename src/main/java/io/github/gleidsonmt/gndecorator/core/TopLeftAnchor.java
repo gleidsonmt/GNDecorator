@@ -36,7 +36,6 @@ public class TopLeftAnchor extends Path implements StageChanges, StageBar {
         this.stage = stage;
         configPaths();
         configActions();
-
     }
 
     private void configPaths(){

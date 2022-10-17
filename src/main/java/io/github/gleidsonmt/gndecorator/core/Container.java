@@ -19,11 +19,13 @@ package io.github.gleidsonmt.gndecorator.core;
 import javafx.scene.layout.StackPane;
 
 /**
+ * This class represents the container directly in body.
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
 public class Container extends StackPane  {
-    public Container(AreaContent areaContent) {
+    Container(AreaContent areaContent) {
+
         this.getStyleClass().add("gn-container");
         this.setId("gn-container");
 

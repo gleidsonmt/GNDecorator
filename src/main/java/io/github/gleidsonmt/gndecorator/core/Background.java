@@ -18,48 +18,28 @@
 package io.github.gleidsonmt.gndecorator.core;
 
 //import io.github.gleidson28.decorator.background.GNBackground;
-import io.github.gleidsonmt.gndecorator.GNDecorator;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.BooleanPropertyBase;
 import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 
+import java.util.Objects;
+
 /**
  * @author   Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Creation  20/04/2018
  */
-public class Background extends StackPane {
-
-    private static final PseudoClass MAXIMIZE_PSEUDO_CLASS =
-            PseudoClass.getPseudoClass("maximized");
-
-//    private static final String USER_AGENT_STYLESHEET =
-//            GNBackground.class.getResource("/theme/agent.css").toExternalForm();
-
-    private final BooleanProperty maximized = new BooleanPropertyBase(false) {
-        public void invalidated() {
-            pseudoClassStateChanged(MAXIMIZE_PSEUDO_CLASS, get());
-        }
-
-        @Override public Object getBean() {
-            return Background.this;
-        }
-
-        @Override public String getName() {
-            return "maximized";
-        }
-    };
-
+public final class Background extends StackPane {
     private static final String DEFAULT_STYLESHEET
-            = Background.class.getResource("/theme/default.css")
+            = Objects.requireNonNull(Background.class.getResource("/theme/default.css"))
             .toExternalForm();
 
-    private static final String LIGHT_STYLESHEET
-            = Background.class.getResource("/theme/light.css")
-            .toExternalForm();
-
-    public Background(Body body, GNDecorator decorator) {
+    /**
+     * Constructor using the body.
+     * @param body structure for the app.
+     */
+    Background(Body body) {
 
         this.getStyleClass().add("gn-background");
         this.setId("gn-background");
@@ -67,29 +47,7 @@ public class Background extends StackPane {
         this.setAlignment(Pos.CENTER);
         this.getChildren().addAll(body);
 
-
-
-        this.getStylesheets().add(LIGHT_STYLESHEET);
         this.getStylesheets().add(DEFAULT_STYLESHEET);
 
-        decorator.maximizedProperty().
-                addListener((observable, oldValue, newValue) -> setMaximize(newValue));
     }
-
-    public boolean isMaximized() {
-        return maximized.get();
-    }
-
-    public BooleanProperty maximizeProperty() {
-        return maximized;
-    }
-
-    public void setMaximize(boolean maximize) {
-        this.maximized.set(maximize);
-    }
-
-//    @Override
-//    public String getUserAgentStylesheet() {
-//        return USER_AGENT_STYLESHEET;
-//    }
 }

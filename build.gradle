@@ -57,6 +57,7 @@ application {
 
 dependencies {
     implementation files('vendor/scenicView.jar')
+    implementation 'org.jetbrains:annotations:20.1.0'
 }
 
 task replaceVersionInREADME {
