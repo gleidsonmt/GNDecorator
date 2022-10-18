@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class LeftBar extends Pane implements StageBar {
+public final class LeftBar extends Pane implements StageBar {
 
     private final StageState state;
 

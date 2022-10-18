@@ -84,7 +84,7 @@ public final class GNDecorator {
     private final StageState stageState = new StageState(stage);
     // Needs change
     private final LeftBar   leftBar     = new LeftBar(stageState);
-    private final RightBar  rightBar    = new RightBar(stage);
+    private final RightBar  rightBar    = new RightBar(stageState);
     private final TopBar    topBar      = new TopBar(stage);
     private final BottomBar bottomBar   = new BottomBar(stage);
 

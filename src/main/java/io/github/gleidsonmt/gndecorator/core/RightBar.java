@@ -24,47 +24,48 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class RightBar extends Pane implements StageChanges, StageBar {
+public final class RightBar extends Pane implements  StageBar {
 
-    private final Stage stage;
+    private final StageState state;
 
-    public RightBar(Stage stage) {
+    RightBar(StageState _state) {
+        this.state = _state;
+
         this.getStyleClass().add("gn-right-bar");
         this.setId("gn-right-bar");
         this.setMinWidth(3D);
         this.setCursor(Cursor.E_RESIZE);
-        this.stage = stage;
         configActions();
     }
 
     private void configActions(){
         this.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown()) {
-                setInitX(event.getScreenX());
-                setInitY(event.getScreenY());
+                state.setInitX(event.getScreenX());
+                state.setInitY(event.getScreenY());
                 event.consume();
             }
         });
 
         this.setOnMouseDragged(event -> {
-            if (!event.isPrimaryButtonDown() || (getInitX() == -1 && getInitY() == -1)) {
+            if (!event.isPrimaryButtonDown() || (state.getInitX() == -1 && state.getInitY() == -1)) {
                 return;
             }
 
-            if (this.stage.isFullScreen()) {
+            if (state.getStage().isFullScreen()) {
                 return;
             }
             if (event.isStillSincePress()) {
                 return;
             }
 
-            setNewX(event.getScreenX());
-            setNewY(event.getScreenY());
+            state.setNewX(event.getScreenX());
+            state.setNewY(event.getScreenY());
 
-            double deltaX = getNewX() - getInitX();
+            double deltaX = state.getNewX() - state.getInitX();
 
             if (Cursor.E_RESIZE.equals(this.getCursor())) {
-                setStageWidth(this.stage, this.stage.getWidth() + deltaX);
+                state.setStageWidth(state.getStage().getWidth() + deltaX);
                 event.consume();
             }
         });
