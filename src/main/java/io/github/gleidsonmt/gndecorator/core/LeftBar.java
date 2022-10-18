@@ -18,13 +18,14 @@ package io.github.gleidsonmt.gndecorator.core;
 
 import javafx.scene.Cursor;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public final class LeftBar extends Pane implements StageBar {
+public final class LeftBar extends Region implements StageBar {
 
     private final StageState state;
 
