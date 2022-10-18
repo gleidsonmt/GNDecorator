@@ -56,7 +56,7 @@ If you use maven add in pom.xml:
 <dependency>
   <groupId>io.github.gleidsonmt</groupId>
   <artifactId>gndecorator</artifactId>
-  <version>2.2.29</version>
+  <version>2.2.25</version>
 </dependency>
 ```
 
