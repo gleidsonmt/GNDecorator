@@ -5,8 +5,8 @@ run-name: Build by ${{ github.actor }} 🧬🚀💻🛠
 on:
   push:
     branches: [develop]
-  pull_request:
-    branches: [develop]
+#  pull_request:
+#    branches: [develop]
 
 jobs:
   build:
@@ -23,14 +23,26 @@ jobs:
         with:
           java-version: 17.0.1
 
-      - uses: madhead/read-java-properties@latest
-        id: all
+      - name: Read value from properties file
+        id: read_property
+        uses: christian-draeger/read-properties@1.1.0
         with:
-          file: version.properties
-          all: true
+          path: 'version.properties'
+          properties: 'buildNumber'
+      - name: Do something with your bumped release version
+        run: echo ${{ steps.read_property.outputs.buildNumber}}
 
-      - run: echo ${{ steps.all.outputs.version }} # Project's version from gradle.properties
-      - run: echo ${{ steps.all.outputs.groupId }} # Project's groupID from gradle.propertie
+      - name: Add & Commit
+
+        uses: EndBug/add-and-commit@v9.1.1
+        with:
+          new_branch: build
+          message: 'New Branch'
+#          pull: '--rebase --autostash'
+
+#        with:
+#
+
 
 #      - name: Grant execute permission for gradlew
 #        run: chmod +x gradlew
