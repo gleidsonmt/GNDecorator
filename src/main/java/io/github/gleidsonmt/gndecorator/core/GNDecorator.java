@@ -16,7 +16,6 @@
  */
 package io.github.gleidsonmt.gndecorator.core;
 
-import io.github.gleidsonmt.gndecorator.Theme;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
@@ -47,7 +46,7 @@ import java.util.Objects;
  * Create on  06/07/2020
  */
 @SuppressWarnings("unused")
-public final class GNDecorator {
+public class GNDecorator {
 
     public final DoubleProperty barHeight
             = new SimpleDoubleProperty(GNDecorator.class,
@@ -78,7 +77,7 @@ public final class GNDecorator {
     private final Rectangle2D bounds
             = Screen.getPrimary().getVisualBounds();
 
-    public final Stage stage = new Stage(StageStyle.UNDECORATED);
+    public final Stage stage = new Stage(StageStyle.TRANSPARENT);
 
     /// Fixing
     private final StageState stageState = new StageState(stage);
@@ -97,9 +96,6 @@ public final class GNDecorator {
 
     private final AreaContent   areaContent   = new AreaContent();
     private final Container container     = new Container(areaContent);
-
-
-
 
     private final Body body
             = new Body(this, container, bar, topBar,
@@ -127,7 +123,7 @@ public final class GNDecorator {
     }
 
     private void configStage() {
-        this.scene.setFill(Color.WHITE);
+        this.scene.setFill(Color.TRANSPARENT);
         this.stage.setScene(this.scene);
         this.stage.setMinWidth(254.0D);
         this.stage.setMinHeight(57.0D);
@@ -223,6 +219,10 @@ public final class GNDecorator {
 
         this.stage.centerOnScreen();
         this.stage.show();
+
+        background.setStyle("-fx-background-radius : 10px;");
+
+//        background.setClip(new Circle(stage.getWidth() /2));
     }
 
     /**
@@ -413,8 +413,8 @@ public final class GNDecorator {
         return stage.getIcons();
     }
 
-    public void switchTheme(Theme theme){;
-        switch (theme) {
+    public void switchTheme(DecoratorTheme decoratorTheme){;
+        switch (decoratorTheme) {
             case MAC_YOSEMITE -> {
                 background.getStylesheets().remove(background.getStylesheets().size() - 1);
                 background.getStylesheets().add(

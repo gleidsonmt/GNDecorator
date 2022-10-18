@@ -1,0 +1,48 @@
+
+
+name: Java CI with gradle
+run-name: Build by ${{ github.actor }} 🧬🚀💻🛠
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17.0.1
+
+      - uses: madhead/read-java-properties@latest
+        id: all
+        with:
+          file: version.properties
+          all: true
+
+      - run: echo ${{ steps.all.outputs.version }} # Project's version from gradle.properties
+      - run: echo ${{ steps.all.outputs.groupId }} # Project's groupID from gradle.propertie
+
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#
+#      - name: Build with gradle
+#        run: ./gradlew build -Pserver
+
+#      - name: Add & Commit
+#        uses: EndBug/add-and-commit@v9.1.1
+#        with:
+#          pull: '--rebase --autostash'
+
+#        run: ./gradlew build
+#      - name: Increment Version
+#        run: ./gradlew incrementVersion

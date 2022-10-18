@@ -14,12 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.gleidsonmt.gndecorator;
+package io.github.gleidsonmt.gndecorator.core;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  11/07/2020
  */
-public enum  Theme {
+public enum DecoratorTheme {
     DEFAULT, MAC_YOSEMITE
 }

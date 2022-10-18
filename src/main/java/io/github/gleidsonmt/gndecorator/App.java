@@ -17,7 +17,7 @@
 
 package io.github.gleidsonmt.gndecorator;
 
-import io.github.gleidsonmt.gndecorator.core.Background;
+import io.github.gleidsonmt.gndecorator.core.DecoratorTheme;
 import io.github.gleidsonmt.gndecorator.core.GNDecorator;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -53,7 +53,7 @@ public class App extends Application {
         decorator.setMinHeight(300D);
 
 //        decorator.fullBody();
-        decorator.switchTheme(Theme.MAC_YOSEMITE);
+        decorator.switchTheme(DecoratorTheme.MAC_YOSEMITE);
         decorator.show();
 
         Button addMenus = new Button("Adiciona menus");
@@ -79,6 +79,9 @@ public class App extends Application {
         body.getChildren().addAll(lblWelcome, addMenus, block, addCustom);
 
         ScenicView.show(decorator.getWindow().getScene());
+        decorator.switchTheme(DecoratorTheme.MAC_YOSEMITE);
+
+
 
     }
 

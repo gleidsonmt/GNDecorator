@@ -16,8 +16,8 @@
  */
 package io.github.gleidsonmt;
 
+import io.github.gleidsonmt.gndecorator.core.DecoratorTheme;
 import io.github.gleidsonmt.gndecorator.core.GNDecorator;
-import io.github.gleidsonmt.gndecorator.Theme;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -43,7 +43,7 @@ public class App extends Application {
 
         Menu options = new Menu("Options");
         MenuItem macTheme = new MenuItem("Mac Yosemite theme");
-        MenuItem defaultTheme = new MenuItem("Default Theme");
+        MenuItem defaultTheme = new MenuItem("Default DecoratorTheme");
         MenuItem switchLight = new MenuItem("Switch Light");
         MenuItem fullscreen = new MenuItem("Fullscreen");
         options.getItems().addAll(macTheme, defaultTheme, switchLight, fullscreen);
@@ -58,9 +58,9 @@ public class App extends Application {
 
         decorator.addMenu(menuAction);
 
-        macTheme.setOnAction( e -> decorator.switchTheme(Theme.MAC_YOSEMITE));
+        macTheme.setOnAction( e -> decorator.switchTheme(DecoratorTheme.MAC_YOSEMITE));
 
-        defaultTheme.setOnAction( e -> decorator.switchTheme(Theme.DEFAULT));
+        defaultTheme.setOnAction( e -> decorator.switchTheme(DecoratorTheme.DEFAULT));
 
         switchLight.setOnAction(e -> decorator.setDark(!decorator.isDark()));
 
