@@ -4,9 +4,9 @@ name: Java Build Test ||
 run-name: Build by ${{ github.actor }} 🧬
 on:
   push:
-    branches: [build]
+    branches: [master]
   pull_request:
-    branches: [build]
+    branches: [master]
 
 jobs:
   build:
