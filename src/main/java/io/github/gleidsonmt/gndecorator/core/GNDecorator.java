@@ -48,7 +48,7 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class GNDecorator {
 
-    public final DoubleProperty barHeight
+    private final DoubleProperty barHeight
             = new SimpleDoubleProperty(GNDecorator.class,
             "BarHeightProperty",30);
 
@@ -80,7 +80,7 @@ public class GNDecorator {
     private final Stage stage = new Stage(StageStyle.TRANSPARENT);
 
     /// Fixing
-    private final StageState stageState = new StageState(stage);
+    private final StageState stageState = new StageState(this, stage);
     private final LeftBar   leftBar     = new LeftBar(stageState);
     private final RightBar  rightBar    = new RightBar(stageState);
     private final TopBar    topBar      = new TopBar(stageState);
@@ -524,4 +524,15 @@ public class GNDecorator {
     }
 
 
+    public double getBarHeight() {
+        return barHeight.get();
+    }
+
+    public DoubleProperty barHeightProperty() {
+        return barHeight;
+    }
+
+    public void setBarHeight(double barHeight) {
+        this.barHeight.set(barHeight);
+    }
 }

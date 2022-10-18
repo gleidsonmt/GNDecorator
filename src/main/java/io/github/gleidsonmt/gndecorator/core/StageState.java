@@ -19,8 +19,10 @@ public final class StageState  {
     private double newY = 0;
 
     private Stage stage;
+    private GNDecorator decorator;
 
-    StageState (Stage _stage) {
+    StageState (GNDecorator _decorator, Stage _stage) {
+        this.decorator = _decorator;
         this.stage = _stage;
     }
 
@@ -129,5 +131,8 @@ public final class StageState  {
 
     Stage getStage() {
         return this.stage;
+    }
+    GNDecorator getDecorator() {
+        return decorator;
     }
 }

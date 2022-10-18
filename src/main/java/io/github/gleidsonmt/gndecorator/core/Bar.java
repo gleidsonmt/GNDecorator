@@ -138,12 +138,12 @@ public class Bar extends HBox implements StageReposition {
         controlsContainer.setSpacing(0D);
         this.menuBar.setPadding(new Insets(0D));
 
-        controlsContainer.prefHeightProperty().bind(decorator.barHeight);
-        menuBar.prefHeightProperty().bind(decorator.barHeight);
+        controlsContainer.prefHeightProperty().bind(decorator.barHeightProperty());
+        menuBar.prefHeightProperty().bind(decorator.barHeightProperty());
 
         defaultControls.forEach(e ->
                 e.prefHeightProperty().
-                        bind(decorator.barHeight));
+                        bind(state.getDecorator().barHeightProperty()));
 
         controlsContainer.setAlignment(Pos.CENTER_RIGHT);
 
