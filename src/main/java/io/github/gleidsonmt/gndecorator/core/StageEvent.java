@@ -21,7 +21,6 @@ import javafx.event.EventType;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -37,16 +36,13 @@ class StageEvent extends Event {
     static final EventType<StageEvent> MINIMIZE = new EventType<>(ANY, "MINIMIZE");
     static final EventType<StageEvent> CLOSE    = new EventType<>(ANY, "CLOSE");
 
-    private final GNDecorator decorator;
-    private final Stage stage;
-
+    private final StageState state;
     private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
-    StageEvent(EventType<? extends Event> eventType, GNDecorator decorator, Stage _stage) {
+    StageEvent(EventType<? extends Event> eventType, StageState _state) {
         super(eventType);
 
-        this.decorator = decorator;
-        this.stage = _stage;
+        this.state = _state;
 
         if (MAXIMIZE.equals(eventType)) {
             maximizeEvent();
@@ -61,29 +57,29 @@ class StageEvent extends Event {
 
     private void maximizeEvent(){
 
-        decorator.noMaximizedBounds =
+        state.updateNoMaximizedBounds(
                 new BoundingBox(
-                        stage.getX(),
-                        stage.getY(),
-                        stage.getWidth(),
-                        stage.getHeight()
-                );
+                        state.getStage().getX(),
+                        state.getStage().getY(),
+                        state.getStage().getWidth(),
+                        state.getStage().getHeight()
+                ));
 
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
+        state.getStage().setX(bounds.getMinX());
+        state.getStage().setY(bounds.getMinY());
+        state.getStage().setWidth(bounds.getWidth());
+        state.getStage().setHeight(bounds.getHeight());
 
-        decorator.setMaximized(true);
+        state.getDecorator().setMaximized(true);
     }
 
     private void restoreEvent(){
-        stage.setX(decorator.noMaximizedBounds.getMinX());
-        stage.setY(decorator.noMaximizedBounds.getMinY());
-        stage.setWidth(decorator.noMaximizedBounds.getWidth());
-        stage.setHeight(decorator.noMaximizedBounds.getHeight());
+        state.getStage().setX(state.noMaximizedBounds().getMinX());
+        state.getStage().setY(state.noMaximizedBounds().getMinY());
+        state.getStage().setWidth(state.noMaximizedBounds().getWidth());
+        state.getStage().setHeight(state.noMaximizedBounds().getHeight());
 
-        decorator.setMaximized(false);
+        state.getDecorator().setMaximized(false);
     }
 
     private void minimizeEvent(){

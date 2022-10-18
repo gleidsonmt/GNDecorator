@@ -82,6 +82,7 @@ public class App extends Application {
         decorator.switchTheme(DecoratorTheme.MAC_YOSEMITE);
 
         System.out.println("decorator.getBarHeight() = " + decorator.getBarHeight());
+
     }
 
     private void handle(MouseEvent mouseEvent) {

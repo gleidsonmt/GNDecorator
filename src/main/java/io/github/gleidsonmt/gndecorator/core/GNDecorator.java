@@ -113,7 +113,7 @@ public class GNDecorator {
     private double  initialHeight   = 600;
     private boolean dark            = false;
 
-    public BoundingBox noMaximizedBounds;
+    private BoundingBox noMaximizedBounds;
 
     public GNDecorator() {
         configStage();
