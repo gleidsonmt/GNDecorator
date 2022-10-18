@@ -36,7 +36,8 @@ jobs:
 
         uses: EndBug/add-and-commit@v9.1.1
         with:
-          new_branch: 'build'
+          new_branch: build
+          message: 'New Branch'
           pull: '--rebase --autostash'
 
 #        with:
