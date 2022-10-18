@@ -81,8 +81,6 @@ public class App extends Application {
         ScenicView.show(decorator.getWindow().getScene());
         decorator.switchTheme(DecoratorTheme.MAC_YOSEMITE);
 
-
-
     }
 
     private void handle(MouseEvent mouseEvent) {

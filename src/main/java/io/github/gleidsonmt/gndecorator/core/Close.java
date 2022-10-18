@@ -19,6 +19,7 @@ package io.github.gleidsonmt.gndecorator.core;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -26,13 +27,13 @@ import javafx.scene.input.MouseEvent;
  */
 class Close extends Button {
 
-    Close(GNDecorator decorator) {
+    Close(Stage stage) {
 
         this.setText("X");
         this.setId("gn-close");
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         this.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            decorator.stage.close();
+            stage.close();
         });
     }
 }

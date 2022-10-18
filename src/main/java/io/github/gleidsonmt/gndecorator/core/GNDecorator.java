@@ -77,28 +77,26 @@ public class GNDecorator {
     private final Rectangle2D bounds
             = Screen.getPrimary().getVisualBounds();
 
-    public final Stage stage = new Stage(StageStyle.TRANSPARENT);
+    private final Stage stage = new Stage(StageStyle.TRANSPARENT);
 
     /// Fixing
     private final StageState stageState = new StageState(stage);
-    // Needs change
     private final LeftBar   leftBar     = new LeftBar(stageState);
     private final RightBar  rightBar    = new RightBar(stageState);
-    private final TopBar    topBar      = new TopBar(stage);
-    private final BottomBar bottomBar   = new BottomBar(stage);
+    private final TopBar    topBar      = new TopBar(stageState);
+    private final BottomBar bottomBar   = new BottomBar(stageState);
+    private final TopLeftAnchor     topLeftAnchor       = new TopLeftAnchor(stageState);
+    private final TopRightAnchor    topRightAnchor      = new TopRightAnchor(stageState);
+    private final BottomLeftAnchor bottomLeftAnchor    = new BottomLeftAnchor(stageState);
+    private final BottomRightAnchor bottomRightAnchor   = new BottomRightAnchor(stageState);
 
-    private final TopLeftAnchor     topLeftAnchor       = new TopLeftAnchor(stage);
-    private final TopRightAnchor    topRightAnchor      = new TopRightAnchor(stage);
-    private final BottomLeftAnchor bottomLeftAnchor    = new BottomLeftAnchor(stage);
-    private final BottomRightAnchor bottomRightAnchor   = new BottomRightAnchor(stage);
-
-    private final Bar bar       = new Bar(this);
+    private final Bar bar       = new Bar(this, stageState);
 
     private final AreaContent   areaContent   = new AreaContent();
     private final Container container     = new Container(areaContent);
 
     private final Body body
-            = new Body(this, container, bar, topBar,
+            = new Body(stage, this, container, bar, topBar,
             rightBar, bottomBar, leftBar, topLeftAnchor, topRightAnchor,
             bottomLeftAnchor, bottomRightAnchor);
 
