@@ -80,7 +80,10 @@ public final class GNDecorator {
 
     public final Stage stage = new Stage(StageStyle.UNDECORATED);
 
-    private final LeftBar   leftBar     = new LeftBar(this);
+    /// Fixing
+    private final StageState stageState = new StageState(stage);
+    // Needs change
+    private final LeftBar   leftBar     = new LeftBar(stageState);
     private final RightBar  rightBar    = new RightBar(stage);
     private final TopBar    topBar      = new TopBar(stage);
     private final BottomBar bottomBar   = new BottomBar(stage);
@@ -94,6 +97,9 @@ public final class GNDecorator {
 
     private final AreaContent   areaContent   = new AreaContent();
     private final Container container     = new Container(areaContent);
+
+
+
 
     private final Body body
             = new Body(this, container, bar, topBar,

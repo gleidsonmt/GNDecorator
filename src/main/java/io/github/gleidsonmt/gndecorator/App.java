@@ -79,6 +79,7 @@ public class App extends Application {
         body.getChildren().addAll(lblWelcome, addMenus, block, addCustom);
 
         ScenicView.show(decorator.getWindow().getScene());
+
     }
 
     private void handle(MouseEvent mouseEvent) {

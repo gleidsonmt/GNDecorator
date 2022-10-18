@@ -24,27 +24,27 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class LeftBar extends Pane implements StageChanges, StageBar {
+public class LeftBar extends Pane implements StageBar {
 
-    private final Stage stage;
-    private final GNDecorator decorator;
+    private final StageState state;
 
-    public LeftBar(GNDecorator decorator) {
+    LeftBar (StageState _state) {
+        this.state = _state;
+
         this.getStyleClass().add("gn-left-bar");
         this.setId("gn-left-bar");
         this.setCursor(Cursor.W_RESIZE);
         this.setMinWidth(3D);
-        this.stage = decorator.stage;
-        this.decorator = decorator;
         configActions();
+
     }
 
     private void configActions(){
         this.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown()) {
 
-                setInitX(event.getScreenX());
-                setInitY(event.getScreenY());
+                state.setInitX(event.getScreenX());
+                state.setInitY(event.getScreenY());
                 event.consume();
 
 //                if(!decorator.isMaximized()){
@@ -55,12 +55,13 @@ public class LeftBar extends Pane implements StageChanges, StageBar {
         });
 
         this.setOnMouseDragged(event -> {
+
             if (!event.isPrimaryButtonDown() ||
-                    (getInitX() == -1 && getInitY() == -1)) {
+                    (state.getInitX() == -1 && state.getInitY() == -1)) {
                 return;
             }
 
-            if (this.stage.isFullScreen()) {
+            if (this.state.getStage().isFullScreen()) {
                 return;
             }
 
@@ -68,14 +69,14 @@ public class LeftBar extends Pane implements StageChanges, StageBar {
                 return;
             }
 
-            setNewX(event.getScreenX());
-            setNewY(event.getScreenY());
+            state.setNewX(event.getScreenX());
+            state.setNewY(event.getScreenY());
 
-            double deltaX = getNewX() - getInitX();
+            double deltaX = state.getNewX() - state.getInitX();
 
             if (Cursor.W_RESIZE.equals(this.getCursor())) {
-                if(setStageWidth(this.stage, this.stage.getWidth() - deltaX)){
-                    this.stage.setX(this.stage.getX() + deltaX);
+                if(state.setStageWidth(state.getStage().getWidth() - deltaX)){
+                    state.getStage().setX(state.getStage().getX() + deltaX);
                 }
                 event.consume();
             }
