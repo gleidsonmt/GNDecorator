@@ -38,7 +38,7 @@ jobs:
         with:
           new_branch: build
           message: 'New Branch'
-          pull: '--rebase --autostash'
+#          pull: '--rebase --autostash'
 
 #        with:
 #
