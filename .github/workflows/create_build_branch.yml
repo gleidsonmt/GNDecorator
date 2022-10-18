@@ -36,8 +36,8 @@ jobs:
         uses: EndBug/add-and-commit@v9.1.1
 
         with:
-          new_branch: build
-#          pull: '--rebase --autostash'
+          new_branch: 'build'
+          pull: '--rebase --autostash'
 
 
 #      - name: Grant execute permission for gradlew
