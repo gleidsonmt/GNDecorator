@@ -106,14 +106,11 @@ public class GNDecorator {
     private final Scene scene
             = new Scene(background);
 
-    public final TranslucentStage translucentStage
-            = new TranslucentStage(this);
-
     private double  initialWidth    = 800;
     private double  initialHeight   = 600;
     private boolean dark            = false;
 
-    private BoundingBox noMaximizedBounds;
+//    private BoundingBox noMaximizedBounds;
 
     public GNDecorator() {
         configStage();
@@ -191,7 +188,7 @@ public class GNDecorator {
         double _width = width < bounds.getWidth() ? width : initialWidth;
         double _height = height < bounds.getHeight() ? height : initialHeight;
 
-        noMaximizedBounds = new BoundingBox( x, y, _width, _height);
+        stageState.updateNoMaximizedBounds(new BoundingBox(x, y, _width, _height));
     }
 
     public Node getContent(){
@@ -199,8 +196,6 @@ public class GNDecorator {
     }
 
     public void show() {
-
-
 
         if(maximized.get()){
             this.stage.setWidth(bounds.getWidth());
@@ -218,7 +213,7 @@ public class GNDecorator {
         this.stage.centerOnScreen();
         this.stage.show();
 
-        background.setStyle("-fx-background-radius : 10px;");
+//        background.setStyle("-fx-background-radius : 10px;");
 
 //        background.setClip(new Circle(stage.getWidth() /2));
     }
