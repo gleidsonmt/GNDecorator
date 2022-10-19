@@ -59,6 +59,8 @@ public class Bar extends HBox implements StageReposition {
     private final Maximize maximize;
     private final Close close;
 
+    private TranslucentStage translucentStage = new TranslucentStage();
+
     Bar(GNDecorator decorator, StageState _state) {
 
         this.state = _state;
@@ -66,7 +68,7 @@ public class Bar extends HBox implements StageReposition {
         this.setId("gn-bar");
 
         minimize = new Minimize(_state.getStage());
-        maximize = new Maximize(decorator, _state.getStage());
+        maximize = new Maximize(_state);
         close = new Close(_state.getStage());
 
         defaultControls = FXCollections.observableArrayList(
@@ -172,9 +174,9 @@ public class Bar extends HBox implements StageReposition {
         public void handle(MouseEvent event) {
             if (event.getClickCount() == 2) {
                 if (!decorator.isMaximized()) {
-                    fireEvent(new StageEvent(StageEvent.MAXIMIZE, decorator, state.getStage()));
+                    fireEvent(new StageEvent(StageEvent.MAXIMIZE, state));
                 } else {
-                    fireEvent(new StageEvent(StageEvent.RESTORE, decorator, state.getStage()));
+                    fireEvent(new StageEvent(StageEvent.RESTORE, state));
                 }
 
             }
@@ -250,24 +252,24 @@ public class Bar extends HBox implements StageReposition {
 
         if (decorator.isMaximized() && decorator.isResizable()) {
 
-            if (bounds.getMaxX() < (event.getScreenX() + decorator.noMaximizedBounds.getWidth())) {
-                state.getStage().setX(bounds.getMaxX() - (decorator.noMaximizedBounds.getWidth()));
-            } else if (bounds.getMinX() < (decorator.noMaximizedBounds.getWidth() - event.getScreenX())) {
+            if (bounds.getMaxX() < (event.getScreenX() + state.noMaximizedBounds().getWidth())) {
+                state.getStage().setX(bounds.getMaxX() - (state.noMaximizedBounds().getWidth()));
+            } else if (bounds.getMinX() < (state.noMaximizedBounds().getWidth() - event.getScreenX())) {
                 state.getStage().setX(0);
             } else {
-                state.getStage().setX(event.getScreenX() - (decorator.noMaximizedBounds.getWidth() / 2));
+                state.getStage().setX(event.getScreenX() - (state.noMaximizedBounds().getWidth() / 2));
             }
 
-            if (decorator.noMaximizedBounds.getHeight() > bounds.getMaxY()) {
+            if (state.noMaximizedBounds().getHeight() > bounds.getMaxY()) {
                 state.getStage().setHeight(bounds.getMaxY() - 100);
             } else {
-                state.getStage().setHeight(decorator.noMaximizedBounds.getHeight());
+                state.getStage().setHeight(state.noMaximizedBounds().getHeight());
             }
 
-            if (decorator.noMaximizedBounds.getWidth() > bounds.getMaxX()) {
+            if (state.noMaximizedBounds().getWidth() > bounds.getMaxX()) {
                 state.getStage().setWidth(bounds.getWidth() - 200);
             } else {
-                state.getStage().setWidth(decorator.noMaximizedBounds.getWidth());
+                state.getStage().setWidth(state.noMaximizedBounds().getWidth());
             }
             state.getStage().setY(0);
             state.getStage().setMaximized(false);
@@ -275,7 +277,7 @@ public class Bar extends HBox implements StageReposition {
 
             if (decorator.isResizable()) {
 
-                Stage stage = decorator.translucentStage;
+                Stage stage = translucentStage;
                 state.getStage().setAlwaysOnTop(true);
 
                 if (isOnTopLeft(event)) {
@@ -300,7 +302,7 @@ public class Bar extends HBox implements StageReposition {
                     repositionOnTop(stage, 20);
                     stage.show();
                 } else {
-                    decorator.translucentStage.close();
+                    translucentStage.close();
                 }
             }
 
@@ -348,10 +350,10 @@ public class Bar extends HBox implements StageReposition {
                 decorator.setMaximized(true);
 
             } else {
-                decorator.translucentStage.close();
+                translucentStage.close();
             }
 
-            decorator.translucentStage.close();
+            translucentStage.close();
         }
 
     }

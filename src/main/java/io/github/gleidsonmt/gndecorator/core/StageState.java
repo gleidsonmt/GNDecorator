@@ -23,10 +23,10 @@ public final class StageState  {
     private GNDecorator decorator;
     private BoundingBox noMaximizedBounds;
 
-    StageState (GNDecorator _decorator, Stage _stage, BoundingBox _noMaximizedBounds) {
+    StageState (GNDecorator _decorator, Stage _stage) {
         this.decorator = _decorator;
         this.stage = _stage;
-        this.noMaximizedBounds = _noMaximizedBounds;
+//        this.noMaximizedBounds = _noMaximizedBounds;
     }
 
     public double getInitX() {
