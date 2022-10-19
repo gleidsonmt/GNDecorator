@@ -81,8 +81,7 @@ public class App extends Application {
         ScenicView.show(decorator.getWindow().getScene());
         decorator.switchTheme(DecoratorTheme.MAC_YOSEMITE);
 
-
-
+        System.out.println("decorator.getBarHeight() = " + decorator.getBarHeight());
     }
 
     private void handle(MouseEvent mouseEvent) {

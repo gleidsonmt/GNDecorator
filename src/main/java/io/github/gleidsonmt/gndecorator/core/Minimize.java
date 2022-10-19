@@ -19,6 +19,7 @@ package io.github.gleidsonmt.gndecorator.core;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -26,14 +27,14 @@ import javafx.scene.input.MouseEvent;
  */
 class Minimize extends Button {
 
-    Minimize(GNDecorator decorator) {
+    Minimize(Stage stage) {
 
         this.setText("-");
         this.setId("gn-minimize");
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
         this.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            decorator.stage.setIconified(true);
+            stage.setIconified(true);
         });
     }
 }
