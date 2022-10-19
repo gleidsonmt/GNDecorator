@@ -106,6 +106,7 @@ public class App extends Application {
 
         decorator.addMenu(menuFile);
 
+
     }
 
     public static void main(String[] args) {

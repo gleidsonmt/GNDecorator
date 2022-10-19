@@ -4,7 +4,7 @@
 
 [![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.gleidsonmt/gndecorator?server=https%3A%2F%2Fs01.oss.sonatype.org&style=for-the-badge)](https://central.sonatype.dev/artifact/io.github.gleidsonmt/gndecorator/2.1.25)
 [![Release](https://img.shields.io/badge/Release-v2.2.25-green.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
-![Build](https://img.shields.io/badge/Build-2.2.34+150-gold.svg?style=for-the-badge)
+![Build](https://img.shields.io/badge/Build-2.2.35+159-gold.svg?style=for-the-badge)
 [![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE)
 
 <p align="center">
@@ -124,10 +124,9 @@ Next steps:
 - [ ] Add Windows Theme
 - [ ] The decoratorTheme in blank to customize
 - [ ] Public methods to update window icons with css.
-- [ ] Code outside the scope (Clean Code)
+- [X] Better pratices for one class receives state scope event (Clean Code)
 - [ ] Default Property to change bar height
-- [ ] Badges to add in custom bar
-- [ ] Customizable search bar (maybe isn't a good idea)
+- [ ] Float options (css too)
 
 ## 📫 Contributing to Project
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
