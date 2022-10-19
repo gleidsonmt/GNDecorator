@@ -432,15 +432,6 @@ public class GNDecorator {
     }
 
 
-//    EventHandler<MouseEvent> handler = (MouseEvent event) -> {
-//
-//        if (event.getY() == 0 && stage.isFullScreen()) {
-//            viewBar(true);
-//            System.err.println("fuck");
-//            this.background.setOnMouseMoved(null);
-//        }
-//    };
-
     public void setFullScreen(boolean value){
         stage.setFullScreen(true);
 //        setMaximized(true);
