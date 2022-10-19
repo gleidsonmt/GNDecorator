@@ -21,6 +21,7 @@ import javafx.event.EventType;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -37,13 +38,15 @@ class StageEvent extends Event {
     static final EventType<StageEvent> CLOSE    = new EventType<>(ANY, "CLOSE");
 
     private final GNDecorator decorator;
+    private final Stage stage;
 
     private final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
-    StageEvent(EventType<? extends Event> eventType,GNDecorator decorator) {
+    StageEvent(EventType<? extends Event> eventType, GNDecorator decorator, Stage _stage) {
         super(eventType);
 
         this.decorator = decorator;
+        this.stage = _stage;
 
         if (MAXIMIZE.equals(eventType)) {
             maximizeEvent();
@@ -60,25 +63,25 @@ class StageEvent extends Event {
 
         decorator.noMaximizedBounds =
                 new BoundingBox(
-                        decorator.stage.getX(),
-                        decorator.stage.getY(),
-                        decorator.stage.getWidth(),
-                        decorator.stage.getHeight()
+                        stage.getX(),
+                        stage.getY(),
+                        stage.getWidth(),
+                        stage.getHeight()
                 );
 
-        decorator.stage.setX(bounds.getMinX());
-        decorator.stage.setY(bounds.getMinY());
-        decorator.stage.setWidth(bounds.getWidth());
-        decorator.stage.setHeight(bounds.getHeight());
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
 
         decorator.setMaximized(true);
     }
 
     private void restoreEvent(){
-        decorator.stage.setX(decorator.noMaximizedBounds.getMinX());
-        decorator.stage.setY(decorator.noMaximizedBounds.getMinY());
-        decorator.stage.setWidth(decorator.noMaximizedBounds.getWidth());
-        decorator.stage.setHeight(decorator.noMaximizedBounds.getHeight());
+        stage.setX(decorator.noMaximizedBounds.getMinX());
+        stage.setY(decorator.noMaximizedBounds.getMinY());
+        stage.setWidth(decorator.noMaximizedBounds.getWidth());
+        stage.setHeight(decorator.noMaximizedBounds.getHeight());
 
         decorator.setMaximized(false);
     }

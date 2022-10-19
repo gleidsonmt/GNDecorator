@@ -22,6 +22,7 @@ import javafx.css.PseudoClass;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -53,7 +54,7 @@ class Maximize extends Button {
         return this.restore.get();
     }
 
-    Maximize(GNDecorator decorator) {
+    Maximize(GNDecorator decorator, Stage stage) {
 
         this.setText("[ ]");
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -64,11 +65,11 @@ class Maximize extends Button {
         this.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
 
             if(!decorator.isMaximized()) {
-                this.fireEvent(new StageEvent(StageEvent.MAXIMIZE, decorator));
+                this.fireEvent(new StageEvent(StageEvent.MAXIMIZE, decorator, stage));
                 setRestore(true);
             } else {
                 setRestore(false);
-                this.fireEvent(new StageEvent(StageEvent.RESTORE, decorator));
+                this.fireEvent(new StageEvent(StageEvent.RESTORE, decorator, stage));
             }
         });
 
