@@ -4,7 +4,7 @@
 
 [![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.gleidsonmt/gndecorator?server=https%3A%2F%2Fs01.oss.sonatype.org&style=for-the-badge)](https://central.sonatype.dev/artifact/io.github.gleidsonmt/gndecorator/2.1.25)
 [![Release](https://img.shields.io/badge/Release-v2.2.25-green.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/releases/tag/2.1.25)
-![Build](https://img.shields.io/badge/Build-2.2.35+160-gold.svg?style=for-the-badge)
+![Build](https://img.shields.io/badge/Build-2.2.31+252-gold.svg?style=for-the-badge)
 [![License](https://img.shields.io/github/license/Gleidson28/GNDecorator.svg?style=for-the-badge)](https://github.com/gleidsonmt/GNDecorator/blob/master/LICENSE)
 
 <p align="center">
@@ -14,20 +14,20 @@
 # 📑 Contents
 
 <!-- TOC -->
+* [📑 Contents](#-contents)
 * [💻 Environment](#-environment)
 * [🚀 Installing Decorator](#-installing-decorator)
 * [☕ Using Decorator](#-using-decorator)
 * [🧬  Basic Structure](#-basic-structure)
   * [Structure - by Scenic View](#structure---by-scenic-view)
     * [Default Structure](#default-structure)
-      * [View Default](#view-default)
-      * [View Darkula](#view-darkula)
-      * [With gradient and image](#with-gradient-and-image)
-  * [📺 On Youtube](#-on-youtube)
-    * [🛠 Enhancements](#-enhancements)
-  * [📫 Contributing to Project](#-contributing-to-project)
-  * [😄 Seja um dos contribuidores<br>](#-seja-um-dos-contribuidores-br)
-  * [📝 Licença](#-licena)
+        * [View Default](#view-default)
+        * [View Darkula](#view-darkula)
+* [📺 On Youtube](#-on-youtube)
+* [🛠 Enhancements](#-enhancements)
+* [📫 Contributing to Project](#-contributing-to-project)
+* [😄 Be a contritubutor<br>](#-be-a-contritubutor-br)
+* [📝 License](#-license)
 <!-- TOC -->
 
 # 💻 Environment
@@ -113,10 +113,11 @@ Begin to use... Java Code!
 ##### With gradient and image
 ![demo1](src/main/resources/screens/mac.png)
 
-## 📺 On Youtube
+# 📺 On Youtube
+Short Presentation
 [Apresentation](https://youtu.be/hZsYU7UbWmU)
 
-### 🛠 Enhancements
+# 🛠 Enhancements
 
 Next steps:
 
@@ -128,7 +129,7 @@ Next steps:
 - [ ] Default Property to change bar height
 - [ ] Float options (css too)
 
-## 📫 Contributing to Project
+# 📫 Contributing to Project
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 To contributing to project, follow these steps:
 
@@ -140,11 +141,11 @@ To contributing to project, follow these steps:
 
 However, if you don't know [How to create a pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-## 😄 Be a contritubutor<br>
+# 😄 Be a contritubutor<br>
 
 🤖I really need more friends.. Send me a  <a href='mailto:gleidisonmt@gmail.com?subject=Hi, I see you need my help!.. I am here.'> email <a/>.
 
-## 📝 License
+# 📝 License
 
 This project is under license. See the file [LICENSE](LICENSE.md) to more details.
 
