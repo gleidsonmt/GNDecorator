@@ -23,7 +23,6 @@
     * [Default Structure](#default-structure)
         * [View Default](#view-default)
         * [View Darkula](#view-darkula)
-        * [With gradient and image](#with-gradient-and-image)
 * [📺 On Youtube](#-on-youtube)
 * [🛠 Enhancements](#-enhancements)
 * [📫 Contributing to Project](#-contributing-to-project)
