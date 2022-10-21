@@ -25,15 +25,15 @@ import javafx.stage.Stage;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  08/07/2020
  */
-public class TopLeftAnchor extends Path implements StageChanges, StageBar {
+public class TopLeftAnchor extends Path implements StageBar {
 
-    private final Stage stage;
+    private final StageState state;
 
-    public TopLeftAnchor(Stage stage) {
+    TopLeftAnchor(StageState _state) {
+        this.state = _state;
         this.getStyleClass().add("gn-top-left");
         this.setId("gn-top-left");
         this.setCursor(Cursor.NW_RESIZE);
-        this.stage = stage;
         configPaths();
         configActions();
     }
@@ -58,35 +58,35 @@ public class TopLeftAnchor extends Path implements StageChanges, StageBar {
     private void configActions(){
         this.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown()) {
-                setInitX(event.getScreenX());
-                setInitY(event.getScreenY());
+                state.setInitX(event.getScreenX());
+                state.setInitY(event.getScreenY());
                 event.consume();
             }
         });
 
         this.setOnMouseDragged(event -> {
-            if (!event.isPrimaryButtonDown() || (getInitX() == -1 && getInitY() == -1)) {
+            if (!event.isPrimaryButtonDown() || (state.getInitX() == -1 && state.getInitY() == -1)) {
                 return;
             }
-            if (this.stage.isFullScreen()) {
+            if (state.getStage().isFullScreen()) {
                 return;
             }
             if (event.isStillSincePress()) {
                 return;
             }
 
-            setNewX(event.getScreenX());
-            setNewY(event.getScreenY());
+            state.setNewX(event.getScreenX());
+            state.setNewY(event.getScreenY());
 
-            double deltaX = getNewX() - getInitX();
-            double deltaY = getNewY() - getInitY();
+            double deltaX = state.getNewX() - state.getInitX();
+            double deltaY = state.getNewY() - state.getInitY();
 
             if (Cursor.NW_RESIZE.equals(this.getCursor())) {
-                if (setStageWidth(this.stage, this.stage.getWidth() - deltaX)) {
-                    this.stage.setX(this.stage.getX() + deltaX);
+                if (state.setStageWidth(state.getStage().getWidth() - deltaX)) {
+                    state.getStage().setX(state.getStage().getX() + deltaX);
                 }
-                if (setStageHeight(this.stage, this.stage.getHeight() - deltaY)) {
-                    setStageY(this.stage, this.stage.getY() + deltaY);
+                if (state.setStageHeight(state.getStage().getHeight() - deltaY)) {
+                    state.setStageY(state.getStage().getY() + deltaY);
                 }
                 event.consume();
             }

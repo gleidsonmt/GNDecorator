@@ -19,6 +19,7 @@ package io.github.gleidsonmt.gndecorator.core;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /** Enviroment class for the container
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -27,7 +28,7 @@ import javafx.scene.layout.AnchorPane;
 public class Body extends AnchorPane implements AlignUtils {
 
 
-    public Body(GNDecorator decorator, Container container, Bar bar,
+    public Body(Stage stage, GNDecorator decorator, Container container, Bar bar,
                 TopBar topBar, RightBar rightBar,
                 BottomBar bottomBar, LeftBar leftBar,
                 TopLeftAnchor topLeftAnchor, TopRightAnchor topRightAnchor,
@@ -64,7 +65,7 @@ public class Body extends AnchorPane implements AlignUtils {
                     .forEach(StageBar::changeCursor);
         });
 
-        decorator.stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> {
+        stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue) getChildren().stream()
                     .filter(e -> e instanceof StageBar)
                     .map(e -> (StageBar) e)

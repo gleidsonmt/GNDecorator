@@ -48,7 +48,7 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class GNDecorator {
 
-    public final DoubleProperty barHeight
+    private final DoubleProperty barHeight
             = new SimpleDoubleProperty(GNDecorator.class,
             "BarHeightProperty",30);
 
@@ -77,28 +77,26 @@ public class GNDecorator {
     private final Rectangle2D bounds
             = Screen.getPrimary().getVisualBounds();
 
-    public final Stage stage = new Stage(StageStyle.TRANSPARENT);
+    private final Stage stage = new Stage(StageStyle.TRANSPARENT);
 
     /// Fixing
-    private final StageState stageState = new StageState(stage);
-    // Needs change
+    private final StageState stageState = new StageState(this, stage);
     private final LeftBar   leftBar     = new LeftBar(stageState);
     private final RightBar  rightBar    = new RightBar(stageState);
-    private final TopBar    topBar      = new TopBar(stage);
-    private final BottomBar bottomBar   = new BottomBar(stage);
+    private final TopBar    topBar      = new TopBar(stageState);
+    private final BottomBar bottomBar   = new BottomBar(stageState);
+    private final TopLeftAnchor     topLeftAnchor       = new TopLeftAnchor(stageState);
+    private final TopRightAnchor    topRightAnchor      = new TopRightAnchor(stageState);
+    private final BottomLeftAnchor bottomLeftAnchor    = new BottomLeftAnchor(stageState);
+    private final BottomRightAnchor bottomRightAnchor   = new BottomRightAnchor(stageState);
 
-    private final TopLeftAnchor     topLeftAnchor       = new TopLeftAnchor(stage);
-    private final TopRightAnchor    topRightAnchor      = new TopRightAnchor(stage);
-    private final BottomLeftAnchor bottomLeftAnchor    = new BottomLeftAnchor(stage);
-    private final BottomRightAnchor bottomRightAnchor   = new BottomRightAnchor(stage);
-
-    private final Bar bar       = new Bar(this);
+    private final Bar bar       = new Bar(this, stageState);
 
     private final AreaContent   areaContent   = new AreaContent();
     private final Container container     = new Container(areaContent);
 
     private final Body body
-            = new Body(this, container, bar, topBar,
+            = new Body(stage, this, container, bar, topBar,
             rightBar, bottomBar, leftBar, topLeftAnchor, topRightAnchor,
             bottomLeftAnchor, bottomRightAnchor);
 
@@ -108,14 +106,11 @@ public class GNDecorator {
     private final Scene scene
             = new Scene(background);
 
-    public final TranslucentStage translucentStage
-            = new TranslucentStage(this);
-
     private double  initialWidth    = 800;
     private double  initialHeight   = 600;
     private boolean dark            = false;
 
-    public BoundingBox noMaximizedBounds;
+//    private BoundingBox noMaximizedBounds;
 
     public GNDecorator() {
         configStage();
@@ -193,7 +188,7 @@ public class GNDecorator {
         double _width = width < bounds.getWidth() ? width : initialWidth;
         double _height = height < bounds.getHeight() ? height : initialHeight;
 
-        noMaximizedBounds = new BoundingBox( x, y, _width, _height);
+        stageState.updateNoMaximizedBounds(new BoundingBox(x, y, _width, _height));
     }
 
     public Node getContent(){
@@ -201,8 +196,6 @@ public class GNDecorator {
     }
 
     public void show() {
-
-
 
         if(maximized.get()){
             this.stage.setWidth(bounds.getWidth());
@@ -439,15 +432,6 @@ public class GNDecorator {
     }
 
 
-//    EventHandler<MouseEvent> handler = (MouseEvent event) -> {
-//
-//        if (event.getY() == 0 && stage.isFullScreen()) {
-//            viewBar(true);
-//            System.err.println("fuck");
-//            this.background.setOnMouseMoved(null);
-//        }
-//    };
-
     public void setFullScreen(boolean value){
         stage.setFullScreen(true);
 //        setMaximized(true);
@@ -526,4 +510,15 @@ public class GNDecorator {
     }
 
 
+    public double getBarHeight() {
+        return barHeight.get();
+    }
+
+    public DoubleProperty barHeightProperty() {
+        return barHeight;
+    }
+
+    public void setBarHeight(double barHeight) {
+        this.barHeight.set(barHeight);
+    }
 }

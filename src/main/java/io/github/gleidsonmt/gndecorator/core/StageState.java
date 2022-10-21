@@ -1,6 +1,7 @@
 package io.github.gleidsonmt.gndecorator.core;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -19,9 +20,13 @@ public final class StageState  {
     private double newY = 0;
 
     private Stage stage;
+    private GNDecorator decorator;
+    private BoundingBox noMaximizedBounds;
 
-    StageState (Stage _stage) {
+    StageState (GNDecorator _decorator, Stage _stage) {
+        this.decorator = _decorator;
         this.stage = _stage;
+//        this.noMaximizedBounds = _noMaximizedBounds;
     }
 
     public double getInitX() {
@@ -129,5 +134,16 @@ public final class StageState  {
 
     Stage getStage() {
         return this.stage;
+    }
+    GNDecorator getDecorator() {
+        return decorator;
+    }
+
+    BoundingBox noMaximizedBounds() {
+        return noMaximizedBounds;
+    }
+
+    void updateNoMaximizedBounds(BoundingBox box) {
+        noMaximizedBounds = box;
     }
 }

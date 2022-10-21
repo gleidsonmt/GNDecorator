@@ -30,9 +30,7 @@ import javafx.stage.StageStyle;
  */
 public class TranslucentStage extends Stage implements StageReposition {
 
-    private final GNDecorator decorator;
-
-    public TranslucentStage(GNDecorator decorator) {
+    TranslucentStage() {
         StackPane root = new StackPane();
         root.setStyle("-fx-background-color : transparent;");
         Parent foreground = new StackPane();
@@ -49,7 +47,6 @@ public class TranslucentStage extends Stage implements StageReposition {
         this.initStyle(StageStyle.TRANSPARENT);
         this.setScene(scene);
 
-        this.decorator = decorator;
 //        this.initOwner(decorator.getStage());
 //        decorator.getStage().initOwner(this);
 

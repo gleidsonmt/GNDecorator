@@ -18,55 +18,56 @@ package io.github.gleidsonmt.gndecorator.core;
 
 import javafx.scene.Cursor;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  06/07/2020
  */
-public class TopBar extends Pane implements StageChanges, StageBar {
+public class TopBar extends Region implements StageBar {
 
-    private final Stage stage;
+    private final StageState state;
 
-    public TopBar(Stage stage) {
+    TopBar(StageState _state) {
+        this.state = _state;
         this.getStyleClass().add("gn-top-bar");
         this.setId("gn-top-bar");
         this.setMinHeight(3D);
         this.setCursor(Cursor.N_RESIZE);
-        this.stage = stage;
         configActions();
     }
 
     private void configActions(){
         this.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown()) {
-                setInitX(event.getScreenX());
-                setInitY(event.getScreenY());
+                state.setInitX(event.getScreenX());
+                state.setInitY(event.getScreenY());
                 event.consume();
             }
         });
 
         this.setOnMouseDragged(event -> {
             if (!event.isPrimaryButtonDown() ||
-                    (getInitX() == -1 && getInitY() == -1)) {
+                    (state.getInitX() == -1 && state.getInitY() == -1)) {
                 return;
             }
 
-            if (this.stage.isFullScreen()) {
+            if (state.getStage().isFullScreen()) {
                 return;
             }
             if (event.isStillSincePress()) {
                 return;
             }
 
-            setNewX(event.getScreenX());
-            setNewY(event.getScreenY());
+            state.setNewX(event.getScreenX());
+            state.setNewY(event.getScreenY());
 
-            double deltaY = getNewY() - getInitY();
+            double deltaY = state.getNewY() - state.getInitY();
 
             if (Cursor.N_RESIZE.equals(this.getCursor())) {
-                if (setStageHeight(this.stage, this.stage.getHeight() - deltaY)) {
-                    setStageY(this.stage, this.stage.getY() + deltaY);
+                if (state.setStageHeight(state.getStage().getHeight() - deltaY)) {
+                    state.setStageY(state.getStage().getY() + deltaY);
                 }
                 event.consume();
             }

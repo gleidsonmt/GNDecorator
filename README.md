@@ -125,10 +125,9 @@ Next steps:
 - [ ] Add Windows Theme
 - [ ] The decoratorTheme in blank to customize
 - [ ] Public methods to update window icons with css.
-- [ ] Code outside the scope (Clean Code)
+- [X] Better pratices for one class receives state scope event (Clean Code)
 - [ ] Default Property to change bar height
-- [ ] Badges to add in custom bar
-- [ ] Customizable search bar (maybe isn't a good idea)
+- [ ] Float options (css too)
 
 # 📫 Contributing to Project
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->

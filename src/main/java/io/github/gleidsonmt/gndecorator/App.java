@@ -81,7 +81,7 @@ public class App extends Application {
         ScenicView.show(decorator.getWindow().getScene());
         decorator.switchTheme(DecoratorTheme.MAC_YOSEMITE);
 
-
+        System.out.println("decorator.getBarHeight() = " + decorator.getBarHeight());
 
     }
 
@@ -105,6 +105,7 @@ public class App extends Application {
                 preferences, new SeparatorMenuItem(), quit);
 
         decorator.addMenu(menuFile);
+
 
     }
 

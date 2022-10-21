@@ -6,7 +6,8 @@ on:
 #  push:
 #    branches: [develop]
   pull_request:
-    branches: [develop]
+#    branches: [develop]
+    branches: [build]
 
 jobs:
   build:
@@ -22,6 +23,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17.0.1
+
       - name: Read value from properties file
         id: read_property
         uses: christian-draeger/read-properties@1.1.0
@@ -32,10 +34,15 @@ jobs:
         run: echo ${{ steps.read_property.outputs.buildNumber}}
 
       - name: Add & Commit
+
         uses: EndBug/add-and-commit@v9.1.1
         with:
           new_branch: build
-          pull: '--rebase --autostash'
+          message: 'New Branch'
+#          pull: '--rebase --autostash'
+
+#        with:
+#
 
 
 #      - name: Grant execute permission for gradlew
