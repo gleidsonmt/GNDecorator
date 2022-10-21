@@ -13,6 +13,7 @@ plugins {
     id 'signing'
 }
 
+
 ext {
 
     Properties _props = new Properties()
@@ -84,8 +85,6 @@ task replaceVersionInREADME {
         fileset(dir: '.', includes: 'README.md')
     }
 
-
-
 }
 
 task buildInServer(dependsOn: build) {
@@ -96,7 +95,7 @@ task buildInServer(dependsOn: build) {
     if (project.hasProperty("server")) {
         println 'Creating a new Build version'
 
-        int sum = buildV as BigDecimal + 1
+        int sum = (buildV as BigDecimal) + 1
         props.setProperty('buildNumber', sum.toString())
         println "Your new build version is ${props.getProperty("buildNumber")}"
         props.store(propsFile.newWriter(), null)
@@ -111,7 +110,7 @@ task incrementBuildArtifactVersion()  {
     println 'incrementing build artifact'
     if (!project.hasProperty("server")) {
         println "update artifact"
-        int sum = buildA as BigDecimal + 1
+        int sum = (buildA as BigDecimal) + 1
         props.setProperty('artifactBuildNumber', sum.toString())
         println "Your new artifact version is ${props.getProperty("artifactBuildNumber")}"
         props.store(propsFile.newWriter(), null)
@@ -143,8 +142,9 @@ artifacts {
 
 signing {
     setRequired {
-        // signing is only required if the artifacts are to be published
-        gradle.taskGraph.allTasks.any { (it == PublishToMavenRepository) }
+//        // signing is only required if the artifacts are to be published
+//        gradle.taskGraph.allTasks.any { (it == PublishToMavenRepository) }
+        gradle.taskGraph.allTasks.any { it.equals( PublishToMavenRepository) }
     }
     sign configurations.archives
 }
@@ -158,6 +158,7 @@ publishing {
             from components.java
 
             pom {
+
                 name = 'GNDecorator'
                 description = 'Custom window decorator for javafx apps.'
                 url = 'https://github.com/gleidsonmt/gndecorator'
@@ -168,6 +169,7 @@ publishing {
                         url = 'https://www.gnu.org/licenses/gpl-3.0-standalone.html'
                     }
                 }
+
                 developers {
                     developer {
                         id = 'Gleidson2020'
@@ -194,14 +196,15 @@ publishing {
                         }
                     }
 
-                    maven {
-                        name = "GitHubPackages"
-                        url = "https://maven.pkg.github.com/gleidsonmt/gndecorator"
-                        credentials {
-                            username = project.properties["github.user"]
-                            password = project.properties["github.token"]
-                        }
-                    }
+//                    maven {
+//                        name = "GitHubPackages"
+//                        url = "https://maven.pkg.github.com/gleidsonmt/gndecorator"
+//                        credentials {
+//                            username = project.properties["github.user"]
+//                            password = project.properties["github.token"]
+//                        }
+//                    }
+
                 }
             }
         }
@@ -231,6 +234,22 @@ jlink {
         addExtraDependencies("javafx")
     }
 }
+
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            beforeDeployment { deployment -> signing.signPom(deployment) }
+//
+//            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+//                authentication(userName: project.properties['ossrhUser'], password: project.properties["ossrhPassword"])
+//            }
+//
+//            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+//                authentication(userName: project.properties['ossrhUser'], password: project.properties["ossrhPassword"])
+//            }
+//        }
+//    }
+//}
 
 jlinkZip {
     group = 'distribution'

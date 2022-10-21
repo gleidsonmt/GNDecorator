@@ -220,7 +220,7 @@ public class GNDecorator {
         this.stage.centerOnScreen();
         this.stage.show();
 
-        background.setStyle("-fx-background-radius : 10px;");
+//        background.setStyle("-fx-background-radius : 10px;");
 
 //        background.setClip(new Circle(stage.getWidth() /2));
     }

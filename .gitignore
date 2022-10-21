@@ -17,3 +17,5 @@ publishInfo.gradle
 
 
 
+/.vscode/
+/bin/
